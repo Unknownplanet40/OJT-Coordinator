@@ -1,0 +1,21 @@
+
+Register page           /
+login page              /
+About Us Page           
+
+admin -----
+dashboard               /
+Trainee                 
+Attendance              
+Resource    
+Report
+logout
+
+trainee -----
+Profile
+Attendance
+Resource
+logout
+
+
+

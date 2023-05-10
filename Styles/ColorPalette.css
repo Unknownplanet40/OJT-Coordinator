@@ -1,0 +1,17 @@
+:root {
+    --clr-background: #1b1b1b;
+    --clr-secondary: #292929;
+    --clr-accent: #ffa31a;
+    --clr-input: #808080;
+
+    --body-color: #1b1b1b;
+    --sidebar-color: #212529;
+    --primary-color: #ffa31a;
+    --text-color: #fff;
+
+    --tran-03: all 0.2s ease;
+    --tran-03: all 0.3s ease;
+    --tran-04: all 0.3s ease;
+    --tran-05: all 0.3s ease;
+    
+}
