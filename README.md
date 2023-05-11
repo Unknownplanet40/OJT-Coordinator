@@ -16,7 +16,7 @@ C:\xampp\htdocs\OJT-Coordinator\database\ojtcs.sql
 ```
 5. Open your browser and go to the following URL.
 ```
-http://localhost/OJT-Coordinator
+localhost/OJT-Coordinator/Login.php
 ```
 6. Login using the following credentials.
 ```
