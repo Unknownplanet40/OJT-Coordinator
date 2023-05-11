@@ -44,6 +44,8 @@ Date Finished:
 Duration:  
 
 ### Students
+<div align="center">
+
 | Name | Year | Course |
 | --- | --- | --- |
 | Ryan James V. Capadocia | 2nd Year | BSIT |
@@ -52,13 +54,14 @@ Duration:
 | Brandon Logon | 2nd Year | BSIT |
 | Lorenzo Asis | 2nd Year | BSIT |
 
+</div>
 
 ### Developers and Contributors
-- [**Ryan James V. Capadocia**]() - Head Developer
-- [**James Matthew R. Veloria**]() - Full Stack Developer
--  [**Jeric C. Dayandante**]() - Full Stack Developer
-- [**Brandon Logon**]() - Back End Developer
-- [**Lorenzo Asis**]() - Front End Developer
+- [**Ryan James V. Capadocia**](https://github.com/Unknownplanet40) - Head Developer
+- [**James Matthew R. Veloria**](https://github.com/JamesVeloria16) - Full Stack Developer
+-  [**Jeric C. Dayandante**](https://github.com/kuya-G) - Full Stack Developer
+- [**Brandon Logon**](#developers-and-contributors) - Back End Developer
+- [**Lorenzo Asis**](#developers-and-contributors) - Front End Developer
 
 ### Instructor
 - [**Mr. Bendict Bautista**](#instructor) - Instructor
