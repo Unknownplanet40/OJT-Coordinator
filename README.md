@@ -26,23 +26,32 @@ Password: admin
 > **Note:** You can change the credentials in the database. or you can create a new account in the application.
 
 ## Features
-- [x] Login
-- [x] Dashboard
-- [x] Manage Students
-- [x] Manage Departments
-- [x] Manage OJT Applications
-- [x] Manage OJT Logs
+> **Note:** The following features are still under development.
+
+`I'll add the features later on.`
 
 ## Screenshots
 ### Admin
+`for admin screenshots`
 ### Trainee
+`for trainee screenshots`
 
 ## Information
 This project was created by the following students of the Cavite State University - Imus Campus (CvSU) in compliance to DCIT 60A - Integrated Programming and Technologies 1
 
-Date started:   April 21, 2023 at 12:15 AM
+Date started:**April 21, 2023 at 12:15 AM**  
 Date Finished:  
 Duration:  
+
+### Students
+| Name | Year | Course |
+| --- | --- | --- |
+| Ryan James V. Capadocia | 2nd Year | BSIT |
+| James Matthew R. Veloria | 2nd Year | BSIT |
+| Jeric C. Dayandante | 2nd Year | BSIT |
+| Brandon Logon | 2nd Year | BSIT |
+| Lorenzo Asis | 2nd Year | BSIT |
+
 
 ### Developers and Contributors
 - [**Ryan James V. Capadocia**]() - Head Developer
