@@ -39,7 +39,7 @@
                 </div>
             </div>
         </form>
-        <div class="social-media">
+        <div class="social-media error">
             <h5>Username or Password is Incorrect</h5>
         </div>
     </div>

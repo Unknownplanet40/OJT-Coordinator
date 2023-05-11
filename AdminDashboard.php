@@ -9,7 +9,6 @@
     <link rel="stylesheet" href="./Styles/AdminDasboard_Style.css">
     <script src="./Script/jQueryv1.9.1.js"></script>
     <script src="./Script/Chart.js"></script>
-
     <title>Dashboard</title>
 </head>
 
@@ -85,15 +84,15 @@
             <nav>
                 <ul class="pagination justify-content-end">
                     <li class="page-item disabled">
-                        <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+                        <a class="page-link text-bg-dark" href="#" tabindex="-1">Previous</a>
                     </li>
-                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item"><a class="page-link" href="#">4</a></li>
-                    <li class="page-item"><a class="page-link" href="#">5</a></li>
+                    <li class="page-item"><a class="page-link text-bg-dark" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link text-bg-dark" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link text-bg-dark" href="#">3</a></li>
+                    <li class="page-item"><a class="page-link text-bg-dark" href="#">4</a></li>
+                    <li class="page-item"><a class="page-link text-bg-dark" href="#">5</a></li>
                     <li class="page-item">
-                        <a class="page-link" href="#" tabindex="1" aria-disabled="false">Next</a>
+                        <a class="page-link text-bg-dark" href="#" tabindex="1">Next</a>
                     </li>
                 </ul>
             </nav>
