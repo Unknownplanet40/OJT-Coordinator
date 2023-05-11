@@ -36,38 +36,37 @@ Password: admin
 ### Trainee
 `for trainee screenshots`
 
+## Prototype Design
+[![Figma](./Images/figma.svg)](https://www.figma.com/proto/OL3IoIvA02Mxak99x9WNN4/OJT-Prototype-Page?type=design&node-id=1-2&scaling=scale-down&page-id=0%3A1&starting-point-node-id=1%3A2&hide-ui=1) 
+
 ## Information
 This project was created by the following students of the Cavite State University - Imus Campus (CvSU) in compliance to DCIT 60A - Integrated Programming and Technologies 1
 
-Date started:**April 21, 2023 at 12:15 AM**  
-Date Finished:  
-Duration:  
+|       |        |
+| :---  |  :---: |
+| Date started:  | **April 21, 2021 at 12:15 AM** |
+| Date Finished: |  |
+| Duration:      |  |
 
-### Students
+### Developers and Contributors
 <div align="center">
 
-| Name | Year | Course |
-| --- | --- | --- |
-| Ryan James V. Capadocia | 2nd Year | BSIT |
-| James Matthew R. Veloria | 2nd Year | BSIT |
-| Jeric C. Dayandante | 2nd Year | BSIT |
-| Brandon Logon | 2nd Year | BSIT |
-| Lorenzo Asis | 2nd Year | BSIT |
+| Name | Role | Year | Course |
+| :--- | :--- | :---: | :---: |
+| [**Ryan James V. Capadocia**](https://github.com/Unknownplanet40) | Head Developer | 2nd Year | BSIT |
+| [**James Matthew R. Veloria**](https://github.com/JamesVeloria16) | Full-Stack Developer | 2nd Year | BSIT |
+| [**Jeric C. Dayandante**](https://github.com/kuya-G) | Full-Stack Developer | 2nd Year | BSIT 
+| [**Brandon Logon**](#developers-and-contributors) | Back-End Developer | 2nd Year | BSIT |
+| [**Lorenzo Asis**](#developers-and-contributors) | Front-End Developer | 2nd Year | BSIT |
 
 </div>
 
-### Developers and Contributors
-- [**Ryan James V. Capadocia**](https://github.com/Unknownplanet40) - Head Developer
-- [**James Matthew R. Veloria**](https://github.com/JamesVeloria16) - Full Stack Developer
--  [**Jeric C. Dayandante**](https://github.com/kuya-G) - Full Stack Developer
-- [**Brandon Logon**](#developers-and-contributors) - Back End Developer
-- [**Lorenzo Asis**](#developers-and-contributors) - Front End Developer
-
 ### Instructor
-- [**Mr. Bendict Bautista**](#instructor) - Instructor
+[**Mr. Bendict Bautista**](#instructor) - Instructor
 
 ## License
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+
 
 ## Acknowledgments
 - [Bootstrap](https://getbootstrap.com/)
@@ -82,6 +81,7 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 
 ## Resources
 > Credits to the following for the images, Design, Color Scheme, Tutorails, and other resources used in the project:
+
 - [Freepik](https://www.freepik.com/)
 - [SVG Icons](https://www.svgrepo.com/collection/iconsax-duotone-filled-icons)
 - [Color Pallette](https://www.color-hex.com/color-palette/77108)
@@ -89,10 +89,16 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 - [Stack Overflow](https://stackoverflow.com/)
 - [ChatGPT](https://chat.openai.com/)
 - [Chart](https://www.chartjs.org/)
+- [Figma](https://www.figma.com/)
+- [GitHub](https://github.com/Unknownplanet40)
 
 
 
 > **Note:** This project is still under development. Some features may not work properly.
+>> **Note:** This project is for educational purposes only.
+
+
+
 
 
 
