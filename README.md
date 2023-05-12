@@ -20,8 +20,13 @@ localhost/OJT-Coordinator/Login.php
 ```
 6. Login using the following credentials.
 ```
-Username: admin
-Password: admin
+for admin:
+username: admin
+password: admin
+
+for trainee:
+username: trainee
+password: trainee
 ```
 > **Note:** You can change the credentials in the database. or you can create a new account in the application.
 
@@ -80,7 +85,7 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 
 
 ## Resources
-> Credits to the following for the images, Design, Color Scheme, Tutorails, and other resources used in the project:
+> Credits to the following for the images, Design, Color Scheme, Tutorials, and other resources used in the project:
 
 - [Freepik](https://www.freepik.com/)
 - [SVG Icons](https://www.svgrepo.com/collection/iconsax-duotone-filled-icons)
