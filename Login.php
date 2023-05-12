@@ -1,3 +1,13 @@
+<?php
+session_start();
+include_once("./External/config.php");
+
+
+
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
