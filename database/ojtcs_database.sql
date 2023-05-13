@@ -59,6 +59,3 @@ BEGIN
     VALUES (NEW.UID,  NEW.name, NEW.trainee_uname, NEW.trainee_pword, NEW.status);
 END//
 DELIMITER ;
-
--- Insert data to tbl_Admin
-INSERT INTO tbl_Admin (ID, name, admin_uname, admin_pword, email, department, role, status) 
