@@ -41,7 +41,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-6">
-                    <div class="card text-bg-dark">
+                    <div class="card text-bg-dark" onclick="window.location.href='">
                         <div class="card-header text-truncate">Bachelor of Science in <span
                                 style="color: var(--clr-accent);">Information Technology </span></div>
                         <div class="card-body">
@@ -59,7 +59,7 @@
                     </div>
                 </div>
                 <div class="col-sm-6">
-                    <div class="card text-bg-dark">
+                    <div class="card text-bg-dark" onclick="window.location.href='">
                         <div class="card-header text-truncate">Bachelor of Science in <span
                                 style="color: var(--clr-accent);">Computer Science</span></div>
                         <div class="card-body">

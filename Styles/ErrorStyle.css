@@ -1,11 +1,12 @@
 @import url(./Fonts.css);
+@import url(./ColorPalette.css);
 
 * {
   font-family: "Poppins";
 }
 
 body {
-  background-color: #2f3242;
+  background-color: var(--clr-background);
 }
 svg {
   position: absolute;
@@ -35,7 +36,7 @@ svg {
   margin-top: 40px;
 }
 .buttons-con .action-link-wrap a {
-  background: #ffa31a;
+  background: var(--clr-accent);
   padding: 8px 25px;
   border-radius: 4px;
   color: #000;
@@ -47,7 +48,7 @@ svg {
   margin-right: 10px;
 }
 .buttons-con .action-link-wrap a:hover {
-  background: #5a5c6c;
+  background: var(--clr-input);
   color: #fff;
 }
 
