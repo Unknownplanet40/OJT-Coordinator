@@ -42,7 +42,7 @@ password: trainee
 `for trainee screenshots`
 
 ## Prototype Design
-[![Figma](./Images/figma.svg)](https://www.figma.com/proto/OL3IoIvA02Mxak99x9WNN4/OJT-Prototype-Page?type=design&node-id=1-2&scaling=scale-down&page-id=0%3A1&starting-point-node-id=1%3A2&hide-ui=1) 
+[![Figma](./Images/figma.svg)](https://www.figma.com/proto/1pcy3WMONFkYbCaifguDCw/OJT-Coordinator-Prototype?page-id=0%3A1&type=design&node-id=97-801&scaling=scale-down&starting-point-node-id=97%3A801) 
 
 ## Information
 This project was created by the following students of the Cavite State University - Imus Campus (CvSU) in compliance to DCIT 60A - Integrated Programming and Technologies 1
