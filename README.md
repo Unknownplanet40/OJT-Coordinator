@@ -100,7 +100,7 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 
 
 > **Note:** This project is still under development. Some features may not work properly.
->> **Note:** This project is for educational purposes only.
+>> This project is for educational purposes only.
 
 
 
