@@ -5,7 +5,7 @@
 $dbhost = "localhost";
 $dbusername = "root";
 $dbpassword = "";
-$dbname = "enter databasename here";
+$dbname = "ojtcs_database";
 
 try {
     $conn = mysqli_connect($dbhost, $dbusername, $dbpassword, $dbname);

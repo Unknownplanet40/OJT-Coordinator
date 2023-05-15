@@ -1,4 +1,5 @@
 <?php
+include_once("./External/log.php");
 //This page is for Error Handling 
 //This only Show if user encounter an error in the web application
 
@@ -234,6 +235,7 @@ upstream server.";
     </div>
     <div>
       <div class="message-box">
+        <?php logMessage("Error Code: " . $default_code . " - " . $code_title); ?>
         <h1>
           <?php echo $default_code; ?>
         </h1>

@@ -1,3 +1,12 @@
+<?php
+session_start();
+
+$Admin_name = $_SESSION['Global_Name'];
+$Admin_role = "Admin";
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 

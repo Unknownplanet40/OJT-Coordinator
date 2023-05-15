@@ -1,0 +1,9 @@
+[2023-05-15 03:50:45] - User rj.capsss logged in as Admin
+[2023-05-15 03:51:42] - User rj.capsss logged out
+[2023-05-15 03:54:18] - Error Code: 500 - Internal Server Error
+[2023-05-15 03:58:36] - User rj.capsss logged in as Admin
+[2023-05-15 03:58:49] - User rj.capsss logged out
+[2023-05-15 04:05:01] - User trainee.account logged in as Trainee
+[2023-05-15 04:05:21] - User trainee.account logged out
+[2023-05-15 04:09:00] - User rj.capsss logged in as Admin
+[2023-05-15 04:25:46] - User rj.capsss logged out

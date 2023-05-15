@@ -1,8 +1,37 @@
 <?php
 session_start();
 include_once("./External/config.php");
+include_once("./External/Log.php");
 
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $username = $_POST['username'];
+    $password = $_POST['password'];
 
+    // check if user exists in database
+    $sql = "SELECT * FROM tbl_accounts WHERE username='$username' AND password='$password'";
+    $result = mysqli_query($conn, $sql);
+    $num = mysqli_num_rows($result);
+    if ($num == 1) {
+        $row = mysqli_fetch_assoc($result);
+        $_SESSION['Global_Loggedin'] = true;
+        $_SESSION['Global_Name'] = $row['name'];
+        $_SESSION['Global_Username'] = $username;
+        $_SESSION['Global_Password'] = $password;
+        $_SESSION['Global_ID'] = $row['UID'];
+
+        // if user is admin, redirect to admin page else redirect to trainee page
+        if ($row['role'] == 1){
+            //header("location: ./admintest.php");
+            header("location: ./AdminDashboard.php");
+            logMessage("User " . $_SESSION['Global_Username'] . " logged in as Admin");
+        } else {
+            header("location: ./traineetest.php");
+            logMessage("User " . $_SESSION['Global_Username'] . " logged in as Trainee");
+        }
+    } else {
+        $error = "You have entered incorrect username or password";
+    }
+}
 
 
 ?>
@@ -18,6 +47,7 @@ include_once("./External/config.php");
     <link rel="stylesheet" href="./Bootstrap_5.3.0/css/bootstrap.css">
     <link rel="stylesheet" href="./Styles/LoginStyle.css">
     <link rel="shortcut icon" href="./Images/login.svg" type="image/x-icon">
+    <link rel="stylesheet" href="./traineetest.php">
     <title> Sign In </title>
 </head>
 
@@ -33,12 +63,12 @@ include_once("./External/config.php");
                 </span>
             </div>
             <div class="form-group">
-                <input type="text" class="form-control item" id="username" placeholder="Username" required
-                    pattern="([A-Z][a-z]{8,}\d{3})">
+                <input type="text" class="form-control item" name="username" placeholder="Username" required>
+                <!--pattern="([a-z]{8,}\d{2,})"-->
             </div>
             <div class="form-group">
-                <input type="password" class="form-control item" id="password" placeholder="Password" required
-                    pattern="([a-z]{8,}\d{2,})">
+                <input type="password" class="form-control item" name="password" placeholder="Password"
+                    required><!--pattern="([a-z]{8,}\d{2,})"-->
             </div>
             <div class="form-group">
                 <button type="submit" class="btn btn-block create-account">Sign In</button>
@@ -50,7 +80,18 @@ include_once("./External/config.php");
             </div>
         </form>
         <div class="social-media error">
-            <h5>Username or Password is Incorrect</h5>
+            <!-- this script is used to display error message for 3 seconds -->
+            <script>
+            setTimeout(function() {
+                document.querySelector('.error').innerHTML = '';
+            }, 3000);
+            </script>
+
+
+            <?php
+            if (isset($error)) {
+                echo "<h5>$error</h5>";
+            } ?>
         </div>
     </div>
 </body>
