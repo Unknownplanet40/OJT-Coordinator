@@ -7,29 +7,46 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-    // check if user exists in database
-    $sql = "SELECT * FROM tbl_accounts WHERE username='$username' AND password='$password'";
-    $result = mysqli_query($conn, $sql);
-    $num = mysqli_num_rows($result);
-    if ($num == 1) {
-        $row = mysqli_fetch_assoc($result);
-        $_SESSION['Global_Loggedin'] = true;
-        $_SESSION['Global_Name'] = $row['name'];
-        $_SESSION['Global_Username'] = $username;
-        $_SESSION['Global_Password'] = $password;
-        $_SESSION['Global_ID'] = $row['UID'];
-
-        // if user is admin, redirect to admin page else redirect to trainee page
-        if ($row['role'] == 1){
-            //header("location: ./admintest.php");
-            header("location: ./AdminDashboard.php");
-            logMessage("User " . $_SESSION['Global_Username'] . " logged in as Admin");
-        } else {
-            header("location: ./traineetest.php");
-            logMessage("User " . $_SESSION['Global_Username'] . " logged in as Trainee");
-        }
+    // check if username and password are empty
+    if (empty($username) || empty($password)) {
+        $error = "Username or Password is empty";
     } else {
-        $error = "You have entered incorrect username or password";
+        $sql = "SELECT * FROM tbl_accounts WHERE username='$username' AND password='$password'";
+        $result = mysqli_query($conn, $sql);
+
+        if(mysqli_num_rows($result) > 0){
+
+            while($row = mysqli_fetch_assoc($result)){
+                $ID = $row['UID'];
+                $Type = $row['user_type'];
+            }
+
+            if($Type == 1){
+                logMessage("User " . $_SESSION['Global_Username'] . " logged in as Admin");
+
+                // Updating the loggin status of the user
+                $sql = "UPDATE tbl_Admin SET LogginStatus = 1 WHERE ID = '$ID'";
+                $result = mysqli_query($conn, $sql);
+
+                // Selecting the data from the database and storing it in the session
+                $sql = "SELECT * FROM tbl_Admin WHERE ID = '$ID'";
+                $result = mysqli_query($conn, $sql);
+                $row = mysqli_fetch_assoc($result);
+                $_SESSION['Global_ID'] = $row['ID'];
+                $_SESSION['Global_Name'] = $row['name'];
+                $_SESSION['Global_Username'] = $row['admin_uname'];
+                $_SESSION['Global_Password'] = $row['admin_pword'];
+                $_SESSION['Global_Email'] = $row['email'];
+                $_SESSION['Global_Dept'] = $row['department'];
+                $_SESSION['role'] = $row['role'];
+                $_SESSION['LogginStatus'] = $row['LogginStatus'];
+
+                // Redirecting to the Admin Home Page
+                header("Location: ./AdminDashboard.php");
+            }
+        } else {
+            $error = "Username or Password is invalid";
+        }
     }
 }
 
@@ -82,9 +99,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <div class="social-media error">
             <!-- this script is used to display error message for 3 seconds -->
             <script>
-            setTimeout(function() {
-                document.querySelector('.error').innerHTML = '';
-            }, 3000);
+                setTimeout(function () {
+                    document.querySelector('.error').innerHTML = '';
+                }, 3000);
             </script>
 
 

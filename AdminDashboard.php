@@ -1,11 +1,17 @@
 <?php
 session_start();
+include_once("./External/Log.php");
 
-$Admin_name = $_SESSION['Global_Name'];
-$Admin_role = "Admin";
-
+if (isset($_SESSION['LogginStatus']) && $_SESSION['LogginStatus'] == 1) {
+    if ($_SESSION['role'] == 1) {
+        $User_Role = "Admin";
+        $User_Name = $_SESSION['Global_Name'];
+    }
+} else{
+    logMessage("Error: Accessing the Admin Dashboard without logging in first.");
+    header("Location: ./Login.php");
+}
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
