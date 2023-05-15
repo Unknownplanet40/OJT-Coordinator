@@ -11,6 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (empty($username) || empty($password)) {
         $error = "Username or Password is empty";
     } else {
+        // check if the username and password are correct
         $sql = "SELECT * FROM tbl_accounts WHERE username='$username' AND password='$password'";
         $result = mysqli_query($conn, $sql);
 
@@ -20,11 +21,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $ID = $row['UID'];
                 $Type = $row['user_type'];
             }
-
+            // check if the user is an admin or a user
             if($Type == 1){
                 logMessage("User " . $_SESSION['Global_Username'] . " logged in as Admin");
 
-                // Updating the loggin status of the user
+                // Updating the loggin status of the admin
                 $sql = "UPDATE tbl_Admin SET LogginStatus = 1 WHERE ID = '$ID'";
                 $result = mysqli_query($conn, $sql);
 
@@ -43,6 +44,27 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
                 // Redirecting to the Admin Home Page
                 header("Location: ./AdminDashboard.php");
+            } else {
+                logMessage("User " . $_SESSION['Global_Username'] . " logged in as User");
+
+                // Updating the loggin status of the user
+                $sql = "UPDATE tbl_trainee SET LogginStatus = 1 WHERE ID = '$ID'";
+                $result = mysqli_query($conn, $sql);
+
+                // Selecting the data from the database and storing it in the session
+                $sql = "SELECT * FROM tbl_trainee WHERE UID = '$ID'";
+                $result = mysqli_query($conn, $sql);
+                $row = mysqli_fetch_assoc($result);
+                $_SESSION['Global_ID'] = $row['UID'];
+                $_SESSION['Global_Name'] = $row['name'];
+                $_SESSION['Global_Username'] = $row['username'];
+                $_SESSION['Global_Password'] = $row['password'];
+                $_SESSION['Global_Email'] = $row['email'];
+                $_SESSION['Global_Dept'] = $row['department'];
+                $_SESSION['LogginStatus'] = $row['LogginStatus'];
+
+                // Redirecting to the User Home Page
+                header("Location: ./UserDashboard.php");
             }
         } else {
             $error = "Username or Password is invalid";
