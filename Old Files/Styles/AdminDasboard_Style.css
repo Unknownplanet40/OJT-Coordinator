@@ -1,0 +1,73 @@
+/* for the fonts */
+@import url(./Fonts.css);
+@import url(./ColorPalette.css);
+
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins";
+  scroll-behavior: smooth;
+}
+
+/*For the scroll bar*/
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--clr-background);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--clr-accent);
+  border-radius: 10px;
+}
+
+.dashboard {
+  position: absolute;
+  top: 60;
+  left: 250px;
+  background-color: var(--body-color);
+  width: calc(100% - 250px);
+  height: 100%;
+  overflow: auto;
+}
+
+.dashboard .text {
+  font-size: 30px;
+  font-weight: 500;
+  color: var(--text-color);
+  padding: 12px 60px;
+}
+
+
+
+
+hr{
+  border: 5px solid #495057;
+  width: 97%;
+  margin: 20px auto;
+  border-radius: 50px;
+}
+
+.slots{
+
+  background-color: #198754;
+  color: #fff;
+  border-radius: 5px;
+  padding: 3px 8px;
+  margin: 5px;
+}
+
+.slots-full{
+  background-color: #dc3545;
+}
+
+.course{
+  color: var(--primary-color);
+}
+
+
+

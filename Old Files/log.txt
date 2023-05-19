@@ -1,0 +1,26 @@
+[2023-05-15 03:50:45] - User rj.capsss logged in as Admin
+[2023-05-15 03:51:42] - User rj.capsss logged out
+[2023-05-15 03:54:18] - Error Code: 500 - Internal Server Error
+[2023-05-15 03:58:36] - User rj.capsss logged in as Admin
+[2023-05-15 03:58:49] - User rj.capsss logged out
+[2023-05-15 04:05:01] - User trainee.account logged in as Trainee
+[2023-05-15 04:05:21] - User trainee.account logged out
+[2023-05-15 04:09:00] - User rj.capsss logged in as Admin
+[2023-05-15 04:25:46] - User rj.capsss logged out
+[2023-05-15 17:44:47] - User admin logged out
+[2023-05-15 17:44:53] - Accessed Admin Dashboard without logging in
+[2023-05-15 17:47:27] - User: admin has logged in as a Admin
+[2023-05-15 17:47:27] - Error: Accessing the Admin Dashboard without logging in first. (or open file directly)
+[2023-05-15 17:48:49] - User: admin has logged in as a Admin
+[2023-05-15 18:04:17] - User  logged in as Admin
+[2023-05-15 18:05:49] - User admin logged out
+[2023-05-15 18:08:55] - User  logged in as Admin
+[2023-05-15 18:57:17] - User admin logged out
+[2023-05-16 14:08:55] - User  logged in as Admin
+[2023-05-16 14:09:15] - User admin logged out
+[2023-05-16 14:09:30] - User  logged in as Admin
+[2023-05-16 14:09:42] - User admin logged out
+[2023-05-17 01:18:06] - User  logged in as Admin
+[2023-05-17 01:18:22] - Error: Accessing the Admin Dashboard without logging in first.
+[2023-05-17 01:19:00] - Error Code: 500 - Internal Server Error
+[2023-05-19 03:47:47] - User  logged in as Admin
