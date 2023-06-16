@@ -7,6 +7,8 @@ session_start();
 if (isset($_SESSION['autoUsername']) && isset($_SESSION['autoPassword'])) {
     $uname = $_SESSION['autoUsername'];
     $pword = $_SESSION['autoPassword'];
+} else {
+
 }
 
 if (isset($_POST['login'])) {
@@ -24,7 +26,9 @@ if (isset($_POST['login'])) {
 
         if (mysqli_num_rows($result) > 0) {
             while ($row = mysqli_fetch_assoc($result)) {
-                $_SESSION['ID'] = $row['UID'];
+                $uname = null;
+                $pword = null;
+                $_SESSION['Auth'] = $row['UID'];
                 $_SESSION['UserType'] = $row['role'];
                 header("Location: ./Components/Authentication.php");
             }

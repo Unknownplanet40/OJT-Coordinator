@@ -16,29 +16,18 @@
     <header>
         <div class="image-text">
             <span class="image">
-                <?php
-                $fileExtensions = ['jpg', 'png', 'jpeg', 'gif'];
-                $profilePicture = '';
-
-                foreach ($fileExtensions as $extension) {
-                    $path = '../uploads/ryanj_Credentials/ryanj_Profile.' . $extension;
-                    if (file_exists($path)) {
-                        $profilePicture = $path;
-                        break;
-                    }
-                }
-
-                if (!empty($profilePicture)) {
-                    echo '<img class="rounded shadow" style="width: 48px; height: 48px;" src="' . $profilePicture . '" alt="Profile Picture">';
-                } else {
-                    echo '<img class="rounded"  style="width: 48px; height: 48px;"  src="../Image/Profile.png" alt="Profile Picture">';
+                <?php 
+                if(isset($_SESSION['Profile'])){
+                    echo '<img class="rounded"  style="width: 48px; height: 48px;"  src="' . $_SESSION['Profile'] . '" alt="Profile Picture">';
                 }
                 ?>
             </span>
 
             <div class="text logo-text">
-                <span class="name">Wally bayola</span>
-                <span class="profession">Trainee</span>
+                <span class="name"><?php echo $_SESSION['GlobalName'];?>
+                </span>
+                <span class="profession text-uppercase"><?php echo $_SESSION['GlobalRole']; ?>
+                </span>
             </div>
         </div>
         <i class='toggle'>

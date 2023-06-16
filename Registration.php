@@ -20,6 +20,8 @@ if (isset($_POST['register'])) {
         "@cvsu.edu.ph",
     ];
 
+    $_SESSION['temp'] = array($name, $age, $email, $usn, $username, $password, $confirm);
+
     // check if fields are empty
     if ($name == "" || $age == "" || $email == "" || $usn == "" || $username == "" || $password == "" || $confirm == "") {
         $error[] = "Please fill all the fields";
@@ -89,7 +91,7 @@ if (isset($_POST['register'])) {
                                 $error[] = "Please make sure your passwords match each other";
                             } else {
                                 // this will need to be updated if the database is updated
-                                $sql = "SELECT * FROM tbl_trainee WHERE trainee_uname = '$username' OR email = '$email' OR ID = '$usn'";
+                                $sql = "SELECT trainee_uname, trainee_pword FROM tbl_trainee WHERE trainee_uname = '$username' OR email = '$email' OR ID = '$usn'";
                                 $result = mysqli_query($conn, $sql);
 
                                 // check if the username, email, and usn is already taken
@@ -100,22 +102,25 @@ if (isset($_POST['register'])) {
                                         $unameAlreadyTaken = "Your username is already taken, please try another one";
                                     } else if ($row['email'] == $email) {
                                         $emailAlreadyTaken = "Your email is already taken, please try another one";
-                                    } else if ($row['ID'] == $usn) {
+                                    } else if ($row['UID'] == $usn) {
                                         $usnAlreadyTaken = $usn . " is already taken, please try another one";
                                     } else {
-                                        $sql = "INSERT INTO tbl_trainee (name, email, ID, trainee_uname, trainee_pword) VALUES ('$name', '$email', '$usn', '$username', '$password')";
+                                        $sql = "INSERT INTO tbl_trainee (name, email, UID, trainee_uname, trainee_pword) VALUES ('$name', '$email', '$usn', '$username', '$password')";
                                         $result = mysqli_query($conn, $sql);
                                         if ($result) {
                                             $success = "Account successfully created";
+                                            // clear the $temp array
+                                            $_SESSION['temp'] = array();
                                         } else {
                                             $error[] = "Error in creating account";
                                         }
                                     }
                                 } else {
                                     //Note: update this syntax
-                                    $sql = "INSERT INTO tbl_trainee (name, email, ID, trainee_uname, trainee_pword) VALUES ('$name', '$email', '$usn', '$username', '$password')";
+                                    $sql = "INSERT INTO tbl_trainee (name, email, UID, trainee_uname, trainee_pword) VALUES ('$name', '$email', '$usn', '$username', '$password')";
                                     $result = mysqli_query($conn, $sql);
                                     if ($result) {
+                                        $_SESSION['temp'] = array();
                                         $success = "Account successfully created";
                                         $_SESSION['autoUsername'] = $username;
                                         $_SESSION['autoPassword'] = $password;
@@ -149,6 +154,19 @@ if (isset($_POST['register'])) {
     <script src="./Script/RegisterValidation.js"></script>
     <link rel="shortcut icon" href="./Image/Register.svg" type="image/x-icon">
 
+    <script>
+        const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]')
+        const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl))
+
+        const name = document.getElementById("Traineename");
+
+        // display popover if the name field is clicked
+        name.addEventListener("click", function () {
+            popoverList[0].show();
+        });
+
+    </script>
+
 </head>
 
 <body style="color: #fff;">
@@ -169,12 +187,18 @@ if (isset($_POST['register'])) {
                     <div class="col-8">
                         <div class="form-group">
                             <input type="text" class="form-control item" name="Traineename" id="Traineename"
-                                placeholder="Name">
+                                placeholder="Name"
+                                value="<?php if (isset($_SESSION['temp'][0])) {
+                                    echo $_SESSION['temp'][0];
+                                } ?>" title="Ex: Juan Dela Cruz">
                         </div>
                     </div>
                     <div class="col-4">
                         <div class="form-group">
-                            <input type="text" class="form-control item" name="age" id="age" placeholder="Age">
+                            <input type="text" class="form-control item" name="age" id="age" placeholder="Age"
+                                value="<?php if (isset($_SESSION['temp'][1])) {
+                                    echo $_SESSION['temp'][1];
+                                } ?>" title="Ex: 18">
                         </div>
                     </div>
                 </div>
@@ -182,31 +206,45 @@ if (isset($_POST['register'])) {
                     <div class="col-6">
                         <div class="form-group">
                             <input type="text" class="form-control item" name="email" id="email"
-                                placeholder="Email Address">
+                                placeholder="Email Address"
+                                value="<?php if (isset($_SESSION['temp'][2])) {
+                                    echo $_SESSION['temp'][2];
+                                } ?>" title="Ex: Blk. 0 Lot 0, Village">
                         </div>
                     </div>
                     <div class="col-6">
                         <div class="form-group">
                             <input type="text" class="form-control item" name="usn" id="usn"
-                                placeholder="University Serial Number">
+                                placeholder="University Serial Number"
+                                value="<?php if (isset($_SESSION['temp'][3])) {
+                                    echo $_SESSION['temp'][3];
+                                } ?>" title="Ex: 1234567890">
                         </div>
                     </div>
                 </div>
                 <div class="form-group">
-                    <input type="text" class="form-control item" name="username" id="username" placeholder="Username">
+                    <input type="text" class="form-control item" name="username" id="username" placeholder="Username"
+                        value="<?php if (isset($_SESSION['temp'][4])) {
+                            echo $_SESSION['temp'][4];
+                        } ?>" title="Ex: delcruz20">
                 </div>
                 <div class="form-group">
                     <div class="row">
                         <div class="col-6">
                             <div class="form-group">
                                 <input type="password" class="form-control item" name="password" id="password"
-                                    placeholder="Password">
+                                    placeholder="Password" value="<?php if (isset($temp[5])) {
+                                        echo $temp[5];
+                                    } ?>" title="Ex: @Juandelacruz123">
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="form-group">
                                 <input type="password" class="form-control item" name="confirm" id="confirm"
-                                    placeholder="Confirm Password">
+                                    placeholder="Confirm Password"
+                                    value="<?php if (isset($temp[6])) {
+                                        echo $temp[6];
+                                    } ?>" title="Ex: @Juandelacruz123">
                             </div>
                         </div>
                     </div>
@@ -324,6 +362,7 @@ if (isset($_POST['register'])) {
                 </small></p>
         </div>
     </div>
+    <script src="./Script/Bootstrap/bootstrap.bundle.js"></script>
 </body>
 
 </html>
