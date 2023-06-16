@@ -44,7 +44,7 @@ function ProfileUpload()
             // Move the old profile picture to the original folder
             foreach ($extensions as $extension) {
                 $filePath = $path . '.' . $extension;
-                $tempPath = '../uploads/' . $foldername . '/temp/' . $username . '_Profile.' . $extension;
+                $tempPath = '../uploads/' . $foldername . '\/temp/' . $username . '_Profile.' . $extension;
                 if (file_exists($tempPath)) {
                     copy($tempPath, $filePath);
                     unlink($tempPath);

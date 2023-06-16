@@ -4,7 +4,6 @@ session_start();
 // this code is for demonstration purposes only no functionality yet
 $oldpassword = "qwertyui12";
 $newpass = "";
-//ghhhgjhgjh
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $currentPassword = $_POST['current'];
