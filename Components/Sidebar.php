@@ -1,3 +1,4 @@
+
 <style>
     .sidebar li .active {
         background-color: var(--primary-color);
@@ -16,10 +17,11 @@
     <header>
         <div class="image-text">
             <span class="image">
-                <?php
+            <?php
                 $fileExtensions = ['jpg', 'png', 'jpeg', 'gif'];
-                $profilePicture = '';
+                $profilePicture = null;
 
+                $_SESSION['user'] = "ryanj";
                 foreach ($fileExtensions as $extension) {
                     $path = '../uploads/' . $_SESSION['user'] . '_Credentials/' . $_SESSION['user'] . '_Profile.' . $extension;
                     if (file_exists($path)) {

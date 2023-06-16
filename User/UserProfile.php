@@ -41,7 +41,7 @@ if (isset($_POST['imageupload'])) {
 </script>
 
 <body>
-    <?php include_once '../Components/Sidebar.php'; ?>
+    <?php @include_once '../Components/Sidebar.php'; ?>
     <?php echo NewAlertBox();
     $_SESSION['Show'] = false; ?>
     <section class="home">
