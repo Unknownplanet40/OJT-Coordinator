@@ -1,0 +1,313 @@
+CREATE TRIGGER delete_old_rows BEFORE DELETE ON mytable
+FOR EACH ROW
+BEGIN
+  IF NOW() - OLD.timestamp > INTERVAL 24 HOURS THEN
+    DELETE FROM mytable WHERE id = OLD.id;
+  END IF;
+END;
+
+<script>
+
+// Get the file input field
+const fileInput = document.getElementById('file');
+
+// When the file input field changes, submit the form
+fileInput.addEventListener('change', function() {
+  this.form.submit();
+});
+
+</script>
+
+<div class="row text-center">
+    <div class="row row-cols-1 row-cols-md-4 g-4">
+      <div class="col">
+        <div class="col-md-12 text-center">
+          <div class="card" style="width: 18rem">
+            <img src="./Image/Player/Asistio-ros2.png" class="card-img-top" alt="Player 1" />
+            <div class="card-body">
+              <p class="card-text">
+                <span class="text-secondary">Anton</span><br>
+                <strong class="fs-4 text-uppercase">Asistio</strong>
+              </p>
+            </div>
+            <div class="card-footer d-flex justify-content-between">
+              <h5 class="text-secondary fw-semibold mt-2">#8 | G</h5>
+              <a href="https://www.pba.ph/players/anton-asistio" class="btn">
+                <img src="./Image/logo.png" alt="logo" style="width: 50px; height: 20px;" />
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="col-md-12 text-center">
+          <div class="card" style="width: 18rem">
+            <img src="./Image/Player/Asistio-ros2.png" class="card-img-top" alt="Player 1" />
+            <div class="card-body">
+              <p class="card-text">
+                <span class="text-secondary">Anton</span><br>
+                <strong class="fs-4 text-uppercase">Asistio</strong>
+              </p>
+            </div>
+            <div class="card-footer d-flex justify-content-between">
+              <h5 class="text-secondary fw-semibold mt-2">#8 | G</h5>
+              <a href="https://www.pba.ph/players/anton-asistio" class="btn">
+                <img src="./Image/logo.png" alt="logo" style="width: 50px; height: 20px;" />
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="col-md-12 text-center">
+          <div class="card" style="width: 18rem">
+            <img src="./Image/Player/Asistio-ros2.png" class="card-img-top" alt="Player 1" />
+            <div class="card-body">
+              <p class="card-text">
+                <span class="text-secondary">Anton</span><br>
+                <strong class="fs-4 text-uppercase">Asistio</strong>
+              </p>
+            </div>
+            <div class="card-footer d-flex justify-content-between">
+              <h5 class="text-secondary fw-semibold mt-2">#8 | G</h5>
+              <a href="https://www.pba.ph/players/anton-asistio" class="btn">
+                <img src="./Image/logo.png" alt="logo" style="width: 50px; height: 20px;" />
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="col-md-12 text-center">
+          <div class="card" style="width: 18rem">
+            <img src="./Image/Player/Asistio-ros2.png" class="card-img-top" alt="Player 1" />
+            <div class="card-body">
+              <p class="card-text">
+                <span class="text-secondary">Anton</span><br>
+                <strong class="fs-4 text-uppercase">Asistio</strong>
+              </p>
+            </div>
+            <div class="card-footer d-flex justify-content-between">
+              <h5 class="text-secondary fw-semibold mt-2">#8 | G</h5>
+              <a href="https://www.pba.ph/players/anton-asistio" class="btn">
+                <img src="./Image/logo.png" alt="logo" style="width: 50px; height: 20px;" />
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="col-md-12 text-center">
+          <div class="card" style="width: 18rem">
+            <img src="./Image/Player/Asistio-ros2.png" class="card-img-top" alt="Player 1" />
+            <div class="card-body">
+              <p class="card-text">
+                <span class="text-secondary">Anton</span><br>
+                <strong class="fs-4 text-uppercase">Asistio</strong>
+              </p>
+            </div>
+            <div class="card-footer d-flex justify-content-between">
+              <h5 class="text-secondary fw-semibold mt-2">#8 | G</h5>
+              <a href="https://www.pba.ph/players/anton-asistio" class="btn">
+                <img src="./Image/logo.png" alt="logo" style="width: 50px; height: 20px;" />
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="col-md-12 text-center">
+          <div class="card" style="width: 18rem">
+            <img src="./Image/Player/Asistio-ros2.png" class="card-img-top" alt="Player 1" />
+            <div class="card-body">
+              <p class="card-text">
+                <span class="text-secondary">Anton</span><br>
+                <strong class="fs-4 text-uppercase">Asistio</strong>
+              </p>
+            </div>
+            <div class="card-footer d-flex justify-content-between">
+              <h5 class="text-secondary fw-semibold mt-2">#8 | G</h5>
+              <a href="https://www.pba.ph/players/anton-asistio" class="btn">
+                <img src="./Image/logo.png" alt="logo" style="width: 50px; height: 20px;" />
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <?php
+session_start();
+include_once("./External/config.php");
+include_once("./External/Log.php");
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+
+    // check if username and password are empty
+    if (empty($username) || empty($password)) {
+        $error = "Username or Password is empty";
+    } else {
+        // check if the username and password are correct
+        $sql = "SELECT * FROM tbl_accounts WHERE username='$username' AND password='$password'";
+        $result = mysqli_query($conn, $sql);
+
+        if(mysqli_num_rows($result) > 0){
+
+            while($row = mysqli_fetch_assoc($result)){
+                $ID = $row['UID'];
+                $Type = $row['user_type'];
+            }
+            // check if the user is an admin or a user
+            if($Type == 1){
+                logMessage("User " . $_SESSION['Global_Username'] . " logged in as Admin");
+
+                // Updating the loggin status of the admin
+                $sql = "UPDATE tbl_Admin SET LogginStatus = 1 WHERE ID = '$ID'";
+                $result = mysqli_query($conn, $sql);
+
+                // Selecting the data from the database and storing it in the session
+                $sql = "SELECT * FROM tbl_Admin WHERE ID = '$ID'";
+                $result = mysqli_query($conn, $sql);
+                $row = mysqli_fetch_assoc($result);
+                $_SESSION['Global_ID'] = $row['ID'];
+                $_SESSION['Global_Name'] = $row['name'];
+                $_SESSION['Global_Username'] = $row['admin_uname'];
+                $_SESSION['Global_Password'] = $row['admin_pword'];
+                $_SESSION['Global_Email'] = $row['email'];
+                $_SESSION['Global_Dept'] = $row['department'];
+                $_SESSION['role'] = $row['role'];
+                $_SESSION['LogginStatus'] = $row['LogginStatus'];
+
+                // Redirecting to the Admin Home Page
+                header("Location: ./AdminDashboard.php");
+            } else {
+                logMessage("User " . $_SESSION['Global_Username'] . " logged in as User");
+
+                // Updating the loggin status of the user
+                $sql = "UPDATE tbl_trainee SET LogginStatus = 1 WHERE ID = '$ID'";
+                $result = mysqli_query($conn, $sql);
+
+                // Selecting the data from the database and storing it in the session
+                $sql = "SELECT * FROM tbl_trainee WHERE UID = '$ID'";
+                $result = mysqli_query($conn, $sql);
+                $row = mysqli_fetch_assoc($result);
+                $_SESSION['Global_ID'] = $row['UID'];
+                $_SESSION['Global_Name'] = $row['name'];
+                $_SESSION['Global_Username'] = $row['username'];
+                $_SESSION['Global_Password'] = $row['password'];
+                $_SESSION['Global_Email'] = $row['email'];
+                $_SESSION['Global_Dept'] = $row['department'];
+                $_SESSION['LogginStatus'] = $row['LogginStatus'];
+
+                // Redirecting to the User Home Page
+                header("Location: ./UserDashboard.php");
+            }
+        } else {
+            $error = "Username or Password is invalid";
+        }
+    }
+}
+
+
+?>
+
+<caption style="min-width: 700px;">
+                        <div class="d-flex justify-content-between">
+                            <div>
+                                <h4 class="mt-2 d-block text-truncate" style="min-width: 320px;">List of users and
+                                    their
+                                    Status</h4>
+                            </div>
+                            <div class="d-flex justify-content-evenly">
+                                <div>
+
+                                    <form class="d-flex">
+                                        <div class="input-group sm-3">
+                                            <input type="text" class="form-control text-bg-dark" placeholder="Search">
+                                            <button class="btn btn-outline-success" type="submit">Search</button>
+                                        </div>
+                                    </form>
+                                </div>
+                                <nav class="ms-3 mt-1">
+                                    <ul class="pagination pagination-sm">
+                                        <li class="page-item">
+                                            <a class="page-link text-bg-dark" href="#" aria-label="Previous">
+                                                <span aria-hidden="true">&laquo;</span>
+                                            </a>
+                                        </li>
+                                        <li class="page-item"><a class="page-link text-bg-dark" href="#">1</a></li>
+                                        <li class="page-item"><a class="page-link text-bg-dark" href="#">2</a></li>
+                                        <li class="page-item"><a class="page-link text-bg-dark" href="#">3</a></li>
+                                        <li class="page-item">
+                                            <a class="page-link text-bg-dark" href="#" aria-label="Next">
+                                                <span aria-hidden="true">&raquo;</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                    </caption>
+
+
+                    
+                    else if (!preg_match("/^[a-zA-Z ]*$/", $name)) {
+        $error[] = "Only letters and whitespace allowed";
+    } else if ($age < 18) {
+        $error[] = "You must be 18 years old and above to register";
+    } else if (preg_match("/^[A-Z ]*$/", $email)) {
+        $error[] = "Email must be in lowercase and must not contain whitespace";
+    } else if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $error[] = "Invalid email format";
+    } else if (!in_array(substr($email, strpos($email, "@")), $validEmailDomain)) {
+        $error[] = "Invalid email domain";
+    } else if (strlen($usn) != 10) {
+        $error[] = "USN must be 10 numeric characters long";
+    } else if (!preg_match("/^[0-9]*$/", $usn)) {
+        $error[] = "USN only accepts numeric characters";
+    } else if (strlen($username) < 5) {
+        $error[] = "Username must be 5 characters long";
+    } else if ($username != strtolower($username)) {
+        $error[] = "Username must be in lowercase";
+    } else if (!preg_match("/^[a-zA-Z0-9]*$/", $username)) {
+        $error[] = "Username must not contain whitespace and special characters";
+    } else if (strlen($password) < 8) {
+        $error[] = "Password must be 8 characters long";
+    } else if ($password != $confirm) {
+        $error[] = "Please confirm your password";
+    } 
+
+    <?php
+session_start();
+@include_once("./Database/config.php");
+
+
+
+if (isset($_POST['login'])) {
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+
+    echo "<script>console.log('$username')</script>";
+    echo "<script>console.log('$password')</script>";
+
+
+    $sql = "SELECT * FROM tbl_accounts WHERE username = '$username' AND password = '$password'";
+    $result = mysqli_query($conn, $sql);
+
+    if ($result) {
+        if (mysqli_num_rows($result) > 0) {
+            $message = "You have successfully logged in!";
+            $success = true;
+        } else {
+            $message = "Invalid username or password!";
+            $success = false;
+        }
+    }
+
+
+}
+?>

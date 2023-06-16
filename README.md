@@ -42,7 +42,7 @@ password: trainee
 `for trainee screenshots`
 
 ## Prototype Design
-[![Figma](./Images/figma.svg)](https://www.figma.com/proto/1pcy3WMONFkYbCaifguDCw/OJT-Coordinator-Prototype?page-id=0%3A1&type=design&node-id=97-801&scaling=scale-down&starting-point-node-id=97%3A801) 
+[![Figma](./Old%20Files/Images/figma.svg)](https://www.figma.com/proto/1pcy3WMONFkYbCaifguDCw/OJT-Coordinator-Prototype?page-id=0%3A1&type=design&node-id=97-801&scaling=scale-down&starting-point-node-id=97%3A801) 
 
 ## Information
 This project was created by the following students of the Cavite State University - Imus Campus (CvSU) in compliance to DCIT 60A - Integrated Programming and Technologies 1
@@ -62,12 +62,17 @@ This project was created by the following students of the Cavite State Universit
 | [**James Matthew R. Veloria**](https://github.com/JamesVeloria16) | Full-Stack Developer | 2nd Year | BSIT |
 | [**Jeric C. Dayandante**](https://github.com/kuya-G) | Full-Stack Developer | 2nd Year | BSIT 
 | [**Brandon Logon**](#developers-and-contributors) | Back-End Developer | 2nd Year | BSIT |
-| [**Lorenzo Asis**](#developers-and-contributors) | Front-End Developer | 2nd Year | BSIT |
+| [**Lorenzo Asis**](#developers-and-contributors) | Quality Assurance | 2nd Year | BSIT |
 
 </div>
 
-### Instructor
-[**Mr. Bendict Bautista**](#instructor) - Instructor
+### Instructors
+
+| Name | Subject |
+| :--- | :--- |
+|[**BAUTISTA, BENEDICT**](#instructor) | DCIT 60A - INTEGRATED PROGRAMMING AND TECHNOLOGIES 1 |
+|[**ALLAUIGAN, WYETH**](#instructor) | DCIT 55A - ADVANCE DATABASE MANAGEMENT SYSTEM |
+| [**MODESTO, SHAINA MARIE**](#instructor) | ITEC 65A - OPEN SOURCE TECHNOLOGY |
 
 ## License
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
@@ -96,6 +101,7 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 - [Chart](https://www.chartjs.org/)
 - [Figma](https://www.figma.com/)
 - [GitHub](https://github.com/Unknownplanet40)
+- [Google Bard](https://bard.google.com/)
 
 
 
