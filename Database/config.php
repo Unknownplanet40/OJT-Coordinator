@@ -12,7 +12,7 @@ try {
     if ($conn) {
         echo "<script>console.log('The database is connected successfully.');</script>";
     } else {
-        echo "Failed to connect to database";
+        echo "<script>console.log('Failed to connect to database.');</script>";
     }
 } catch (\Throwable $th) {
     header("location: ErrorPage.php?error=500");

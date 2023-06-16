@@ -116,7 +116,7 @@ if (isset($_POST['login'])) {
                 <script>
                     setTimeout(function () {
                         document.getElementsByName("perror")[0].innerHTML = "";
-                    }, 3000);
+                    }, 6000);
                     document.querySelector('.error').scrollIntoView({
                         behavior: 'smooth'
                     });

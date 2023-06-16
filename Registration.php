@@ -312,7 +312,7 @@ if (isset($_POST['register'])) {
                 <script>
                     setTimeout(function () {
                         document.getElementsByName("perror")[0].innerHTML = "";
-                    }, 3000);
+                    }, 6000);
                     document.querySelector('.error').scrollIntoView({
                         behavior: 'smooth'
                     });
