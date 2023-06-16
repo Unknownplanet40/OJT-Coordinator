@@ -15,7 +15,7 @@
             --clr-input: #808080;
         }
 
-        /*For the scroll bar*/
+        /*For the scroll-bar*/
         ::-webkit-scrollbar {
             width: 8px;
         }
