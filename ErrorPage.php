@@ -8,7 +8,7 @@ $isdebugON = false; // currently debugging is off
 
 if ($isdebugON) {
   header("Refresh: 5 ; url=ErrorPage.php");
-  // this array is for debugging purposes only to test all error codes
+  // this array is for debugging purposes only to test all error code
   $Codes = array(400, 401, 402, 403, 404, 405, 406, 407, 408, 409, 410, 411, 412, 413, 414, 415, 416, 417, 418, 421, 422, 423, 424, 500, 501, 502, 503, 504, 505);
   //randomly select one of the error codes for each page load
   $error_codes = $Codes[array_rand($Codes)];
