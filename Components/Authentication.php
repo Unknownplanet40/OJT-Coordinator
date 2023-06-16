@@ -45,14 +45,16 @@ function fetchAdminData($ID)
         $result = mysqli_query($conn, $sql);
 
         if ($result) {
-            $_SESSION['message'] = "Welcome, " . $_SESSION['GlobalName'] . "!";
+            $_SESSION['message'] = "Good day, " . $_SESSION['GlobalName'] . "! Welcome to the admin dashboard.";
             $_SESSION['icon'] = "success";
             $_SESSION['Show'] = true;
+            $_SESSION['DatahasbeenFetched'] = true;
             header("Location: ../Admin/AdminDashboard.php");
         } else {
             $_SESSION['message'] = "We incountered an error while logging you in, please try again later.";
             $_SESSION['icon'] = "error";
             $_SESSION['Show'] = true;
+            $_SESSION['DatahasbeenFetched'] = null;
             logMessage("Error", "Authentication", "The file Authentication was accessed by " . $_SESSION['GlobalName'] . ".");
             header("Location: ../Login.php");
         }
@@ -82,14 +84,16 @@ function fetchModeratorData($ID)
         $result = mysqli_query($conn, $sql);
 
         if ($result) {
-            $_SESSION['message'] = "Welcome, " . $_SESSION['GlobalName'] . "!";
+            $_SESSION['message'] = "Good day, " . $_SESSION['GlobalName'] . "! Welcome to the admin dashboard.";
             $_SESSION['icon'] = "success";
             $_SESSION['Show'] = true;
-            header("Location: ../Admin/AdminDashboard.php");
+            $_SESSION['DatahasbeenFetched'] = true;
+            header("Location: ../Moderator/ModDashboard.php");
         } else {
             $_SESSION['message'] = "We incountered an error while logging you in, please try again later.";
             $_SESSION['icon'] = "error";
             $_SESSION['Show'] = true;
+            $_SESSION['DatahasbeenFetched'] = null;
             logMessage("Error", "Authentication", "The file Authentication was accessed by " . $_SESSION['GlobalName'] . ".");
             header("Location: ../Login.php");
         }
