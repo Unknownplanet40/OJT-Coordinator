@@ -24,6 +24,7 @@ if (isset($_SESSION['message'])) {
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <style>
         :root {
+            /* Color Scheme  */
             --clr-background: #1b1b1b;
             --clr-secondary: #292929;
             --clr-accent: #ffa31a;
