@@ -144,7 +144,7 @@
 
         <div class="bottom-content">
             <li class="nav-link" title="Logout">
-                <a href="../logout.php">
+                <a class="logout">
                     <i class='icon'>
                         <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 96 960 960" width="24">
                             <path
@@ -153,6 +153,29 @@
                     </i>
                     <span class="text nav-text">Logout</span>
                 </a>
+                <script>
+                    const logout = document.querySelector('.logout');
+
+                    //if logout is clicked it will show a confirmation box using sweetalert
+                    logout.addEventListener('click', function (e) {
+                        e.preventDefault();
+                        Swal.fire({
+                            title: 'Are you sure?',
+                            text: "You want to logout?",
+                            icon: 'warning',
+                            showCancelButton: true,
+                            confirmButtonColor: '#d33',
+                            cancelButtonColor: '#3085d6',
+                            confirmButtonText: 'Yes, Logout!'
+                            bbackground: '#19191a',
+                            color: '#fff'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                window.location.href = "../logout.php";
+                            }
+                        })
+                    })
+                </script>
             </li>
             <!-- This is the dark mode toggle switch I will Hide this for now Because its so Buggy -->
             <li class="mode" hidden>
