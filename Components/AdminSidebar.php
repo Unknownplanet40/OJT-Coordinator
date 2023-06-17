@@ -144,7 +144,7 @@
 
         <div class="bottom-content">
             <li class="nav-link" title="Logout">
-                <a href="#">
+                <a href="../logout.php">
                     <i class='icon'>
                         <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 96 960 960" width="24">
                             <path

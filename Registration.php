@@ -91,7 +91,7 @@ if (isset($_POST['register'])) {
                                 $error[] = "Please make sure your passwords match each other";
                             } else {
                                 // this will need to be updated if the database is updated
-                                $sql = "SELECT trainee_uname, trainee_pword FROM tbl_trainee WHERE trainee_uname = '$username' OR email = '$email' OR ID = '$usn'";
+                                $sql = "SELECT trainee_uname, trainee_pword FROM tbl_trainee WHERE trainee_uname = '$username' OR email = '$email' OR UID = '$usn'";
                                 $result = mysqli_query($conn, $sql);
 
                                 // check if the username, email, and usn is already taken

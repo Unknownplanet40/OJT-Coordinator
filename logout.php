@@ -1,31 +1,31 @@
 <?php
 session_start();
-include_once("./External/config.php");
-include_once("./External/Log.php");
+@include_once("./Database/config.php");
+@include_once("./Components/SystemLog.php");
 
 // check what type of user is logging out
-if (isset($_GET['type'])) {
-    if ($_GET['type'] == "Admin") {
-        #sql query to update the loggin status of the admin
-        $sql = "UPDATE tbl_Admin SET LogginStatus = 0 WHERE ID = '" . $_SESSION['Global_ID'] . "'";
-        $result = mysqli_query($conn, $sql);
-    } else if ($_GET['type'] == "User") {
-        #sql query to update the loggin status of the user
-        $sql = "UPDATE tbl_trainee SET LogginStatus = 0 WHERE UID = '" . $_SESSION['Global_ID'] . "'";
-        $result = mysqli_query($conn, $sql);
+if (isset($_SESSION['GlobalRole'])) {
+    if ($_SESSION['GlobalRole'] == "administrator") {
+        $sql = "UPDATE tbl_accounts SET status = 0 WHERE UID = '" . $_SESSION['GlobalID'] . "'";
+    } else if ($_SESSION['GlobalRole'] == "moderator") {
+        $sql = "UPDATE tbl_accounts SET status = 0 WHERE UID = '" . $_SESSION['GlobalID'] . "'";
     } else {
-        logMessage("Error: Type of user not specified");
-        header("Location: ErrorPage.php?error=409");
+        $sql = "UPDATE tbl_accounts SET status = 0 WHERE UID = '" . $_SESSION['GlobalID'] . "'";
     }
 }
+$result = mysqli_query($conn, $sql);
+$_SESSION['DatahasbeenFetched'] = null;
+
 // check if the loggin status of the user was updated
 if ($result) {
-    logMessage("User " . $_SESSION['Global_Username'] . " logged out");
+    session_unset();
+    session_destroy();
+    header("Location: ./login.php");
 } else {
-    logMessage("Error: Unable to update the loggin status of the user");
+    $_SESSION['message'] = "The System encountered an error while logging you out, please Contact the Administrator.";
+    $_SESSION['icon'] = "error";
+    $_SESSION['Show'] = true;
+    logMessage("Error", "Log-out", "There was an error while logging out.");
+    header("Location: " . $_SERVER['HTTP_REFERER']);
 }
-
-session_unset();
-session_destroy();
-header("Location: ./login.php");
 ?>

@@ -12,9 +12,13 @@
                         "rgb(54, 162, 235)", //male color
                         "rgb(255, 99, 132)", //Female color
                     ],
-                    data: [87, 42],  //add php data here
+                    //data: [87, 42],  //add php data here
                     // to get data from php use this "json_encode($data)"
                     // try ko hanapin yung pinagkunan ko ng code na to para mas maintindihan nyo
+                    data: [
+                        <?php echo json_encode(maleChart()); ?>, 
+                        <?php echo json_encode(femaleChart()); ?>
+                    ],
                 },
             ],
         },

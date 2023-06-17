@@ -10,6 +10,51 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
     $ShowAlert = true;
 }
 
+$sql = "SELECT COUNT(UID), COUNT(program), COUNT(completed) FROM tbl_trainee;";
+$result = mysqli_query($conn, $sql);
+
+if (mysqli_num_rows($result) > 0) {
+    $row = mysqli_fetch_row($result);
+    $TotalTrainee = $row[0];
+    $Deployed = $row[1];
+    $Completed = $row[2];
+}
+
+//gender chart
+function maleChart()
+{
+    global $conn;
+    $sql = "SELECT COUNT(UID) FROM `tbl_trainee` WHERE `gender` = 'male'";
+    $result = mysqli_query($conn, $sql);
+
+    if (mysqli_num_rows($result) > 0) {
+        $row = mysqli_fetch_row($result);
+        return $row[0];
+    }
+}
+
+function femaleChart(){
+    global $conn;
+    $sql = "SELECT COUNT(UID) FROM `tbl_trainee` WHERE `gender` = 'female'";
+    $result = mysqli_query($conn, $sql);
+
+    if (mysqli_num_rows($result) > 0) {
+        $row = mysqli_fetch_row($result);
+        return $row[0];
+    }
+}
+
+function MonthlyChart($month){
+    global $conn;
+    $sql = "SELECT COUNT(UID) FROM tbl_trainee WHERE MONTH(account_Created) = $month";
+    $result = mysqli_query($conn, $sql);
+
+    if (mysqli_num_rows($result) > 0) {
+        $row = mysqli_fetch_row($result);
+        return $row[0];
+    }
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en, fil">
@@ -41,7 +86,9 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
                     <div class="card h-100 text-bg-dark">
                         <div class="card-body">
                             <h5 class="card-title text-uppercase d-block text-truncate">Total Trainee's</h5>
-                            <h1 class="card-text text-center fw-bold text-warning">100</h1>
+                            <h1 class="card-text text-center fw-bold text-warning">
+                                <?php echo $TotalTrainee; ?>
+                            </h1>
                         </div>
                     </div>
                 </div>
@@ -49,7 +96,9 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
                     <div class="card h-100 text-bg-dark">
                         <div class="card-body">
                             <h5 class="card-title text-uppercase d-block text-truncate">Deployed</h5>
-                            <h1 class="card-text text-center fw-bold text-warning">100</h1>
+                            <h1 class="card-text text-center fw-bold text-warning">
+                                <?php echo $Deployed; ?>
+                            </h1>
                         </div>
                     </div>
                 </div>
@@ -57,7 +106,9 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
                     <div class="card h-100 text-bg-dark">
                         <div class="card-body">
                             <h5 class="card-title text-uppercase d-block text-truncate">Completed</h5>
-                            <h1 class="card-text text-center fw-bold text-warning">100</h1>
+                            <h1 class="card-text text-center fw-bold text-warning">
+                                <?php echo $Completed; ?>
+                            </h1>
                         </div>
                     </div>
                 </div>

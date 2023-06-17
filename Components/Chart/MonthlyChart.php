@@ -26,7 +26,27 @@
                         "#FFA31A",
                         "#FFA31A",
                     ],
-                    data: [87, 42, 15, 69, 33, 58, 91, 24, 76, 51, 9, 95],  //add php data here
+                    data: [
+                        <?php echo json_encode(MonthlyChart(1)); ?>,
+                        <?php echo json_encode(MonthlyChart(2)); ?>,
+                        <?php echo json_encode(MonthlyChart(3)); ?>,
+                        <?php echo json_encode(MonthlyChart(4)); ?>,
+                        <?php echo json_encode(MonthlyChart(5)); ?>,
+                        <?php echo json_encode(MonthlyChart(6)); ?>,
+                        <?php echo json_encode(MonthlyChart(7)); ?>,
+                        <?php echo json_encode(MonthlyChart(8)); ?>,
+                        <?php echo json_encode(MonthlyChart(9)); ?>,
+                        <?php echo json_encode(MonthlyChart(10)); ?>,
+                        <?php echo json_encode(MonthlyChart(11)); ?>,
+                        <?php echo json_encode(MonthlyChart(12)); ?>,
+                    ],
+                    
+                    
+                    
+                    
+                    
+                    
+                    //add php data here
                     // to get data from php use this "json_encode($data)"
                     // example: data: <php echo json_encode($data); >,
                     // mag isip kayo kung pano nyo ilalagay sa data yung data from php

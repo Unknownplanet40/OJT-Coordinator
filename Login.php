@@ -7,8 +7,6 @@ session_start();
 if (isset($_SESSION['autoUsername']) && isset($_SESSION['autoPassword'])) {
     $uname = $_SESSION['autoUsername'];
     $pword = $_SESSION['autoPassword'];
-} else {
-
 }
 
 if (isset($_POST['login'])) {
@@ -26,8 +24,10 @@ if (isset($_POST['login'])) {
 
         if (mysqli_num_rows($result) > 0) {
             while ($row = mysqli_fetch_assoc($result)) {
-                $uname = null;
-                $pword = null;
+                // clear autoUsername and autoPassword session
+                $_SESSION['autoUsername'] = null;
+                $_SESSION['autoPassword'] = null;
+
                 $_SESSION['Auth'] = $row['UID'];
                 $_SESSION['UserType'] = $row['role'];
                 header("Location: ./Components/Authentication.php");
@@ -37,7 +37,6 @@ if (isset($_POST['login'])) {
         }
     }
 } 
-
 ?>
 
 
@@ -127,7 +126,6 @@ if (isset($_POST['login'])) {
                 </script>
             </div>
             <p class="text-muted text-center"><small>
-                    Refreshing the page while locked out will reset the time immediately. <br>
                     <span class="text-warning">&copy; 2023. All Rights Reserved.</span>
                 </small></p>
         </div>
