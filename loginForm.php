@@ -1,3 +1,14 @@
+<?php
+// this is a Design Version 2.0
+session_start();
+
+// check if message is set
+if (isset($_SESSION['message'])) {
+    echo "<script>alert('" . $_SESSION['message'] . "')</script>";
+    unset($_SESSION['message']);
+}
+?>
+
 <!DOCTYPE html>
 <html>
 
@@ -146,7 +157,7 @@
 <body>
     <div class="container-fluid">
         <div class="registration-form">
-            <form method="POST" action="loginForm.php">
+            <form method="POST" action="database.php">
                 <div class="form-icon">
                     <span>
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 96 960 960" fill="var(--clr-secondary)">
@@ -155,6 +166,7 @@
                         </svg>
                     </span>
                 </div>
+                <!-- &nbsp; is a non-breaking space -->
                 <div class="form-group">
                     <input type="text" class="form-control item" name="username" id="username" placeholder="Name">
                     <div class="text-danger" id="usernameErr" style="margin: -25px 0 5px 15px;">&nbsp;</div>
@@ -174,12 +186,11 @@
                                 Show Password
                             </label>
                         </div>
-                        <p class="reg-link"><a href="ForgotPassword.php">Forgot
-                                Password</a></p>
+                        <p class="reg-link"><a href="ForgotPassword.php">Forgot Password</a></p>
                     </div>
                 </div>
                 <div class="form-group">
-                    <button type="submit" class="btn btn-block create-account" name="login">Create Account</button>
+                    <button type="submit" class="btn btn-block create-account" name="login" id="login">Create Account</button>
                     <div>
                         <p class="reg-link text-end">Already have an account? <a href="loginForm.php">Sign In</a>
                         </p>
@@ -189,6 +200,7 @@
             <div class="social-media error">
 
             </div>
+            <!-- This design is not its final form; it may change in the future. -->
             <p class="text-muted text-center mb-0"><small>
                     <span class="text-warning">&copy; 2023. All Rights Reserved.</span>
                 </small></p>
@@ -294,8 +306,6 @@
                     passError.innerHTML = "&nbsp;";
                     mailError.innerHTML = "&nbsp;";
                     form.submit();
-
-                    alert("Account Created Successfully");
                 }
             });
         </script>
