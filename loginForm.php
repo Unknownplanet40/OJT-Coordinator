@@ -7,8 +7,12 @@ if (isset($_SESSION['message'])) {
     echo "<script>alert('" . $_SESSION['message'] . "')</script>";
     unset($_SESSION['message']);
 }
-?>
 
+// It's not submitting, when the code for the Validation is in the same file as the code for the database.
+// so I separated the code for the Validation and the code for the database.
+// I put the code for Database in a different file named database.php
+?>
+<!-- Reference for the design: https://epicbootstrap.com/snippets/registration -->
 <!DOCTYPE html>
 <html>
 
@@ -78,7 +82,7 @@ if (isset($_SESSION['message'])) {
         }
 
         .registration-form .form-icon span svg {
-            margin-top: -15px;
+            margin-top: -20px;
         }
 
         .registration-form .item {
@@ -144,7 +148,6 @@ if (isset($_SESSION['message'])) {
             margin-right: 5px;
             color: #dc3545;
         }
-
 
         @media (max-width: 576px) {
             .registration-form form {
