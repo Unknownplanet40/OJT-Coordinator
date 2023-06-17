@@ -163,12 +163,13 @@
                             title: 'Are you sure?',
                             text: "You want to logout?",
                             icon: 'warning',
+                            allowOutsideClick: false,
                             showCancelButton: true,
                             confirmButtonColor: '#d33',
                             cancelButtonColor: '#3085d6',
-                            confirmButtonText: 'Yes, Logout!'
-                            bbackground: '#19191a',
-                            color: '#fff'
+                            confirmButtonText: 'Yes, Logout!',
+                            background: '#19191a',
+                            color: '#fff',
                         }).then((result) => {
                             if (result.isConfirmed) {
                                 window.location.href = "../logout.php";
