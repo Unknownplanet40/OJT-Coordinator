@@ -16,17 +16,19 @@
     <header>
         <div class="image-text">
             <span class="image">
-                <?php 
-                if(isset($_SESSION['Profile'])){
+                <?php
+                if (isset($_SESSION['Profile'])) {
                     echo '<img class="rounded"  style="width: 48px; height: 48px;"  src="' . $_SESSION['Profile'] . '" alt="Profile Picture">';
                 }
                 ?>
             </span>
 
             <div class="text logo-text">
-                <span class="name"><?php echo $_SESSION['GlobalName'];?>
+                <span class="name text-capitalize text-truncate" style="max-width: 155px;">
+                    <?php echo $_SESSION['GlobalName']; ?>
                 </span>
-                <span class="profession text-uppercase"><?php echo $_SESSION['GlobalRole']; ?>
+                <span class="profession text-uppercase">
+                    <?php echo $_SESSION['GlobalRole']; ?>
                 </span>
             </div>
         </div>
@@ -172,7 +174,39 @@
                             color: '#fff',
                         }).then((result) => {
                             if (result.isConfirmed) {
-                                window.location.href = "../logout.php";
+                                //array of random messages
+                                const titlemessage = [
+                                    'Logging out...',
+                                    'See you soon...',
+                                    'Bye bye...',
+                                    'Have a nice day...',
+                                    'Goodbye...',];
+                                
+                                const textmessage = [
+                                    'Please wait while we are logging you out',
+                                    'Closing your session',
+                                    'Clearing your session',
+                                    'Please wait, where saving your data',
+                                    'Please wait a moment'];
+                                const ranText = Math.floor(Math.random() * textmessage.length);
+                                const ranTitle = Math.floor(Math.random() * titlemessage.length);
+
+                                Swal.fire({
+                                    title: titlemessage[ranTitle],
+                                    text: textmessage[ranText],
+                                    allowOutsideClick: false,
+                                    background: '#19191a',
+                                    color: '#fff',
+                                    didOpen: () => {
+                                        Swal.showLoading()
+                                    },
+                                })
+                                var milliseconds = Math.floor(
+                                    Math.random() * (9999 - 1000 + 1) + 1000
+                                ).toString();
+                                setTimeout(() => {
+                                    window.location.href = "../Logout.php";
+                                }, milliseconds)
                             }
                         })
                     })

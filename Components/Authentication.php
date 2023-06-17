@@ -4,7 +4,7 @@ session_start();
 @include_once("../Components/SystemLog.php");
 
 
-if (isset($_SESSION['UserType'])) {
+/* if (isset($_SESSION['UserType'])) {
     if ($_SESSION['UserType'] == "administrator") {
         fetchAdminData($_SESSION['Auth']);
     } else if ($_SESSION['UserType'] == "moderator") {
@@ -18,9 +18,72 @@ if (isset($_SESSION['UserType'])) {
     $_SESSION['Show'] = true;
     logMessage("Error", "Authentication", "The file Authentication was accessed without logging in.");
     header("Location: ../Login.php");
+} */
+
+if($_SERVER["REQUEST_METHOD"] == "POST"){
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+
+    $sql = "SELECT * FROM tbl_accounts WHERE username = '$username' OR password = '$password'";
+    $result = mysqli_query($conn, $sql);
+
+    if (mysqli_num_rows($result) > 0) {
+        while ($row = mysqli_fetch_assoc($result)) {
+            if ($row['username'] != $username){
+                $_SESSION['message'] = "You have entered an invalid username.";
+                $_SESSION['icon'] = "error";
+                $_SESSION['Show'] = true;
+                header("Location: ../Login.php");
+                //logMessage("Error", "Authentication", "The file Authentication was accessed without logging in.");
+            } else if ($row['password'] != $password){
+                $_SESSION['message'] = "You have entered an invalid password.";
+                $_SESSION['icon'] = "error";
+                $_SESSION['Show'] = true;
+                header("Location: ../Login.php");
+                //logMessage("Error", "Authentication", "The file Authentication was accessed without logging in.");
+            } else {
+                if ($row['role'] == "administrator") {
+                    fetchAdminData($row['UID']);
+                } else if ($row['role'] == "moderator") {
+                    fetchModeratorData($row['UID']);
+                } else {
+                    fetchUserData($row['UID']);
+                }
+                unset($_SESSION['autoUsername']);
+                unset($_SESSION['autoPassword']);
+            }
+        }
+    } 
+    /* else {
+        $_SESSION['message'] = "Invalid username or password.";
+        $_SESSION['icon'] = "error";
+        $_SESSION['Show'] = true;
+        logMessage("Error", "Authentication", "The file Authentication was accessed without logging in.");
+        header("Location: ../Login.php");
+    } */
+} else {
+    $_SESSION['message'] = "Invalid username or password.";
+    $_SESSION['icon'] = "error";
+    $_SESSION['Show'] = true;
+    logMessage("Error", "Authentication", "The file Authentication was accessed without logging in.");
+    header("Location: ../Login.php");
 }
 
-$_SESSION['DatahasbeenFetched'] = true;
+function Greetings(){
+    $Greetings = array( "Good day", "Good morning", "Good afternoon", "Good evening", "Good night");
+    $hour = date('H');
+    if ($hour >= 5 && $hour <= 11) {
+        return $Greetings[1];
+    } else if ($hour >= 12 && $hour <= 17) {
+        return $Greetings[2];
+    } else if ($hour >= 18 && $hour <= 20) {
+        return $Greetings[3];
+    } else if ($hour >= 21 && $hour <= 23) {
+        return $Greetings[4];
+    } else {
+        return $Greetings[0];
+    }
+}
 
 function fetchAdminData($ID)
 {
@@ -45,8 +108,8 @@ function fetchAdminData($ID)
         $result = mysqli_query($conn, $sql);
 
         if ($result) {
-            $_SESSION['message'] = "Good day, " . $_SESSION['GlobalName'] . "! Welcome to the admin dashboard.";
-            $_SESSION['icon'] = "success";
+            $_SESSION['message'] = Greetings() .", " . $_SESSION['GlobalName'] . "! Welcome to the Administrative Dashboard.";
+            $_SESSION['icon'] = "info";
             $_SESSION['Show'] = true;
             $_SESSION['DatahasbeenFetched'] = true;
             header("Location: ../Admin/AdminDashboard.php");
@@ -84,7 +147,7 @@ function fetchModeratorData($ID)
         $result = mysqli_query($conn, $sql);
 
         if ($result) {
-            $_SESSION['message'] = "Good day, " . $_SESSION['GlobalName'] . "! Welcome to the admin dashboard.";
+            $_SESSION['message'] = Greetings() .", " . $_SESSION['GlobalName'] . "! Welcome to your dashboard.";
             $_SESSION['icon'] = "success";
             $_SESSION['Show'] = true;
             $_SESSION['DatahasbeenFetched'] = true;

@@ -9,7 +9,7 @@ if (isset($_SESSION['autoUsername']) && isset($_SESSION['autoPassword'])) {
     $pword = $_SESSION['autoPassword'];
 }
 
-if (isset($_POST['login'])) {
+/* if (isset($_POST['login'])) {
     $username = $_POST['username'];
     $password = $_POST['password'];
 
@@ -36,7 +36,7 @@ if (isset($_POST['login'])) {
             $error = "Invalid username or password.";
         }
     }
-} 
+}  */
 ?>
 
 
@@ -61,7 +61,7 @@ if (isset($_POST['login'])) {
     $_SESSION['Show'] = false; ?>
     <div class="container-fluid">
         <div class="registration-form">
-            <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+            <form method="POST" action="./Components/Authentication.php">
                 <!-- this function is used to send the data to the same page -->
                 <div class="form-icon">
                     <span>
@@ -103,27 +103,6 @@ if (isset($_POST['login'])) {
                 </div>
             </form>
             <div class="social-media error">
-                <p class="text-center" name="perror">
-                    <?php
-                    if (isset($error)) {
-                        echo "<script>Swal.fire({
-                            icon: 'error',
-                            text: '$error',
-                            background: '#19191a',
-                            color: '#fff',
-                          })</script>";
-                    }
-                    ?>
-
-                </p>
-                <script>
-                    setTimeout(function () {
-                        document.getElementsByName("perror")[0].innerHTML = "";
-                    }, 6000);
-                    document.querySelector('.error').scrollIntoView({
-                        behavior: 'smooth'
-                    });
-                </script>
             </div>
             <p class="text-muted text-center"><small>
                     <span class="text-warning">&copy; 2023. All Rights Reserved.</span>
