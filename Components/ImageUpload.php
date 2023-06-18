@@ -18,7 +18,8 @@ function ProfileUpload()
         foreach ($extensions as $extension) {
             $filePath = $path . '.' . $extension;
             if (file_exists($filePath)) {
-                $tempPath = '../uploads/' . $foldername . '\/temp/' . $username . '_Profile.' . $extension;
+                //$tempPath = '../uploads/' . $foldername . '\/temp/' . $username . '_Profile.' . $extension;
+                $tempPath = "../uploads/$foldername/temp/$username" . "_Profile.$extension";
                 echo "<script>console.log('Debug Objects: " . $tempPath . "' );</script>";
                 copy($filePath, $tempPath);
                 break;
@@ -34,7 +35,7 @@ function ProfileUpload()
             }
         }
 
-        $target_dir = "../uploads/" . $foldername . "/"; // this is the folder where you will keep the files
+        $target_dir = "../uploads/$foldername/"; // this is the folder where you will keep the files
         $target_file = $target_dir . basename($_FILES["Profile"]["name"]); // this is the actual file
         $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION)); //store what type of file the image is (png, jpg, etc)
         $newfilename = $username . "_Profile." . $imageFileType; // this is the new file name
@@ -44,7 +45,8 @@ function ProfileUpload()
             // Move the old profile picture to the original folder
             foreach ($extensions as $extension) {
                 $filePath = $path . '.' . $extension;
-                $tempPath = '../uploads/' . $foldername . '\/temp/' . $username . '_Profile.' . $extension;
+                //$tempPath = '../uploads/' . $foldername . '\/temp/' . $username . '_Profile.' . $extension;
+                $tempPath = "../uploads/$foldername/temp/$username" . "_Profile.$extension";
                 if (file_exists($tempPath)) {
                     copy($tempPath, $filePath);
                     unlink($tempPath);
@@ -59,7 +61,8 @@ function ProfileUpload()
             // same din dito
             foreach ($extensions as $extension) {
                 $filePath = $path . '.' . $extension;
-                $tempPath = '../uploads/' . $foldername . '\/temp/' . $username . '_Profile.' . $extension;
+                //$tempPath = '../uploads/' . $foldername . '\/temp/' . $username . '_Profile.' . $extension;
+                $tempPath = "../uploads/$foldername/temp/$username" . "_Profile.$extension";
                 if (file_exists($tempPath)) {
                     copy($tempPath, $filePath);
                     unlink($tempPath);
@@ -74,7 +77,8 @@ function ProfileUpload()
             // ito rin
             foreach ($extensions as $extension) {
                 $filePath = $path . '.' . $extension;
-                $tempPath = '../uploads/' . $foldername . '\/temp/' . $username . '_Profile.' . $extension;
+                //$tempPath = '../uploads/' . $foldername . '\/temp/' . $username . '_Profile.' . $extension;
+                $tempPath = "../uploads/$foldername/temp/$username" . "_Profile.$extension";
                 if (file_exists($tempPath)) {
                     copy($tempPath, $filePath);
                     unlink($tempPath);
@@ -89,7 +93,8 @@ function ProfileUpload()
             // and ito rin
             foreach ($extensions as $extension) {
                 $filePath = $path . '.' . $extension;
-                $tempPath = '../uploads/' . $foldername . '\/temp/' . $username . '_Profile.' . $extension;
+                //$tempPath = '../uploads/' . $foldername . '\/temp/' . $username . '_Profile.' . $extension;
+                $tempPath = "../uploads/$foldername/temp/$username" . "_Profile.$extension";
                 if (file_exists($tempPath)) {
                     copy($tempPath, $filePath);
                     unlink($tempPath);
@@ -104,7 +109,8 @@ function ProfileUpload()
             if (move_uploaded_file($_FILES["Profile"]["tmp_name"], $target_file)) {
                 // delete the temp profile picture in the temp folder
                 foreach ($extensions as $extension) {
-                    $tempPath = '../uploads/' . $foldername . '\/temp/' . $username . '_Profile.' . $extension;
+                    $tempPath = "../uploads/$foldername/temp/$username" . "_Profile.$extension";
+                    //$tempPath = '../uploads/' . $foldername . '\/temp/' . $username . '_Profile.' . $extension;
                     if (file_exists($tempPath)) {
                         unlink($tempPath);
                         break;

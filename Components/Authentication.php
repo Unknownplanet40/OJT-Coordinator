@@ -103,6 +103,8 @@ function fetchAdminData($ID)
         $_SESSION['GlobalDept'] = $row['department'];
         $_SESSION['Profile'] = $row['imagePath'];
         $_SESSION['GlobalRole'] = $row['role'];
+        $_SESSION['GlobalDept'] = $row['department'];
+        $_SESSION['GlobalStatus'] = $row['status'];
 
         $sql = "UPDATE tbl_accounts SET status = 1 WHERE UID = '$ID'";
         $result = mysqli_query($conn, $sql);

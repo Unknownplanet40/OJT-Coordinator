@@ -19,12 +19,14 @@
                 <?php
                 if (isset($_SESSION['Profile'])) {
                     echo '<img class="rounded"  style="width: 48px; height: 48px;"  src="' . $_SESSION['Profile'] . '" alt="Profile Picture">';
+                } else {
+                    echo '<img class="rounded"  style="width: 48px; height: 48px;"  src="../Image/Profile.png" alt="Profile Picture">';
                 }
                 ?>
             </span>
 
             <div class="text logo-text">
-                <span class="name text-capitalize text-truncate" style="max-width: 155px;">
+                <span class="name text-capitalize text-truncate" style="max-width: 155px;" title="<?php echo $_SESSION['GlobalName']; ?>">
                     <?php echo $_SESSION['GlobalName']; ?>
                 </span>
                 <span class="profession text-uppercase">
@@ -70,7 +72,7 @@
                 </li>
 
                 <li class="nav-link" title="Trainee's Programs Details">
-                    <a <?php echo (basename($_SERVER['PHP_SELF']) == "../Admin/#") ? "class='active'" : "href='../Admin/#'"; ?>>
+                    <a <?php echo (basename($_SERVER['PHP_SELF']) == "AdminPrograms.php") ? "class='active'" : "href='../Admin/AdminPrograms.php'"; ?>>
                         <i class='icon'>
                             <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24">
                                 <path
@@ -82,7 +84,7 @@
                 </li>
 
                 <li class="nav-link" title="Trainee's Events Details">
-                    <a <?php echo (basename($_SERVER['PHP_SELF']) == "../Admin/#") ? "class='active'" : "href='../Admin/#'"; ?>>
+                    <a <?php echo (basename($_SERVER['PHP_SELF']) == "AdminEvents.php") ? "class='active'" : "href='../Admin/AdminEvents.php'"; ?>>
                         <i class='icon'>
                             <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24">
                                 <path
@@ -174,14 +176,13 @@
                             color: '#fff',
                         }).then((result) => {
                             if (result.isConfirmed) {
-                                //array of random messages
+                                //random message for the logout
                                 const titlemessage = [
                                     'Logging out...',
                                     'See you soon...',
                                     'Bye bye...',
                                     'Have a nice day...',
                                     'Goodbye...',];
-                                
                                 const textmessage = [
                                     'Please wait while we are logging you out',
                                     'Closing your session',
