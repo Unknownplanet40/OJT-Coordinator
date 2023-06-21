@@ -2,8 +2,9 @@
 
 function ProfileUpload()
 {
+    global $conn;
     // $username = "caps"; //get the username (change this to the actual username using session)
-    $username = $_SESSION['user'];
+    $username = $_SESSION['GlobalUsername'];
     $foldername = $username . "_Credentials"; //create a folder for the user's credentials
     $path = '../uploads/' . $foldername . '/' . $username . '_Profile'; //this is the path of the profile picture
     $extensions = ['png', 'jpg', 'jpeg', 'gif']; //these are the extensions of the profile picture
@@ -116,12 +117,22 @@ function ProfileUpload()
                         break;
                     }
                 }
-                // Display success message
-                $_SESSION['message'] = "Congratulations! The file " . htmlspecialchars(basename($_FILES["Profile"]["name"])) . " has been uploaded.";
-                //$_SESSION['message'] = $target_file; // Testing purposes only to see the file path
-                $_SESSION['icon'] = "success";
-                $_SESSION['Show'] = true;
                 //update the database here (use the $target_file variable)
+
+                $sql = "UPDATE tbl_trainee SET image = '$target_file' WHERE UID = '$_SESSION[GlobalID]'";
+                $result = mysqli_query($conn, $sql);
+
+                if ($result) {
+                    $_SESSION['Profile'] = $target_file;
+                    $_SESSION['message'] = "Congratulations! The file " . htmlspecialchars(basename($_FILES["Profile"]["name"])) . " has been uploaded.";
+                    $_SESSION['icon'] = "success";
+                    $_SESSION['Show'] = true;
+                } else {
+                    $_SESSION['message'] = "We incountered an error while uploading your profile picture, please try again later.";
+                    $_SESSION['icon'] = "error";
+                    $_SESSION['Show'] = true;
+                }
+
 
             } else {
                 $_SESSION['message'] = "Sorry, there was an error uploading your file.";

@@ -36,21 +36,10 @@
 [2023-06-12 17:53:20] - Error - URI Too Long - The URI requested by the client is longer than the server is willing to interpret.
 [2023-06-12 17:53:28] - Error - Method Not Allowed - A request method is not supported for the requested resource.
 [2023-06-12 17:53:35] - Error - Unprocessable Entity - The request was well-formed but was unable to be followed due to semantic errors.
-[2023-06-14 05:51:37] - Error - Registration - There is an error in the registration process of the trainee
-[2023-06-14 06:13:38] - Error - Registration - There is an error in the registration process of the trainee
-[2023-06-14 06:15:38] - Error - Registration - There is an error in the registration process of the trainee
-[2023-06-14 06:16:10] - Error - Registration - There is an error in the registration process of the trainee
-[2023-06-14 06:16:41] - Error - Registration - There is an error in the registration process of the trainee
-[2023-06-14 06:16:47] - Error - Registration - There is an error in the registration process of the trainee
-[2023-06-14 06:16:50] - Error - Registration - There is an error in the registration process of the trainee
-[2023-06-14 06:16:54] - Error - Registration - There is an error in the registration process of the trainee
-[2023-06-14 07:03:37] - Error - Registration - There is an error in the registration process of the trainee
-[2023-06-14 13:56:11] - Error - Registration - There is an error in the registration process of the trainee
-[2023-06-14 16:38:15] - Error - Registration - There is an error in the registration process of the trainee
-[2023-06-14 16:39:42] - Error - Registration - There is an error in the registration process of the trainee
-[2023-06-16 07:57:26] - Error - Registration - There is an error in the registration process of the trainee
-[2023-06-16 08:02:15] - Error - Registration - There is an error in the registration process of the trainee
-[2023-06-16 08:10:03] - Error - Registration - There is an error in the registration process of the trainee
 [2023-06-16 11:53:35] - Error - Registration - There is an error in the registration process of the trainee
 [2023-06-16 11:53:45] - Error - Registration - There is an error in the registration process of the trainee
 [2023-06-17 12:34:48] - Error - Registration - There is an error in the registration process of the trainee
+[2023-06-20 13:12:50] - Error - Registration - There is an error in the registration process of the trainee
+[2023-06-20 13:14:58] - Error - Registration - There is an error in the registration process of the trainee
+[2023-06-20 13:18:22] - Error - Registration - There is an error in the registration process of the trainee
+[2023-06-21 02:23:01] - Error - Registration - There is an error in the registration process of the trainee

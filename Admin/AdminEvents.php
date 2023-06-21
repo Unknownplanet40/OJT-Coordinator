@@ -24,7 +24,7 @@ session_start();
         <div class="text">Events</div>
         <div class="container-fluid" style="width: 98%;">
             <div class="container-fluid my-1 table-responsive" style="min-width: 512px;">
-                <form class="row g-3 text-bg-dark rounded mt-1" method="POST" action="#">
+                <form class="row g-3 rounded mt-1" method="POST" action="#">
                     <div class="col-md-6">
                         <div class="form-floating mb-3 text-light">
                             <input type="text" class="form-control text-bg-dark" id="EventTitle" name="EventTitle"

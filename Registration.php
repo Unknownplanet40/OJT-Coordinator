@@ -20,6 +20,9 @@ if (isset($_POST['register'])) {
         "@cvsu.edu.ph",
     ];
 
+    //current date format YYYY-MM-DD
+    $date = date("Y-m-d");
+
     $_SESSION['temp'] = array($name, $age, $email, $usn, $username, $password, $confirm);
 
     // check if fields are empty
@@ -104,20 +107,9 @@ if (isset($_POST['register'])) {
                                         $emailAlreadyTaken = "Your email is already taken, please try another one";
                                     } else if ($row['UID'] == $usn) {
                                         $usnAlreadyTaken = $usn . " is already taken, please try another one";
-                                    } else {
-                                        $sql = "INSERT INTO tbl_trainee (name, email, UID, trainee_uname, trainee_pword) VALUES ('$name', '$email', '$usn', '$username', '$password')";
-                                        $result = mysqli_query($conn, $sql);
-                                        if ($result) {
-                                            $success = "Account successfully created";
-                                            // clear the $temp array
-                                            $_SESSION['temp'] = array();
-                                        } else {
-                                            $error[] = "Error in creating account";
-                                        }
                                     }
                                 } else {
-                                    //Note: update this syntax
-                                    $sql = "INSERT INTO tbl_trainee (name, email, UID, trainee_uname, trainee_pword) VALUES ('$name', '$email', '$usn', '$username', '$password')";
+                                    $sql = "INSERT INTO tbl_trainee (name, email, UID, trainee_uname, trainee_pword, account_Created) VALUES ('$name', '$email', '$usn', '$username', '$password', '$date')";
                                     $result = mysqli_query($conn, $sql);
                                     if ($result) {
                                         $_SESSION['temp'] = array();
@@ -152,6 +144,7 @@ if (isset($_POST['register'])) {
     <link rel="stylesheet" href="./Style/SweetAlert2.css">
     <script src="./Script/SweetAlert2.js"></script>
     <script src="./Script/RegisterValidation.js"></script>
+    <script defer src="./Script/Bootstrap/bootstrap.bundle.js"></script>
     <link rel="shortcut icon" href="./Image/Register.svg" type="image/x-icon">
 
     <script>
@@ -164,7 +157,6 @@ if (isset($_POST['register'])) {
         name.addEventListener("click", function () {
             popoverList[0].show();
         });
-
     </script>
 
 </head>
@@ -350,7 +342,7 @@ if (isset($_POST['register'])) {
                 <script>
                     setTimeout(function () {
                         document.getElementsByName("perror")[0].innerHTML = "";
-                    }, 6000);
+                    }, 6500);
                     document.querySelector('.error').scrollIntoView({
                         behavior: 'smooth'
                     });
@@ -362,7 +354,6 @@ if (isset($_POST['register'])) {
                 </small></p>
         </div>
     </div>
-    <script src="./Script/Bootstrap/bootstrap.bundle.js"></script>
 </body>
 
 </html>

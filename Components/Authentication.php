@@ -71,7 +71,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
 function Greetings(){
     $Greetings = array( "Good day", "Good morning", "Good afternoon", "Good evening", "Good night");
-    $hour = date('H');
+    $hour = date('h');
     if ($hour >= 5 && $hour <= 11) {
         return $Greetings[1];
     } else if ($hour >= 12 && $hour <= 17) {
@@ -167,9 +167,63 @@ function fetchModeratorData($ID)
 
 function fetchUserData($ID)
 {
-    echo "User";
-}
+    global $conn;
 
+    $sql = "SELECT * FROM tbl_trainee WHERE UID = '$ID'";
+    $result = mysqli_query($conn, $sql);
+
+    while ($row = mysqli_fetch_assoc($result)) {
+        $_SESSION['GlobalID'] = $row['UID'];
+        $_SESSION['GlobalName'] = $row['name'];
+        $_SESSION['GlobalUsername'] = $row['trainee_uname'];
+        $_SESSION['GlobalPassword'] = $row['trainee_pword'];
+        $_SESSION['GlobalBirthdate'] = $row['birthdate'];
+        $_SESSION['GlobalEmail'] = $row['email'];
+        $_SESSION['GlobalDept'] = $row['department'];
+        $_SESSION['GlobalStatus'] = $row['status'];
+        $_SESSION['GlobalRole'] = $row['role'];
+        $_SESSION['GlobalAccCreated'] = $row['account_Created'];
+        $_SESSION['GlobalProfileCompleted'] = $row['profile_Completed'];
+        $_SESSION['Profile'] = $row['image'];
+        $_SESSION['GlobalGender'] = $row['gender'];
+        $_SESSION['GlobalCourse'] = $row['course'];
+        $_SESSION['GlobalPhone'] = $row['phone'];
+        $_SESSION['GlobalProgram'] = $row['program'];
+        $_SESSION['P_duration'] = $row['prog_duration'];
+        $_SESSION['Fulfilled'] = $row['fulfilled_time'];
+        $_SESSION['GlobalCompleted'] = $row['completed'];
+        $_SESSION['GlobalEvaluated'] = $row['evaluated'];
+        $_SESSION['GlobalAddress'] = $row['address'];
+        $_SESSION['GlobalCity'] = $row['city'];
+        $_SESSION['GlobalZip'] = $row['postal_code'];   
+        $_SESSION['GlobalProvince'] = $row['province'];
+        
+        $sql = "UPDATE tbl_accounts SET status = 1 WHERE UID = '$ID'";
+        $result = mysqli_query($conn, $sql);
+
+        if ($result) {
+
+            if ($_SESSION['GlobalProfileCompleted'] == 'false') {
+                $_SESSION['DatahasbeenFetched'] = true;
+                header("Location: ../User/UserProfile.php");
+            } else{
+                $_SESSION['message'] = Greetings() .", " . $_SESSION['GlobalName'] . "! Welcome to your dashboard.";
+                $_SESSION['icon'] = "success";
+                $_SESSION['Show'] = true;
+                $_SESSION['DatahasbeenFetched'] = true;
+                header("Location: ../User/UserDashboard.php");
+            }
+
+        } else {
+            $_SESSION['message'] = "We incountered an error while logging you in, please try again later.";
+            $_SESSION['icon'] = "error";
+            $_SESSION['Show'] = true;
+            $_SESSION['DatahasbeenFetched'] = null;
+            logMessage("Error", "Authentication", "The file Authentication was accessed by " . $_SESSION['GlobalName'] . ".");
+            header("Location: ../Login.php");
+        }
+    }
+}
 
 // Path: Components\Authentication.php
 ?>

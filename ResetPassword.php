@@ -1,90 +1,144 @@
 <?php
 session_start();
+@include_once("./Database/config.php");
+@include_once("./Components/SystemLog.php");
+@include_once("./Components/PopupAlert.php");
 
-// this code is for demonstration purposes only no functionality yet
-$oldpassword = "qwertyui12";
-$newpass = "";
+if (isset($_POST['mailadd'])) {
+    $email = $_POST['emailAddress'];
+    $sql = "SELECT * FROM tbl_trainee WHERE email = '$email'";
+    $result = mysqli_query($conn, $sql);
 
-if ($_SERVER['REQUEST_METHOD'] == "POST") {
-    $currentPassword = $_POST['current'];
-    $newPassword = $_POST['new'];
-    $confirmPassword = $_POST['confirm'];
+    if (mysqli_num_rows($result) > 0) {
+        while ($row = mysqli_fetch_assoc($result)) {
 
-    if ($currentPassword == $oldpassword) {
-        if ($currentPassword == $newPassword) {
-            $status = "New Password cannot be same as your current password";
-            $statusType = "error";
-        } else if ($newPassword == $confirmPassword) {
-            $newpass = $newPassword;
-            $status = "Your Password has been changed";
-            $statusType = "success";
-        } else {
-            $status = "New Password and Confirm Password does not match";
-            $statusType = "error";
         }
     } else {
-        $status = "Current Password is incorrect";
-        $statusType = "error";
+        $error = "Invalid username or password.";
     }
 }
+
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./Bootstrap_5.3.0/css/bootstrap.css">
-    <link rel="stylesheet" href="./Styles/LoginStyle.css">
-    <link rel="shortcut icon" href="./Images/login.svg" type="image/x-icon">
-    <title> Sign In </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Sign In</title>
+    <link rel="stylesheet" href="./Style/Bootstrap_Style/bootstrap.css">
+    <link rel="stylesheet" href="./Style/SweetAlert2.css">
+    <link rel="stylesheet" href="./Style/LoginStyle.css">
+    <script defer src="./Script/Bootstrap_Script/bootstrap.bundle.js"></script>
+    <script src="./Script/LoginValidation.js"></script>
+    <script src="./Script/SweetAlert2.js"></script>
+    <link rel="shortcut icon" href="./Image/login.svg" type="image/x-icon">
+
 </head>
 
-<body>
-    <div class="registration-form">
-        <form method="POST" action="ResetPassword.php">
-            <div class="form-icon">
-                <span>
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 96 960 960">
-                        <path
-                            d="M222 801q63-44 125-67.5T480 710q71 0 133.5 23.5T739 801q44-54 62.5-109T820 576q0-145-97.5-242.5T480 236q-145 0-242.5 97.5T140 576q0 61 19 116t63 109Zm257.814-195Q422 606 382.5 566.314q-39.5-39.686-39.5-97.5t39.686-97.314q39.686-39.5 97.5-39.5t97.314 39.686q39.5 39.686 39.5 97.5T577.314 566.5q-39.686 39.5-97.5 39.5Zm.654 370Q398 976 325 944.5q-73-31.5-127.5-86t-86-127.266Q80 658.468 80 575.734T111.5 420.5q31.5-72.5 86-127t127.266-86q72.766-31.5 155.5-31.5T635.5 207.5q72.5 31.5 127 86t86 127.032q31.5 72.532 31.5 155T848.5 731q-31.5 73-86 127.5t-127.032 86q-72.532 31.5-155 31.5ZM480 916q55 0 107.5-16T691 844q-51-36-104-55t-107-19q-54 0-107 19t-104 55q51 40 103.5 56T480 916Zm0-370q34 0 55.5-21.5T557 469q0-34-21.5-55.5T480 392q-34 0-55.5 21.5T403 469q0 34 21.5 55.5T480 546Zm0-77Zm0 374Z" />
-                    </svg>
-                </span>
-            </div>
-            <div class="form-group">
-                <input type="text" class="form-control item" name="current" placeholder="Current Password" required
-                    pattern="([a-z]{8,}\d{2,})">
-            </div>
-            <div class="form-group">
-                <input type="text" class="form-control item" name="new" placeholder="New Password" required
-                    pattern="([a-z]{8,}\d{2,})">
-            </div>
-            <div class="form-group">
-                <input type="password" class="form-control item" name="confirm" placeholder="Confirm Password" required
-                    pattern="([a-z]{8,}\d{2,})">
-            </div>
-            <div class="form-group">
-                <input type="submit" name="submit" value="Sign In" class="btn btn-block create-account">
-                <!--about us-->
-                <div style="display: flex; justify-content: space-between;">
-                    <p class="reg-link" style="margin-left: 15px;"><a href="AboutUs.php">About Us</a></p>
-                    <p class="reg-link">Don't have an account? <a href="Registration.php">Register Here</a></p>
+<body style="color: #fff;">
+    <?php echo NewAlertBox();
+    $_SESSION['Show'] = false; ?>
+    <div class="container-fluid">
+        <div class="registration-form">
+            <form method="POST" action="./Components/Authentication.php">
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                    Launch static backdrop modal
+                </button>
+
+                <!-- Modal -->
+                <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
+                    tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <form action="ResetPassword.php" method="POST">
+                            <div class="modal-content text-bg-dark">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Before you proceed</h1>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="input-group input-group-sm mb-3">
+                                        <span class="input-group-text text-bg-dark" id="emailAdd">Email Address</span>
+                                        <input type="text" name="emailAddress" id="emailAddress"
+                                            class="form-control text-bg-dark" aria-label="Sizing example input"
+                                            aria-describedby="emailAdd">
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <input type="submit" class="btn btn-primary" name="mailadd" value="Get OTP">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
                 </div>
+
+                <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
+                    tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content text-bg-dark">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="staticBackdropLabel">Before you proceed</h1>
+                            </div>
+                            <div class="modal-body">
+                                <div class="input-group input-group-sm mb-3">
+                                    <span class="input-group-text text-bg-dark" id="inputGroup-sizing-sm">Email
+                                        Address</span>
+                                    <input type="text" class="form-control text-bg-dark"
+                                        aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary">Understood</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- this function is used to send the data to the same page -->
+                <div class="form-icon">
+                    <span>
+                        <span>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 96 960 960" fill="var(--clr-secondary)">
+                                <path
+                                    d="M480 576q-66 0-113-47t-47-113q0-66 47-113t113-47q66 0 113 47t47 113q0 66-47 113t-113 47ZM240 896q-33 0-56.5-23.5T160 816v-32q0-34 17.5-62.5T224 678q62-31 126-46.5T480 616q66 0 130 15.5T736 678q29 15 46.5 43.5T800 784v32q0 33-23.5 56.5T720 896H240Z" />
+                            </svg>
+                        </span>
+                    </span>
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control item" name="password" id="password"
+                        placeholder="Password">
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control item" name="password" id="password"
+                        placeholder="Password">
+                    <div style="margin: -20px 5px 0 5px; display: flex; justify-content: space-between;">
+                        <div>
+                            <input class="form-check-input" type="checkbox" id="flexCheckDefault">
+                            <label class="form-check-label" for="flexCheckDefault" style="Color: #fff;">
+                                Show Password
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-block create-account" name="resetpassword">Sign In</button>
+                    <div>
+                        <p class="reg-link text-end">Back to <a href="Login.php">Login</a>
+                        </p>
+                    </div>
+                </div>
+            </form>
+            <div class="social-media error">
             </div>
-        </form>
-        <div class="social-media <?php echo (isset($statusType)) ? $statusType : ""; ?>">
-            <h5>
-                <?php
-                if (isset($status)) {
-                    echo $status;
-                } else {
-                    echo " ";
-                }
-                ?>
-            </h5>
+            <p class="text-muted text-center"><small>
+                    <span class="text-warning">&copy; 2023. All Rights Reserved.</span>
+                </small></p>
         </div>
+
     </div>
 </body>
 

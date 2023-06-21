@@ -42,7 +42,18 @@ function NewAlertBox()
             timer: 2600
             });</script>"; */
 
-            return '<script>
+            if (isset($_SESSION['SAtheme']) && $_SESSION['SAtheme'] == "light") {
+                return '<script>
+                Swal.fire({
+                    icon: "' . $_SESSION['icon'] . '",
+                    title: "' . $title . '",
+                    text: "' . $_SESSION['message'] . '",
+                    allowOutsideClick: false,
+                    allowEscapeKey: false,
+                    allowEnterKey: false
+                  });</script>';
+            } else {
+                return '<script>
                 Swal.fire({
                     icon: "' . $_SESSION['icon'] . '",
                     title: "' . $title . '",
@@ -53,6 +64,7 @@ function NewAlertBox()
                     background: "#19191a",
                     color: "#fff"
                   });</script>';
+            }
         }
     }
 }

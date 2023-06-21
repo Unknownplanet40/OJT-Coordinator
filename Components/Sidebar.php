@@ -1,4 +1,3 @@
-
 <style>
     .sidebar li .active {
         background-color: var(--primary-color);
@@ -17,30 +16,27 @@
     <header>
         <div class="image-text">
             <span class="image">
-            <?php
-                $fileExtensions = ['jpg', 'png', 'jpeg', 'gif'];
-                $profilePicture = null;
-
-                $_SESSION['user'] = "ryanj";
-                foreach ($fileExtensions as $extension) {
-                    $path = '../uploads/' . $_SESSION['user'] . '_Credentials/' . $_SESSION['user'] . '_Profile.' . $extension;
-                    if (file_exists($path)) {
-                        $profilePicture = $path;
-                        break;
-                    }
+                <?php
+                if ($_SESSION['GlobalRole'] == "User") {
+                    $role = "Trainee";
                 }
-
-                if (!empty($profilePicture)) {
-                    echo '<img class="rounded shadow-lg" src="' . $profilePicture . '" alt="Profile Picture">';
+                if (isset($_SESSION['Profile'])) {
+                    echo '<img class="rounded shadow-lg" src="' . $_SESSION['Profile'] . '" alt="Profile Picture" title="Click your name to edit your profile">';
                 } else {
-                    echo '<img class="rounded" src="../Image/Profile.png" alt="Profile Picture">';
+                    echo '<img class="rounded" src="../Image/Profile.png" alt="Profile Picture" title="Click your name to edit your profile">';
                 }
                 ?>
             </span>
 
             <div class="text logo-text">
-                <span class="name">Wally bayola</span>
-                <span class="profession">Trainee</span>
+                <span class="name text-capitalize text-truncate" style="max-width: 155px;"
+                    title="<?php echo $_SESSION['GlobalName']; ?> - <?php echo $role; ?>">
+                    <?php echo $_SESSION['GlobalName']; ?>
+                </span>
+                <span class="profession text-uppercase text-success"
+                    title="<?php echo $_SESSION['GlobalName']; ?> - <?php echo $role; ?>">
+                    <?php echo $role; ?>
+                </span>
             </div>
         </div>
         <i class='toggle'>
@@ -145,7 +141,7 @@
 
         <div class="bottom-content">
             <li class="nav-link" title="Logout">
-                <a href="#">
+                <a class="logout">
                     <i class='icon'>
                         <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 96 960 960" width="24">
                             <path
@@ -154,6 +150,57 @@
                     </i>
                     <span class="text nav-text">Logout</span>
                 </a>
+                <script>
+                    const logout = document.querySelector('.logout');
+
+                    //if logout is clicked it will show a confirmation box using sweetalert
+                    logout.addEventListener('click', function (e) {
+                        e.preventDefault();
+                        Swal.fire({
+                            title: 'Are you sure?',
+                            text: "You want to logout?",
+                            icon: 'warning',
+                            allowOutsideClick: false,
+                            showCancelButton: true,
+                            confirmButtonColor: '#d33',
+                            cancelButtonColor: '#3085d6',
+                            confirmButtonText: 'Yes, Logout!'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                //random message for the logout
+                                const titlemessage = [
+                                    'Logging out...',
+                                    'See you soon...',
+                                    'Bye bye...',
+                                    'Have a nice day...',
+                                    'Goodbye...',];
+                                const textmessage = [
+                                    'Please wait while we are logging you out',
+                                    'Closing your session',
+                                    'Clearing your session',
+                                    'Please wait, where saving your data',
+                                    'Please wait a moment'];
+                                const ranText = Math.floor(Math.random() * textmessage.length);
+                                const ranTitle = Math.floor(Math.random() * titlemessage.length);
+
+                                Swal.fire({
+                                    title: titlemessage[ranTitle],
+                                    text: textmessage[ranText],
+                                    allowOutsideClick: false,
+                                    didOpen: () => {
+                                        Swal.showLoading()
+                                    },
+                                })
+                                var milliseconds = Math.floor(
+                                    Math.random() * (9999 - 1000 + 1) + 1000
+                                ).toString();
+                                setTimeout(() => {
+                                    window.location.href = "../Logout.php";
+                                }, milliseconds)
+                            }
+                        })
+                    })
+                </script>
             </li>
             <!-- This is the dark mode toggle switch I will Hide this for now Because its so Buggy -->
             <li class="mode" hidden>

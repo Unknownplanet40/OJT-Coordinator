@@ -53,9 +53,7 @@ document.addEventListener("DOMContentLoaded", function () {
     } else if (!pword.match(/[a-z]/)) {
       displayError("Password must contain at least one lowercase letter");
     } else if (!pword.match(/[0-9]/)) {
-      displayError("Password must contain at least one number");
-    } else if (!pword.match(/[!@#$%^&*]/)) {
-      displayError("Password must contain at least one special character");
+      displayError("Password must contain at least one number"); // .
     } else {
       form.submit();
     }

@@ -18,18 +18,19 @@
             <span class="image">
                 <?php
                 if (isset($_SESSION['Profile'])) {
-                    echo '<img class="rounded"  style="width: 48px; height: 48px;"  src="' . $_SESSION['Profile'] . '" alt="Profile Picture">';
+                    echo '<img class="rounded"  style="width: 48px; height: 48px;"  src="' . $_SESSION['Profile'] . '" alt="Profile Picture" title="Click your name to edit your profile">';
                 } else {
+                    // incase the user did not upload a profile picture
                     echo '<img class="rounded"  style="width: 48px; height: 48px;"  src="../Image/Profile.png" alt="Profile Picture">';
                 }
                 ?>
             </span>
 
             <div class="text logo-text">
-                <span class="name text-capitalize text-truncate" style="max-width: 155px;" title="<?php echo $_SESSION['GlobalName']; ?>">
+                <span class="name text-capitalize text-truncate" style="max-width: 155px;" title="<?php echo $_SESSION['GlobalName']; ?> - <?php echo $_SESSION['GlobalRole']; ?>">
                     <?php echo $_SESSION['GlobalName']; ?>
                 </span>
-                <span class="profession text-uppercase">
+                <span class="profession text-uppercase text-success" title="<?php echo $_SESSION['GlobalName']; ?> - <?php echo $_SESSION['GlobalRole']; ?>">
                     <?php echo $_SESSION['GlobalRole']; ?>
                 </span>
             </div>

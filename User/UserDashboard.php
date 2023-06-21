@@ -1,6 +1,16 @@
 <?php
+session_start();
+@include_once("../Database/config.php");
+@include_once("../Components/PopupAlert.php");
+
+$_SESSION['SAtheme'] = "light";
+
 if (!isset($_SESSION['DatahasbeenFetched'])) {
     header("Location: ../Login.php");
+} elseif ($_SESSION['GlobalProfileCompleted'] == 'false') {
+    header("Location: ../User/UserProfile.php");
+} else {
+    $ShowAlert = true;
 }
 
 
@@ -15,10 +25,16 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../Style/ImportantImport.css">
     <link rel="stylesheet" href="../Style/TestingDashboard.css">
+    <script src="../Script/SweetAlert2.js"></script>
     <title>Dashboard</title>
 </head>
+
 <body>
-    <?php include_once '../Components/Sidebar.php'; ?>
+    <?php include_once '../Components/Sidebar.php';
+    if (isset($ShowAlert)) {
+        echo NewAlertBox();
+        $_SESSION['Show'] = false;
+    } ?>
 
     <section class="home">
         <div class="text">Dashboard</div>
@@ -84,7 +100,8 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
                             <h5 class="card-title">Leadership Development Workshop</h5>
                             <p class="card-text">August 25, 2023</p>
                             <p class="card-text">Training Room 3, ABC Company Headquarters</p>
-                            <p class="card-text" style="font-size: 14px;">Enhance your leadership skills in this engaging workshop. Learn
+                            <p class="card-text" style="font-size: 14px;">Enhance your leadership skills in this
+                                engaging workshop. Learn
                                 strategies for effective communication, team building, and decision-making. Limited
                                 seats available. Register now!
                             </p>
@@ -104,7 +121,8 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
                             <h5 class="card-title">Digital Marketing Seminar</h5>
                             <p class="card-text">September 10, 2023</p>
                             <p class="card-text">Conference Hall B, XYZ Convention Center</p>
-                            <p class="card-text" style="font-size: 14px;">Explore the latest digital marketing trends and strategies. Unlock
+                            <p class="card-text" style="font-size: 14px;">Explore the latest digital marketing trends
+                                and strategies. Unlock
                                 growth opportunities and boost your online presence. Limited seats available. Reserve
                                 your spot today!
                             </p>
@@ -123,7 +141,8 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
                             <h5 class="card-title">Time Management Masterclass</h5>
                             <p class="card-text">October 5, 2023</p>
                             <p class="card-text">Training Room 2, DEF Company Headquarters</p>
-                            <p class="card-text" style="font-size: 14px;">Learn essential time management techniques to enhance productivity.
+                            <p class="card-text" style="font-size: 14px;">Learn essential time management techniques to
+                                enhance productivity.
                                 Maximize your efficiency and prioritize tasks effectively. Limited seats available.
                                 Secure your seat now!</p>
                             <small class="text-muted">Time: 10:00 AM - 12:00 PM | Available Seats: 10</small>
@@ -141,7 +160,8 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
                             <h5 class="card-title">Cybersecurity Awareness Webinar</h5>
                             <p class="card-text">November 12, 2023</p>
                             <p class="card-text">Online Webinar</p>
-                            <p class="card-text" style="font-size: 14px;">Protect yourself online. Join our cybersecurity webinar and learn
+                            <p class="card-text" style="font-size: 14px;">Protect yourself online. Join our
+                                cybersecurity webinar and learn
                                 practical tips to safeguard your digital presence. Limited seats available. Sign up now!
                             </p>
                             <small class="text-muted">Time: 3:00 PM - 4:00 PM | Available Seats: 15</small>

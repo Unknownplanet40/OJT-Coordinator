@@ -1,13 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="refresh" content="0; url=./login.php">
-    <title>This is Just a Redirect Page</title>
+    <!--<meta http-equiv="refresh" content="0; url=./login.php">-->
+    <link rel="stylesheet" href="./Style/ImportantImport.css">
+    <title>Please Wait...</title>
+    <style>
+        body {
+            background: url(./Image/bg-redirect.svg);
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .cont {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+
+        h1 {
+            margin: 0;
+        }
+
+        p {
+            margin: 0;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+    </style>
 </head>
-<body>
-    
+
+<body class="text-bg-dark">
+    <div class="cont container-fluid">
+        <div class="spinner-border text-light" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+        <h1>Please Wait While We Redirect You</h1>
+        <p class="size"></p>
+        <p>If you are not redirected in 5 seconds, click <a href="./login.php">here</a>.</p>
+    </div>
+    <!-- This is just a esthetic thing, it's not important,
+        but in case it fails to redirect, it will show a link to the login page -->
+    <script>
+        var width = screen.width;
+        var size = document.querySelector(".size");
+
+        if (width < 768) {
+            size.innerHTML = "Your screen is too small for this website you will have a bad experience using it";
+        } else {
+            size.innerHTML = "Your screen is Perfect for this website";
+        }
+        setTimeout(function() {
+            window.location.href = "./login.php";
+        }, 5000);
+    </script>
 </body>
+
 </html>
