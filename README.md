@@ -16,17 +16,22 @@ C:\xampp\htdocs\OJT-Coordinator\database\ojtcs.sql
 ```
 5. Open your browser and go to the following URL.
 ```
-localhost/OJT-Coordinator/Login.php
+localhost/OJT-Coordinator
 ```
 6. Login using the following credentials.
 ```
-for admin:
-username: admin
-password: admin
+Administrator:
+username: 
+password: 
 
-for trainee:
-username: trainee
-password: trainee
+Moderator:
+username:
+password:
+
+User/Trainee:
+username: 
+password: 
+
 ```
 > **Note:** You can change the credentials in the database. or you can create a new account in the application.
 
@@ -42,7 +47,7 @@ password: trainee
 `for trainee screenshots`
 
 ## Prototype Design
-[![Figma](./Old%20Files/Images/figma.svg)](https://www.figma.com/proto/1pcy3WMONFkYbCaifguDCw/OJT-Coordinator-Prototype?page-id=0%3A1&type=design&node-id=97-801&scaling=scale-down&starting-point-node-id=97%3A801) 
+[![Figma](./Backups/Old%20Files/Images/figma.svg)](#) <!--update the figma link here-->
 
 ## Information
 This project was created by the following students of the Cavite State University - Imus Campus (CvSU) in compliance to DCIT 60A - Integrated Programming and Technologies 1
@@ -69,7 +74,7 @@ This project was created by the following students of the Cavite State Universit
 ### Instructors
 
 | Name | Subject |
-| :--- | :--- |
+| :---: | :--- |
 |[**BAUTISTA, BENEDICT**](#instructor) | DCIT 60A - INTEGRATED PROGRAMMING AND TECHNOLOGIES 1 |
 |[**ALLAUIGAN, WYETH**](#instructor) | DCIT 55A - ADVANCE DATABASE MANAGEMENT SYSTEM |
 | [**MODESTO, SHAINA MARIE**](#instructor) | ITEC 65A - OPEN SOURCE TECHNOLOGY |
