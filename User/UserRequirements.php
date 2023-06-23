@@ -1,12 +1,26 @@
 <?php
 session_start();
-include_once '../Components/PopupAlert.php';
+@include_once("../Database/config.php");
 include_once '../Components/ImageUpload.php';
+@include_once("../Components/PopupAlert.php");
+
+$_SESSION['SAtheme'] = "light";
+
+if (!isset($_SESSION['DatahasbeenFetched'])) {
+    header("Location: ../Login.php");
+} elseif ($_SESSION['GlobalProfileCompleted'] == 'false') {
+    header("Location: ../User/UserProfile.php");
+} else {
+    $ShowAlert = true;
+}
 
 if (isset($_POST['submita'])) {
     pl1upload();
 }
+
+
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">

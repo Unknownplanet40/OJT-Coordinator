@@ -1,4 +1,17 @@
 <?php
+session_start();
+@include_once("../Database/config.php");
+@include_once("../Components/PopupAlert.php");
+
+$_SESSION['SAtheme'] = "light";
+
+if (!isset($_SESSION['DatahasbeenFetched'])) {
+    header("Location: ../Login.php");
+} elseif ($_SESSION['GlobalProfileCompleted'] == 'false') {
+    header("Location: ../User/UserProfile.php");
+} else {
+    $ShowAlert = true;
+}
 
 
 ?>
@@ -15,7 +28,11 @@
 </head>
 
 <body>
-    <?php include_once '../Components/Sidebar.php'; ?>
+<?php include_once '../Components/Sidebar.php';
+    if (isset($ShowAlert)) {
+        echo NewAlertBox();
+        $_SESSION['Show'] = false;
+    } ?>
     <section class="home">
         <div class="text">Program Details</div>
         <div style="margin: 10px; width: 98%;">

@@ -1,3 +1,21 @@
+<?php
+session_start();
+@include_once("../Database/config.php");
+@include_once("../Components/PopupAlert.php");
+
+$_SESSION['SAtheme'] = "light";
+
+if (!isset($_SESSION['DatahasbeenFetched'])) {
+    header("Location: ../Login.php");
+} elseif ($_SESSION['GlobalProfileCompleted'] == 'false') {
+    header("Location: ../User/UserProfile.php");
+} else {
+    $ShowAlert = true;
+}
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,10 +28,13 @@
 </head>
 
 <body>
-    <?php
-    include_once '../Components/ProgramsModals.php';
-    include_once '../Components/Sidebar.php';
-    ?>
+    <?php 
+    @include_once '../Components/Sidebar.php';
+    @include_once '../Components/ProgramsModals.php';
+    if (isset($ShowAlert)) {
+        echo NewAlertBox();
+        $_SESSION['Show'] = false;
+    } ?>
     <section class="home">
         <div class="text">Programs</div>
         <div class="content" style="margin: 10px; width: 98%;">
@@ -29,11 +50,13 @@
             <div class="row row-cols-1 row-cols-md-3 g-4">
                 <div class="col">
                     <div class="card h-100">
-                        <img style="ratio: 16/9" src="https://resources.workable.com/wp-content/uploads/2018/03/job-offer-featured.png"
+                        <img style="ratio: 16/9"
+                            src="https://resources.workable.com/wp-content/uploads/2018/03/job-offer-featured.png"
                             class="card-img-top" alt="...">
                         <div class="card-body">
                             <h5 class="card-title">Web Development Internship</h5>
-                            <p class="card-text" style="font-size: 14px;">Gain practical experience and training in web development through the
+                            <p class="card-text" style="font-size: 14px;">Gain practical experience and training in web
+                                development through the
                                 Web Development Internship. Develop skills in HTML, CSS, and JavaScript, and collaborate
                                 on real-world projects under the guidance of experienced mentors.</p>
                             <small class="text-muted">12 Weeks</small>
@@ -48,11 +71,13 @@
                 </div>
                 <div class="col">
                     <div class="card h-100">
-                        <img style="ratio: 16/9" src="https://www.callcentrehelper.com/images/stories/2022/05/jo-118810083-760.jpg"
+                        <img style="ratio: 16/9"
+                            src="https://www.callcentrehelper.com/images/stories/2022/05/jo-118810083-760.jpg"
                             class="card-img-top" alt="...">
                         <div class="card-body">
                             <h5 class="card-title">Software Engineering Internship</h5>
-                            <p class="card-text" style="font-size: 14px;">Gain practical experience and enhance programming skills through the
+                            <p class="card-text" style="font-size: 14px;">Gain practical experience and enhance
+                                programming skills through the
                                 Software Engineering Internship. Work on real-world software development projects,
                                 collaborate with industry professionals, and learn best practices in software
                                 engineering.</p>
@@ -68,11 +93,13 @@
                 </div>
                 <div class="col">
                     <div class="card h-100">
-                        <img style="ratio: 16/9" src="https://resumegenius.com/wp-content/uploads/2019/07/decline-job-offer-500x333.png"
+                        <img style="ratio: 16/9"
+                            src="https://resumegenius.com/wp-content/uploads/2019/07/decline-job-offer-500x333.png"
                             class="card-img-top" alt="...">
                         <div class="card-body">
                             <h5 class="card-title">Digital Marketing Internship</h5>
-                            <p class="card-text" style="font-size: 14px;">Gain practical experience and skills in digital marketing through the
+                            <p class="card-text" style="font-size: 14px;">Gain practical experience and skills in
+                                digital marketing through the
                                 Digital Marketing Internship. Work on real-world marketing campaigns, learn various
                                 digital marketing techniques, and develop a strong foundation in online marketing
                                 strategies.</p>

@@ -34,13 +34,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 $_SESSION['icon'] = "error";
                 $_SESSION['Show'] = true;
                 header("Location: ../Login.php");
-                //logMessage("Error", "Authentication", "The file Authentication was accessed without logging in.");
-            } else if ($row['password'] != $password){
+            } elseif ($row['password'] != $password){
                 $_SESSION['message'] = "You have entered an invalid password.";
                 $_SESSION['icon'] = "error";
                 $_SESSION['Show'] = true;
                 header("Location: ../Login.php");
-                //logMessage("Error", "Authentication", "The file Authentication was accessed without logging in.");
             } else {
                 if ($row['role'] == "administrator") {
                     fetchAdminData($row['UID']);
@@ -54,13 +52,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             }
         }
     } 
-    /* else {
+    else {
         $_SESSION['message'] = "Invalid username or password.";
         $_SESSION['icon'] = "error";
         $_SESSION['Show'] = true;
-        logMessage("Error", "Authentication", "The file Authentication was accessed without logging in.");
         header("Location: ../Login.php");
-    } */
+    }
 } else {
     $_SESSION['message'] = "Invalid username or password.";
     $_SESSION['icon'] = "error";
@@ -114,6 +111,7 @@ function fetchAdminData($ID)
             $_SESSION['icon'] = "info";
             $_SESSION['Show'] = true;
             $_SESSION['DatahasbeenFetched'] = true;
+            echo "<script>console.log('".$_SESSION['GlobalName']."');</script>";
             header("Location: ../Admin/AdminDashboard.php");
         } else {
             $_SESSION['message'] = "We incountered an error while logging you in, please try again later.";
@@ -186,9 +184,9 @@ function fetchUserData($ID)
         $_SESSION['GlobalProfileCompleted'] = $row['profile_Completed'];
         $_SESSION['Profile'] = $row['image'];
         $_SESSION['GlobalGender'] = $row['gender'];
-        $_SESSION['GlobalCourse'] = $row['course'];
         $_SESSION['GlobalPhone'] = $row['phone'];
         $_SESSION['GlobalProgram'] = $row['program'];
+        $_SESSION['GlobalCourse'] = $row['course'];
         $_SESSION['P_duration'] = $row['prog_duration'];
         $_SESSION['Fulfilled'] = $row['fulfilled_time'];
         $_SESSION['GlobalCompleted'] = $row['completed'];
@@ -197,6 +195,35 @@ function fetchUserData($ID)
         $_SESSION['GlobalCity'] = $row['city'];
         $_SESSION['GlobalZip'] = $row['postal_code'];   
         $_SESSION['GlobalProvince'] = $row['province'];
+
+        // course = BSIT - 2B
+        // Department = BSIT
+        // year = 2
+        // Section = B
+
+        // get the year and section from the course by splitting it after the dash
+        $course = explode("-", $_SESSION['GlobalCourse']);
+        $second = $course[1];
+
+        // get the year and section by splitting it after the first character
+        $year = substr($second, 0, 1);
+        $section = substr($second, 1, 1);
+
+        if ($year == '1'){
+            $_SESSION['GlobalYear'] = "1st Year";
+        } else if ($year == '2'){
+            $_SESSION['GlobalYear'] = "2nd Year";
+        } else if ($year == '3'){
+            $_SESSION['GlobalYear'] = "3rd Year";
+        } else if ($year == '4'){
+            $_SESSION['GlobalYear'] = "4th Year";
+        } else {
+            $_SESSION['GlobalYear'] = $year;
+        }
+
+        $_SESSION['GlobalSection'] = $section;
+
+
         
         $sql = "UPDATE tbl_accounts SET status = 1 WHERE UID = '$ID'";
         $result = mysqli_query($conn, $sql);
@@ -204,6 +231,9 @@ function fetchUserData($ID)
         if ($result) {
 
             if ($_SESSION['GlobalProfileCompleted'] == 'false') {
+                $_SESSION['message'] = "Before you can proceed to your dashboard, you need to complete your profile first.";
+                $_SESSION['icon'] = "info";
+                $_SESSION['Show'] = true;
                 $_SESSION['DatahasbeenFetched'] = true;
                 header("Location: ../User/UserProfile.php");
             } else{
