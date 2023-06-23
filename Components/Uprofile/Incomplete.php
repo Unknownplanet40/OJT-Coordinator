@@ -15,7 +15,7 @@
                         <div class="d-grid gap-2 w-100">
                             <br>
                             <input type="file" id="fileInput" class="form-control form-control-sm" name="Profile"
-                                style="width: 256px;" onchange="checkFileInput()">
+                                style="width: 256px;" accept=".png, .jpg, .jpeg, .gif" onchange="checkFileInput()">
                             <input type="submit" id="submitButton" class="btn btn-success" name="imageupload"
                                 value="Upload" disabled>
                         </div>
@@ -25,56 +25,57 @@
             <div class="col-xl-8">
                 <div class="container-fluid">
                     <div class="inner-content">
-                        <form class="row g-3 overflow-auto" method="POST" action="../Database/UpdateProfile.php">
+                        <form class="row g-3 overflow-auto" id="INCform" method="POST" action="../Components/Uprofile/INCfunction.php">
                             <div class="col-md-12">
                                 <label for="Address" class="form-label">Address</label>
-                                <input type="text" class="form-control form-control-sm" name="Address" id="Address"
+                                <input type="text" class="form-control form-control-sm" name="Address" id="INCadd"
                                     placeholder="1234 Main St">
                             </div>
                             <div class="col-md-4">
                                 <label for="city" class="form-label">City</label>
-                                <input type="text" class="form-control form-control-sm" name="city" id="city"
+                                <input type="text" class="form-control form-control-sm" name="city" id="INCcity"
                                     placeholder="Imus">
                             </div>
                             <div class="col-md-4">
                                 <label for="zipcode" class="form-label">Zipcode</label>
-                                <input type="text" class="form-control form-control-sm" name="zipcode" id="zipcode"
-                                    placeholder="1234">
+                                <input type="text" class="form-control form-control-sm" name="zipcode" id="INCzip"
+                                    placeholder="1234" maxlength="4">
                             </div>
                             <div class="col-md-4">
                                 <label for="province" class="form-label">Province</label>
-                                <input type="text" class="form-control form-control-sm" name="province" id="province"
+                                <input type="text" class="form-control form-control-sm" name="province" id="INCprov"
                                     placeholder="Cavite">
                             </div>
                             <div class="col-md-4">
                                 <label for="birth" class="form-label d-block text-truncate">Birth Date</label>
-                                <input type="date" class="form-control form-control-sm" name="birth" id="birth">
+                                <input type="date" class="form-control form-control-sm" name="birth" id="INCbirth"
+                                    placeholder="01/01/2000">
                             </div>
                             <div class="col-md-4">
                                 <label for="phone" class="form-label">Phone</label>
-                                <input type="text" class="form-control form-control-sm" name="phone" id="phone"
-                                    placeholder="09123456789">
+                                <input type="text" class="form-control form-control-sm" name="phone" id="INCphone"
+                                    placeholder="09123456789" maxlength="11">
                             </div>
                             
                             <div class="col-md-4">
-                                <label for="Department" class="form-label d-block text-truncate">Dept.</label>
-                                <select id="department" name="department" class="form-select form-select-sm">
+                                <label for="INCdept" class="form-label d-block text-truncate">Dept.</label>
+                                <select name="department" class="form-select form-select-sm" id="INCdept">
                                     <option selected hidden>Choose...</option>
                                     <option value="BSIT">BSIT</option>
                                     <option value="BSCS">BSCS</option>
                                 </select>
                             </div>
                             <div class="col-md-4">
-                                <label for="gender" class="form-label d-block text-truncate">Sex</label>
-                                <select id="gender" name="gender" class="form-select form-select-sm">
+                                <label for="INCsex" class="form-label d-block text-truncate">Sex</label>
+                                <select name="gender" class="form-select form-select-sm" id="INCsex">
                                     <option selected hidden>Choose...</option>
                                     <option value="male">Male</option>
                                     <option value="female">Female</option>
                                 </select>
                             </div>
                             <div class="col-md-4">
-                                <label for="Section" class="form-label d-block text-truncate">Section</label>
-                                <select id="Yearlevel" name="Yearlevel" class="form-select form-select-sm">
+                                <label for="INCyear" class="form-label d-block text-truncate">Year</label>
+                                <select name="Yearlevel" class="form-select form-select-sm" id="INCyear">
                                     <option selected hidden>Choose...</option>
                                     <option value="1">1st Year</option>
                                     <option value="2">2nd Year</option>
@@ -83,8 +84,8 @@
                                 </select>
                             </div>
                             <div class="col-md-4">
-                                <label for="Section" class="form-label d-block text-truncate">Section</label>
-                                <select id="Section" name="Yearlevel" class="form-select form-select-sm">
+                                <label for="INCsec" class="form-label d-block text-truncate">Section</label>
+                                <select name="section" class="form-select form-select-sm" id="INCsec">
                                     <option selected hidden>Choose...</option>
                                     <option value="A">A</option>
                                     <option value="B">B</option>
@@ -107,8 +108,15 @@
                                     allowed and the maximum file size is
                                     3 MB and best resolution is 256x256.</small>
                             </p>
+                            <p class="text-danger text-center" id="INCerror">
+                                <script>
+                                    setTimeout(function () {
+                                        document.getElementById('INCerror').innerHTML = "";
+                                    }, 6500);
+                                </script>
+                            </p>
                             <div class="col-12 text-center">
-                                <button type="submit" class="btn btn-success" name="uncomplete">Confirm</button>
+                                <input type="submit" value="Submit and Continue" class="btn btn-success" name="INC" id="Incomplete">
                             </div>
                         </form>
                     </div>

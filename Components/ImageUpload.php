@@ -119,7 +119,12 @@ function ProfileUpload()
                 }
                 //update the database here (use the $target_file variable)
 
-                $sql = "UPDATE tbl_trainee SET image = '$target_file' WHERE UID = '$_SESSION[GlobalID]'";
+                // role based
+                if ($_SESSION['GlobalRole'] == 'administrator' || $_SESSION['GlobalRole'] == 'moderator') {
+                    $sql = "UPDATE tbl_admin SET imagePath = '$target_file' WHERE UID = '$_SESSION[GlobalID]'";
+                } else  {
+                    $sql = "UPDATE tbl_trainee SET image = '$target_file' WHERE UID = '$_SESSION[GlobalID]'";
+                }
                 $result = mysqli_query($conn, $sql);
 
                 if ($result) {

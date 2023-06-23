@@ -15,7 +15,7 @@
                         <div class="d-grid gap-2 w-100">
                             <br>
                             <input type="file" id="fileInput" class="form-control form-control-sm" name="Profile"
-                                style="width: 256px;" onchange="checkFileInput()">
+                                style="width: 256px;" accept=".png, .jpg, .jpeg, .gif" onchange="checkFileInput()">
                             <input type="submit" id="submitButton" class="btn btn-success" name="imageupload"
                                 value="Upload" disabled>
                         </div>
@@ -25,7 +25,7 @@
             <div class="col-xl-8">
                 <div class="container-fluid">
                     <div class="inner-content">
-                        <form class="row g-3 overflow-auto" method="POST" action="../Database/UpdateProfile.php">
+                        <form class="row g-3 overflow-auto" id="COMform" method="POST" action="../Database/UpdateProfile.php">
                             <div class="col-md-4">
                                 <label for="name" class="form-label">Name</label>
                                 <input type="text" class="form-control form-control-sm" name="name" id="name"
@@ -145,8 +145,15 @@
                                     allowed and the maximum file size is
                                     3 MB and best resolution is 256x256.</small>
                             </p>
+                            <p class="text-danger text-center" id="INCerror">
+                                <script>
+                                    setTimeout(function () {
+                                        document.getElementById('INCerror').innerHTML = "";
+                                    }, 6500);
+                                </script>
+                            </p>
                             <div class="col-12 text-center">
-                                <button type="submit" class="btn btn-success" name="complete">Confirm</button>
+                                <input type="submit" value="Update Info" class="btn btn-success" name="COM" id="Complete">
                             </div>
                         </form>
                     </div>
