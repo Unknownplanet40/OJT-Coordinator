@@ -24,7 +24,7 @@ SET time_zone = "+00:00";
 CREATE DATABASE IF NOT EXISTS `ojtcs_database` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 USE ojtcs_database;
 
-------------------------------------------------------------
+-- --------------------------------------------------------
 
 --
 -- Table structure for table `tbl_accounts`
@@ -47,7 +47,8 @@ CREATE TABLE `tbl_accounts` (
 INSERT INTO `tbl_accounts` (`ID`, `UID`, `name`, `username`, `password`, `role`, `status`) VALUES
 (1, 2021, 'rjc', 'rjc123', 'rjc@123', 'administrator', 0),
 (2, 985674321, 'Ryan James Capadocia', 'ryancaps123', '@Ryanjames123', 'User', 0),
-(3, 2021100110, 'Ryan James Capadocia', 'ryanjames', '@Capadocia123', 'administrator', 0);
+(3, 2021100110, 'Ryan James Capadocia', 'ryanjames', '@Capadocia123', 'administrator', 1),
+(5, 2021222990, 'Lorenzo Asis', 'lorenzoasis23', 'Lorenzo.asis2023', 'User', 1);
 
 --
 -- Triggers `tbl_accounts`
@@ -89,7 +90,7 @@ CREATE TABLE `tbl_admin` (
 
 INSERT INTO `tbl_admin` (`UID`, `name`, `admin_uname`, `admin_pword`, `admin_email`, `department`, `imagePath`, `role`, `status`) VALUES
 (2021, 'rjc', 'rjc123', 'rjc@123', 'rjc@gmail.com', 'BSIT', '../Image/Profile.png', 'administrator', 0),
-(2021100110, 'Ryan James Capadocia', 'ryanjames', '@Capadocia123', 'capadocia@gmail.com', 'BSIT', '../Image/Profile.png', 'administrator', 0);
+(2021100110, 'Ryan James Capadocia', 'ryanjames', '@Capadocia123', 'capadocia@gmail.com', 'BSIT', '../Image/Profile.png', 'administrator', 1);
 
 --
 -- Triggers `tbl_admin`
@@ -101,6 +102,22 @@ CREATE TRIGGER `Insert_admin` AFTER INSERT ON `tbl_admin` FOR EACH ROW BEGIN
 END
 $$
 DELIMITER ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_announcement`
+--
+
+CREATE TABLE `tbl_announcement` (
+  `ID` int(5) NOT NULL,
+  `Title` varchar(128) NOT NULL DEFAULT 'announcement',
+  `Description` text NOT NULL,
+  `PostedBy` varchar(128) DEFAULT NULL,
+  `DateAdded` date NOT NULL,
+  `DateEnd` date NOT NULL,
+  `isEnded` tinyint(1) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='This if For Announcement For all Trainee';
 
 -- --------------------------------------------------------
 
@@ -175,8 +192,8 @@ CREATE TABLE `tbl_trainee` (
   `status` int(5) DEFAULT 0,
   `role` varchar(50) DEFAULT 'User',
   `account_Created` date DEFAULT NULL,
-  `profile_Completed` varchar(10) NOT NULL DEFAULT 'False',
-  `image` varchar(50) DEFAULT '../Image/Profile.png',
+  `profile_Completed` varchar(10) NOT NULL DEFAULT 'false',
+  `image` text DEFAULT '../Image/Profile.png',
   `gender` varchar(10) DEFAULT NULL,
   `course` varchar(30) DEFAULT NULL,
   `phone` int(11) DEFAULT NULL,
@@ -197,7 +214,8 @@ CREATE TABLE `tbl_trainee` (
 
 INSERT INTO `tbl_trainee` (`UID`, `name`, `trainee_uname`, `trainee_pword`, `email`, `birthdate`, `department`, `status`, `role`, `account_Created`, `profile_Completed`, `image`, `gender`, `course`, `phone`, `program`, `prog_duration`, `fulfilled_time`, `completed`, `evaluated`, `address`, `city`, `postal_code`, `province`) VALUES
 (985674321, 'Ryan James Capadocia', 'ryancaps123', '@Ryanjames123', 'ryan@cvsu.edu.ph', NULL, NULL, 0, 'User', '2023-06-17', 'False', '../Image/Profile.png', 'male', NULL, NULL, NULL, NULL, NULL, NULL, 'false', NULL, NULL, NULL, NULL),
-(1234567891, 'James Matthew Veloria', 'jeymssss0', 'Qwertyuiop123!', 'james123@gmail.com', NULL, NULL, 0, 'user', '2023-06-16', 'False', '../Image/Profile.png', 'male', NULL, NULL, NULL, NULL, NULL, NULL, 'false', NULL, NULL, NULL, NULL);
+(1234567891, 'James Matthew Veloria', 'jeymssss0', 'Qwertyuiop123!', 'james123@gmail.com', NULL, NULL, 0, 'user', '2023-06-16', 'False', '../Image/Profile.png', 'male', NULL, NULL, NULL, NULL, NULL, NULL, 'false', NULL, NULL, NULL, NULL),
+(2021222990, 'Lorenzo Asis', 'lorenzoasis23', 'Lorenzo.asis2023', 'lorenzo.asis@cvsu.edu.ph', '1999-06-09', 'BSIT', 1, 'User', '2023-06-20', 'true', '../uploads/lorenzoasis23_Credentials/lorenzoasis23_Profile.gif', 'male', 'BSIT-2B', 2147483647, NULL, NULL, NULL, NULL, 'false', 'Queensrow AB Molino 3', 'Bacoor', 4102, 'Cavite');
 
 --
 -- Triggers `tbl_trainee`
@@ -227,6 +245,12 @@ ALTER TABLE `tbl_admin`
   ADD PRIMARY KEY (`UID`);
 
 --
+-- Indexes for table `tbl_announcement`
+--
+ALTER TABLE `tbl_announcement`
+  ADD PRIMARY KEY (`ID`);
+
+--
 -- Indexes for table `tbl_evaluation`
 --
 ALTER TABLE `tbl_evaluation`
@@ -252,13 +276,19 @@ ALTER TABLE `tbl_trainee`
 -- AUTO_INCREMENT for table `tbl_accounts`
 --
 ALTER TABLE `tbl_accounts`
-  MODIFY `ID` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `ID` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `tbl_admin`
 --
 ALTER TABLE `tbl_admin`
   MODIFY `UID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2021100111;
+
+--
+-- AUTO_INCREMENT for table `tbl_announcement`
+--
+ALTER TABLE `tbl_announcement`
+  MODIFY `ID` int(5) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `tbl_evaluation`
@@ -276,7 +306,7 @@ ALTER TABLE `tbl_events`
 -- AUTO_INCREMENT for table `tbl_trainee`
 --
 ALTER TABLE `tbl_trainee`
-  MODIFY `UID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1234567892;
+  MODIFY `UID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2021222992;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
