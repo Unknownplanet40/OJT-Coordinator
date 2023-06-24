@@ -56,7 +56,7 @@ if (isset($_SESSION['autoUsername']) && isset($_SESSION['autoPassword'])) {
     <link rel="shortcut icon" href="./Image/login.svg" type="image/x-icon">
 </head>
 
-<body style="color: #fff;">
+<body style="color: #fff; background-image: url('./Image/BG_image.svg'); background-size: cover;">
     <?php echo NewAlertBox();
     $_SESSION['Show'] = false; ?>
     <div class="container-fluid">
@@ -105,7 +105,7 @@ if (isset($_SESSION['autoUsername']) && isset($_SESSION['autoPassword'])) {
             <div class="social-media error">
             </div>
             <p class="text-muted text-center"><small>
-                    <span class="text-warning">&copy; 2023. All Rights Reserved.</span>
+                    <span class="text-light">&copy; 2023. All Rights Reserved.</span>
                 </small></p>
         </div>
 

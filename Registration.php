@@ -161,7 +161,7 @@ if (isset($_POST['register'])) {
 
 </head>
 
-<body style="color: #fff;">
+<body style="color: #fff; background-image: url('./Image/BG_image.svg'); background-size: cover;">
     <div class="container-fluid">
         <div class="registration-form">
             <form method="POST" action="Registration.php" enctype="multipart/form-data" id="register-form"
