@@ -61,7 +61,7 @@
                 </li>
 
                 <li class="nav-link" title="Trainee's Details">
-                    <a <?php echo (basename($_SERVER['PHP_SELF']) == "../Admin/#") ? "class='active'" : "href='../Admin/#'"; ?>>
+                    <a <?php echo (basename($_SERVER['PHP_SELF']) == "AdminTrainees.php") ? "class='active'" : "href='../Admin/AdminTrainees.php'"; ?>>
                         <i class='icon'>
                             <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24">
                                 <path
@@ -109,7 +109,7 @@
                 </li>
 
                 <li class="nav-link" title="Trainee's Documents Submitted">
-                    <a href="#">
+                    <a <?php echo (basename($_SERVER['PHP_SELF']) == "AdminTraineeResource.php") ? "class='active'" : "href='../Admin/AdminTraineeResource.php'"; ?>>
                         <i class='icon'>
                             <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24">
                                 <path
@@ -120,8 +120,8 @@
                     </a>
                 </li>
 
-                <li class="nav-link">
-                    <a <?php echo (basename($_SERVER['PHP_SELF']) == "#") ? "class='active'" : "href='../Admin/#'"; ?>>
+                <li class="nav-link" title="Manage Moderators Accounts">
+                    <a <?php echo (basename($_SERVER['PHP_SELF']) == "Manage.php") ? "class='active'" : "href='../Admin/Manage.php'"; ?>>
                         <i class='icon'>
                             <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24">
                                 <path

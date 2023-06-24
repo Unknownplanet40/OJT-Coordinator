@@ -33,7 +33,8 @@ function maleChart()
     }
 }
 
-function femaleChart(){
+function femaleChart()
+{
     global $conn;
     $sql = "SELECT COUNT(UID) FROM `tbl_trainee` WHERE `gender` = 'female'";
     $result = mysqli_query($conn, $sql);
@@ -44,7 +45,8 @@ function femaleChart(){
     }
 }
 
-function MonthlyChart($month){
+function MonthlyChart($month)
+{
     global $conn;
     $sql = "SELECT COUNT(UID) FROM tbl_trainee WHERE MONTH(account_Created) = $month";
     $result = mysqli_query($conn, $sql);
@@ -67,6 +69,7 @@ function MonthlyChart($month){
     <script src="../Script/SidebarScript.js"></script>
     <script src="../Script/SweetAlert2.js"></script>
     <script src="../Script/chart.js"></script>
+    <script src="../Script/AdminTables.js"></script>
     <title>Admin Dashboard</title>
 </head>
 
@@ -79,7 +82,9 @@ function MonthlyChart($month){
     }
     ?>
     <section class="home">
-        <div class="text">Dashboard</div>
+        <div class="text">
+            <h1 class="text-warning">Dashboard</h1>
+        </div>
         <div class="container-fluid" style="width: 98%;">
             <div class="row row-cols-1 row-cols-md-4 g-4">
                 <div class="col">
@@ -138,7 +143,8 @@ function MonthlyChart($month){
                             <h5 class="card-title text-uppercase d-block text-truncate">Monthly Registered Trainee's
                             </h5>
                             <canvas id="Monthly"></canvas>
-                            <?php include_once '../Components/Chart/MonthlyChart.php'; ?>
+                            <?php @include_once '../Components/Chart/MonthlyChart.php';
+                            ?>
                         </div>
                     </div>
                 </div>
@@ -147,7 +153,7 @@ function MonthlyChart($month){
             <hr class="mt-4 mb-4" style="background-color: white; height: 5px; border-radius: 5px;">
 
             <div class="container-fluid table-responsive-md">
-                <table class="table table-dark table-striped table-hover caption-top">
+                <table class="table table-dark table-striped table-hover caption-top" id="Trainee-Table">
                     <caption style="min-width: 600px;">
                         <nav class="navbar navbar-dark navbar-expand-lg bg-body-tertiary">
                             <div class="container-fluid">
@@ -162,35 +168,24 @@ function MonthlyChart($month){
                                         </a>
                                         <div class="d-flex justify-content-between">
                                             <div>
-                                                <div class="d-flex">
-                                                    <form class="d-flex" id="TL" role="search"
-                                                        style="margin-right: 10px;">
-                                                        <div class="input-group sm-3">
-                                                            <input type="text" class="form-control form-sm text-bg-dark"
-                                                                placeholder="Search Trainee">
-                                                            <button class="btn btn-sm btn-outline-success"
-                                                                type="submit">Filter</button>
-                                                        </div>
-                                                    </form>
-                                                    <a href="#" class="btn btn-outline-primary w-50">Show more</a>
+                                                <div>
+                                                    <div class="input-group mb-3">
+                                                        <input type="search" id="TL" class="form-control text-bg-dark"
+                                                            placeholder="Filter by Name Only">
+                                                        <a href="#" class="btn btn-outline-primary">Show more</a>
+                                                    </div>
                                                 </div>
                                             </div>
                                             <nav class="ms-3 mt-1">
                                                 <ul class="pagination pagination-sm">
                                                     <li class="page-item">
-                                                        <a class="page-link text-bg-dark" href="#"
-                                                            aria-label="Previous">
+                                                        <a class="page-link text-bg-dark"
+                                                            aria-label="Previous" id="previousPage">
                                                             <span aria-hidden="true">&laquo;</span>
                                                         </a>
                                                     </li>
-                                                    <li class="page-item"><a class="page-link text-bg-dark"
-                                                            href="#">1</a></li>
-                                                    <li class="page-item"><a class="page-link text-bg-dark"
-                                                            href="#">2</a></li>
-                                                    <li class="page-item"><a class="page-link text-bg-dark"
-                                                            href="#">3</a></li>
                                                     <li class="page-item">
-                                                        <a class="page-link text-bg-dark" href="#" aria-label="Next">
+                                                        <a class="page-link text-bg-dark" id="nextPage" aria-label="Next">
                                                             <span aria-hidden="true">&raquo;</span>
                                                         </a>
                                                     </li>
@@ -233,6 +228,69 @@ function MonthlyChart($month){
                             <td>Web Development</td>
                             <td><span class="badge text-bg-success">Completed</span></td>
                         </tr>
+                        <tr>
+                            <th scope="row">4</th>
+                            <td>Thomas Aquinas</td>
+                            <td>BSIT</td>
+                            <td>Web Development</td>
+                            <td><span class="badge text-bg-success">Completed</span></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">5</th>
+                            <td>Thomas Aquinas</td>
+                            <td>BSIT</td>
+                            <td>Web Development</td>
+                            <td><span class="badge text-bg-success">Completed</span></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">6</th>
+                            <td>Thomas Aquinas</td>
+                            <td>BSIT</td>
+                            <td>Web Development</td>
+                            <td><span class="badge text-bg-success">Completed</span></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">7</th>
+                            <td>Lorenzo Asis</td>
+                            <td>BSIT</td>
+                            <td>Web Development</td>
+                            <td><span class="badge text-bg-danger">Pending</span></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">8</th>
+                            <td>Mark Otto</td>
+                            <td>BSCS</td>
+                            <td>IT Support</td>
+                            <td><span class="badge text-bg-warning">On-Going</span></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">9</th>
+                            <td>Thomas Aquinas</td>
+                            <td>BSIT</td>
+                            <td>Web Development</td>
+                            <td><span class="badge text-bg-success">Completed</span></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">10</th>
+                            <td>Thomas Aquinas</td>
+                            <td>BSIT</td>
+                            <td>Web Development</td>
+                            <td><span class="badge text-bg-success">Completed</span></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">11</th>
+                            <td>Thomas Aquinas</td>
+                            <td>BSIT</td>
+                            <td>Web Development</td>
+                            <td><span class="badge text-bg-success">Completed</span></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">12</th>
+                            <td>Thomas Aquinas</td>
+                            <td>BSIT</td>
+                            <td>Web Development</td>
+                            <td><span class="badge text-bg-success">Completed</span></td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
@@ -254,16 +312,12 @@ function MonthlyChart($month){
                                         <a class="navbar-brand text-light text-muted">Program list</a>
                                         <div class="d-flex justify-content-between">
                                             <div>
-                                                <div class="d-flex">
-                                                    <form class="d-flex" role="search" style="margin-right: 10px;">
-                                                        <div class="input-group sm-3">
-                                                            <input type="text" class="form-control form-sm text-bg-dark"
-                                                                placeholder="Search Program">
-                                                            <button class="btn btn-sm btn-outline-success PL"
-                                                                type="submit">Filter</button>
-                                                        </div>
-                                                    </form>
-                                                    <a href="#" class="btn btn-outline-primary w-50">Show more</a>
+                                                <div>
+                                                    <div class="input-group mb-3">
+                                                        <input type="search" id="PL" class="form-control text-bg-dark"
+                                                            placeholder="Filter">
+                                                        <a href="#" class="btn btn-outline-primary">Show more</a>
+                                                    </div>
                                                 </div>
                                             </div>
                                             <nav class="ms-3 mt-1">
@@ -350,16 +404,12 @@ function MonthlyChart($month){
                                         <a class="navbar-brand text-light text-muted">Event list</a>
                                         <div class="d-flex justify-content-between">
                                             <div>
-                                                <div class="d-flex">
-                                                    <form class="d-flex" role="search" style="margin-right: 10px;">
-                                                        <div class="input-group sm-3">
-                                                            <input type="text" class="form-control form-sm text-bg-dark"
-                                                                placeholder="Search Event">
-                                                            <button class="btn btn-sm btn-outline-success"
-                                                                type="submit">Filter</button>
-                                                        </div>
-                                                    </form>
-                                                    <a href="#" class="btn btn-outline-primary w-50">Show more</a>
+                                                <div>
+                                                    <div class="input-group mb-3">
+                                                        <input type="search" id="EL" class="form-control text-bg-dark"
+                                                            placeholder="Filter">
+                                                        <a href="#" class="btn btn-outline-primary">Show more</a>
+                                                    </div>
                                                 </div>
                                             </div>
                                             <nav class="ms-3 mt-1">
@@ -431,7 +481,6 @@ function MonthlyChart($month){
             <hr class="mt-4 mb-4" style="background-color: white; height: 5px; border-radius: 5px;">
 
     </section>
-
     <script src="../Script/Bootstrap_Script/bootstrap.js"></script>
 </body>
 

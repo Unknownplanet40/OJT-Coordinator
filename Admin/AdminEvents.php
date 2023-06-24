@@ -23,7 +23,7 @@ session_start();
     <section class="home">
         <div class="text">Events</div>
         <div class="container-fluid" style="width: 98%;">
-            <div class="container-fluid my-1 table-responsive" style="min-width: 512px;">
+            <div class="container-xl my-1 table-responsive">
                 <form class="row g-3 rounded mt-1" method="POST" action="#">
                     <div class="col-md-6">
                         <div class="form-floating mb-3 text-light">

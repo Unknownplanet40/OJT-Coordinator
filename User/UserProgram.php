@@ -35,6 +35,10 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
     } ?>
     <section class="home">
         <div class="text">Program Details</div>
+        <p class="text-light"> Feature: Can View Program Details</p>
+            <p class="text-light"> Can apply for the program</p>
+            <p class="text-light"> if applied, desable all apply button</p>
+            <p class="text-light"> can cancel application</p>
         <div style="margin: 10px; width: 98%;">
             <div class="text-center text-uppercase fs-3 fw-bolder">Web Development Internship</div>
             <div style="display: flex; justify-content: center;">

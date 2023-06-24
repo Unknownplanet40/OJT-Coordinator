@@ -41,11 +41,6 @@
                         <?php echo json_encode(MonthlyChart(12)); ?>,
                     ],
                     
-                    
-                    
-                    
-                    
-                    
                     //add php data here
                     // to get data from php use this "json_encode($data)"
                     // example: data: <php echo json_encode($data); >,

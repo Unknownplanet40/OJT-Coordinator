@@ -464,3 +464,46 @@ if (isset($_POST['login'])) {
                 profile
                 picture. Please upload a valid file. (This has been Fix)</span>
         </div>
+
+
+        <div class="card-body">
+                            <h5 class="card-title text-uppercase d-block text-truncate">Date and Time</h5>
+                            <script>
+                                //current Time
+                                setInterval(function () {
+                                    var currentTime = new Date();
+                                    var hours = currentTime.getHours();
+                                    var minutes = currentTime.getMinutes();
+                                    var seconds = currentTime.getSeconds();
+                                    var suffix = "AM";
+                                    if (hours >= 12) {
+                                        suffix = "PM";
+                                        hours = hours - 12;
+                                    }
+                                    if (hours == 0) {
+                                        hours = 12;
+                                    }
+                                    if (minutes < 10) {
+                                        minutes = "0" + minutes;
+                                    }
+                                    if (seconds < 10) {
+                                        seconds = "0" + seconds;
+                                    }
+                                    document.getElementById('time').innerHTML = hours + ":" + minutes + ":" + seconds + " " + suffix;
+                                }, 1000);
+                            </script>
+                            <ul class="list-group">
+                                <li class="list-group-item text-center text-uppercase text-bg-warning">
+                                    <?php echo date("l"); ?>
+                                </li>
+                                <li class="list-group-item text-center text-uppercase text-bg-warning">
+                                    <h1><?php echo date("d"); ?></h1>
+                                <li class="list-group-item text-center text-uppercase text-bg-warning">
+                                    <h1><?php echo date("F"); ?></h1>
+                                <li class="list-group-item text-center text-uppercase text-bg-warning">
+                                    <h1><?php echo date("Y"); ?></h1>
+                                <li class="list-group-item text-center text-uppercase text-bg-warning">
+                                    <h1 id="time"></h1>
+                                </li>
+                            </ul>
+                        </div>
