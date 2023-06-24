@@ -3,8 +3,6 @@ session_start();
 @include_once("../Database/config.php");
 @include_once("../Components/PopupAlert.php");
 
-//1111111
-
 $_SESSION['SAtheme'] = "light";
 
 if (!isset($_SESSION['DatahasbeenFetched'])) {
