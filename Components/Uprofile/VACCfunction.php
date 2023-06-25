@@ -24,7 +24,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $VaccineFolder = $_SESSION['GlobalUsername'] . "_Vaccine";
     $folderpath = '../../uploads/' . $ParentFolder . '/' . $VaccineFolder;
     $tempfolderpath = '../../uploads/' . $ParentFolder . '/temp';
-    $filename = $ID . '_VaccineImage';
+    $filename = $_SESSION['GlobalUsername'] . '_VaccineImage';
     $extensions = ['png', 'jpg', 'jpeg'];
 
     if (!file_exists($folderpath)) {
@@ -55,7 +55,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $taget_dir = "../../uploads/$ParentFolder/$VaccineFolder/";
     $target_file = $taget_dir . basename($_FILES["vaccineCard"]["name"]);
     $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
-    $newfilename = $ID . "_VaccineImage." . $imageFileType;
+    $newfilename = $_SESSION['GlobalUsername'] . "_VaccineCard." . $imageFileType;
     $target_file = $taget_dir . $newfilename;
 
 
@@ -91,7 +91,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             
             $target_file = substr($target_file, 3);
 
-            $sql = "INSERT INTO tbl_vaccine (UID, vaccineName, vaccineType, vaccineDose, vaccineLoc, vaccineImage, VaccDoseOne, VaccDosetwo, VaccDoseBooster) VALUES ('$ID', '$VaccName', '$VaccType', '$VaccDose', '$VaccLoc', '$target_file', '$VD1', '$VD2', '$VD3')";
+            if ($_SESSION['GlobalVaccCompleted'] == 1) {
+                $sql = "UPDATE tbl_vaccine SET vaccineName = '$VaccName', vaccineType = '$VaccType', vaccineDose = '$VaccDose', vaccineLoc = '$VaccLoc', vaccineImage = '$target_file', VaccDoseOne = '$VD1', VaccDosetwo = '$VD2', VaccDoseBooster = '$VD3' WHERE UID = $ID";
+            } else{
+                $sql = "INSERT INTO tbl_vaccine (UID, vaccineName, vaccineType, vaccineDose, vaccineLoc, vaccineImage, VaccDoseOne, VaccDosetwo, VaccDoseBooster) VALUES ('$ID', '$VaccName', '$VaccType', '$VaccDose', '$VaccLoc', '$target_file', '$VD1', '$VD2', '$VD3')";
+            }
             $result = mysqli_query($conn, $sql);
 
             if ($result) {

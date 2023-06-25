@@ -192,7 +192,7 @@ if (isset($_SESSION['GlobalVaccCompleted']) && $_SESSION['GlobalVaccCompleted'] 
                                     <label for="vaccineDose" class="form-label">Vaccination Dose</label>
                                     <select class="form-select form-select-md" name="vaccineDose" id="vaccineDose">
                                         <option selected hidden>Choose...</option>
-                                        <option value="one">One Dose</option>
+                                        <option id="VDSO1" value="one">One Dose</option>
                                         <option value="two">Two Dose</option>
                                         <option value="booster">Booster Dose</option>
                                     </select>

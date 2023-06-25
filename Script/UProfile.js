@@ -127,9 +127,18 @@ document.addEventListener("DOMContentLoaded", function () {
 
   vaccinetype.addEventListener("change", function () {
     let VNSO7 = document.getElementById("VNSO7");
+    let VDSO1 = document.getElementById("VDSO1");
     if (vaccinetype.value == 2) {
       //add VNSO7 Selected attribute
       VNSO7.setAttribute("selected", "");
+      VDSO1.setAttribute("selected", "");
+      VD1.style.display = "block";
+      VD1Label.style.display = "block";
+    } else {
+      VNSO7.removeAttribute("selected");
+      VDSO1.removeAttribute("selected");
+      VD1.style.display = "none";
+      VD1Label.style.display = "none";
     }
   });
 
