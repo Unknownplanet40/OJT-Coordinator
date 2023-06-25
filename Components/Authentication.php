@@ -176,6 +176,7 @@ function fetchUserData($ID)
         $_SESSION['GlobalUsername'] = $row['trainee_uname'];
         $_SESSION['GlobalPassword'] = $row['trainee_pword'];
         $_SESSION['GlobalBirthdate'] = $row['birthdate'];
+        $_SESSION['GlobalAge'] = $row['age'];
         $_SESSION['GlobalEmail'] = $row['email'];
         $_SESSION['GlobalDept'] = $row['department'];
         $_SESSION['GlobalStatus'] = $row['status'];
@@ -203,11 +204,11 @@ function fetchUserData($ID)
 
         // get the year and section from the course by splitting it after the dash
         $course = explode("-", $_SESSION['GlobalCourse']);
-        $second = $course[1];
+        $endtext = $course[1];
 
         // get the year and section by splitting it after the first character
-        $year = substr($second, 0, 1);
-        $section = substr($second, 1, 1);
+        $year = substr($endtext, 0, 1);
+        $section = substr($endtext, 1, 1);
 
         if ($year == '1'){
             $_SESSION['GlobalYear'] = "1st Year";
@@ -229,7 +230,6 @@ function fetchUserData($ID)
         $result = mysqli_query($conn, $sql);
 
         if ($result) {
-
             if ($_SESSION['GlobalProfileCompleted'] == 'false') {
                 $_SESSION['message'] = "Before you can proceed to your dashboard, you need to complete your profile first.";
                 $_SESSION['icon'] = "info";
@@ -243,7 +243,6 @@ function fetchUserData($ID)
                 $_SESSION['DatahasbeenFetched'] = true;
                 header("Location: ../User/UserDashboard.php");
             }
-
         } else {
             $_SESSION['message'] = "We incountered an error while logging you in, please try again later.";
             $_SESSION['icon'] = "error";

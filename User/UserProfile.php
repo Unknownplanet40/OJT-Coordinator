@@ -4,6 +4,7 @@ session_start();
 @include_once '../Components/SystemLog.php';
 @include_once '../Components/PopupAlert.php';
 @include_once '../Components/ImageUpload.php';
+@include_once '../Components/VaccineeData.php';
 
 $_SESSION['SAtheme'] = "light";
 
@@ -25,6 +26,13 @@ if ($_SESSION['GlobalProfileCompleted'] == 'false') {
     echo '<script>var ProfileCompleted = true;</script>';
 }
 
+if (isset($_SESSION['GlobalVaccCompleted']) && $_SESSION['GlobalVaccCompleted'] == 1) {
+    echo '<script>var VaccCompleted = true;</script>';
+    echo '<script>console.log(VaccCompleted);</script>';
+} else {
+    echo '<script>var VaccCompleted = false;</script>';
+    echo '<script>console.log(VaccCompleted);</script>';
+}
 ?>
 
 <!DOCTYPE html>
@@ -78,67 +86,159 @@ if ($_SESSION['GlobalProfileCompleted'] == 'false') {
             <div class="container">
                 <b class="text">Vaccination Status</b>
                 <div class="container-xl">
-                    <form action="" id="VACform">
+                    <div class="container-fluid" id="VACDetails">
                         <div class="row">
                             <div class="col-md-6">
-                                <label for="vaccineType" class="form-label">Vaccine Type</label>
-                                <select class="form-select" name="vaccineType" id="vaccineType">
-                                    <option selected hidden>Choose...</option>
-                                    <option value="1">Full Vaccination series</option>
-                                    <option value="2">Single Dose Vaccine</option>
-                                </select>
+                                <img src="<?php echo $_SESSION['GlobalVaccImage']; ?>" alt="VacCard" id="VacCard"
+                                    class="img-fluid img-thumbnail" style="width: 420;">
                             </div>
                             <div class="col-md-6">
-                                <label for="vaccineName" class="form-label">Vaccine Brand</label>
-                                <select class="form-select form-select-md" name="vaccineName" id="vaccineName">
-                                    <option selected hidden>Choose...</option>
-                                    <option value="Pfizer">Pfizer - BioNTech</option>
-                                    <option value="Moderna">Moderna - NIAID</option>
-                                    <option value="AstraZeneca">AstraZeneca - Oxford</option>
-                                    <option value="Sinovac">Sinovac - Coronavac</option>
-                                    <option value="Sputnik">Sputnik V - Gamaleya</option>
-                                    <option value="Johnson">Johnson & Johnson - Janssen</option>
-                                </select>
-                            </div>
-                            <div class="col-md-6">
-                                <label for="vaccineDose" class="form-label">Vaccination Dose</label>
-                                <select class="form-select form-select-md" name="vaccineDose" id="vaccineDose">
-                                    <option selected hidden>Choose...</option>
-                                    <option value="one">One Dose</option>
-                                    <option value="two">Two Dose</option>
-                                    <option value="booster">Booster Dose</option>
-                                </select>
-                            </div>
-                            <div class="col-md-6">
-                                <label for="VD1" class="form-label">Vaccination Date first dose</label>
-                                <input type="date" class="form-control" name="VD1" id="VD1">
-
-                                <label for="VD2" class="form-label">Vaccination Date second dose</label>
-                                <input type="date" class="form-control" name="VD2" id="VD2">
-
-                                <label for="VD3" class="form-label">Vaccination Date third dose</label>
-                                <input type="date" class="form-control" name="VD3" id="VD3">
-                            </div>
-                            <div class="col-md-6">
-                                <label for="vaccineLocation" class="form-label">Vaccination Location</label>
-                                <input type="text" class="form-control" name="vaccineLocation" id="vaccineLocation">
-                            </div>
-                            <div class="col-md-6">
-                                <label for="vaccineCard" class="form-label">Vaccination Card</label>
-                                <input type="file" class="form-control" name="vaccineCard" id="VaccineInput" onchange="checkFileInput()">
-                                <small class="blockquote-footer" style="font-size: 12px;">You can upload at least 1 file; no need to upload all vaccines, just the latest.</small>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <b class="fs-4 text-truncate">Vaccine Name:</b>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p class="fs-5 text-truncate text-success">
+                                            <?php echo isset($_SESSION['GlobalVaccName']) ? $_SESSION['GlobalVaccName'] : "Not Available"; ?>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <b class="fs-4 text-truncate">Vaccine Type:</b>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p class="fs-5 text-truncate text-success">
+                                            <?php echo isset($_SESSION['GlobalVaccType']) ? $_SESSION['GlobalVaccType'] : "Not Available"; ?>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <b class="fs-4 text-truncate">Vaccine Dose:</b>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p class="fs-5 text-truncate text-success">
+                                            <?php echo isset($_SESSION['GlobalVaccDose']) ? $_SESSION['GlobalVaccDose'] : "Not Available"; ?>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <b class="fs-4 text-truncate">Vaccine Date(s):</b>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <?php
+                                        if (isset($_SESSION['GlobalVaccDose']) && $_SESSION['GlobalVaccDose'] == 'one') {
+                                            echo '<p class="fs-5 text-truncate text-success">' . $_SESSION['GlobalVD1'] . '</p>';
+                                        } else if (isset($_SESSION['GlobalVaccDose']) && $_SESSION['GlobalVaccDose'] == 'two') {
+                                            echo '<p class="fs-5 text-truncate text-success">' . $_SESSION['GlobalVD1'] . '</p>';
+                                            echo '<p class="fs-5 text-truncate text-success">' . $_SESSION['GlobalVD2'] . '</p>';
+                                        } else if (isset($_SESSION['GlobalVaccDose']) && $_SESSION['GlobalVaccDose'] == 'booster') {
+                                            echo '<p class="fs-5 text-truncate text-success">' . $_SESSION['GlobalVD1'] . '</p>';
+                                            echo '<p class="fs-5 text-truncate text-success">' . $_SESSION['GlobalVD2'] . '</p>';
+                                            echo '<p class="fs-5 text-truncate text-success">' . $_SESSION['GlobalVD3'] . '</p>';
+                                        } else {
+                                            echo '<p class="fs-5 text-truncate text-success">Not Available</p>';
+                                        }
+                                        ?>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <b class="fs-4 text-truncate">Vaccine Location:</b>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p class="fs-5 text-truncate text-success">
+                                                <?php echo isset($_SESSION['GlobalVaccLoc']) ? $_SESSION['GlobalVaccLoc'] : "Not Available"; ?>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <input type="button" class="btn btn-success btn-sm w-100" value="Edit"
+                                                id="editVaccine">
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <input type="submit" name="vaccine" id="vaccine" class="btn btn-primary btn-sm" value="Submit">
+                    </div>
+                    <br>
+                    <div class="container-xl" id="VACcontainer">
+                        <form action="../Components/Uprofile/VACCfunction.php" method="POST"
+                            enctype="multipart/form-data" id="VACform">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label for="vaccineType" class="form-label">Vaccine Type</label>
+                                    <select class="form-select" name="vaccineType" id="vaccineType">
+                                        <option selected hidden>Choose...</option>
+                                        <option value="1">Full Vaccination series</option>
+                                        <option value="2">Single Dose Vaccine</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="vaccineName" class="form-label">Vaccine Brand</label>
+                                    <select class="form-select form-select-md" name="vaccineName" id="vaccineName">
+                                        <option selected hidden>Choose...</option>
+                                        <option value="Pfizer">Pfizer - BioNTech</option>
+                                        <option value="Moderna">Moderna - NIAID</option>
+                                        <option value="AstraZeneca">AstraZeneca - Oxford</option>
+                                        <option value="Sinovac">Sinovac - Coronavac</option>
+                                        <option value="Sputnik">Sputnik V - Gamaleya</option>
+                                        <option id="VNSO7" value="Johnson">Johnson & Johnson - Janssen</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="vaccineDose" class="form-label">Vaccination Dose</label>
+                                    <select class="form-select form-select-md" name="vaccineDose" id="vaccineDose">
+                                        <option selected hidden>Choose...</option>
+                                        <option value="one">One Dose</option>
+                                        <option value="two">Two Dose</option>
+                                        <option value="booster">Booster Dose</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="VD1" class="form-label">Vaccination Date first dose</label>
+                                    <input type="date" class="form-control" name="VD1" id="VD1">
+
+                                    <label for="VD2" class="form-label">Vaccination Date second dose</label>
+                                    <input type="date" class="form-control" name="VD2" id="VD2">
+
+                                    <label for="VD3" class="form-label">Vaccination Date third dose</label>
+                                    <input type="date" class="form-control" name="VD3" id="VD3">
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="vaccineLocation" class="form-label">Vaccination Location</label>
+                                    <input type="text" class="form-control" name="vaccineLocation" id="vaccineLocation">
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="vaccineCard" class="form-label">Vaccination Card</label>
+                                    <input type="file" class="form-control" name="vaccineCard" id="VaccineInput">
+                                    <small class="blockquote-footer" style="font-size: 12px;">You can upload at least 1
+                                        file; no need to upload all vaccines, just the latest.</small>
+                                </div>
                             </div>
-                        </div>
-                    </form>
+                            <div class="row">
+                                <div class="col-md-6 text-center">
+                                    <input type="submit" name="vaccine" id="vaccine" class="btn btn-primary btn-sm w-50"
+                                        value="Submit">
+                                </div>
+                                <div class="col-md-6">
+                                    <p class="text-danger" id="VACerror">
+                                        <script>
+                                            setTimeout(function () {
+                                                document.getElementById('INCerror').innerHTML = "";
+                                            }, 6500);
+                                        </script>
+                                    </p>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
                 </div>
+                <br>
             </div>
         </div>
-        <br>
     </section>
 </body>
 
