@@ -126,9 +126,9 @@ function ProfileUpload()
                     $sql = "UPDATE tbl_trainee SET image = '$target_file' WHERE UID = '$_SESSION[GlobalID]'";
                 }
                 $result = mysqli_query($conn, $sql);
-
+                $_SESSION['Profile'] = $target_file;
+                
                 if ($result) {
-                    $_SESSION['Profile'] = $target_file;
                     $_SESSION['message'] = "Congratulations! The file " . htmlspecialchars(basename($_FILES["Profile"]["name"])) . " has been uploaded.";
                     $_SESSION['icon'] = "success";
                     $_SESSION['Show'] = true;
