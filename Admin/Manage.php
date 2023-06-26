@@ -24,25 +24,252 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
     <script src="../Script/SidebarScript.js"></script>
     <script src="../Script/SweetAlert2.js"></script>
     <script src="../Script/chart.js"></script>
-    <script src="../Script/AdminTables.js"></script>
-    <title>Accounts
+    <script src="../Script/MangeAdminTable.js"></script>
+    <script defer src="../Script/Bootstrap_Script/bootstrap.bundle.js"></script>
+    <title>Accounts</title>
 </head>
 
 <body class="dark adminuser" style="min-width: 1080px;">
     <?php
     @include_once '../Components/AdminSidebar.php';
+    @include_once '../Components/ManageAdminModal.php';
     if (isset($ShowAlert)) {
         echo NewAlertBox();
         $_SESSION['Show'] = false;
     }
     ?>
     <section class="home">
-        <div class="text">
-            <h1 class="text-warning">Moderators Accounts</h1>
+        <div>
+            <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
+                <div class="container-fluid">
+                    <a class="navbar-brand text-warning" href="#">Accounts</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
+                        aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="#">Administrator</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Moderator</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
         </div>
         <div class="container-fluid" style="width: 98%;">
-            <div class="container-lg">
-                
+            <div class="container-lg table-responsive">
+                <div class="container mt-5 text-bg-dark rounded" style="min-width: fit-content;">
+                    <table class="table table-hover table-dark align-middle caption-top" id="AccountTable">
+                        <caption>
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="col-4">
+                                        <div class="input-group">
+                                            <!-- In the future, I will add a Category Search -->
+                                            <span class="input-group-text text-bg-dark"
+                                                title="You can search only by name">
+                                                <svg xmlns="http://www.w3.org/2000/svg" height="20"
+                                                    viewBox="0 -960 960 960" width="20" fill="var(--bs-warning)">
+                                                    <path
+                                                        d="M382.122-330.5q-102.187 0-173.861-71.674Q136.587-473.848 136.587-576q0-102.152 71.674-173.826Q279.935-821.5 382.087-821.5q102.152 0 173.826 71.674 71.674 71.674 71.674 173.861 0 40.859-12.022 76.292-12.021 35.434-33.065 64.956l212.087 212.326q12.674 12.913 12.674 28.945 0 16.033-12.913 28.707-12.674 12.674-29.326 12.674t-29.326-12.674L523.848-375.587q-29.761 21.044-65.434 33.065-35.672 12.022-76.292 12.022Zm-.035-83q67.848 0 115.174-47.326Q544.587-508.152 544.587-576q0-67.848-47.326-115.174Q449.935-738.5 382.087-738.5q-67.848 0-115.174 47.326Q219.587-643.848 219.587-576q0 67.848 47.326 115.174Q314.239-413.5 382.087-413.5Z" />
+                                                </svg>
+                                            </span>
+                                            <input type="search" class="form-control text-bg-dark"
+                                                placeholder="Search by Name" id="SearchBar">
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <!-- piginations -->
+                                        <nav aria-label="Page navigation example">
+                                            <ul class="pagination pagination-sm">
+                                                <li class="page-item">
+                                                    <a class="page-link text-bg-dark" id="Previous"
+                                                        style="cursor: pointer;">
+                                                        <span aria-hidden="true">&laquo;</span>
+                                                    </a>
+                                                </li>
+                                                <li class="page-item m-1 text-bg-dark"><small
+                                                        class="text-warning text-center mx-1">Showing <span
+                                                            id="CurrentPage"></span> to <span id="TotalPage"></span> of
+                                                        <span id="TotalItem"></span> entries</small></li>
+                                                <li class="page-item">
+                                                    <a class="page-link text-bg-dark" id="Next"
+                                                        style="cursor: pointer;">
+                                                        <span aria-hidden="true">&raquo;</span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </nav>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="d-flex justify-content-end">
+                                            <button type="button" title="Add new account" class="btn btn-primary btn-sm"
+                                                data-bs-toggle="modal" data-bs-target="#CreateModal">
+                                                <img src="../Image/Create.svg" alt="">
+                                                Add Account
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </caption>
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Profile</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Username</th>
+                                <th scope="col">Password</th>
+                                <th scope="col" hidden>Unhidden Password</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Dept.</th>
+                                <th scope="col">Position</th>
+                                <th scope="col">Status</th>
+                                <th scope="col" hidden>id</th>
+                                <th scope="col" class="text-center">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            $sql = "SELECT * FROM tbl_admin WHERE role = 'administrator' ORDER BY name ASC";
+                            $result = mysqli_query($conn, $sql);
+
+                            if (mysqli_num_rows($result) > 0) {
+                                $i = 1;
+                                function hiddenPassword($password)
+                                {
+                                    $hiddenPassword = "";
+                                    for ($i = 0; $i < strlen($password); $i++) {
+                                        $hiddenPassword .= "&#x2022;";
+                                    }
+                                    return $hiddenPassword;
+                                }
+                                while ($row = mysqli_fetch_assoc($result)) {
+
+                                    if ($row['status'] == 1) {
+                                        if ($_SESSION['GlobalID'] == $row['UID']) {
+                                            $status = '<span class="badge bg-success">You</span>';
+                                            $modalStatus = 'Signed In';
+                                        } else {
+                                            $status = '<span class="badge bg-success">Signed In</span>';
+                                            $modalStatus = 'Signed In';
+                                        }
+                                    } else {
+                                        $status = '<span class="badge bg-danger">Signed Out</span>';
+                                        $modalStatus = 'Signed Out';
+                                    }
+
+                                    if ($row['role'] == 'administrator') {
+                                        $row['role'] = 'ADMIN';
+                                    } else {
+                                        $row['role'] = 'MOD';
+                                    }
+
+                                    echo '<tr>
+                                    <th scope="row">' . $i . '</th>
+                                    <td class="text-center"><img src="' . $row['imagePath'] . '" alt="Profile" class="rounded-circle img-fluid" style="width: 50px; height: 50px;"></td>
+                                    <td class="text-truncate" style="max-width: 100px;">' . $row['name'] . '</td>
+                                    <td class="text-truncate" style="max-width: 100px;">' . $row['admin_uname'] . '</td>
+                                    <td class="text-truncate" style="max-width: 100px;">' . hiddenPassword($row['admin_pword']) . '</td>
+                                    <td hidden>' . $row['admin_pword'] . '</td>
+                                    <td class="text-truncate" style="max-width: 100px;"><a href="mailto:' . $row['admin_email'] . '" class="text-decoration-none text-white">' . $row['admin_email'] . '</a></td>
+                                    <td class="text-truncate" style="max-width: 100px;">' . $row['department'] . '</td>
+                                    <td class="text-truncate" style="max-width: 100px;">' . $row['role'] . '</td>
+                                    <td class="text-truncate" style="max-width: 100px;">' . $status . '</td>
+                                    <td hidden>' . $row['UID'] . '</td>
+                                    <td class="text-truncate">
+                                        <a title="Update this account" id="UpdateAccount" class="btn btn-primary btn-sm"><img src="../Image/Update.svg" alt="Update" style="width: 20px; height: 20px;"></a>
+                                        <a title="Delete this account" id="DeleteAccount" class="btn btn-danger btn-sm"><img src="../Image/Delete.svg" alt="Delete" style="width: 20px; height: 20px;"></a>
+                                        <a title="View this account" id="ViewAccount" data-bs-toggle="modal" data-bs-target="#AccountDetails" class="btn btn-success btn-sm"><img src="../Image/View.svg" alt="View" style="width: 20px; height: 20px;"></a>
+                                    </td>
+                                    </tr>
+                                    <script>
+                                        var UpdateAccount = document.querySelectorAll("#UpdateAccount");
+                                        var DeleteAccount = document.querySelectorAll("#DeleteAccount");
+                                        var ViewAccount = document.querySelectorAll("#ViewAccount");
+
+                                        UpdateAccount[' . ($i - 1) . '].addEventListener("click", () => {
+                                            window.location.href = "Update.php?id=' . $row['UID'] . '";
+                                        });
+                                        ViewAccount[' . ($i - 1) . '].addEventListener("click", () => {
+                                            let modalName = document.querySelector("#modalName");
+                                            let modalEmail = document.querySelector("#modalEmail");
+                                            let modalDept = document.querySelector("#modalDept");
+                                            let modalRole = document.querySelector("#modalRole");
+                                            let modalCreated = document.querySelector("#modalCreated");
+                                            let modalLastLogin = document.querySelector("#ModalLastLogin");
+                                            let modalStatus = document.querySelector("#modalStatus");
+                                            let modalImage = document.querySelector("#modalImage");
+                                            let modalUname = document.querySelector("#modalUname");
+
+                                            modalName.innerHTML = "' . $row['name'] . '";
+                                            modalEmail.innerHTML = "' . $row['admin_email'] . '";
+                                            modalDept.innerHTML = "' . $row['department'] . '";
+                                            modalRole.innerHTML = "' . $row['role'] . '";
+                                            modalStatus.innerHTML = "' . $modalStatus . '";
+                                            modalImage.setAttribute("src", "' . $row['imagePath'] . '");
+                                            modalUname.innerHTML = "' . $row['admin_uname'] . '";
+
+                                            let modalEdit = document.querySelector("#modalEdit");
+                                            modalEdit.setAttribute("href", "Update.php?id=' . $row['UID'] . '");
+                                        });
+
+                                        if (' . $_SESSION['GlobalID'] . ' == ' . $row['UID'] . ') {
+                                            DeleteAccount[' . ($i - 1) . '].addEventListener("click", () => {
+                                                Swal.fire({
+                                                    icon: "error",
+                                                    title: "Oops...",
+                                                    text: "You cannot delete your own account!",
+                                                    background: "#19191a",
+                                                    color: "#fff",
+                                                });
+                                            });
+                                        } else if (' .$row['status']. ' == 1) {
+                                            DeleteAccount[' . ($i - 1) . '].addEventListener("click", () => {
+                                                Swal.fire({
+                                                    icon: "error",
+                                                    title: "Oops...",
+                                                    text: "You cannot delete an account that is currently signed in!",
+                                                    background: "#19191a",
+                                                    color: "#fff",
+                                                });
+                                            });
+                                        } else {
+                                            DeleteAccount[' . ($i - 1) . '].addEventListener("click", () => {
+                                                Swal.fire({
+                                                    title: "Are you sure?",
+                                                    text: "You won\'t be able to revert this!",
+                                                    icon: "warning",
+                                                    showCancelButton: true,
+                                                    confirmButtonColor: "#3085d6",
+                                                    cancelButtonColor: "#d33",
+                                                    confirmButtonText: "Yes, delete it!",
+                                                    background: "#19191a",
+                                                    color: "#fff",
+                                                }).then((result) => {
+                                                    if (result.isConfirmed) {
+                                                        window.location.href = "Delete.php?id=' . $row['UID'] . '";
+                                                    }
+                                                });
+                                            });
+                                        }
+                                        </script>';
+                                    $i++;
+                                }
+                            } else {
+                                echo '<tr>
+                                <th colspan="10" class="text-center">No data available</th>
+                            </tr>';
+                            }
+                            ?>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </section>
