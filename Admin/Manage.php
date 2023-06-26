@@ -88,7 +88,7 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
                                         <nav aria-label="Page navigation example">
                                             <ul class="pagination pagination-sm">
                                                 <li class="page-item">
-                                                    <a class="page-link text-bg-dark" id="Previous"
+                                                    <a class="page-link text-bg-dark user-select-none" id="Previous"
                                                         style="cursor: pointer;">
                                                         <span aria-hidden="true">&laquo;</span>
                                                     </a>
@@ -99,7 +99,7 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
                                                         <span id="TotalItem"></span> entries</small>
                                                     </li>
                                                 <li class="page-item">
-                                                    <a class="page-link text-bg-dark" id="Next"
+                                                    <a class="page-link text-bg-dark user-select-none" id="Next"
                                                         style="cursor: pointer;">
                                                         <span aria-hidden="true">&raquo;</span>
                                                     </a>
@@ -155,7 +155,7 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
                                     if ($row['status'] == 1) {
                                         if ($_SESSION['GlobalID'] == $row['UID']) {
                                             $status = '<span class="badge bg-success">You</span>';
-                                            $modalStatus = 'Signed In';
+                                            $modalStatus = 'Currently Signed In';
                                         } else {
                                             $status = '<span class="badge bg-success">Signed In</span>';
                                             $modalStatus = 'Signed In';
@@ -170,6 +170,10 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
                                     } else {
                                         $row['role'] = 'MOD';
                                     }
+
+                                    // format date to Januaray 1, 2021
+                                    $dateCreated = date("F j, Y", strtotime($row['date_created']));
+
 
                                     echo '<tr>
                                     <th scope="row">' . $i . '</th>
@@ -209,6 +213,7 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
                                             let modalStatus = document.querySelector("#modalStatus");
                                             let modalImage = document.querySelector("#modalImage");
                                             let modalUname = document.querySelector("#modalUname");
+                                            let modalTitle = document.querySelector("#modalTitle");
 
                                             modalName.innerHTML = "' . $row['name'] . '";
                                             modalEmail.innerHTML = "' . $row['admin_email'] . '";
@@ -217,6 +222,16 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
                                             modalStatus.innerHTML = "' . $modalStatus . '";
                                             modalImage.setAttribute("src", "' . $row['imagePath'] . '");
                                             modalUname.innerHTML = "' . $row['admin_uname'] . '";
+
+                                            if ("' . $row['status'] . '" == 1) {
+                                                modalTitle.innerHTML = "Your Information";
+                                                modalCreated.innerHTML = "' . $dateCreated . '";
+                                                modalLastLogin.innerHTML = "' . $row['last_login'] . '";
+                                            } else {
+                                                modalTitle.innerHTML = "Account Information";
+                                                modalCreated.innerHTML = "' . $dateCreated . '";
+                                                modalLastLogin.innerHTML = "Not Available";
+                                            }
 
                                             let modalEdit = document.querySelector("#modalEdit");
                                             modalEdit.setAttribute("href", "Update.php?id=' . $row['UID'] . '");

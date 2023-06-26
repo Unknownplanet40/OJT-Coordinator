@@ -75,11 +75,11 @@
             <div class="modal-body">
                 <div class="row">
                     <div class="col-md-4 mb-3">
-                        <img id="modalImage" class="img-fluid rounded-start" style="width: 256px; height: 256px;"
-                            alt="...">
+                        <img id="modalImage" class="img-fluid rounded-start my-5 mx-2" style="width: 256px;"
+                            alt="Profile Picture">
                     </div>
                     <div class="col-md-8 mb-3">
-                        <ul class="list-group list-group-flush">
+                        <ul class="list-group list-group-flush user-select-none">
                             <li class="list-group-item bg-dark text-secondary">Name: <span class="text-light"
                                     id="modalName">Not Available</span></li>
                             <li class="list-group-item bg-dark text-secondary">Username: <span class="text-light"
