@@ -1,3 +1,17 @@
+<?php
+session_start();
+@include_once("../Database/config.php");
+@include_once("../Components/PopupAlert.php");
+
+// prevent user from accessing the page without logging in
+if (!isset($_SESSION['DatahasbeenFetched'])) {
+    header("Location: ../Login.php");
+} else {
+    $ShowAlert = true;
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en, fil">
 

@@ -20,6 +20,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
       }
     }
+
   });
 
   //limit table row
@@ -67,5 +68,3 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 });
-
-

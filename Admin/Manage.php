@@ -96,7 +96,8 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
                                                 <li class="page-item m-1 text-bg-dark"><small
                                                         class="text-warning text-center mx-1">Showing <span
                                                             id="CurrentPage"></span> to <span id="TotalPage"></span> of
-                                                        <span id="TotalItem"></span> entries</small></li>
+                                                        <span id="TotalItem"></span> entries</small>
+                                                    </li>
                                                 <li class="page-item">
                                                     <a class="page-link text-bg-dark" id="Next"
                                                         style="cursor: pointer;">
@@ -183,10 +184,12 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
                                     <td class="text-truncate" style="max-width: 100px;">' . $status . '</td>
                                     <td hidden>' . $row['UID'] . '</td>
                                     <td class="text-truncate">
+                                        <div class="d-flex justify-content-evenly">
                                         <a title="Update this account" id="UpdateAccount" class="btn btn-primary btn-sm"><img src="../Image/Update.svg" alt="Update" style="width: 20px; height: 20px;"></a>
                                         <a title="Delete this account" id="DeleteAccount" class="btn btn-danger btn-sm"><img src="../Image/Delete.svg" alt="Delete" style="width: 20px; height: 20px;"></a>
                                         <a title="View this account" id="ViewAccount" data-bs-toggle="modal" data-bs-target="#AccountDetails" class="btn btn-success btn-sm"><img src="../Image/View.svg" alt="View" style="width: 20px; height: 20px;"></a>
-                                    </td>
+                                        </div>
+                                        </td>
                                     </tr>
                                     <script>
                                         var UpdateAccount = document.querySelectorAll("#UpdateAccount");
