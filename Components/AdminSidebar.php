@@ -121,7 +121,7 @@
                 </li>
 
                 <li class="nav-link" title="Manage Moderators Accounts">
-                    <a <?php echo (basename($_SERVER['PHP_SELF']) == "Manage.php") ? "class='active'" : "href='../Admin/Manage.php'"; ?>>
+                    <a <?php echo (basename($_SERVER['PHP_SELF']) == "ManageAdmin.php") ? "class='active'" : "href='../Admin/ManageAdmin.php'"; ?>>
                         <i class='icon'>
                             <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24">
                                 <path

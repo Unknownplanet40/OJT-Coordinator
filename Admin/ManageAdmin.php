@@ -49,19 +49,19 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                        <ul class="navbar-nav">
-                            <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="#">Administrator</a>
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            <li class="nav-item" id="Tabs">
+                                <a class="nav-link active" id="AdminTab" style="cursor: pointer;">Administrator</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Moderator</a>
+                                <a class="nav-link" id="ModTab" style="cursor: pointer;" href="../Admin/ManageMod.php">Moderator</a>
                             </li>
                         </ul>
                     </div>
                 </div>
             </nav>
         </div>
-        <div class="container-fluid" style="width: 98%;">
+        <div class="container-fluid" style="width: 98%;" id="AdminTable">
             <div class="container-lg table-responsive">
                 <div class="container mt-5 text-bg-dark rounded" style="min-width: fit-content;">
                     <table class="table table-hover table-dark align-middle caption-top" id="AccountTable">
@@ -97,7 +97,7 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
                                                         class="text-warning text-center mx-1">Showing <span
                                                             id="CurrentPage"></span> to <span id="TotalPage"></span> of
                                                         <span id="TotalItem"></span> entries</small>
-                                                    </li>
+                                                </li>
                                                 <li class="page-item">
                                                     <a class="page-link text-bg-dark user-select-none" id="Next"
                                                         style="cursor: pointer;">
@@ -142,7 +142,7 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
 
                             if (mysqli_num_rows($result) > 0) {
                                 $i = 1;
-                                function hiddenPassword($password)
+                                function hiddenPasswordAdmin($password)
                                 {
                                     $hiddenPassword = "";
                                     for ($i = 0; $i < strlen($password); $i++) {
@@ -180,7 +180,7 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
                                     <td class="text-center"><img src="' . $row['imagePath'] . '" alt="Profile" class="rounded-circle img-fluid" style="width: 50px; height: 50px;"></td>
                                     <td class="text-truncate" style="max-width: 100px;">' . $row['name'] . '</td>
                                     <td class="text-truncate" style="max-width: 100px;">' . $row['admin_uname'] . '</td>
-                                    <td class="text-truncate" style="max-width: 100px;">' . hiddenPassword($row['admin_pword']) . '</td>
+                                    <td class="text-truncate" style="max-width: 100px;">' . hiddenPasswordAdmin($row['admin_pword']) . '</td>
                                     <td hidden>' . $row['admin_pword'] . '</td>
                                     <td class="text-truncate" style="max-width: 100px;"><a href="mailto:' . $row['admin_email'] . '" class="text-decoration-none text-white">' . $row['admin_email'] . '</a></td>
                                     <td class="text-truncate" style="max-width: 100px;">' . $row['department'] . '</td>
@@ -247,7 +247,7 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
                                                     color: "#fff",
                                                 });
                                             });
-                                        } else if (' .$row['status']. ' == 1) {
+                                        } else if (' . $row['status'] . ' == 1) {
                                             DeleteAccount[' . ($i - 1) . '].addEventListener("click", () => {
                                                 Swal.fire({
                                                     icon: "error",

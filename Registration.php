@@ -109,6 +109,15 @@ if (isset($_POST['register'])) {
                                         $usnAlreadyTaken = $usn . " is already taken, please try another one";
                                     }
                                 } else {
+                                    $ParentFolder = $username . "_Credentials";
+                                    $folderpath = '../uploads/' . $ParentFolder;
+                                    $tempfolderpath = '../uploads/' . $ParentFolder . '/temp';
+                                    if (!file_exists($folderpath)) {
+                                        mkdir($folderpath, 0777, true);
+                                    } else if (!file_exists($tempfolderpath)) {
+                                        mkdir($tempfolderpath, 0777, true);
+                                    }
+                                    
                                     $sql = "INSERT INTO tbl_trainee (name, email, UID, trainee_uname, trainee_pword, account_Created) VALUES ('$name', '$email', '$usn', '$username', '$password', '$date')";
                                     $result = mysqli_query($conn, $sql);
                                     if ($result) {
