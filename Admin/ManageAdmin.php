@@ -173,6 +173,7 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
 
                                     // format date to Januaray 1, 2021
                                     $dateCreated = date("F j, Y", strtotime($row['date_created']));
+                                    $row['last_login'] = date("h:i A", strtotime($row['last_login']));
 
 
                                     echo '<tr>
@@ -226,11 +227,11 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
                                             if ("' . $row['status'] . '" == 1) {
                                                 modalTitle.innerHTML = "Your Information";
                                                 modalCreated.innerHTML = "' . $dateCreated . '";
-                                                modalLastLogin.innerHTML = "' . $row['last_login'] . '";
+                                                modalLastLogin.innerHTML = "Now";
                                             } else {
                                                 modalTitle.innerHTML = "Account Information";
                                                 modalCreated.innerHTML = "' . $dateCreated . '";
-                                                modalLastLogin.innerHTML = "Not Available";
+                                                modalLastLogin.innerHTML = "' . $row['last_login'] . '";
                                             }
 
                                             let modalEdit = document.querySelector("#modalEdit");

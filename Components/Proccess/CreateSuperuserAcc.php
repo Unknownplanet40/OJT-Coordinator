@@ -119,7 +119,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     }
                     //remove the first 3 characters of the path
                     $target_file = substr($target_file, 3);
-                    $sql = "INSERT INTO tbl_admin (UID, name, admin_uname, admin_pword, admin_email, department, imagePath, date_created, last_login, role) VALUES ('$ID', '$name', '$username', '$Password', '$Email', '$department', '$target_file', '$date', '$date', '$Role')";
+                    $sql = "INSERT INTO tbl_admin (UID, name, admin_uname, admin_pword, admin_email, department, imagePath, date_created, last_login, role) VALUES ('$ID', '$name', '$username', '$Password', '$Email', '$department', '$target_file', '$date', NOW(), '$Role')";
                     $result = mysqli_query($conn, $sql);
                     if ($result) {
                         if ($Role == "administrator") {
