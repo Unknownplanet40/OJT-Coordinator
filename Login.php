@@ -56,7 +56,7 @@ if (isset($_SESSION['autoUsername']) && isset($_SESSION['autoPassword'])) {
     <link rel="shortcut icon" href="./Image/login.svg" type="image/x-icon">
 </head>
 
-<body style="color: #fff; background-image: url('./Image/BG_image.svg'); background-size: cover;">
+<body style="color: #fff;">
     <?php echo NewAlertBox();
     $_SESSION['Show'] = false; ?>
     <div class="container-fluid">

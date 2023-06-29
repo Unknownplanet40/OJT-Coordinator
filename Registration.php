@@ -156,21 +156,9 @@ if (isset($_POST['register'])) {
     <script defer src="./Script/Bootstrap/bootstrap.bundle.js"></script>
     <link rel="shortcut icon" href="./Image/Register.svg" type="image/x-icon">
 
-    <script>
-        const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]')
-        const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl))
-
-        const name = document.getElementById("Traineename");
-
-        // display popover if the name field is clicked
-        name.addEventListener("click", function () {
-            popoverList[0].show();
-        });
-    </script>
-
 </head>
 
-<body style="color: #fff; background-image: url('./Image/BG_image.svg'); background-size: cover;">
+<body style="color: #fff;">
     <div class="container-fluid">
         <div class="registration-form">
             <form method="POST" action="Registration.php" enctype="multipart/form-data" id="register-form"
@@ -357,7 +345,7 @@ if (isset($_POST['register'])) {
                     });
                 </script>
             </div>
-            <p class="text-muted text-center"><small>
+            <p class="text-light text-center"><small>
                     Please enter your basic information to create an account.<br>
                     <span class="text-warning">&copy; 2023. All Rights Reserved.</span>
                 </small></p>
