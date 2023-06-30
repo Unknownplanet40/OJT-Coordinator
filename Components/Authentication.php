@@ -74,7 +74,8 @@ function fetchAdminData($ID)
     $sql = "SELECT * FROM tbl_admin WHERE UID = '$ID'";
     $result = mysqli_query($conn, $sql);
 
-    while ($row = mysqli_fetch_assoc($result)) {
+    while ($result){
+        $row = mysqli_fetch_assoc($result);
         $_SESSION['GlobalID'] = $row['UID'];
         $_SESSION['GlobalName'] = $row['name'];
         $_SESSION['GlobalUsername'] = $row['admin_uname'];
@@ -137,8 +138,9 @@ function fetchUserData($ID)
 
     $sql = "SELECT * FROM tbl_trainee WHERE UID = '$ID'";
     $result = mysqli_query($conn, $sql);
-
-    while ($row = mysqli_fetch_assoc($result)) {
+    
+    while ($result){
+        $row = mysqli_fetch_assoc($result);
         $_SESSION['GlobalID'] = $row['UID'];
         $_SESSION['GlobalName'] = $row['name'];
         $_SESSION['GlobalUsername'] = $row['trainee_uname'];

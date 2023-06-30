@@ -23,10 +23,10 @@
 body {
   background-color: var(--clr-background);
   background-image: url(../Image/YellowBG.svg) !important;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-position: center;
+  background-size: cover !important;
+  background-repeat: no-repeat !important;
+  background-attachment: fixed !important;
+  background-position: center !important;
 }
 
 .registration-form {
