@@ -172,7 +172,7 @@ function MonthlyChart($month)
                                                     <div class="input-group mb-3">
                                                         <input type="search" id="TL" class="form-control text-bg-dark"
                                                             placeholder="Filter by Name Only">
-                                                        <a href="#" class="btn btn-outline-primary">Show more</a>
+                                                        <a href="../Admin/AdminTrainees.php" class="btn btn-outline-primary">Show more</a>
                                                     </div>
                                                 </div>
                                             </div>

@@ -32,8 +32,8 @@
                             <div class="row">
                                 <div class="col-md-6 mb-3">
                                     <label for="CreUSN" class="form-label">USN</label>
-                                    <input type="number" class="form-control" id="CreUSN" name="CreUSN"
-                                        placeholder="0123456789" required title="USN must be 10 numbers." >
+                                    <input type="number" class="form-control text-bg-dark" id="CreUSN" name="CreUSN"
+                                        placeholder="Default" disabled title="USN is automatically generated.">
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label for="CreUname" class="form-label">Username</label>

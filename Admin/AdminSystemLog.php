@@ -21,6 +21,8 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="../Style/ImportantImport.css">
     <script src="../Script/SidebarScript.js"></script>
+    <script src="../Script/SweetAlert2.js"></script>
+    <script defer src="../Script/Bootstrap_Script/bootstrap.bundle.js" ></script>
     <title>Admin Dashboard</title>
 </head>
 
@@ -176,7 +178,6 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
             <br>
         </div>
     </section>
-    <script src="../Script/Bootstrap_Script/bootstrap.js"></script>
 </body>
 
 </html>

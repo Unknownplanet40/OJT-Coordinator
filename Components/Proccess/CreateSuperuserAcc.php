@@ -31,18 +31,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         return $result;
     }
 
-    $sql = "SELECT * FROM tbl_admin WHERE UID = '$ID' OR admin_uname = '$username' OR admin_email = '$Email'";
+    $sql = "SELECT * FROM tbl_admin WHERE admin_uname = '$username' OR admin_email = '$Email'";
     $result = mysqli_query($conn, $sql);
     $num = mysqli_num_rows($result);
 
     if ($num == 1) {
         if ($row = mysqli_fetch_assoc($result)) {
-            if ($row['UID'] == $ID) {
-                $_SESSION['message'] = "UID already exists, please try other USN.";
-                $_SESSION['icon'] = "error";
-                $_SESSION['Show'] = true;
-                header($address);
-            } else if ($row['admin_uname'] == $username) {
+            if ($row['admin_uname'] == $username) {
                 $_SESSION['message'] = "Your Username already exists.";
                 $_SESSION['icon'] = "error";
                 $_SESSION['Show'] = true;
@@ -121,7 +116,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     //remove the first 3 characters of the path
                     $target_file = substr($target_file, 3);
 
-                    $sql = "INSERT INTO tbl_admin (UID, name, admin_uname, admin_pword, admin_email, department, imagePath, date_created, last_login, role) VALUES ('$ID', '$name', '$username', '$Password', '$Email', '$department', '$target_file', '$date', NOW(), '$Role')";
+                    $sql = "INSERT INTO tbl_admin (name, admin_uname, admin_pword, admin_email, department, imagePath, date_created, last_login, role) VALUES ('$name', '$username', '$Password', '$Email', '$department', '$target_file', '$date', NOW(), '$Role')";
                     $result = mysqli_query($conn, $sql);
                     if ($result) {
                         if ($Role == "administrator") {
