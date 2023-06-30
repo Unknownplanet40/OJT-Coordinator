@@ -192,8 +192,6 @@ function fetchUserData($ID)
 
         $_SESSION['GlobalSection'] = $section;
 
-
-        
         $sql = "UPDATE tbl_accounts SET status = 1 WHERE UID = '$ID'";
         $result = mysqli_query($conn, $sql);
 
