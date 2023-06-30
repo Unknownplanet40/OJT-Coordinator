@@ -201,9 +201,41 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
                                         var DeleteAccount = document.querySelectorAll("#DeleteAccount");
                                         var ViewAccount = document.querySelectorAll("#ViewAccount");
 
+                                        // Please note that the UpdateAccount, DeleteAccount is from ChatGPT
                                         UpdateAccount[' . ($i - 1) . '].addEventListener("click", () => {
-                                            window.location.href = "Update.php?id=' . $row['UID'] . '";
-                                        });
+                                            // password confirmation
+                                            Swal.fire({
+                                              title: "Enter your password",
+                                              input: "password",
+                                              inputAttributes: {
+                                                autocapitalize: "off",
+                                              },
+                                              showCancelButton: true,
+                                              confirmButtonText: "Confirm",
+                                              showLoaderOnConfirm: true,
+                                              preConfirm: async () => {
+                                                try {
+                                                  const password = Swal.getInput().value; // Get the password from the input field
+                                                  const response = await fetch("../Components/Proccess/PasswordConfirmation.php?password=" + password);
+                                          
+                                                  if (!response.ok) {
+                                                    throw new Error(response.statusText);
+                                                  }
+                                          
+                                                  return response.json();
+                                                } catch (error) {
+                                                  Swal.showValidationMessage(`Request failed: ${error}`);
+                                                }
+                                              },
+                                              allowOutsideClick: () => !Swal.isLoading(),
+                                              background: "#19191a",
+                                              color: "#fff",
+                                            }).then((result) => {
+                                              if (result.isConfirmed && result.value.valid) {
+                                                window.location.href = "Update.php?id=' . $row['UID'] . '";
+                                              }
+                                            });
+                                          });
                                         ViewAccount[' . ($i - 1) . '].addEventListener("click", () => {
                                             let modalName = document.querySelector("#modalName");
                                             let modalEmail = document.querySelector("#modalEmail");
@@ -296,3 +328,6 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
 </body>
 
 </html>
+
+<!-- if you find comment like this, it means that the code is from ChatGPT -->
+<!-- for Update Account,Delete Account, Code is from ChatGPT I just modified it to fit my needs -->

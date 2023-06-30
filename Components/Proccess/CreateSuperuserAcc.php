@@ -62,11 +62,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             header($address);
         }
     } else {
-        $ParentFolder = $username . "_Credentials";
-        $folderpath = '../../uploads/' . $ParentFolder;
-        $tempfolderpath = '../../uploads/' . $ParentFolder . '/temp';
-        $filename = $username . '_Profile_' . RandomCharacter(5);
-        $extensions = ['png', 'jpg', 'jpeg', 'gif'];
+        $ParentFolder = $username . "_Credentials"; // folder name
+        $folderpath = '../../uploads/' . $ParentFolder; // folder path
+        $tempfolderpath = '../../uploads/' . $ParentFolder . '/temp'; // temp folder path
+        $filename = $username . '_Profile_' . RandomCharacter(5); // file name
+        $extensions = ['png', 'jpg', 'jpeg', 'gif']; // allowed extensions
 
         if (!file_exists($folderpath)) {
             mkdir($folderpath, 0777, true);

@@ -117,7 +117,7 @@ if (isset($_POST['register'])) {
                                     } else if (!file_exists($tempfolderpath)) {
                                         mkdir($tempfolderpath, 0777, true);
                                     }
-                                    
+
                                     $sql = "INSERT INTO tbl_trainee (name, email, UID, trainee_uname, trainee_pword, account_Created) VALUES ('$name', '$email', '$usn', '$username', '$password', '$date')";
                                     $result = mysqli_query($conn, $sql);
                                     if ($result) {
@@ -166,28 +166,25 @@ if (isset($_POST['register'])) {
                 <!-- this function is used to send the data to the same page -->
                 <div class="form-icon">
                     <span>
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 96 960 960" fill="var(--clr-secondary)">
-                            <path
-                                d="M480 576q-66 0-113-47t-47-113q0-66 47-113t113-47q66 0 113 47t47 113q0 66-47 113t-113 47ZM240 896q-33 0-56.5-23.5T160 816v-32q0-34 17.5-62.5T224 678q62-31 126-46.5T480 616q66 0 130 15.5T736 678q29 15 46.5 43.5T800 784v32q0 33-23.5 56.5T720 896H240Z" />
-                        </svg>
+                        <span>
+                            <img src="./Image/Login.gif" alt="Login" width="100px" height="100px">
+                        </span>
                     </span>
                 </div>
                 <div class="row">
                     <div class="col-8">
                         <div class="form-group">
                             <input type="text" class="form-control item" name="Traineename" id="Traineename"
-                                placeholder="Name"
-                                value="<?php if (isset($_SESSION['temp'][0])) {
+                                placeholder="Name" value="<?php if (isset($_SESSION['temp'][0])) {
                                     echo $_SESSION['temp'][0];
                                 } ?>" title="Ex: Juan Dela Cruz">
                         </div>
                     </div>
                     <div class="col-4">
                         <div class="form-group">
-                            <input type="text" class="form-control item" name="age" id="age" placeholder="Age"
-                                value="<?php if (isset($_SESSION['temp'][1])) {
-                                    echo $_SESSION['temp'][1];
-                                } ?>" title="Ex: 18">
+                            <input type="text" class="form-control item" name="age" id="age" placeholder="Age" value="<?php if (isset($_SESSION['temp'][1])) {
+                                echo $_SESSION['temp'][1];
+                            } ?>" title="Ex: 18">
                         </div>
                     </div>
                 </div>
@@ -195,8 +192,7 @@ if (isset($_POST['register'])) {
                     <div class="col-6">
                         <div class="form-group">
                             <input type="text" class="form-control item" name="email" id="email"
-                                placeholder="Email Address"
-                                value="<?php if (isset($_SESSION['temp'][2])) {
+                                placeholder="Email Address" value="<?php if (isset($_SESSION['temp'][2])) {
                                     echo $_SESSION['temp'][2];
                                 } ?>" title="Ex: Blk. 0 Lot 0, Village">
                         </div>
@@ -204,8 +200,7 @@ if (isset($_POST['register'])) {
                     <div class="col-6">
                         <div class="form-group">
                             <input type="text" class="form-control item" name="usn" id="usn"
-                                placeholder="University Serial Number"
-                                value="<?php if (isset($_SESSION['temp'][3])) {
+                                placeholder="University Serial Number" value="<?php if (isset($_SESSION['temp'][3])) {
                                     echo $_SESSION['temp'][3];
                                 } ?>" title="Ex: 1234567890">
                         </div>
@@ -230,8 +225,7 @@ if (isset($_POST['register'])) {
                         <div class="col-6">
                             <div class="form-group">
                                 <input type="password" class="form-control item" name="confirm" id="confirm"
-                                    placeholder="Confirm Password"
-                                    value="<?php if (isset($temp[6])) {
+                                    placeholder="Confirm Password" value="<?php if (isset($temp[6])) {
                                         echo $temp[6];
                                     } ?>" title="Ex: @Juandelacruz123">
                             </div>
