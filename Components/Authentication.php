@@ -22,7 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $_SESSION['icon'] = "error";
                 $_SESSION['Show'] = true;
                 header("Location: ../Login.php");
-            } else {
+            } elseif ($row['username'] == $username && $row['password'] == $password) {
                 if ($row['role'] == "administrator") {
                     fetchAdminData($row['UID']);
                 } else if ($row['role'] == "moderator") {
@@ -32,6 +32,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 }
                 unset($_SESSION['autoUsername']);
                 unset($_SESSION['autoPassword']);
+            } else {
+                $_SESSION['message'] = "Invalid username or password.";
+                $_SESSION['icon'] = "error";
+                $_SESSION['Show'] = true;
+                header("Location: ../Login.php");
             }
         }
     } else {
@@ -41,7 +46,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         header("Location: ../Login.php");
     }
 } else {
-    $_SESSION['message'] = "Invalid username or password.";
+    $_SESSION['message'] = "No user was found.";
     $_SESSION['icon'] = "error";
     $_SESSION['Show'] = true;
     logMessage("Error", "Authentication", "The file Authentication was accessed without logging in.");
@@ -120,12 +125,6 @@ function fetchAdminData($ID)
                 header("Location: ../Login.php");
             }
         }
-    } else {
-        $_SESSION['message'] = "We incountered an error while logging you in, please try again later.";
-        $_SESSION['icon'] = "error";
-        $_SESSION['Show'] = true;
-        $_SESSION['DatahasbeenFetched'] = null;
-        header("Location: ../Login.php");
     }
 }
 
