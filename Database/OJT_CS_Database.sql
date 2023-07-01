@@ -45,11 +45,12 @@ CREATE TABLE `tbl_accounts` (
 --
 
 INSERT INTO `tbl_accounts` (`ID`, `UID`, `name`, `username`, `password`, `role`, `status`) VALUES
-(24, 1, 'Ryan James Capadocia', 'ryanjames', '@Capadocia123', 'administrator', 0),
-(25, 2, 'James Veloria', 'jamesveloria', '@Veloria123', 'moderator', 0),
-(26, 1000000000, 'Lorenzo Asis', 'lorenzoasis', 'Lorenzo.asis2023', 'User', 0),
-(27, 2000000000, 'Brandon Logon', 'brandon23', 'Brandon.logon4sale', 'User', 0),
-(28, 3000000000, 'Jeric Dayandante', 'jeric20', 'Jeric@4sale', 'User', 0);
+(1, 1, 'Ryan James Capadocia', 'ryanjames', '@Capadocia123', 'administrator', 0),
+(2, 2, 'James Veloria', 'jamesveloria', '@Veloria123', 'moderator', 0),
+(3, 1000000000, 'Lorenzo Asis', 'lorenzoasis', 'Lorenzo.asis2023', 'User', 0),
+(4, 2000000000, 'Brandon Logon', 'brandon23', 'Brandon.logon4sale', 'User', 0),
+(5, 3000000000, 'Jeric Dayandante', 'jeric20', 'Jeric@4sale', 'User', 0),
+(6, 3, 'Administrator Account', 'admin01', '@dmin_Account-1', 'administrator', 0);
 
 --
 -- Triggers `tbl_accounts`
@@ -80,7 +81,7 @@ CREATE TABLE `tbl_admin` (
   `admin_pword` varchar(30) NOT NULL,
   `admin_email` varchar(30) NOT NULL,
   `department` varchar(20) NOT NULL,
-  `imagePath` text NOT NULL DEFAULT '../Image/Profile.png',
+  `imagePath` varchar(512) DEFAULT '../Image/Profile.png',
   `date_created` date DEFAULT NULL,
   `last_login` time DEFAULT NULL,
   `role` varchar(20) DEFAULT 'moderator',
@@ -93,7 +94,8 @@ CREATE TABLE `tbl_admin` (
 
 INSERT INTO `tbl_admin` (`UID`, `name`, `admin_uname`, `admin_pword`, `admin_email`, `department`, `imagePath`, `date_created`, `last_login`, `role`, `status`) VALUES
 (1, 'Ryan James Capadocia', 'ryanjames', '@Capadocia123', 'rj.caps@cvsu.edu.ph', 'BSIT', '../Image/Profile.png', '2023-06-30', '16:07:54', 'administrator', 0),
-(2, 'James Veloria', 'jamesveloria', '@Veloria123', 'james@gmail.com', 'BSIT', '../Image/Profile.png', '2023-06-30', NULL, 'moderator', 0);
+(2, 'James Veloria', 'jamesveloria', '@Veloria123', 'james@gmail.com', 'BSIT', '../Image/Profile.png', '2023-06-30', NULL, 'moderator', 0),
+(3, 'Administrator Account', 'admin01', '@dmin_Account-1', 'Example@Domain.com', 'BSCS', '../uploads/admin01_Credentials/admin01_Profile_ljfma.gif', '2023-06-28', '20:09:17', 'administrator', 0);
 
 --
 -- Triggers `tbl_admin`
@@ -114,9 +116,9 @@ DELIMITER ;
 
 CREATE TABLE `tbl_announcement` (
   `ID` int(5) NOT NULL,
-  `Title` varchar(128) NOT NULL DEFAULT 'announcement',
+  `Title` varchar(128) DEFAULT 'announcement',
   `Description` text NOT NULL,
-  `PostedBy` varchar(128) DEFAULT NULL,
+  `PostedBy` text DEFAULT NULL,
   `DateAdded` date NOT NULL,
   `DateEnd` date NOT NULL,
   `isEnded` tinyint(1) NOT NULL DEFAULT 0
@@ -166,7 +168,7 @@ CREATE TABLE `tbl_events` (
   `eventID` int(10) DEFAULT NULL,
   `eventTitle` varchar(50) DEFAULT NULL,
   `eventDescription` text DEFAULT NULL,
-  `eventImage` text NOT NULL DEFAULT '../Image/eventImage.jpg',
+  `eventImage` varchar(512) DEFAULT '../Image/eventImage.jpg',
   `eventDate` date DEFAULT NULL,
   `eventStartTime` timestamp NOT NULL DEFAULT current_timestamp(),
   `eventEndTime` timestamp NULL DEFAULT NULL,
@@ -196,9 +198,9 @@ CREATE TABLE `tbl_trainee` (
   `status` int(5) DEFAULT 0,
   `role` varchar(50) DEFAULT 'User',
   `account_Created` date DEFAULT NULL,
-  `profile_Completed` varchar(10) NOT NULL DEFAULT 'false',
+  `profile_Completed` varchar(10) DEFAULT 'false',
   `vaccine_Completed` tinyint(1) NOT NULL DEFAULT 0,
-  `image` text DEFAULT '../Image/Profile.png',
+  `image` varchar(512) DEFAULT '../Image/Profile.png',
   `gender` varchar(10) DEFAULT NULL,
   `course` varchar(30) DEFAULT NULL,
   `phone` varchar(11) DEFAULT NULL,
@@ -212,6 +214,7 @@ CREATE TABLE `tbl_trainee` (
   `postal_code` int(20) DEFAULT NULL,
   `province` varchar(30) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
 
 --
 -- Dumping data for table `tbl_trainee`
@@ -246,7 +249,7 @@ CREATE TABLE `tbl_vaccine` (
   `vaccineType` varchar(128) DEFAULT NULL,
   `vaccineDose` varchar(128) DEFAULT NULL,
   `vaccineLoc` varchar(512) NOT NULL,
-  `vaccineImage` text NOT NULL,
+  `vaccineImage` varchar(512) DEFAULT '../Image/Vaccination_Image.jpg',
   `VaccDoseOne` varchar(128) NOT NULL,
   `VaccDosetwo` varchar(128) NOT NULL,
   `VaccDoseBooster` varchar(128) NOT NULL
@@ -257,7 +260,7 @@ CREATE TABLE `tbl_vaccine` (
 --
 
 INSERT INTO `tbl_vaccine` (`ID`, `UID`, `vaccineName`, `vaccineType`, `vaccineDose`, `vaccineLoc`, `vaccineImage`, `VaccDoseOne`, `VaccDosetwo`, `VaccDoseBooster`) VALUES
-(4, 3000000000, 'Johnson', '2', 'one', 'Sa prima diko alam  san banda', '../uploads/jeric20_Credentials/jeric20_Vaccine/jeric20_VaccineCard.jpg', '2023-07-01', '', '');
+(1, 3000000000, 'Johnson', '2', 'one', 'Sa prima diko alam  san banda', '../uploads/jeric20_Credentials/jeric20_Vaccine/jeric20_VaccineCard.jpg', '2023-07-01', '', '');
 
 --
 -- Indexes for dumped tables
@@ -313,13 +316,13 @@ ALTER TABLE `tbl_vaccine`
 -- AUTO_INCREMENT for table `tbl_accounts`
 --
 ALTER TABLE `tbl_accounts`
-  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `tbl_admin`
 --
 ALTER TABLE `tbl_admin`
-  MODIFY `UID` bigint(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `UID` bigint(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `tbl_announcement`
@@ -349,7 +352,7 @@ ALTER TABLE `tbl_trainee`
 -- AUTO_INCREMENT for table `tbl_vaccine`
 --
 ALTER TABLE `tbl_vaccine`
-  MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
