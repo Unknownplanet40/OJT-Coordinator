@@ -58,26 +58,7 @@ if (isset($_POST['submita'])) {
             </div>
             <div class="content">
                 <div class="profile">
-                    <?php
-                    $fileExtensions = ['jpg', 'png', 'jpeg'];
-                    $profilePicture = '';
-
-                    foreach ($fileExtensions as $extension) {
-                        $path = '../uploads/ryanj_Credentials/ryanj_Profile.' . $extension;
-                        if (file_exists($path)) {
-                            $profilePicture = $path;
-                            break;
-                        }
-                    }
-
-                    if (!empty($profilePicture)) {
-                        echo '<img class="rounded shadow-lg" src="' . $profilePicture . '" alt="Profile Picture">';
-                    } else {
-                        echo '<img class="rounded" src="../Image/Profile.png" alt="Profile Picture">';
-                    }
-
-                    ?>
-
+                    <img src="<?php isset($_SESSION['Profile']) ? print $_SESSION['Profile'] : print "../Image/Profile.png";?>" alt="">
                     <div class="d-grid gap-2">
                         <br>
                         <button type="button" class="btn btn-success" onclick="location.href='UserProfile.php'">Update

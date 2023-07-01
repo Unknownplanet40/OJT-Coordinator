@@ -206,7 +206,7 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
                                         UpdateAccount[' . ($i - 1) . '].addEventListener("click", () => {
                                             // password confirmation
                                             if (' . $_SESSION['GlobalID'] . ' == ' . $row['UID'] . ') {
-                                                window.location.href = "Update.php?id=' . $row['UID'] . '";
+                                                window.location.href = "../Components/Proccess/UpdateSuperuserAcc.php?id=' . $row['UID'] . '";
                                             } else if ("' . $row['status'] . '" == 1) {
                                                 Swal.fire({
                                                     icon: "error",
@@ -245,7 +245,7 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
                                                     color: "#fff",
                                                   }).then((result) => {
                                                     if (result.isConfirmed && result.value.valid) {
-                                                      window.location.href = "Update.php?id=' . $row['UID'] . '";
+                                                      window.location.href = "../Components/Proccess/UpdateSuperuserAcc.php?id=' . $row['UID'] . '";
                                                     }
                                                   });
                                             }

@@ -200,9 +200,54 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
                                         var DeleteAccount = document.querySelectorAll("#DeleteAccount");
                                         var ViewAccount = document.querySelectorAll("#ViewAccount");
 
+                                        // Please note that the UpdateAccount, DeleteAccount is from ChatGPT
                                         UpdateAccount[' . ($i - 1) . '].addEventListener("click", () => {
-                                            window.location.href = "Update.php?id=' . $row['UID'] . '";
-                                        });
+                                            // password confirmation
+                                            if (' . $_SESSION['GlobalID'] . ' == ' . $row['UID'] . ') {
+                                                window.location.href = "../Components/Proccess/UpdateSuperuserAcc.php?id=' . $row['UID'] . '";
+                                            } else if ("' . $row['status'] . '" == 1) {
+                                                Swal.fire({
+                                                    icon: "error",
+                                                    title: "Oops...",
+                                                    text: "You cannot update an account that is currently signed in!",
+                                                    background: "#19191a",
+                                                    color: "#fff",
+                                                });
+                                            } else {
+                                                Swal.fire({
+                                                    text: "We need to verify your password first before you can update this account.",
+                                                    input: "password",
+                                                    inputAttributes: {
+                                                      autocapitalize: "off",
+                                                      placeholder: "Enter your password",
+                                                    },
+                                                    showCancelButton: true,
+                                                    confirmButtonText: "Confirm",
+                                                    showLoaderOnConfirm: true,
+                                                    preConfirm: async () => {
+                                                      try {
+                                                        const password = Swal.getInput().value; // Get the password from the input field
+                                                        const response = await fetch("../Components/Proccess/PasswordConfirmation.php?password=" + password);
+                                                
+                                                        if (!response.ok) {
+                                                          throw new Error(response.statusText);
+                                                        }
+                                                
+                                                        return response.json();
+                                                      } catch (error) {
+                                                        Swal.showValidationMessage(`Request failed: ${error}`);
+                                                      }
+                                                    },
+                                                    allowOutsideClick: () => !Swal.isLoading(),
+                                                    background: "#19191a",
+                                                    color: "#fff",
+                                                  }).then((result) => {
+                                                    if (result.isConfirmed && result.value.valid) {
+                                                      window.location.href = "../Components/Proccess/UpdateSuperuserAcc.php?id=' . $row['UID'] . '";
+                                                    }
+                                                  });
+                                            }
+                                          });
                                         ViewAccount[' . ($i - 1) . '].addEventListener("click", () => {
                                             let modalName = document.querySelector("#modalName");
                                             let modalEmail = document.querySelector("#modalEmail");
