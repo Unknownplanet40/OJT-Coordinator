@@ -81,7 +81,7 @@ CREATE TABLE `tbl_admin` (
   `admin_pword` varchar(30) NOT NULL,
   `admin_email` varchar(30) NOT NULL,
   `department` varchar(20) NOT NULL,
-  `imagePath` text NOT NULL DEFAULT '../Image/Profile.png',
+  `imagePath` varchar(512) DEFAULT '../Image/Profile.gif',
   `date_created` date DEFAULT NULL,
   `last_login` time DEFAULT NULL,
   `role` varchar(20) DEFAULT 'moderator',
@@ -93,8 +93,9 @@ CREATE TABLE `tbl_admin` (
 --
 
 INSERT INTO `tbl_admin` (`UID`, `name`, `admin_uname`, `admin_pword`, `admin_email`, `department`, `imagePath`, `date_created`, `last_login`, `role`, `status`) VALUES
-(1, 'Ryan James Capadocia', 'ryanjames', '@Capadocia123', 'rj.caps@cvsu.edu.ph', 'BSIT', '../Image/Profile.png', '2023-06-30', '16:07:54', 'administrator', 0),
-(2, 'James Veloria', 'jamesveloria', '@Veloria123', 'james@gmail.com', 'BSIT', '../Image/Profile.png', '2023-06-30', NULL, 'moderator', 0);
+(1, 'Ryan James Capadocia', 'ryanjames', '@Capadocia123', 'rj.caps@cvsu.edu.ph', 'BSIT', '../Image/Profile.gif', '2023-06-30', '16:07:54', 'administrator', 0),
+(2, 'James Veloria', 'jamesveloria', '@Veloria123', 'james@gmail.com', 'BSIT', '../Image/Profile.gif', '2023-06-30', NULL, 'moderator', 0),
+(3, 'Administrator Account', 'admin01', '@dmin_Account-1', 'Example@Domain.com', 'BSCS', '../uploads/admin01_Credentials/admin01_Profile_ljfma.gif', '2023-06-28', '20:09:17', 'administrator', 0);
 
 --
 -- Triggers `tbl_admin`
@@ -213,6 +214,13 @@ CREATE TABLE `tbl_trainee` (
   `postal_code` int(20) DEFAULT NULL,
   `province` varchar(30) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+ALTER TABLE `tbl_trainee` 
+ADD `Join_an_Event` BOOLEAN NOT NULL DEFAULT FALSE COMMENT '0-false, 1-true' 
+AFTER `province`, 
+ADD `EventID` INT NULL DEFAULT NULL COMMENT 'Event ID from tbl_events'
+AFTER `Join_an_Event`;
+
 
 --
 -- Dumping data for table `tbl_trainee`
