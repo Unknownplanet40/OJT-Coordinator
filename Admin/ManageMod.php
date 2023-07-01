@@ -279,7 +279,7 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
                                             }
 
                                             let modalEdit = document.querySelector("#modalEdit");
-                                            modalEdit.setAttribute("href", "Update.php?id=' . $row['UID'] . '");
+                                            modalEdit.setAttribute("href", "../Components/Proccess/UpdateSuperuserAcc.php?id=' . $row['UID'] . '");
                                         });
 
                                         if (' . $_SESSION['GlobalID'] . ' == ' . $row['UID'] . ') {
@@ -316,7 +316,7 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
                                                     color: "#fff",
                                                 }).then((result) => {
                                                     if (result.isConfirmed) {
-                                                        window.location.href = "Delete.php?id=' . $row['UID'] . '";
+                                                        window.location.href = "../Components/Proccess/Delete.php?ID=' . $row['UID'] . '&username=' . $row['admin_uname'] . '";
                                                     }
                                                 });
                                             });
