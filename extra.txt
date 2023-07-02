@@ -712,3 +712,82 @@ if (isset($_POST['login'])) {
         }
     }
     // basta ganyan lang yung code tatawagin mo lang yung function na to pag nag upload ng profile image
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    <form action="AdminTraineeEvaluation.php" method="POST">
+                <div class="input-group mb-3" style="min-width: 460px;">
+                    <input type="search" name="search" class="form-control"
+                        placeholder="Try Searching for Trainee ID, Name, Email, or Username">
+                    <input type="submit" class="btn btn-outline-primary" name="SearchTrainee" value="Search Trainee">
+                </div>
+            </form>
+
+            <?php
+            if (isset($alert)) {
+                echo "<script>Swal.fire({
+                        icon: 'info',
+                        title: 'Complete the form',
+                        text: '$alert',
+                        footer: 'Form will automatically Reset',
+                        background: '#19191a',
+                        color: '#fff'
+                        })</script>";
+            }
+            if (isset($Find) && $Find == true) {
+                @include_once '../Components/EvaluateTable.php';
+            } else {
+                echo "<h5 class='text-center text-bg-warning rounded' style='margin: 20px 0; padding: 15px; font-size: 20px; min-width: 460px;
+                    '>You have not searched for any Trainee yet.</h5>";
+            } ?>
+            <br>
+            <div class="container-fluid d-flex justify-content-center">
+                <div class="table-responsive rounded">
+                    <?php
+                    if (isset($TraineesID)) {
+                        if (isset($thereAreEmptyFields) && $thereAreEmptyFields == false) {
+                            echo "<table class='table table-hover table-dark table-striped' style='min-width: 600px;'>
+                        <tbody>
+                        <tr>
+                            <th scope='row'>Quality of Work: </th>
+                            <td colsapn='2' class='text-center'>" . ($Q1 + $Q2 + $Q3) . " - $QualityOfWork%</td>
+                        </tr>
+                        <tr>
+                            <th scope='row'>Productivity: </th>
+                            <td colsapn='2' class='text-center'>" . ($Q4 + $Q5 + $Q6 + $Q7) . " - $Productivity%</td>
+                        </tr>
+                        <tr>
+                            <th scope='row'>Work Habits, Talents & Skills: </th>
+                            <td colsapn='2' class='text-center'>" . ($Q8 + $Q9 + $Q10 + $Q11 + $Q12 + $Q13 + $Q14) . " - $WorkHabitsTalentsSkills%</td>
+                        </tr>
+                        <tr>
+                            <th scope='row'>Interpersonal Work Relationship: </th>
+                            <td colsapn='2' class='text-center'>" . ($Q15 + $Q16 + $Q17 + $Q18) . " - $InterpersonalWorkRelationship%</td>
+                        </tr>
+                        <tr>
+                            <th scope='row'></th>
+                            <td colsapn='2' class='text-center'>Total Score: $TotalScore%</td>
+                        </tr>
+                        <tr>
+                            <th scope='row'></th>";
+                            if ($TotalScore >= 90) {
+                                echo "<td colsapn='2'>Remarks: <b class='text-success fw-bold'>Outstanding</b></td>";
+                            } elseif ($TotalScore >= 80) {
+                                echo "<td colsapn='2'>Remarks: <b class='text-success fw-bold'>Very Satisfactory</b></td>";
+                            } elseif ($TotalScore >= 70) {
+                                echo "<td colsapn='2'>Remarks: <b class='text-warning fw-bold'>Satisfactory</b></td>";
+                            } elseif ($TotalScore >= 60) {
+                                echo "<td colsapn='2'>Remarks: <b class='text-warning fw-bold'>Needs Improvement</b></td>";
+                            } elseif ($TotalScore >= 50) {
+                                echo "<td colsapn='2'>Remarks: <b class='text-danger fw-bold'>Poor</b></td>";
+                            } else {
+                                echo "<td colsapn='2'>Remarks: <b class='text-danger fw-bold'>Very Poor</b></td>";
+                            }
+                            echo "</tr>                        
+                    </tbody>
+                    </table>";
+                        }
+                    }
+                    ?>
+                </div>
+            </div>

@@ -1,20 +1,27 @@
-<form action="AdminTraineeEvaluation.php" method="POST" enctype="multipart/form-data">
+<form action="EvaluteProccess.php" method="POST" enctype="multipart/form-data">
     <div class="table-responsive-md rounded" style="min-width: 460px;">
 
-        <ul class="list-group" style="min-width: 460px;">
+        <ul class="list-group rounded" style="min-width: 460px;">
             <li class="list-group-item text-bg-success" aria-current="true">Trainee Details</li>
-            <li class="list-group-item text-bg-dark">Trainee ID: <b>
-                    <?php echo $TraineeID; ?>
-                </b></li>
-            <li class="list-group-item text-bg-dark">Trainee Name: <b>
-                    <?php echo $TraineeName; ?>
-                </b></li>
-            <li class="list-group-item text-bg-dark">Trainee Email: <b>
-                    <?php echo $TraineeEmail; ?>
-                </b></li>
-            <li class="list-group-item text-bg-dark">Trainee Username: <b>
-                    <?php echo $TraineeUsername; ?>
-                </b></li>
+            <li class="list-group-item bg-dark"><span class="text-muted">Trainee ID: </span><b class="text-light">
+                    <?php echo $ID; ?>
+                </b>
+                <input type="hidden" name="EvID" value="<?php echo $ID; ?>">
+            </li>
+            <li class="list-group-item bg-dark"><span class="text-muted">Trainee Name: </span><b class="text-light">
+                    <?php echo $name; ?>
+                    <input type="hidden" name="EvName" value="<?php echo $name; ?>">
+            </li>
+            <li class="list-group-item bg-dark"><span class="text-muted">Trainee Email: </span><b class="text-light">
+                    <?php echo $email; ?>
+                </b>
+                <input type="hidden" name="EvEmail" value="<?php echo $email; ?>">
+            </li>
+            <li class="list-group-item bg-dark"><span class="text-muted">Trainee Username: </span><b class="text-light">
+                    <?php echo $trainee_uname; ?>
+                </b>
+                <input type="hidden" name="EvUname" value="<?php echo $trainee_uname; ?>">
+            </li>
         </ul>
         <br>
         <table class="table table-dark caption-top rounded" style="min-width: 460px;">
@@ -239,9 +246,10 @@
                 </tr>
                 <tr>
                     <td colspan="6">
-                    <small class="text-muted">Comments, general impressions & observations regarding the capability, behavior's & personality of the trainee.</small>
-                        <textarea class="form-control text-bg-dark" name="Comments" id="Comments" cols="30" rows="8" maxlength="1000"
-                            placeholder="Maximum of 1,000 characters"></textarea>
+                        <small class="text-muted">Comments, general impressions & observations regarding the capability,
+                            behavior's & personality of the trainee.</small>
+                        <textarea class="form-control text-bg-dark" name="Comments" id="Comments" cols="30" rows="8"
+                            maxlength="1000" placeholder="Maximum of 1,000 characters"></textarea>
                     </td>
                 </tr>
             </tbody>
@@ -249,6 +257,37 @@
         <div class="text-end">
             <input type="submit" class="btn btn-success w-25" name="evaluate" value="Submit" style="min-width: 100px;">
             <input type="reset" class="btn btn-danger" value="Reset">
+            <a href="../../Admin/AdminTraineeEvaluation.php" class="btn btn-secondary">Back</a>
+
+            <Script>
+                // add confirm box before submitting
+                $(document).ready(function () {
+                    $('form').submit(function (e) {
+                        var form = this;
+                        e.preventDefault();
+                        Swal.fire({
+                            title: 'Are you sure?',
+                            text: "Please review your evaluation before submitting it.",
+                            icon: 'warning',
+                            footer: 'Form will reset after submitting.',
+                            showCancelButton: true,
+                            confirmButtonColor: '#28a745',
+                            cancelButtonColor: '#dc3545',
+                            confirmButtonText: 'Yes, submit it!',
+                            backdrop: `rgba(0,0,0,0.4)`,
+                            allowOutsideClick: false,
+                            allowEscapeKey: false,
+                            background: "#19191a",
+                            color: "#fff"
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                form.submit();
+                            }
+                        })
+                    });
+                });
+            </Script>
+
         </div>
         <br>
     </div>

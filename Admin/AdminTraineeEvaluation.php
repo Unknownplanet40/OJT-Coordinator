@@ -1,68 +1,11 @@
 <?php
 session_start();
+@include_once("../Database/config.php");
 
-if (isset($_POST['SearchTrainee'])) {
-    $search = $_POST['search'];
-
-    // Search for ID, Name, Email, username;
-}
-
-if (isset($_POST['evaluate'])) {
-
-    // Q1 - Q3 = Quality of Work
-    // Q4 - Q7 = Productivity
-    // Q8 - Q14 = Work Habits, Talents & Skills
-    // Q15 - Q18 = Interpersonal Work Relationship
-
-    // Initialize an array of question keys and their corresponding labels
-    $questionKeys = [
-        'Q1' => 'Question 1',
-        'Q2' => 'Question 2',
-        'Q3' => 'Question 3',
-        'Q4' => 'Question 4',
-        'Q5' => 'Question 5',
-        'Q6' => 'Question 6',
-        'Q7' => 'Question 7',
-        'Q8' => 'Question 8',
-        'Q9' => 'Question 9',
-        'Q10' => 'Question 10',
-        'Q11' => 'Question 11',
-        'Q12' => 'Question 12',
-        'Q13' => 'Question 13',
-        'Q14' => 'Question 14',
-        'Q15' => 'Question 15',
-        'Q16' => 'Question 16',
-        'Q17' => 'Question 17',
-        'Q18' => 'Question 18'
-    ];
-    
-    // Check if any input is empty
-    $emptyFields = [];
-    // Loop through each question key
-    // $key = 'Q1' => $label = 'Question 1'
-    foreach ($questionKeys as $key => $label) {
-        if (empty($_POST[$key])) {
-            // Add the label of the empty question to the array
-            $emptyFields[] = $label;
-        }
-        // Assign the value of each question to a variable
-        ${$key} = $_POST[$key];
-    }
-
-    // Display an alert if any input is empty
-    if (!empty($emptyFields)) {
-        // Convert the array of empty fields to a string
-        $emptyFieldsStr = implode(", ", $emptyFields);
-        $alert = "You din\'t answer the following Fields: $emptyFieldsStr.";
-        $thereAreEmptyFields = true;
-    } else {
-        $thereAreEmptyFields = false;
-        $QualityOfWork = round((($Q1 + $Q2 + $Q3) / 15) * 100, 2);
-        $Productivity = round((($Q4 + $Q5 + $Q6 + $Q7) / 20) * 100, 2);
-        $WorkHabitsTalentsSkills = round((($Q8 + $Q9 + $Q10 + $Q11 + $Q12 + $Q13 + $Q14) / 35) * 100, 2);
-        $InterpersonalWorkRelationship = round((($Q15 + $Q16 + $Q17 + $Q18) / 20) * 100, 2);
-        $TotalScore = round((($QualityOfWork + $Productivity + $WorkHabitsTalentsSkills + $InterpersonalWorkRelationship) / 4), 2);
-    }
+if (!isset($_SESSION['DatahasbeenFetched'])) {
+    header("Location: ../Login.php");
+} else {
+    $ShowAlert = true;
 }
 
 ?>
@@ -78,6 +21,8 @@ if (isset($_POST['evaluate'])) {
     <link rel="stylesheet" href="../Style/SweetAlert2.css">
     <script src="../Script/SweetAlert2.js"></script>
     <script src="../Script/SidebarScript.js"></script>
+    <script src="../Script/MangeAdminTable.js"></script>
+
     <title>Trainee Evaluation</title>
 </head>
 
@@ -89,85 +34,135 @@ if (isset($_POST['evaluate'])) {
             <?php // print_r($_POST); ?>
         </p>
         <div class="container-fluid" style="width: 98%;">
-            <!-- for Trainee ID -->
-            <form action="AdminTraineeEvaluation.php" method="POST">
-                <div class="input-group mb-3" style="min-width: 460px;">
-                    <input type="search" name="search" class="form-control"
-                        placeholder="Try Searching for Trainee ID, Name, Email, or Username">
-                    <input type="submit" class="btn btn-outline-primary" name="SearchTrainee" value="Search Trainee">
-                </div>
-            </form>
-
-            <?php
-            if (isset($alert)) {
-                echo "<script>Swal.fire({
-                        icon: 'info',
-                        title: 'Complete the form',
-                        text: '$alert',
-                        footer: 'Form will automatically Reset',
-                        background: '#19191a',
-                        color: '#fff'
-                        })</script>";
-            }
-            $TraineesID = true;
-            if (isset($TraineesID)) {
-                @include_once '../Components/EvaluateTable.php';
-            } else {
-                echo "<h5 class='text-center text-bg-warning rounded' style='margin: 20px 0; padding: 15px; font-size: 20px; min-width: 460px;
-                    '>You have not searched for any Trainee yet.</h5>";
-            } ?>
-            <br>
-            <div class="container-fluid d-flex justify-content-center">
-                <div class="table-responsive rounded">
-                    <?php
-                    if (isset($TraineesID)) {
-                        if (isset($thereAreEmptyFields) && $thereAreEmptyFields == false) {
-                            echo "<table class='table table-hover table-dark table-striped' style='min-width: 600px;'>
+            <div class="container-lg table-responsive" id="AdminTable">
+                <div class="container mt-5 text-bg-dark rounded" style="min-width: fit-content;">
+                    <table class="table table-hover table-dark align-middle caption-top" id="AccountTable">
+                        <caption>
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="col-4">
+                                        <div class="input-group">
+                                            <!-- In the future, I will add a Category Search -->
+                                            <span class="input-group-text text-bg-dark"
+                                                title="You can search only by name">
+                                                <svg xmlns="http://www.w3.org/2000/svg" height="20"
+                                                    viewBox="0 -960 960 960" width="20" fill="var(--bs-warning)">
+                                                    <path
+                                                        d="M382.122-330.5q-102.187 0-173.861-71.674Q136.587-473.848 136.587-576q0-102.152 71.674-173.826Q279.935-821.5 382.087-821.5q102.152 0 173.826 71.674 71.674 71.674 71.674 173.861 0 40.859-12.022 76.292-12.021 35.434-33.065 64.956l212.087 212.326q12.674 12.913 12.674 28.945 0 16.033-12.913 28.707-12.674 12.674-29.326 12.674t-29.326-12.674L523.848-375.587q-29.761 21.044-65.434 33.065-35.672 12.022-76.292 12.022Zm-.035-83q67.848 0 115.174-47.326Q544.587-508.152 544.587-576q0-67.848-47.326-115.174Q449.935-738.5 382.087-738.5q-67.848 0-115.174 47.326Q219.587-643.848 219.587-576q0 67.848 47.326 115.174Q314.239-413.5 382.087-413.5Z" />
+                                                </svg>
+                                            </span>
+                                            <input type="search" class="form-control text-bg-dark"
+                                                placeholder="Search by Name" id="SearchBar">
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <!-- piginations -->
+                                        <nav aria-label="Page navigation example">
+                                            <ul class="pagination pagination-sm">
+                                                <li class="page-item">
+                                                    <a class="page-link text-bg-dark user-select-none" id="Previous"
+                                                        style="cursor: pointer;">
+                                                        <span aria-hidden="true">&laquo;</span>
+                                                    </a>
+                                                </li>
+                                                <li class="page-item m-1 text-bg-dark"><small
+                                                        class="text-warning text-center mx-1">Showing <span
+                                                            id="CurrentPage"></span> to <span id="TotalPage"></span> of
+                                                        <span id="TotalItem"></span> entries</small>
+                                                </li>
+                                                <li class="page-item">
+                                                    <a class="page-link text-bg-dark user-select-none" id="Next"
+                                                        style="cursor: pointer;">
+                                                        <span aria-hidden="true">&raquo;</span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </nav>
+                                    </div>
+                                    <div class="col-4" hidden>
+                                        <div class="d-flex justify-content-end">
+                                            <button type="button" disabled title="Add new account"
+                                                class="btn btn-primary btn-sm" data-bs-toggle="modal"
+                                                data-bs-target="#CreateModal">
+                                                <img src="../Image/Create.svg" alt="">
+                                                Add Account
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </caption>
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Profile</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Username</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Dept.</th>
+                                <th scope="col">Status</th>
+                                <th scope="col" hidden>id</th>
+                                <th scope="col" class="text-center">Action</th>
+                            </tr>
+                        </thead>
                         <tbody>
-                        <tr>
-                            <th scope='row'>Quality of Work: </th>
-                            <td colsapn='2' class='text-center'>" . ($Q1 + $Q2 + $Q3) . " - $QualityOfWork%</td>
-                        </tr>
-                        <tr>
-                            <th scope='row'>Productivity: </th>
-                            <td colsapn='2' class='text-center'>" . ($Q4 + $Q5 + $Q6 + $Q7) . " - $Productivity%</td>
-                        </tr>
-                        <tr>
-                            <th scope='row'>Work Habits, Talents & Skills: </th>
-                            <td colsapn='2' class='text-center'>" . ($Q8 + $Q9 + $Q10 + $Q11 + $Q12 + $Q13 + $Q14) . " - $WorkHabitsTalentsSkills%</td>
-                        </tr>
-                        <tr>
-                            <th scope='row'>Interpersonal Work Relationship: </th>
-                            <td colsapn='2' class='text-center'>" . ($Q15 + $Q16 + $Q17 + $Q18) . " - $InterpersonalWorkRelationship%</td>
-                        </tr>
-                        <tr>
-                            <th scope='row'></th>
-                            <td colsapn='2' class='text-center'>Total Score: $TotalScore%</td>
-                        </tr>
-                        <tr>
-                            <th scope='row'></th>";
-                            if ($TotalScore >= 90) {
-                                echo "<td colsapn='2'>Remarks: <b class='text-success fw-bold'>Outstanding</b></td>";
-                            } elseif ($TotalScore >= 80) {
-                                echo "<td colsapn='2'>Remarks: <b class='text-success fw-bold'>Very Satisfactory</b></td>";
-                            } elseif ($TotalScore >= 70) {
-                                echo "<td colsapn='2'>Remarks: <b class='text-warning fw-bold'>Satisfactory</b></td>";
-                            } elseif ($TotalScore >= 60) {
-                                echo "<td colsapn='2'>Remarks: <b class='text-warning fw-bold'>Needs Improvement</b></td>";
-                            } elseif ($TotalScore >= 50) {
-                                echo "<td colsapn='2'>Remarks: <b class='text-danger fw-bold'>Poor</b></td>";
+                            <?php
+                            $sql = "SELECT * FROM tbl_trainee WHERE role = 'User' ORDER BY name ASC";
+                            $result = mysqli_query($conn, $sql);
+
+                            if (mysqli_num_rows($result) > 0) {
+                                $i = 1;
+
+                                while ($row = mysqli_fetch_assoc($result)) {
+
+                                    $evaluated = $row['evaluated'];
+
+                                    if ($evaluated == "true") {
+                                        $evaluated = '<span class="badge bg-success">Evaluated</span>';
+                                    } else {
+                                        $evaluated = '<span class="badge bg-danger">Not Evaluated</span>';
+                                    }
+
+                                    echo '<tr>
+                                    <th scope="row">' . $i . '</th>
+                                    <td class="text-start"><img src="' . $row['image'] . '" alt="Profile" class="rounded-circle img-fluid" style="width: 50px; height: 50px;"></td>
+                                    <td class="text-truncate" style="max-width: 100px;">' . $row['name'] . '</td>
+                                    <td class="text-truncate" style="max-width: 100px;">' . $row['trainee_uname'] . '</td>
+                                    <td class="text-truncate" style="max-width: 100px;"><a href="mailto:' . $row['email'] . '" class="text-decoration-none text-white">' . $row['email'] . '</a></td>
+                                    <td class="text-truncate" style="max-width: 100px;">' . $row['department'] . '</td>
+                                    <td class="text-truncate" style="max-width: 100px;">' . $evaluated . '</td>
+                                    <td hidden>' . $row['UID'] . '</td>
+                                    <td class="text-truncate text-center">
+                                        <a title="Evaluate This Account" id="Evaluate" class="btn btn-success btn-sm"><img src="../Image/assessment.gif" alt="Evaluate" style="width: 30px; height: 30px;"></a>
+                                        <a title="View Evaluation" href="../Components/Proccess/ViewEvaluation.php?ID=' . $row['UID'] . '" class="btn btn-primary btn-sm"><img src="../Image/View.svg" alt="View" style="width: 30px; height: 30px;"></a>
+                                        </td>
+                                    </tr>
+
+                                    <script>
+                                    var Evaluate = document.querySelectorAll("#Evaluate");
+
+                                    Evaluate[' . ($i - 1) . '].addEventListener("click", () => {
+                                        window.location.href = "../Components/Proccess/EvaluateTrainee.php?ID=' . $row['UID'] . '";
+                                    });
+                                    
+                                    </script>
+                                    
+                                    
+                                    
+                                    ';
+                                    $i++;
+                                }
                             } else {
-                                echo "<td colsapn='2'>Remarks: <b class='text-danger fw-bold'>Very Poor</b></td>";
+                                echo '<tr>
+                                <th colspan="10" class="text-center">No data available</th>
+                            </tr>';
                             }
-                            echo "</tr>                        
-                    </tbody>
-                    </table>";
-                        }
-                    }
-                    ?>
+                            ?>
+                        </tbody>
+                    </table>
                 </div>
             </div>
-            <br>
+        </div>
     </section>
 </body>
 
