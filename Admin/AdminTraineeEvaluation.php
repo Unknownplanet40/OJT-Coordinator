@@ -22,12 +22,16 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
     <script src="../Script/SweetAlert2.js"></script>
     <script src="../Script/SidebarScript.js"></script>
     <script src="../Script/MangeAdminTable.js"></script>
-
+    <script defer src="../Script/jquery-3.5.1.js"></script>
+    <script defer src="../Script/Bootstrap_Script/bootstrap.bundle.js"></script>
     <title>Trainee Evaluation</title>
 </head>
 
 <body class="dark adminuser" style="min-width: 1080px;">
-    <?php include_once '../Components/AdminSidebar.php'; ?>
+    <?php 
+        @include_once '../Components/AdminSidebar.php'; 
+        @include_once '../Components/EvaluateModal.php';
+    ?>
     <section class="home">
         <div class="text">Evaluation</div>
         <p class="text-start text-secondary">
@@ -37,6 +41,7 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
             <div class="container-lg table-responsive" id="AdminTable">
                 <div class="container mt-5 text-bg-dark rounded" style="min-width: fit-content;">
                     <table class="table table-hover table-dark align-middle caption-top" id="AccountTable">
+                        <input type="hidden" id="showPassword">
                         <caption>
                             <div class="container-fluid">
                                 <div class="row">
@@ -133,8 +138,7 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
                                     <td class="text-truncate" style="max-width: 100px;">' . $evaluated . '</td>
                                     <td hidden>' . $row['UID'] . '</td>
                                     <td class="text-truncate text-center">
-                                        <a title="Evaluate This Account" id="Evaluate" class="btn btn-success btn-sm"><img src="../Image/assessment.gif" alt="Evaluate" style="width: 30px; height: 30px;"></a>
-                                        <a title="View Evaluation" href="../Components/Proccess/ViewEvaluation.php?ID=' . $row['UID'] . '" class="btn btn-primary btn-sm"><img src="../Image/View.svg" alt="View" style="width: 30px; height: 30px;"></a>
+                                        <a title="Evaluate This Account" id="Evaluate" class="btn btn-success btn-sm"><img src="../Image/assessment.gif" alt="Evaluate" style="width: 25px; height: 25px;"></a>
                                         </td>
                                     </tr>
 
@@ -144,11 +148,7 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
                                     Evaluate[' . ($i - 1) . '].addEventListener("click", () => {
                                         window.location.href = "../Components/Proccess/EvaluateTrainee.php?ID=' . $row['UID'] . '";
                                     });
-                                    
                                     </script>
-                                    
-                                    
-                                    
                                     ';
                                     $i++;
                                 }
