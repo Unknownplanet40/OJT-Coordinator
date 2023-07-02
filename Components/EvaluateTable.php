@@ -280,7 +280,8 @@
                             $grade = "<b class='text-danger'>Poor</b>";
                         }
 
-                        $date = date("F d, Y", strtotime($date));
+                        $date = explode(" ", $date);
+                        $date = date("F j, Y", strtotime($date[0])) . " at " . date("h:i A", strtotime($date[1]));
 
                         echo '<script>
                                 window.onload = function() {
@@ -322,24 +323,23 @@
                                     <td colspan="2" class="text-center">' . $InterpersonalWorkRelationship . '%</td>
                                 </tr>
                                 <tr>
-                                    <th scope="row">Total Score &nbsp;&nbsp;&nbsp; <small class="text-muted">(10% of the total
-                                            score is for the comment section)</small></th>
+                                    <th scope="row">Total Score &nbsp; <small class="text-muted">(10 points will be added to the total score for the overall rating)</small></th>
                                     <td colspan="2" class="text-center border-top">' . ($Q1 + $Q2 + $Q3 + $Q4 + $Q5 + $Q6 + $Q7 + $Q8 + $Q9 + $Q10 + $Q11 + $Q12 + $Q13 + $Q14 + $Q15 + $Q16 + $Q17 + $Q18 + 10) . ' / 100</td>
                                     <td colspan="2" class="text-center border-top">' . $TotalScore . '%</td>
                                 </tr>
                                 <tr>
                                 <th class="text-end text-muted" scope="row" colspan="2"></th>
-                                    <td class="text-end text-uppercase">Remarks</td>
+                                    <td class="text-end text-uppercase"><small class="text-muted">Remarks<small></td>
                                     <td class="text-center text-uppercase" colspan="2">' . $grade . '</td>
                                 </tr>
                                 <tr>
                                     <th class="text-end text-muted" scope="row" colspan="2"></th>
-                                    <td class="text-end text-uppercase">Date Taken</td>
-                                    <td class="text-end text-uppercase" colspan="2">' . $date . '</td>
+                                    <td class="text-end text-uppercase"><small class="text-muted">Date Evaluated<small></td>
+                                    <td class="text-end" colspan="2">' . $date . '</td>
                                 </tr>
                                 <tr>
                                     <th class="text-end text-muted" scope="row" colspan="2"></th>
-                                    <td class="text-end text-uppercase">Evaluated By</td>
+                                    <td class="text-end text-uppercase"><small class="text-muted">Evaluated By<small></td>
                                     <td class="text-end text-uppercase" colspan="2">' . $evaluator . '</td>
                                 </tr>
                                 <tr>

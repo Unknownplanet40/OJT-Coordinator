@@ -46,7 +46,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $InterpersonalWorkRelationship = round((($Q15 + $Q16 + $Q17 + $Q18) / 20) * 100, 2);
         $bonus = round(((5 + 5) / 10) * 100, 2);
         $TotalScore = round((($QualityOfWork + $Productivity + $WorkHabitsTalentsSkills + $InterpersonalWorkRelationship + $bonus) / 5), 2);
-        $date = date("Y-m-d");
+        // current date and time
+        $date = date("Y-m-d H:i:s");
         $evaluator = $_SESSION['GlobalName'];
 
         if ($_SESSION['evaluated'] == "false") {
