@@ -312,7 +312,7 @@ function scoreWidth($score)
         </div>
         <div class="col-md-4">
             <div class="form-floating">
-                <input type="text" class="form-control" value="Admin: Jeric Dayandante" readonly>
+                <input type="text" class="form-control" value="Admin: <?php echo $evaby ?>" readonly>
                 <label for="floatingInput">Evaluated by:</label>
 
             </div>
