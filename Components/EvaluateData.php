@@ -279,7 +279,7 @@ function scoreWidth($score)
             <div class="form-floating">
                 <textarea class="form-control" style="resize:none; height: 256px;" readonly>
                     <?php
-                    echo $_fed;
+                    echo $fed;
                     ?>
                     </textarea>
                 <label for="floatingTextarea2" class="text-success"></label>
