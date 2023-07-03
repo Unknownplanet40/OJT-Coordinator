@@ -25,6 +25,26 @@ if (mysqli_num_rows($result) > 0) {
         $showForm = true;
         $Q1 = $row['Q1'];
         $Q2 = $row['Q2'];
+        $Q3 = $row['Q3'];
+        $Q4 = $row['Q4'];
+        $Q5 = $row['Q5'];
+        $Q6 = $row['Q6'];
+        $Q7 = $row['Q7'];
+        $Q8 = $row['Q8'];
+        $Q9 = $row['Q9'];
+        $Q10 = $row['Q10'];
+        $Q11 = $row['Q11'];
+        $Q12 = $row['Q12'];
+        $Q13 = $row['Q13'];
+        $Q14 = $row['Q14'];
+        $Q15 = $row['Q15'];
+        $Q16 = $row['Q16'];
+        $Q17 = $row['Q17'];
+        $Q18 = $row['Q18'];
+        $total = $row['total'];
+        $fed = $row['feedback'];
+        $evaby = $row['evaluated_by'];
+
     } else {
         $showForm = null;
     }
