@@ -24,7 +24,7 @@ function scoreWidth($score)
                 <div class="col-md-8">
                     <div class="progress mt-1" style="height: 20px;">
                         <?php
-                        echo scoreWidth(4);
+                            echo scoreWidth($Q1);
                         ?>
                     </div>
                 </div>
@@ -38,7 +38,7 @@ function scoreWidth($score)
                 <div class="col-md-8">
                     <div class="progress mt-1" style="height: 20px;">
                         <?php
-                        echo scoreWidth(5);
+                        echo scoreWidth($Q2)
                         ?>
                     </div>
                 </div>
