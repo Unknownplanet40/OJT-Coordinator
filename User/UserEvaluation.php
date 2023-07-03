@@ -54,7 +54,6 @@ if (mysqli_num_rows($result) > 0) {
     $_SESSION['message'] = "Error No Data Found!";
     $_SESSION['icon'] = "error";
     $_SESSION['Show'] = true;
-    header("Location: UserEvaluation.php");
 }
 
 
