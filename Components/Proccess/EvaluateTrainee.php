@@ -126,12 +126,6 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
                 @include "../../Components/EvaluateTable.php";
             }
             ?>
-
-            <div class="container-lg text-bg-dark rounded table-responsive">
-                
-            </div>
-
-
         </div>
     </div>
 </body>
