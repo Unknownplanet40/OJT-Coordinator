@@ -47,7 +47,7 @@ CREATE TABLE `tbl_accounts` (
 INSERT INTO `tbl_accounts` (`ID`, `UID`, `name`, `username`, `password`, `role`, `status`) VALUES
 (1, 1, 'Ryan James Capadocia', 'ryanjames', '@Capadocia123', 'administrator', 0),
 (2, 2, 'James Veloria', 'jamesveloria', '@Veloria123', 'moderator', 0),
-(3, 1000000000, 'Lorenzo Asis', 'lorenzoasis', 'Lorenzo.asis2023', 'User', 0),
+(3, 1000000000, 'Lorenzo Asis', 'lorenzoasis', 'Lorenzo.asis2023', 'User', 1),
 (4, 2000000000, 'Brandon Logon', 'brandon23', 'Brandon.logon4sale', 'User', 0),
 (5, 3000000000, 'Jeric Dayandante', 'jeric20', 'Jeric@4sale', 'User', 0),
 (6, 3, 'Administrator Account', 'admin01', '@dmin_Account-1', 'administrator', 0);
@@ -93,9 +93,9 @@ CREATE TABLE `tbl_admin` (
 --
 
 INSERT INTO `tbl_admin` (`UID`, `name`, `admin_uname`, `admin_pword`, `admin_email`, `department`, `imagePath`, `date_created`, `last_login`, `role`, `status`) VALUES
-(1, 'Ryan James Capadocia', 'ryanjames', '@Capadocia123', 'rj.caps@cvsu.edu.ph', 'BSIT', '../Image/Profile.gif', '2023-06-30', '16:07:54', 'administrator', 0),
+(1, 'Ryan James Capadocia', 'ryanjames', '@Capadocia123', 'rj.caps@cvsu.edu.ph', 'BSIT', '../Image/Profile.gif', '2023-06-30', '09:11:32', 'administrator', 0),
 (2, 'James Veloria', 'jamesveloria', '@Veloria123', 'james@gmail.com', 'BSIT', '../Image/Profile.gif', '2023-06-30', NULL, 'moderator', 0),
-(3, 'Administrator Account', 'admin01', '@dmin_Account-1', 'Example@Domain.com', 'BSCS', '../uploads/admin01_Credentials/admin01_Profile_ljfma.gif', '2023-06-28', '20:09:17', 'administrator', 0);
+(3, 'Administrator Account', 'admin01', '@dmin_Account-1', 'Example@Domain.com', 'BSCS', '../uploads/admin01_Credentials/admin01_Profile_ljfma.gif', '2023-06-28', '19:49:22', 'administrator', 0);
 
 --
 -- Triggers `tbl_admin`
@@ -151,11 +151,22 @@ CREATE TABLE `tbl_evaluation` (
   `Q16` int(10) DEFAULT NULL,
   `Q17` int(10) DEFAULT NULL,
   `Q18` int(10) DEFAULT NULL,
+  `QoW` int(100) DEFAULT NULL,
+  `Prod` int(100) DEFAULT NULL,
+  `WHTS` int(100) DEFAULT NULL,
+  `IWR` int(100) DEFAULT NULL,
   `Total` int(11) DEFAULT NULL,
-  `date_Taken` date DEFAULT NULL,
+  `date_Taken` datetime DEFAULT NULL,
   `feedback` text DEFAULT NULL,
   `evaluated_by` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='For Trainee Evaluation';
+
+--
+-- Dumping data for table `tbl_evaluation`
+--
+
+INSERT INTO `tbl_evaluation` (`ID`, `UID`, `Q1`, `Q2`, `Q3`, `Q4`, `Q5`, `Q6`, `Q7`, `Q8`, `Q9`, `Q10`, `Q11`, `Q12`, `Q13`, `Q14`, `Q15`, `Q16`, `Q17`, `Q18`, `QoW`, `Prod`, `WHTS`, `IWR`, `Total`, `date_Taken`, `feedback`, `evaluated_by`) VALUES
+(4, 1000000000, 2, 5, 1, 5, 2, 1, 4, 1, 4, 2, 4, 3, 4, 2, 5, 3, 2, 5, 53, 60, 57, 75, 69, '2023-07-02 00:00:00', 'Well The last testeting for today', 'Ryan James Capadocia');
 
 -- --------------------------------------------------------
 
@@ -212,24 +223,19 @@ CREATE TABLE `tbl_trainee` (
   `address` varchar(30) DEFAULT NULL,
   `city` varchar(30) DEFAULT NULL,
   `postal_code` int(20) DEFAULT NULL,
-  `province` varchar(30) DEFAULT NULL
+  `province` varchar(30) DEFAULT NULL,
+  `Join_an_Event` tinyint(1) NOT NULL DEFAULT 0 COMMENT '0-false, 1-true',
+  `EventID` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
-ALTER TABLE `tbl_trainee` 
-ADD `Join_an_Event` BOOLEAN NOT NULL DEFAULT FALSE COMMENT '0-false, 1-true' 
-AFTER `province`, 
-ADD `EventID` INT NULL DEFAULT NULL COMMENT 'Event ID from tbl_events'
-AFTER `Join_an_Event`;
-
 
 --
 -- Dumping data for table `tbl_trainee`
 --
 
-INSERT INTO `tbl_trainee` (`UID`, `name`, `trainee_uname`, `trainee_pword`, `email`, `birthdate`, `age`, `department`, `status`, `role`, `account_Created`, `profile_Completed`, `vaccine_Completed`, `image`, `gender`, `course`, `phone`, `program`, `prog_duration`, `fulfilled_time`, `completed`, `evaluated`, `address`, `city`, `postal_code`, `province`) VALUES
-(1000000000, 'Lorenzo Asis', 'lorenzoasis', 'Lorenzo.asis2023', 'Lorenzo@gail.co', '2023-06-30', 23, 'BSCS', 0, 'User', '2023-06-30', 'true', 0, '../uploads/lorenzoasis_Credentials/lorenzoasis_Profile_HJTSZ.gif', 'male', 'BSCS-2B', '09876543219', NULL, NULL, NULL, NULL, 'false', 'Queenstown Molino 3', 'Bacoor', 4102, 'Cavite'),
-(2000000000, 'Brandon Logon', 'brandon23', 'Brandon.logon4sale', 'Brandon@gmail.com', '2023-06-29', 21, 'BSIT', 0, 'User', '2023-06-30', 'false', 0, '../Image/Profile.png', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'false', NULL, NULL, NULL, NULL),
-(3000000000, 'Jeric Dayandante', 'jeric20', 'Jeric@4sale', 'jeric@outlook.com', '2023-06-30', 20, 'BSIT', 0, 'User', '2023-06-30', 'true', 1, '../uploads/jeric20_Credentials/jeric20_Profile_wFId1.gif', 'male', 'BSIT-2B', '09675453124', NULL, NULL, NULL, NULL, 'false', 'Taga Prima banda sa imus', 'Imus', 4102, 'Cavite');
+INSERT INTO `tbl_trainee` (`UID`, `name`, `trainee_uname`, `trainee_pword`, `email`, `birthdate`, `age`, `department`, `status`, `role`, `account_Created`, `profile_Completed`, `vaccine_Completed`, `image`, `gender`, `course`, `phone`, `program`, `prog_duration`, `fulfilled_time`, `completed`, `evaluated`, `address`, `city`, `postal_code`, `province`, `Join_an_Event`, `EventID`) VALUES
+(1000000000, 'Lorenzo Asis', 'lorenzoasis', 'Lorenzo.asis2023', 'Lorenzo@gail.co', '2023-06-30', 23, 'BSCS', 1, 'User', '2023-06-30', 'true', 0, '../uploads/lorenzoasis_Credentials/lorenzoasis_Profile_HJTSZ.gif', 'male', 'BSCS-2B', '09876543219', NULL, NULL, NULL, NULL, 'true', 'Queenstown Molino 3', 'Bacoor', 4102, 'Cavite', 0, NULL),
+(2000000000, 'Brandon Logon', 'brandon23', 'Brandon.logon4sale', 'Brandon@gmail.com', '2023-06-29', 21, 'BSIT', 0, 'User', '2023-06-30', 'false', 0, '../Image/Profile.png', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'false', NULL, NULL, NULL, NULL, 0, NULL),
+(3000000000, 'Jeric Dayandante', 'jeric20', 'Jeric@4sale', 'jeric@outlook.com', '2023-06-30', 20, 'BSIT', 0, 'User', '2023-06-30', 'true', 1, '../uploads/jeric20_Credentials/jeric20_Profile_wFId1.gif', 'male', 'BSIT-2B', '09675453124', NULL, NULL, NULL, NULL, 'false', 'Taga Prima banda sa imus', 'Imus', 4102, 'Cavite', 0, NULL);
 
 --
 -- Triggers `tbl_trainee`
@@ -322,13 +328,13 @@ ALTER TABLE `tbl_vaccine`
 -- AUTO_INCREMENT for table `tbl_accounts`
 --
 ALTER TABLE `tbl_accounts`
-  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `tbl_admin`
 --
 ALTER TABLE `tbl_admin`
-  MODIFY `UID` bigint(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `UID` bigint(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `tbl_announcement`
@@ -340,7 +346,7 @@ ALTER TABLE `tbl_announcement`
 -- AUTO_INCREMENT for table `tbl_evaluation`
 --
 ALTER TABLE `tbl_evaluation`
-  MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `tbl_events`
