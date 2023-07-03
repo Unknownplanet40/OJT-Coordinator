@@ -52,7 +52,7 @@ if (mysqli_num_rows($result) > 0) {
 
 } else {
     $_SESSION['message'] = "Not yet Evaluated!";
-    $_SESSION['icon'] = "error";
+    $_SESSION['icon'] = "info";
     $_SESSION['Show'] = true;
 }
 
