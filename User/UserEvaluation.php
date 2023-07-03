@@ -41,7 +41,7 @@ if (mysqli_num_rows($result) > 0) {
         $Q16 = $row['Q16'];
         $Q17 = $row['Q17'];
         $Q18 = $row['Q18'];
-        $total = $row['total'];
+        $Total_Score = $row['total'];
         $fed = $row['feedback'];
         $evaby = $row['evaluated_by'];
 

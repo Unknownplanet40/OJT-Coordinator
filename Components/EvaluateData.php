@@ -52,7 +52,7 @@ function scoreWidth($score)
                 <div class="col-md-8">
                     <div class="progress mt-1" style="height: 20px;">
                         <?php
-                        echo scoreWidth(3);
+                        echo scoreWidth($Q3);
                         ?>
                     </div>
                 </div>
@@ -67,7 +67,7 @@ function scoreWidth($score)
                 <div class="col-md-8">
                     <div class="progress mt-1" style="height: 20px;">
                         <?php
-                        echo scoreWidth(1);
+                        echo scoreWidth($Q4);
                         ?>
                     </div>
                 </div>
@@ -80,7 +80,7 @@ function scoreWidth($score)
                 <div class="col-md-8">
                     <div class="progress mt-1" style="height: 20px;">
                         <?php
-                        echo scoreWidth(2);
+                        echo scoreWidth($Q5);
                         ?>
                     </div>
                 </div>
@@ -94,7 +94,7 @@ function scoreWidth($score)
                 <div class="col-md-8">
                     <div class="progress mt-1" style="height: 20px;">
                         <?php
-                        echo scoreWidth(3);
+                        echo scoreWidth($Q6);
                         ?>
                     </div>
                 </div>
@@ -108,7 +108,7 @@ function scoreWidth($score)
                 <div class="col-md-8">
                     <div class="progress mt-1" style="height: 20px;">
                         <?php
-                        echo scoreWidth(4);
+                        echo scoreWidth($Q7);
                         ?>
                     </div>
                 </div>
@@ -123,7 +123,7 @@ function scoreWidth($score)
                 <div class="col-md-8">
                     <div class="progress mt-1" style="height: 20px;">
                         <?php
-                        echo scoreWidth(5);
+                        echo scoreWidth($Q8);
                         ?>
                     </div>
                 </div>
@@ -136,7 +136,7 @@ function scoreWidth($score)
                 <div class="col-md-8">
                     <div class="progress mt-1" style="height: 20px;">
                         <?php
-                        echo scoreWidth(4);
+                        echo scoreWidth($Q9);
                         ?>
                     </div>
                 </div>
@@ -150,7 +150,7 @@ function scoreWidth($score)
                 <div class="col-md-8">
                     <div class="progress mt-1" style="height: 20px;">
                         <?php
-                        echo scoreWidth(3);
+                        echo scoreWidth($Q10);
                         ?>
                     </div>
                 </div>
@@ -164,7 +164,7 @@ function scoreWidth($score)
                 <div class="col-md-8">
                     <div class="progress mt-1" style="height: 20px;">
                         <?php
-                        echo scoreWidth(2);
+                        echo scoreWidth($Q11);
                         ?>
                     </div>
                 </div>
@@ -178,7 +178,7 @@ function scoreWidth($score)
                 <div class="col-md-8">
                     <div class="progress mt-1" style="height: 20px;">
                         <?php
-                        echo scoreWidth(1);
+                        echo scoreWidth($Q12);
                         ?>
                     </div>
                 </div>
@@ -192,7 +192,7 @@ function scoreWidth($score)
                 <div class="col-md-8">
                     <div class="progress mt-1" style="height: 20px;">
                         <?php
-                        echo scoreWidth(5);
+                        echo scoreWidth($Q13);
                         ?>
                     </div>
                 </div>
@@ -207,7 +207,7 @@ function scoreWidth($score)
                 <div class="col-md-8">
                     <div class="progress mt-1" style="height: 20px;">
                         <?php
-                        echo scoreWidth(4);
+                        echo scoreWidth($Q14);
                         ?>
                     </div>
                 </div>
@@ -222,7 +222,7 @@ function scoreWidth($score)
                 <div class="col-md-8">
                     <div class="progress mt-1" style="height: 20px;">
                         <?php
-                        echo scoreWidth(3);
+                        echo scoreWidth($Q15);
                         ?>
                     </div>
                 </div>
@@ -235,7 +235,7 @@ function scoreWidth($score)
                 <div class="col-md-8">
                     <div class="progress mt-1" style="height: 20px;">
                         <?php
-                        echo scoreWidth(4);
+                        echo scoreWidth($Q16);
                         ?>
                     </div>
                 </div>
@@ -250,7 +250,7 @@ function scoreWidth($score)
                 <div class="col-md-8">
                     <div class="progress mt-1" style="height: 20px;">
                         <?php
-                        echo scoreWidth(1);
+                        echo scoreWidth($Q17);
                         ?>
                     </div>
                 </div>
@@ -264,7 +264,7 @@ function scoreWidth($score)
                 <div class="col-md-8">
                     <div class="progress mt-1" style="height: 20px;">
                         <?php
-                        echo scoreWidth(2);
+                        echo scoreWidth($Q18);
                         ?>
                     </div>
                 </div>
@@ -277,15 +277,11 @@ function scoreWidth($score)
         <div class="col-md-12">
             <div class="form-floating">
                 <textarea class="form-control" style="resize:none; height: 256px;"
-                    readonly>The trainee demonstrated remarkable capability throughout the training program, consistently showcasing a strong understanding of the concepts and techniques taught. Their competence was evident in their exceptional performance.
-
-In terms of behavior, the trainee maintained a professional demeanor, displaying punctuality, attentiveness, and a commendable work ethic. They approached tasks with dedication and remained focused on their objectives, fostering a productive learning environment.
-
-The trainee's personality played a significant role in their success. They exhibited high motivation and sought additional learning opportunities beyond the curriculum, inspiring others with their enthusiasm. Their excellent communication skills facilitated active participation in discussions, allowing them to convey ideas effectively.
-
-Moreover, the trainee exhibited adaptability and resilience. They embraced challenges with a problem-solving mindset, adjusted strategies in the face of obstacles, and showed perseverance under pressure.
-
-In conclusion, the trainee's capability, behavior, and personality make them a highly promising individual. With their exceptional skills, professionalism, and positive attitude, they are poised for success in their chosen field. The trainee's remarkable performance, combined with their adaptability and resilience, ensures a bright future ahead. Their dedication to continuous growth and collaboration will undoubtedly contribute to their ongoing achievements.</textarea>
+                    readonly> 
+                    <?php
+                    echo $_fed;
+                    ?>
+                    </textarea>
                 <label for="floatingTextarea2" class="text-success"></label>
             </div>
         </div>
@@ -296,25 +292,21 @@ In conclusion, the trainee's capability, behavior, and personality make them a h
             <!-- Score -->
             <div class="form-floating">
                 <?php
-                    $overall_score = 56; // get this from the database
-                    $total = 100;
-                    $bonus = 10;
-                    $percentage = (($overall_score + $bonus) / $total) * 100; // get the percentage
-                    $percentage = floor($percentage); // round down
+                    $percentage = $Total_Score;
 
-                    if ($percentage >= 80) {
+                    if ($Total_Score >= 80) {
                         $grade = 'Excellent';
-                    } else if ($percentage >= 60) {
+                    } else if ($Total_Score >= 60) {
                         $grade = 'Very Good';
-                    } else if ($percentage >= 40) {
+                    } else if ($Total_Score >= 40) {
                         $grade = 'Good';
-                    } else if ($percentage >= 20) {
+                    } else if ($Total_Score >= 20) {
                         $grade = 'Fair';
                     } else {
                         $grade = 'Poor';
                     }
                 ?>
-                <input type="text" class="form-control" value="<?php echo $percentage . '% - ' . $grade ?>" readonly>
+                <input type="text" class="form-control" value="<?php echo $Total_Score . '% - ' . $grade ?>" readonly>
                 <label for="floatingInput">Overall Score:</label>
             </div>
         </div>
