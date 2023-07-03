@@ -24,7 +24,7 @@ function scoreWidth($score)
                 <div class="col-md-8">
                     <div class="progress mt-1" style="height: 20px;">
                         <?php
-                            echo scoreWidth($Q1);
+                        echo scoreWidth($Q1);
                         ?>
                     </div>
                 </div>
@@ -39,7 +39,7 @@ function scoreWidth($score)
                     <div class="progress mt-1" style="height: 20px;">
                         <?php
                         echo scoreWidth($Q2)
-                        ?>
+                            ?>
                     </div>
                 </div>
             </div>
@@ -272,12 +272,12 @@ function scoreWidth($score)
         </li>
     </ul>
     <div class="text">Comments</div>
-    <small class="text-muted">Comments, general impressions & observations regarding the capability, behavior's & personality of the trainee.</small>
+    <small class="text-muted">Comments, general impressions & observations regarding the capability, behavior's &
+        personality of the trainee.</small>
     <div class="row">
         <div class="col-md-12">
             <div class="form-floating">
-                <textarea class="form-control" style="resize:none; height: 256px;"
-                    readonly> 
+                <textarea class="form-control" style="resize:none; height: 256px;" readonly>
                     <?php
                     echo $_fed;
                     ?>
@@ -292,19 +292,19 @@ function scoreWidth($score)
             <!-- Score -->
             <div class="form-floating">
                 <?php
-                    $percentage = $Total_Score;
+                $Total_Score;
 
-                    if ($Total_Score >= 80) {
-                        $grade = 'Excellent';
-                    } else if ($Total_Score >= 60) {
-                        $grade = 'Very Good';
-                    } else if ($Total_Score >= 40) {
-                        $grade = 'Good';
-                    } else if ($Total_Score >= 20) {
-                        $grade = 'Fair';
-                    } else {
-                        $grade = 'Poor';
-                    }
+                if ($Total_Score >= 80) {
+                    $grade = 'Excellent';
+                } else if ($Total_Score >= 60) {
+                    $grade = 'Very Good';
+                } else if ($Total_Score >= 40) {
+                    $grade = 'Good';
+                } else if ($Total_Score >= 20) {
+                    $grade = 'Fair';
+                } else {
+                    $grade = 'Poor';
+                }
                 ?>
                 <input type="text" class="form-control" value="<?php echo $Total_Score . '% - ' . $grade ?>" readonly>
                 <label for="floatingInput">Overall Score:</label>
