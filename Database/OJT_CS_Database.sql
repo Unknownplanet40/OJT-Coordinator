@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 18, 2023 at 11:04 AM
+-- Generation Time: April 21, 2021 at 12:15 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -47,10 +47,11 @@ CREATE TABLE `tbl_accounts` (
 INSERT INTO `tbl_accounts` (`ID`, `UID`, `name`, `username`, `password`, `role`, `status`) VALUES
 (1, 1, 'Ryan James Capadocia', 'ryanjames', '@Capadocia123', 'administrator', 0),
 (2, 2, 'James Veloria', 'jamesveloria', '@Veloria123', 'moderator', 0),
-(3, 1000000000, 'Lorenzo Asis', 'lorenzoasis', 'Lorenzo.asis2023', 'User', 1),
+(3, 1000000000, 'Lorenzo Asis', 'lorenzoasis', 'Lorenzo.asis2023', 'User', 0),
 (4, 2000000000, 'Brandon Logon', 'brandon23', 'Brandon.logon4sale', 'User', 0),
-(5, 3000000000, 'Jeric Dayandante', 'jeric20', 'Jeric@4sale', 'User', 0),
-(6, 3, 'Administrator Account', 'admin01', '@dmin_Account-1', 'administrator', 0);
+(5, 3000000000, 'Jeric Dayandante', 'jeric20', 'Jeric@4sale', 'User', 1),
+(6, 3, 'Administrator Account', 'admin01', '@dmin_Account-1', 'administrator', 0),
+(13, 1234567825, 'Joseph Contador', 'josephpogi23', 'Joseph@pogi23', 'User', 0);
 
 --
 -- Triggers `tbl_accounts`
@@ -93,7 +94,7 @@ CREATE TABLE `tbl_admin` (
 --
 
 INSERT INTO `tbl_admin` (`UID`, `name`, `admin_uname`, `admin_pword`, `admin_email`, `department`, `imagePath`, `date_created`, `last_login`, `role`, `status`) VALUES
-(1, 'Ryan James Capadocia', 'ryanjames', '@Capadocia123', 'rj.caps@cvsu.edu.ph', 'BSIT', '../Image/Profile.gif', '2023-06-30', '09:11:32', 'administrator', 0),
+(1, 'Ryan James Capadocia', 'ryanjames', '@Capadocia123', 'rj.caps@cvsu.edu.ph', 'BSIT', '../Image/Profile.gif', '2023-06-30', '15:36:53', 'administrator', 0),
 (2, 'James Veloria', 'jamesveloria', '@Veloria123', 'james@gmail.com', 'BSIT', '../Image/Profile.gif', '2023-06-30', NULL, 'moderator', 0),
 (3, 'Administrator Account', 'admin01', '@dmin_Account-1', 'Example@Domain.com', 'BSCS', '../uploads/admin01_Credentials/admin01_Profile_ljfma.gif', '2023-06-28', '19:49:22', 'administrator', 0);
 
@@ -166,7 +167,7 @@ CREATE TABLE `tbl_evaluation` (
 --
 
 INSERT INTO `tbl_evaluation` (`ID`, `UID`, `Q1`, `Q2`, `Q3`, `Q4`, `Q5`, `Q6`, `Q7`, `Q8`, `Q9`, `Q10`, `Q11`, `Q12`, `Q13`, `Q14`, `Q15`, `Q16`, `Q17`, `Q18`, `QoW`, `Prod`, `WHTS`, `IWR`, `Total`, `date_Taken`, `feedback`, `evaluated_by`) VALUES
-(4, 1000000000, 2, 5, 1, 5, 2, 1, 4, 1, 4, 2, 4, 3, 4, 2, 5, 3, 2, 5, 53, 60, 57, 75, 69, '2023-07-02 00:00:00', 'Well The last testeting for today', 'Ryan James Capadocia');
+(4, 1000000000, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 60, 60, 60, 60, 68, '2023-07-03 09:12:23', 'syet ang sarap na kaka wet sobra cap daks 10 inch mabuhok sa dulo yummy cum inside me daddy ugh ugh syetttt....... ughhh.........', 'Ryan James Capadocia');
 
 -- --------------------------------------------------------
 
@@ -233,9 +234,10 @@ CREATE TABLE `tbl_trainee` (
 --
 
 INSERT INTO `tbl_trainee` (`UID`, `name`, `trainee_uname`, `trainee_pword`, `email`, `birthdate`, `age`, `department`, `status`, `role`, `account_Created`, `profile_Completed`, `vaccine_Completed`, `image`, `gender`, `course`, `phone`, `program`, `prog_duration`, `fulfilled_time`, `completed`, `evaluated`, `address`, `city`, `postal_code`, `province`, `Join_an_Event`, `EventID`) VALUES
-(1000000000, 'Lorenzo Asis', 'lorenzoasis', 'Lorenzo.asis2023', 'Lorenzo@gail.co', '2023-06-30', 23, 'BSCS', 1, 'User', '2023-06-30', 'true', 0, '../uploads/lorenzoasis_Credentials/lorenzoasis_Profile_HJTSZ.gif', 'male', 'BSCS-2B', '09876543219', NULL, NULL, NULL, NULL, 'true', 'Queenstown Molino 3', 'Bacoor', 4102, 'Cavite', 0, NULL),
+(1000000000, 'Lorenzo Asis', 'lorenzoasis', 'Lorenzo.asis2023', 'Lorenzo@gail.co', '2023-06-30', 23, 'BSCS', 0, 'User', '2023-06-30', 'true', 0, '../uploads/lorenzoasis_Credentials/lorenzoasis_Profile_HJTSZ.gif', 'male', 'BSCS-2B', '09876543219', NULL, NULL, NULL, NULL, 'true', 'Queenstown Molino 3', 'Bacoor', 4102, 'Cavite', 0, NULL),
+(1234567825, 'Joseph Contador', 'josephpogi23', 'Joseph@pogi23', 'joseph.contador@cvsu.edu.ph', '2004-02-09', NULL, 'BSIT', 0, 'User', '2023-07-03', 'true', 1, '../uploads/josephpogi23_Credentials/josephpogi23_Profile_Tq3UZ.jpg', 'male', 'BSIT-2B', '09687363887', NULL, NULL, NULL, NULL, 'false', 'DASMA PALIRARAN BACOOR CAVITE', 'DASMA', 404, 'Dasma', 0, NULL),
 (2000000000, 'Brandon Logon', 'brandon23', 'Brandon.logon4sale', 'Brandon@gmail.com', '2023-06-29', 21, 'BSIT', 0, 'User', '2023-06-30', 'false', 0, '../Image/Profile.png', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'false', NULL, NULL, NULL, NULL, 0, NULL),
-(3000000000, 'Jeric Dayandante', 'jeric20', 'Jeric@4sale', 'jeric@outlook.com', '2023-06-30', 20, 'BSIT', 0, 'User', '2023-06-30', 'true', 1, '../uploads/jeric20_Credentials/jeric20_Profile_wFId1.gif', 'male', 'BSIT-2B', '09675453124', NULL, NULL, NULL, NULL, 'false', 'Taga Prima banda sa imus', 'Imus', 4102, 'Cavite', 0, NULL);
+(3000000000, 'Jeric Dayandante', 'jeric20', 'Jeric@4sale', 'jeric@outlook.com', '2023-06-30', 20, 'BSIT', 1, 'User', '2023-06-30', 'true', 1, '../uploads/jeric20_Credentials/jeric20_Profile_wFId1.gif', 'male', 'BSIT-2B', '09675453124', NULL, NULL, NULL, NULL, 'false', 'Taga Prima banda sa imus', 'Imus', 4102, 'Cavite', 0, NULL);
 
 --
 -- Triggers `tbl_trainee`
@@ -272,7 +274,8 @@ CREATE TABLE `tbl_vaccine` (
 --
 
 INSERT INTO `tbl_vaccine` (`ID`, `UID`, `vaccineName`, `vaccineType`, `vaccineDose`, `vaccineLoc`, `vaccineImage`, `VaccDoseOne`, `VaccDosetwo`, `VaccDoseBooster`) VALUES
-(1, 3000000000, 'Johnson', '2', 'one', 'Sa prima diko alam  san banda', '../uploads/jeric20_Credentials/jeric20_Vaccine/jeric20_VaccineCard.jpg', '2023-07-01', '', '');
+(1, 3000000000, 'Johnson', '2', 'one', 'Sa prima diko alam  san banda', '../uploads/jeric20_Credentials/jeric20_Vaccine/jeric20_VaccineCard.jpg', '2023-07-01', '', ''),
+(2, 1234567825, 'Johnson', '1', 'booster', 'DASMA PALA PALA OPEN COURT', '../uploads/josephpogi23_Credentials/josephpogi23_Vaccine/josephpogi23_VaccineCard.png', '2019-12-02', '2020-12-03', '2021-02-04');
 
 --
 -- Indexes for dumped tables
@@ -328,7 +331,7 @@ ALTER TABLE `tbl_vaccine`
 -- AUTO_INCREMENT for table `tbl_accounts`
 --
 ALTER TABLE `tbl_accounts`
-  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `tbl_admin`
@@ -364,7 +367,7 @@ ALTER TABLE `tbl_trainee`
 -- AUTO_INCREMENT for table `tbl_vaccine`
 --
 ALTER TABLE `tbl_vaccine`
-  MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
