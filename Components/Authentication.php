@@ -170,6 +170,8 @@ function fetchUserData($ID)
         $_SESSION['GlobalCity'] = $row['city'];
         $_SESSION['GlobalZip'] = $row['postal_code'];
         $_SESSION['GlobalProvince'] = $row['province'];
+        $_SESSION['GlobalJoin_an_Event'] = $row['Join_an_Event'];
+        $_SESSION['GlobalEventID'] = $row['EventID'];
 
         $course = explode("-", $_SESSION['GlobalCourse']);
         $endtext = $course[1];

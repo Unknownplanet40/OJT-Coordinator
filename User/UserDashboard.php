@@ -14,6 +14,8 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
 }
 
 
+
+
 ?>
 
 <!DOCTYPE html>
@@ -90,88 +92,50 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
                 </div>
             </div>
             <div class="text">Events</div>
-
             <div class="row row-cols-1 row-cols-md-3 g-4">
-                <div class="col">
-                    <div class="card h-100">
-                        <img style="ratio: 16/9" src="https://via.placeholder.com/500x256" class="card-img-top"
-                            alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Leadership Development Workshop</h5>
-                            <p class="card-text">August 25, 2023</p>
-                            <p class="card-text">Training Room 3, ABC Company Headquarters</p>
-                            <p class="card-text" style="font-size: 14px;">Enhance your leadership skills in this
-                                engaging workshop. Learn
-                                strategies for effective communication, team building, and decision-making. Limited
-                                seats available. Register now!
-                            </p>
-                            <small class="text-muted">Time: 9:00 AM - 12:00 PM | Available Seats: 30</small>
+            <?php
+            $sql = "SELECT * FROM tbl_events";
+            $result = mysqli_query($conn, $sql);
+            
+            if (mysqli_num_rows($result) > 0) {
+            
+                while ($row = mysqli_fetch_assoc($result)) {
+                    $output = 
+                    '
+                    <div class="col">
+                        <div class="card h-100">
+                            <img style="ratio: 16/9" src="' . $row['eventImage'] . '" class="card-img-top"
+                                alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">'. $row['eventTitle'] . '</h5>
+                                <p class="card-text">' . $row['eventDate'] . '</p>
+                                <p class="card-text">' . $row['eventLocation'] . '</p>
+                                <p class="card-text" style="font-size: 14px;">' . $row['eventDescription'] . '</p>
+                                <small class="text-muted">Time: ' . $row['eventStartTime'] . ' - ' . $row['eventEndTime'] . ' | Available Seats: ' . $row['eventSlots'] . '</small>
+                            </div>
+                            <div class="card-footer text-center">
+                                <!-- if the user is already registered, the button should be disabled -->
+                                ';
+                echo $output;
+                if ($_SESSION['GlobalJoin_an_Event'] == 1){
+                    echo '<a class="btn btn-success" hidden>Register</a>
+                            </div>
                         </div>
-                        <div class="card-footer text-center">
-                            <!-- if the user is already registered, the button should be disabled -->
-                            <a href="#" class="btn btn-success">Register</a>
+                    </div>';
+                } else {
+                    echo '<a href="../Components/eventprocess.php?ID=' . $row['eventID'] . '" class="btn btn-success">Register</a>
+                            </div>
                         </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card h-100">
-                        <img style="ratio: 16/9" src="https://via.placeholder.com/500x256" class="card-img-top"
-                            alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Digital Marketing Seminar</h5>
-                            <p class="card-text">September 10, 2023</p>
-                            <p class="card-text">Conference Hall B, XYZ Convention Center</p>
-                            <p class="card-text" style="font-size: 14px;">Explore the latest digital marketing trends
-                                and strategies. Unlock
-                                growth opportunities and boost your online presence. Limited seats available. Reserve
-                                your spot today!
-                            </p>
-                            <small class="text-muted">Time: 2:00 PM - 4:00 PM | Available Seats: 20</small>
-                        </div>
-                        <div class="card-footer text-center">
-                            <a href="#" class="btn btn-success">Register</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card h-100">
-                        <img style="ratio: 16/9" src="https://via.placeholder.com/500x256" class="card-img-top"
-                            alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Time Management Masterclass</h5>
-                            <p class="card-text">October 5, 2023</p>
-                            <p class="card-text">Training Room 2, DEF Company Headquarters</p>
-                            <p class="card-text" style="font-size: 14px;">Learn essential time management techniques to
-                                enhance productivity.
-                                Maximize your efficiency and prioritize tasks effectively. Limited seats available.
-                                Secure your seat now!</p>
-                            <small class="text-muted">Time: 10:00 AM - 12:00 PM | Available Seats: 10</small>
-                        </div>
-                        <div class="card-footer text-center">
-                            <a href="#" class="btn btn-success">Register</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card h-100">
-                        <img style="ratio: 16/9" src="https://via.placeholder.com/500x256" class="card-img-top"
-                            alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Cybersecurity Awareness Webinar</h5>
-                            <p class="card-text">November 12, 2023</p>
-                            <p class="card-text">Online Webinar</p>
-                            <p class="card-text" style="font-size: 14px;">Protect yourself online. Join our
-                                cybersecurity webinar and learn
-                                practical tips to safeguard your digital presence. Limited seats available. Sign up now!
-                            </p>
-                            <small class="text-muted">Time: 3:00 PM - 4:00 PM | Available Seats: 15</small>
-                        </div>
-                        <div class="card-footer text-center">
-                            <a href="#" class="btn btn-success">Register</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                    </div>';
+                }
+                }
+
+            }else {
+                echo "No data found";
+            };
+            ?>
+</div>
+            
             <br>
         </div>
 
