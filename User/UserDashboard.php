@@ -41,14 +41,7 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
     <section class="home">
         <div class="text">Dashboard</div>
         <div class="content" style="margin: 10px; width: 98%;">
-            <div class="alert alert-success" role="alert">
-                <!-- for the announcement, just change the text inside the <p> tag -->
-                <h4 class="alert-heading">Announcement!</h4>
-                <p>Aww yeah, you successfully read this important alert message. This example text is going to run a bit
-                    longer so that you can see how spacing within an alert works with this kind of content.</p>
-                <hr>
-                <p class="mb-0">Whenever you need to, be sure to use margin utilities to keep things nice and tidy.</p>
-            </div>
+            <?php @include_once '../Components/Announcement.php'; ?>
             <div class="row">
                 <div class="col-sm-8">
                     <div class="card h-100">
@@ -93,21 +86,21 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
             </div>
             <div class="text">Events</div>
             <div class="row row-cols-1 row-cols-md-3 g-4">
-            <?php
-            $sql = "SELECT * FROM tbl_events";
-            $result = mysqli_query($conn, $sql);
-            
-            if (mysqli_num_rows($result) > 0) {
-            
-                while ($row = mysqli_fetch_assoc($result)) {
-                    $output = 
-                    '
+                <?php
+                $sql = "SELECT * FROM tbl_events";
+                $result = mysqli_query($conn, $sql);
+
+                if (mysqli_num_rows($result) > 0) {
+
+                    while ($row = mysqli_fetch_assoc($result)) {
+                        $output =
+                            '
                     <div class="col">
                         <div class="card h-100">
                             <img style="ratio: 16/9" src="' . $row['eventImage'] . '" class="card-img-top"
                                 alt="...">
                             <div class="card-body">
-                                <h5 class="card-title">'. $row['eventTitle'] . '</h5>
+                                <h5 class="card-title">' . $row['eventTitle'] . '</h5>
                                 <p class="card-text">' . $row['eventDate'] . '</p>
                                 <p class="card-text">' . $row['eventLocation'] . '</p>
                                 <p class="card-text" style="font-size: 14px;">' . $row['eventDescription'] . '</p>
@@ -116,26 +109,30 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
                             <div class="card-footer text-center">
                                 <!-- if the user is already registered, the button should be disabled -->
                                 ';
-                echo $output;
-                if ($_SESSION['GlobalJoin_an_Event'] == 1){
-                    echo '<a class="btn btn-success" hidden>Register</a>
+                        echo $output;
+                        if ($_SESSION['GlobalJoin_an_Event'] == 1) {
+                            echo '<a class="btn btn-success" hidden>Register</a>
                             </div>
                         </div>
                     </div>';
-                } else {
-                    echo '<a href="../Components/eventprocess.php?ID=' . $row['eventID'] . '" class="btn btn-success">Register</a>
+                        } else {
+                            echo '<a href="../Components/eventprocess.php?ID=' . $row['eventID'] . '" class="btn btn-success">Register</a>
                             </div>
                         </div>
                     </div>';
-                }
-                }
+                        }
+                    }
 
-            }else {
-                echo "No data found";
-            };
-            ?>
-</div>
-            
+                } else {
+                    echo '
+                    <div class="content d-flex justify-content-center" style="margin: 10px; width: 98%;">
+                        No Events Available
+                    </div>';
+                }
+                ;
+                ?>
+            </div>
+
             <br>
         </div>
 
