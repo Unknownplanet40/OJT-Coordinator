@@ -29,6 +29,7 @@ if($_SERVER["REQUEST_METHOD"] == "GET") {
                 $_SESSION['GlobalJoin_an_Event'] = 1;
                 $_SESSION['GlobalEventID'] = $ID;
 
+
                 header("Location: ../User/UserDashboard.php");
             }else {
                 $_SESSION['message'] = "Can\'t proceed, Please try again later!";
