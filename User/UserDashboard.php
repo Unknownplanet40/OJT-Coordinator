@@ -93,6 +93,11 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
                 if (mysqli_num_rows($result) > 0) {
 
                     while ($row = mysqli_fetch_assoc($result)) {
+                        
+                        $start = date("g:i A", strtotime($row['eventStartTime']));
+                        $end = date("g:i A", strtotime($row['eventEndTime']));
+                        $date = date("F j, Y", strtotime($row['eventDate']));
+
                         $output =
                             '
                     <div class="col">
@@ -101,10 +106,10 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
                                 alt="...">
                             <div class="card-body">
                                 <h5 class="card-title">' . $row['eventTitle'] . '</h5>
-                                <p class="card-text">' . $row['eventDate'] . '</p>
+                                <p class="card-text">' . $date . '</p>
                                 <p class="card-text">' . $row['eventLocation'] . '</p>
                                 <p class="card-text" style="font-size: 14px;">' . $row['eventDescription'] . '</p>
-                                <small class="text-muted">Time: ' . $row['eventStartTime'] . ' - ' . $row['eventEndTime'] . ' | Available Seats: ' . $row['eventSlots'] . '</small>
+                                <small class="text-muted">Time: ' . $start . ' - ' . $end . ' | Available Seats: ' . $row['eventSlots'] . '</small>
                             </div>
                             <div class="card-footer text-center">
                                 <!-- if the user is already registered, the button should be disabled -->

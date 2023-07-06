@@ -74,13 +74,13 @@ if (isset($_SESSION['autoUsername']) && isset($_SESSION['autoPassword'])) {
                     <input type="text" class="form-control item" name="username" id="username" placeholder="Username"
                         value="<?php if (isset($uname)) {
                             echo $uname;
-                        } ?>">
+                        } ?> " title="Username must contain at least 5 characters, with no special characters, no whitespaces no numbers, no UPPER/lowercase and must be unique.">
                 </div>
                 <div class="form-group">
                     <input type="password" class="form-control item" name="password" id="password"
                         placeholder="Password" value="<?php if (isset($pword)) {
                             echo $pword;
-                        } ?>">
+                        } ?>" title="Password must contain at least 8 characters, including UPPER/lowercase and numbers with special characters and no whitespaces.">
                     <div style="margin: -20px 5px 0 5px; display: flex; justify-content: space-between;">
                         <div>
                             <input class="form-check-input" type="checkbox" id="flexCheckDefault">
@@ -88,7 +88,8 @@ if (isset($_SESSION['autoUsername']) && isset($_SESSION['autoPassword'])) {
                                 Show Password
                             </label>
                         </div>
-                        <p class="reg-link"><a href="ForgotPassword.php">Forgot Password</a></p>
+                        <!-- I will add this later -->
+                        <!-- <p class="reg-link"><a href="ForgotPassword.php">Forgot Password</a></p> -->
                     </div>
                 </div>
                 <div class="form-group">

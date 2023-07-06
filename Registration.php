@@ -177,14 +177,14 @@ if (isset($_POST['register'])) {
                             <input type="text" class="form-control item" name="Traineename" id="Traineename"
                                 placeholder="Name" value="<?php if (isset($_SESSION['temp'][0])) {
                                     echo $_SESSION['temp'][0];
-                                } ?>" title="Ex: Juan Dela Cruz">
+                                } ?>" title="Name must contain at least 3 characters, with whitespaces and UPPER/lowercase letters only">
                         </div>
                     </div>
                     <div class="col-4">
                         <div class="form-group">
                             <input type="text" class="form-control item" name="age" id="age" placeholder="Age" value="<?php if (isset($_SESSION['temp'][1])) {
                                 echo $_SESSION['temp'][1];
-                            } ?>" title="Ex: 18">
+                            } ?>" title="Age must be 18 years old and above">
                         </div>
                     </div>
                 </div>
@@ -202,7 +202,7 @@ if (isset($_POST['register'])) {
                             <input type="text" class="form-control item" name="usn" id="usn"
                                 placeholder="University Serial Number" value="<?php if (isset($_SESSION['temp'][3])) {
                                     echo $_SESSION['temp'][3];
-                                } ?>" title="Ex: 1234567890">
+                                } ?>" title="USN must be 10 numeric characters only">
                         </div>
                     </div>
                 </div>
@@ -210,7 +210,7 @@ if (isset($_POST['register'])) {
                     <input type="text" class="form-control item" name="username" id="username" placeholder="Username"
                         value="<?php if (isset($_SESSION['temp'][4])) {
                             echo $_SESSION['temp'][4];
-                        } ?>" title="Ex: delcruz20">
+                        } ?>" title="Username must contain at least 5 characters, with no special characters, no whitespaces no numbers, no UPPER/lowercase and must be unique.">
                 </div>
                 <div class="form-group">
                     <div class="row">
@@ -219,7 +219,7 @@ if (isset($_POST['register'])) {
                                 <input type="password" class="form-control item" name="password" id="password"
                                     placeholder="Password" value="<?php if (isset($temp[5])) {
                                         echo $temp[5];
-                                    } ?>" title="Ex: @Juandelacruz123">
+                                    } ?>" title="Password must contain at least 8 characters, with atleast 1 number, UPPER/lowercase, a special character and must match the Confirm password">
                             </div>
                         </div>
                         <div class="col-6">
@@ -227,7 +227,7 @@ if (isset($_POST['register'])) {
                                 <input type="password" class="form-control item" name="confirm" id="confirm"
                                     placeholder="Confirm Password" value="<?php if (isset($temp[6])) {
                                         echo $temp[6];
-                                    } ?>" title="Ex: @Juandelacruz123">
+                                    } ?>" title="Password must contain at least 8 characters, with atleast 1 number, UPPER/lowercase, a special character and must match the Password">
                             </div>
                         </div>
                     </div>

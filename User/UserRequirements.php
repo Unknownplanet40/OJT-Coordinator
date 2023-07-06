@@ -15,7 +15,7 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
 }
 
 if (isset($_POST['submita'])) {
-    pl1upload();
+    //pl1upload();
 }
 
 
@@ -47,7 +47,7 @@ if (isset($_POST['submita'])) {
         <div class="announcement" style="margin: 10px; width: 98%; dispaly: flex; justify-content: center;">
             <!-- if the aadmin wants to submit the requirements personally this will show -->
             <div class="alert alert-primary" role="alert">
-                <h4 class="alert-heading">Hi [Username]!</h4>
+                <h4 class="alert-heading">Hi <?php echo $_SESSION['GlobalName']; ?>!</h4>
                 <p>We have noticed that you have completed your requirements. We would like to have a physical copy of
                     your requirements. Please submit it to the Office of the Registrar on the 2nd floor of the Main
                     Building from 8:00 AM to 5:00 PM, Monday to Friday.</p>

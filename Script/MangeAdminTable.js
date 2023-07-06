@@ -1,102 +1,80 @@
+// I Optimize this code using ChatGPT
 document.addEventListener("DOMContentLoaded", function () {
   //search table
   let table = document.getElementById("AccountTable");
-  let tbody = table.getElementsByTagName("tbody")[0];
-  let rows = tbody.getElementsByTagName("tr");
-  let seach = document.getElementById("SearchBar");
+  let tbody = table.querySelector("tbody");
+  let rows = Array.from(tbody.querySelectorAll("tr"));
+  let search = document.getElementById("SearchBar");
   let prev = document.getElementById("Previous");
   let next = document.getElementById("Next");
-  let AdminTable = document.getElementById("AdminTable");
-  let AdminTab = document.getElementById("AdminTab");
   let limit = 10;
+  let currentPage = 1;
+  let totalPage = Math.ceil(rows.length / limit);
+  let currentPageElement = document.getElementById("CurrentPage");
+  let totalPageElement = document.getElementById("TotalPage");
+  let totalItemElement = document.getElementById("TotalItem");
+  let password = document.getElementById("CrePword");
+  let conpassword = document.getElementById("CreConPword");
+  let showPassword = document.getElementById("showPassword");
 
-  seach.addEventListener("keyup", function () {
-    let filter = seach.value.toUpperCase();
-    let rows = document.getElementsByTagName("tr");
+  function filterRows() {
+    let filter = search.value.toUpperCase();
+    rows.forEach(function (row) {
+      let td = row.querySelector("td:nth-child(2)");
+      let textValue = td.textContent || td.innerText;
+      row.style.display = textValue.toUpperCase().includes(filter) ? "" : "none";
+    });
+    updatePagination();
+  }
 
-    for (let i = 0; i < rows.length; i++) {
-      let td = rows[i].getElementsByTagName("td")[1];
-      if (td) {
-        let textValue = td.textContent || td.innerHTML;
-        if (textValue.toUpperCase().indexOf(filter) > -1) {
-          rows[i].style.display = "";
-        } else {
-          rows[i].style.display = "none";
-        }
-      }
+  function showPage() {
+    let start = (currentPage - 1) * limit;
+    let end = currentPage * limit;
+    rows.forEach(function (row, index) {
+      row.style.display = (index >= start && index < end) ? "" : "none";
+    });
+    updatePagination();
+  }
+
+  function updatePagination() {
+    prev.classList.toggle("disabled", currentPage === 1);
+    next.classList.toggle("disabled", currentPage === totalPage);
+    currentPageElement.textContent = currentPage;
+    totalPageElement.textContent = totalPage;
+    totalItemElement.textContent = rows.length;
+  }
+
+  function resetSearch() {
+    search.value = "";
+    filterRows();
+  }
+
+  search.addEventListener("keyup", function () {
+    if (search.value === "") {
+      resetSearch();
+    } else {
+      filterRows();
     }
   });
 
-  //limit table row
-  let page = 1;
-  let start = (page - 1) * limit;
-  let end = page * limit;
-  let totalPage = Math.ceil(rows.length / limit);
-  let totalItem = rows.length;
-  let currentPage = document.getElementById("CurrentPage");
-  let total = document.getElementById("TotalPage");
-  let item = document.getElementById("TotalItem");
-
-  if (page == 1) {
-    prev.classList.add("disabled");
-  } else {
-    prev.classList.remove("disabled");
-  }
-
-  if (page == totalPage) {
-    next.classList.add("disabled");
-  } else {
-    next.classList.remove("disabled");
-  }
-
-  currentPage.innerHTML = page;
-  total.innerHTML = totalPage;
-  item.innerHTML = totalItem;
-
-  function showPage() {
-    for (let i = 0; i < rows.length; i++) {
-      if (i >= start && i < end) {
-        rows[i].style.display = "";
-      } else {
-        rows[i].style.display = "none";
-      }
-    }
-  }
-  showPage();
-
   prev.addEventListener("click", function () {
-    if (page > 1) {
-      page--;
-      start = (page - 1) * limit;
-      end = page * limit;
-      currentPage.innerHTML = page;
+    if (currentPage > 1) {
+      currentPage--;
       showPage();
     }
   });
 
   next.addEventListener("click", function () {
-    if (page < totalPage) {
-      page++;
-      start = (page - 1) * limit;
-      end = page * limit;
-      currentPage.innerHTML = page;
+    if (currentPage < totalPage) {
+      currentPage++;
       showPage();
     }
   });
 
-  // show password
-
-  let show = document.getElementById("showPassword");
-
-  show.addEventListener("click", function () {
-    let password = document.getElementById("CrePword");
-    let conpassword = document.getElementById("CreConPword");
-    if (show.checked) {
-      password.type = "text";
-      conpassword.type = "text";
-    } else {
-      password.type = "password";
-      conpassword.type = "password";
-    }
+  showPassword.addEventListener("change", function () {
+    password.type = showPassword.checked ? "text" : "password";
+    conpassword.type = showPassword.checked ? "text" : "password";
   });
+
+  showPage();
 });
