@@ -87,7 +87,7 @@ function MonthlyChart($month)
     <title>Admin Dashboard</title>
 </head>
 
-<body class="dark adminuser" style="min-width: 1080px;">
+<body class="dark adminuser user-select-none" style="min-width: 1080px;">
     <?php
     @include_once '../Components/AdminSidebar.php';
     if (isset($ShowAlert)) {

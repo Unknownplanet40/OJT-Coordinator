@@ -30,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     } else {
         $parentfolderpath = '../../uploads/' . $eventitle . '_Event'; // parent folder path 'eventtitle_event
         $folderpath = $parentfolderpath . '/Eventimg'; // folder path 'eventtitle_event/Eventimg'
-        $tempfolderpath = '../../uploads/temp'; // temp folder path
+        $tempfolderpath = $parentfolderpath . '/Eventimg/temp'; // temp folder path 'eventtitle_event/Eventimg/temp'
         $filename = RandomCharacter(5) . "_Eventimg(" . $eventitle . ")"; // filename format "randomstring_eventimg(eventtitle)
         $extensions = ['png', 'jpg', 'jpeg']; // allowed extensions
 

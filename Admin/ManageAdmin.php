@@ -42,7 +42,7 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
         <div>
             <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
                 <div class="container-fluid">
-                    <a class="navbar-brand text-warning" href="#">Accounts</a>
+                    <a class="navbar-brand text-warning">Accounts</a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                         data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
                         aria-label="Toggle navigation">

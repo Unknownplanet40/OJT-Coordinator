@@ -137,7 +137,7 @@ unset($_POST['resetEvent']);
                             <div class="form-floating mb-3 text-light">
                                 <textarea class="form-control text-bg-dark" placeholder="Event Description"
                                     id="EventDescription" name="EventDescription"
-                                    style="height: 150px"></textarea><!-- minlength="256" -->
+                                    style="height: 150px" minlength="256"></textarea>
                                 <label for="EventDescription">Event Description</label>
                             </div>
                         </div>
