@@ -76,7 +76,6 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
                         </div> 
                         <?php
 
-<<<<<<< HEAD
                         $sql = "SELECT EventID FROM tbl_trainee WHERE UID = '" . $_SESSION['GlobalID'] . "' AND Join_an_Event = 1";
                         $result = mysqli_query($conn, $sql);
 
@@ -111,7 +110,7 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
                         echo $output;
                         ?>
                         
-=======
+
                         $sql = "SELECT * FROM tbl_trainee WHERE UID = '" . $_SESSION['GlobalID'] . "'";
                         $result = mysqli_query($conn, $sql);
                         $row = mysqli_fetch_assoc($result);
