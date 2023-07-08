@@ -73,14 +73,43 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
                     <div class="card h-100 card border-success mb-3">
                         <div class="card-header">
                             Events Joined
-                        </div>
-                        <div class="card-body">
+                        </div> 
+                        <?php
+
+                        $sql = "SELECT EventID FROM tbl_trainee WHERE UID = '" . $_SESSION['GlobalID'] . "' AND Join_an_Event = 1";
+                        $result = mysqli_query($conn, $sql);
+
+                        if ($result){
+                            $row = mysqli_fetch_assoc($result);
+                            $eventID = $row['EventID'];
+                            
+                            $sql = "SELECT * FROM tbl_events WHERE eventID = '$eventID'";
+                            $result = mysqli_query($conn, $sql);
+                            $row = mysqli_fetch_assoc($result);
+
+                            $start = date("g:i A", strtotime($row['eventStartTime']));
+                            $end = date("g:i A", strtotime($row['eventEndTime']));
+                            $date = date("F j, Y", strtotime($row['eventDate']));
+
+                            $output =
+                                '<div class="card-body">
+                                <h5 class="card-title">' . $row['eventTitle'] . '</h5>
+                                <p class="card-text">' . $date . '</p>
+                                <small class="text-muted">Time: ' . $start . ' - ' . $end . ' | Available Seats: ' . $row['eventSlots'] . '</small>
+                            </div>';
+                        }else{
+                            $output =
+                            '<div class="card-body">
                             <!-- this should be a list of events joined by the user -->
                             <h5 class="card-title"></h5> <!-- Event Name -->
                             <p class="card-text">No events joined yet.</p> <!-- Event Description -->
                             <!-- so on and so forth -->
                             <!--<a href="#" class="btn btn-success" hidden>Go somewhere</a>-->
-                        </div>
+                        </div>';
+                        }
+                        echo $output;
+                        ?>
+                        
                     </div>
                 </div>
             </div>
