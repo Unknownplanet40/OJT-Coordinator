@@ -47,7 +47,7 @@ CREATE TABLE `tbl_accounts` (
 INSERT INTO `tbl_accounts` (`ID`, `UID`, `name`, `username`, `password`, `role`, `status`) VALUES
 (1, 1, 'Ryan James Capadocia', 'ryanjames', '@Capadocia123', 'administrator', 0),
 (2, 2, 'James Veloria', 'jamesveloria', '@Veloria123', 'moderator', 0),
-(3, 1000000000, 'Lorenzo Asis', 'lorenzoasis', 'Lorenzo.asis2023', 'User', 0),
+(3, 1000000000, 'Lorenzo Asis', 'lorenzoasis', 'Lorenzo.asis2023', 'User', 1),
 (4, 2000000000, 'Brandon Logon', 'brandon23', 'Brandon.logon4sale', 'User', 0),
 (5, 3000000000, 'Jeric Dayandante', 'jeric20', 'Jeric@4sale', 'User', 1),
 (6, 3, 'Administrator Account', 'admin01', '@dmin_Account-1', 'administrator', 0),
@@ -94,7 +94,7 @@ CREATE TABLE `tbl_admin` (
 --
 
 INSERT INTO `tbl_admin` (`UID`, `name`, `admin_uname`, `admin_pword`, `admin_email`, `department`, `imagePath`, `date_created`, `last_login`, `role`, `status`) VALUES
-(1, 'Ryan James Capadocia', 'ryanjames', '@Capadocia123', 'rj.caps@cvsu.edu.ph', 'BSIT', '../Image/Profile.gif', '2023-06-30', '15:36:53', 'administrator', 0),
+(1, 'Ryan James Capadocia', 'ryanjames', '@Capadocia123', 'rj.caps@cvsu.edu.ph', 'BSIT', '../Image/Profile.gif', '2023-06-30', '21:40:58', 'administrator', 0),
 (2, 'James Veloria', 'jamesveloria', '@Veloria123', 'james@gmail.com', 'BSIT', '../Image/Profile.gif', '2023-06-30', NULL, 'moderator', 0),
 (3, 'Administrator Account', 'admin01', '@dmin_Account-1', 'Example@Domain.com', 'BSCS', '../uploads/admin01_Credentials/admin01_Profile_ljfma.gif', '2023-06-28', '19:49:22', 'administrator', 0);
 
@@ -116,7 +116,7 @@ DELIMITER ;
 --
 
 CREATE TABLE `tbl_announcement` (
-  `ID` int(5) NOT NULL,
+  `ID` int(1) NOT NULL,
   `Title` varchar(128) DEFAULT 'announcement',
   `Description` text NOT NULL,
   `PostedBy` text DEFAULT NULL,
@@ -124,6 +124,13 @@ CREATE TABLE `tbl_announcement` (
   `DateEnd` date NOT NULL,
   `isEnded` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='This if For Announcement For all Trainee';
+
+--
+-- Dumping data for table `tbl_announcement`
+--
+
+INSERT INTO `tbl_announcement` (`ID`, `Title`, `Description`, `PostedBy`, `DateAdded`, `DateEnd`, `isEnded`) VALUES
+(1, 'Announcement', 'For all the Trainees, please be reminded that the deadline for the submission of your requirements is on August 15, 2023. Thank you!', 'Company A', '2023-06-15', '2023-07-05', 0);
 
 -- --------------------------------------------------------
 
@@ -182,8 +189,8 @@ CREATE TABLE `tbl_events` (
   `eventDescription` text DEFAULT NULL,
   `eventImage` varchar(512) DEFAULT '../Image/eventImage.jpg',
   `eventDate` date DEFAULT NULL,
-  `eventStartTime` timestamp NOT NULL DEFAULT current_timestamp(),
-  `eventEndTime` timestamp NULL DEFAULT NULL,
+  `eventStartTime` time DEFAULT NULL,
+  `eventEndTime` time DEFAULT NULL,
   `eventType` varchar(50) DEFAULT NULL,
   `eventCompletion` date DEFAULT NULL,
   `eventEnded` varchar(10) DEFAULT 'false',
@@ -191,6 +198,42 @@ CREATE TABLE `tbl_events` (
   `eventSlots` int(10) NOT NULL DEFAULT 50,
   `eventOrganizer` varchar(30) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tbl_events`
+--
+
+INSERT INTO `tbl_events` (`ID`, `eventID`, `eventTitle`, `eventDescription`, `eventImage`, `eventDate`, `eventStartTime`, `eventEndTime`, `eventType`, `eventCompletion`, `eventEnded`, `eventLocation`, `eventSlots`, `eventOrganizer`) VALUES
+(1, 123, 'Annual Charity Run', 'Join us for our annual charity run to raise funds for a local nonprofit organization.', '../Image/eventImage.jpg', '2023-08-15', '21:26:51', '00:27:07', 'Sports/Charity', '2023-07-06', 'false', 'Central Park', 50, 'Community Sports Club');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_programs`
+--
+
+CREATE TABLE `tbl_programs` (
+  `ID` int(10) NOT NULL,
+  `progID` int(128) DEFAULT NULL,
+  `title` varchar(512) DEFAULT NULL,
+  `description` text NOT NULL,
+  `start_date` date NOT NULL,
+  `end_date` date NOT NULL,
+  `slots` int(50) NOT NULL DEFAULT 10,
+  `department` varchar(512) DEFAULT NULL,
+  `hours` int(50) DEFAULT 600,
+  `start_time` time DEFAULT NULL,
+  `end_time` time DEFAULT NULL,
+  `Duration` varchar(100) DEFAULT NULL,
+  `closed` tinyint(1) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tbl_programs`
+--
+
+INSERT INTO `tbl_programs` (`ID`, `progID`, `title`, `description`, `start_date`, `end_date`, `slots`, `department`, `hours`, `start_time`, `end_time`, `Duration`, `closed`) VALUES
+(1, 12345, 'Introduction to Programming', 'This course introduces the basics of programming and computer science concepts.', '2023-09-01', '2023-12-15', 30, 'BSIT', 600, '09:00:00', '12:00:00', '15', 0);
 
 -- --------------------------------------------------------
 
@@ -234,10 +277,10 @@ CREATE TABLE `tbl_trainee` (
 --
 
 INSERT INTO `tbl_trainee` (`UID`, `name`, `trainee_uname`, `trainee_pword`, `email`, `birthdate`, `age`, `department`, `status`, `role`, `account_Created`, `profile_Completed`, `vaccine_Completed`, `image`, `gender`, `course`, `phone`, `program`, `prog_duration`, `fulfilled_time`, `completed`, `evaluated`, `address`, `city`, `postal_code`, `province`, `Join_an_Event`, `EventID`) VALUES
-(1000000000, 'Lorenzo Asis', 'lorenzoasis', 'Lorenzo.asis2023', 'Lorenzo@gail.co', '2023-06-30', 23, 'BSCS', 0, 'User', '2023-06-30', 'true', 0, '../uploads/lorenzoasis_Credentials/lorenzoasis_Profile_HJTSZ.gif', 'male', 'BSCS-2B', '09876543219', NULL, NULL, NULL, NULL, 'true', 'Queenstown Molino 3', 'Bacoor', 4102, 'Cavite', 0, NULL),
+(1000000000, 'Lorenzo Asis', 'lorenzoasis', 'Lorenzo.asis2023', 'Lorenzo@gail.co', '2023-06-30', 23, 'BSCS', 1, 'User', '2023-06-30', 'true', 0, '../uploads/lorenzoasis_Credentials/lorenzoasis_Profile_HJTSZ.gif', 'male', 'BSCS-2B', '09876543219', NULL, NULL, NULL, NULL, 'true', 'Queenstown Molino 3', 'Bacoor', 4102, 'Cavite', 0, NULL),
 (1234567825, 'Joseph Contador', 'josephpogi23', 'Joseph@pogi23', 'joseph.contador@cvsu.edu.ph', '2004-02-09', NULL, 'BSIT', 0, 'User', '2023-07-03', 'true', 1, '../uploads/josephpogi23_Credentials/josephpogi23_Profile_Tq3UZ.jpg', 'male', 'BSIT-2B', '09687363887', NULL, NULL, NULL, NULL, 'false', 'DASMA PALIRARAN BACOOR CAVITE', 'DASMA', 404, 'Dasma', 0, NULL),
 (2000000000, 'Brandon Logon', 'brandon23', 'Brandon.logon4sale', 'Brandon@gmail.com', '2023-06-29', 21, 'BSIT', 0, 'User', '2023-06-30', 'false', 0, '../Image/Profile.png', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'false', NULL, NULL, NULL, NULL, 0, NULL),
-(3000000000, 'Jeric Dayandante', 'jeric20', 'Jeric@4sale', 'jeric@outlook.com', '2023-06-30', 20, 'BSIT', 1, 'User', '2023-06-30', 'true', 1, '../uploads/jeric20_Credentials/jeric20_Profile_wFId1.gif', 'male', 'BSIT-2B', '09675453124', NULL, NULL, NULL, NULL, 'false', 'Taga Prima banda sa imus', 'Imus', 4102, 'Cavite', 0, NULL);
+(3000000000, 'Jeric Dayandante', 'jeric20', 'Jeric@4sale', 'jeric@outlook.com', '2023-06-30', 20, 'BSIT', 1, 'User', '2023-06-30', 'true', 1, '../Image/Profile.png', 'male', 'BSIT-2B', '09675453124', NULL, NULL, NULL, NULL, 'false', 'Taga Prima banda sa imus', 'Imus', 4102, 'Cavite', 0, NULL);
 
 --
 -- Triggers `tbl_trainee`
@@ -312,6 +355,12 @@ ALTER TABLE `tbl_events`
   ADD PRIMARY KEY (`ID`);
 
 --
+-- Indexes for table `tbl_programs`
+--
+ALTER TABLE `tbl_programs`
+  ADD PRIMARY KEY (`ID`);
+
+--
 -- Indexes for table `tbl_trainee`
 --
 ALTER TABLE `tbl_trainee`
@@ -340,12 +389,6 @@ ALTER TABLE `tbl_admin`
   MODIFY `UID` bigint(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
--- AUTO_INCREMENT for table `tbl_announcement`
---
-ALTER TABLE `tbl_announcement`
-  MODIFY `ID` int(5) NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT for table `tbl_evaluation`
 --
 ALTER TABLE `tbl_evaluation`
@@ -355,7 +398,13 @@ ALTER TABLE `tbl_evaluation`
 -- AUTO_INCREMENT for table `tbl_events`
 --
 ALTER TABLE `tbl_events`
-  MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `tbl_programs`
+--
+ALTER TABLE `tbl_programs`
+  MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `tbl_trainee`
