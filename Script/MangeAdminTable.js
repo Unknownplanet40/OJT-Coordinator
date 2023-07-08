@@ -20,7 +20,6 @@ document.addEventListener("DOMContentLoaded", function () {
         }
       }
     }
-
   });
 
   //limit table row
@@ -47,6 +46,8 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
   showPage();
+  console.log(rows.length);
+  
 
   prev.addEventListener("click", function () {
     if (page > 1) {

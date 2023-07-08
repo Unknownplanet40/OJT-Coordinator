@@ -23,7 +23,6 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
     <link rel="stylesheet" href="../Style/ImportantImport.css">
     <script src="../Script/SidebarScript.js"></script>
     <script src="../Script/SweetAlert2.js"></script>
-    <script src="../Script/chart.js"></script>
     <script src="../Script/MangeAdminTable.js"></script>
     <script defer src="../Script/Bootstrap_Script/bootstrap.bundle.js"></script>
     <title>Accounts</title>
@@ -174,7 +173,13 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
 
                                     // format date to Januaray 1, 2021
                                     $dateCreated = date("F j, Y", strtotime($row['date_created']));
-                                    $row['last_login'] = date("h:i A", strtotime($row['last_login']));
+
+                                    if (isset($row['last_login'])) {
+                                        $lastlog = date("h:i A", strtotime($row['last_login']));
+                                    } else {
+                                        $lastlog = "Never";
+                                    }
+
 
 
                                     echo '<tr>
@@ -261,7 +266,6 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
                                             let modalImage = document.querySelector("#modalImage");
                                             let modalUname = document.querySelector("#modalUname");
                                             let modalTitle = document.querySelector("#modalTitle");
-                                            let modalID = document.querySelector("#UpID");
 
                                             modalName.innerHTML = "' . $row['name'] . '";
                                             modalEmail.innerHTML = "' . $row['admin_email'] . '";
@@ -270,16 +274,15 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
                                             modalStatus.innerHTML = "' . $modalStatus . '";
                                             modalImage.setAttribute("src", "' . $row['imagePath'] . '");
                                             modalUname.innerHTML = "' . $row['admin_uname'] . '";
-                                            modalID.innerHTML = "' . $row['UID'] . '";
 
-                                            if ("' . $row['status'] . '" == 1) {
+                                            if (' . $row['status'] . ' == 1) {
                                                 modalTitle.innerHTML = "Your Information";
                                                 modalCreated.innerHTML = "' . $dateCreated . '";
                                                 modalLastLogin.innerHTML = "Now";
                                             } else {
                                                 modalTitle.innerHTML = "Account Information";
                                                 modalCreated.innerHTML = "' . $dateCreated . '";
-                                                modalLastLogin.innerHTML = "' . $row['last_login'] . '";
+                                                modalLastLogin.innerHTML = "' . $lastlog . '";
                                             }
 
                                             let modalEdit = document.querySelector("#modalEdit");

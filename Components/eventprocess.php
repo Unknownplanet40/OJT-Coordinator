@@ -37,17 +37,12 @@ if($_SERVER["REQUEST_METHOD"] == "GET") {
                 $_SESSION['Show'] = true;
                 header("Location: ../User/UserDashboard.php");
             }
-
-
-
-
         }else {
             $_SESSION['message'] = "Can\'t proceed, Please try again later!";
             $_SESSION['icon'] = "error";
             $_SESSION['Show'] = true;
             header("Location: ../User/UserDashboard.php");
         }
-
     } else {
         $_SESSION['message'] = "Can\'t join Even, Try again later.";
         $_SESSION['icon'] = "error";

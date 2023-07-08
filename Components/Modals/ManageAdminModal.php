@@ -50,7 +50,23 @@
                                 pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{8,}"
                                 title="Password must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters and one special character.">
                             <input class="form-check-input" id="showPassword" type="checkbox">
-                            <label for="showPassword" class="form-label">Show Password</label>
+                            <label for="showPassword" class="form-label user-select-none">Show Password</label>
+                            <script>
+                                let show = document.getElementById("showPassword");
+                                show.checked = false;
+
+                                show.addEventListener("click", function () {
+                                    let password = document.getElementById("CrePword");
+                                    let conpassword = document.getElementById("CreConPword");
+                                    if (show.checked) {
+                                        password.type = "text";
+                                        conpassword.type = "text";
+                                    } else {
+                                        password.type = "password";
+                                        conpassword.type = "password";
+                                    }
+                                });
+                            </script>
                         </div>
                         <div class="col-md-6 mb-3">
                             <label for="CreConPword" class="form-label">Confirm Password</label>

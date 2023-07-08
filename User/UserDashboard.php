@@ -73,16 +73,16 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
                     <div class="card h-100 card border-success mb-3">
                         <div class="card-header">
                             Events Joined
-                        </div> 
+                        </div>
                         <?php
-
-                        $sql = "SELECT EventID FROM tbl_trainee WHERE UID = '" . $_SESSION['GlobalID'] . "' AND Join_an_Event = 1";
+                        $id = $_SESSION['GlobalID'];
+                        $sql = "SELECT EventID, Join_an_Event FROM tbl_trainee WHERE UID = '$id'";
                         $result = mysqli_query($conn, $sql);
+                        $row = mysqli_fetch_assoc($result);
+                        $eventID = $row['EventID'];
+                        $join = $row['Join_an_Event'];
 
-                        if ($result){
-                            $row = mysqli_fetch_assoc($result);
-                            $eventID = $row['EventID'];
-                            
+                        if ($row['Join_an_Event'] == 1) {
                             $sql = "SELECT * FROM tbl_events WHERE eventID = '$eventID'";
                             $result = mysqli_query($conn, $sql);
                             $row = mysqli_fetch_assoc($result);
@@ -92,62 +92,24 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
                             $date = date("F j, Y", strtotime($row['eventDate']));
 
                             $output =
+                                $output =
                                 '<div class="card-body">
                                 <h5 class="card-title">' . $row['eventTitle'] . '</h5>
                                 <p class="card-text">' . $date . '</p>
                                 <small class="text-muted">Time: ' . $start . ' - ' . $end . ' | Available Seats: ' . $row['eventSlots'] . '</small>
                             </div>';
-                        }else{
-                            $output =
-                            '<div class="card-body">
-                            <!-- this should be a list of events joined by the user -->
-                            <h5 class="card-title"></h5> <!-- Event Name -->
-                            <p class="card-text">No events joined yet.</p> <!-- Event Description -->
-                            <!-- so on and so forth -->
-                            <!--<a href="#" class="btn btn-success" hidden>Go somewhere</a>-->
-                        </div>';
-                        }
-                        echo $output;
-                        ?>
-                        
-
-                        $sql = "SELECT * FROM tbl_trainee WHERE UID = '" . $_SESSION['GlobalID'] . "'";
-                        $result = mysqli_query($conn, $sql);
-                        $row = mysqli_fetch_assoc($result);
-                        $eventID = $row['EventID'];
-                        $Join_an_Event = $row['Join_an_Event'];
-
-                        if ($result){
-                            if (isset($Join_an_Event) && $Join_an_Event == 1){
-                                $sql = "SELECT * FROM tbl_events WHERE eventID = '$eventID'";
-                                $result = mysqli_query($conn, $sql);
-                                $row = mysqli_fetch_assoc($result);
-    
-                                $start = date("g:i A", strtotime($row['eventStartTime']));
-                                $end = date("g:i A", strtotime($row['eventEndTime']));
-                                $date = date("F j, Y", strtotime($row['eventDate']));
-    
-                                $output =
-                                    '<div class="card-body">
-                                    <h5 class="card-title">' . $row['eventTitle'] . '</h5>
-                                    <p class="card-text">' . $date . '</p>
-                                    <small class="text-muted">Time: ' . $start . ' - ' . $end . ' | Available Seats: ' . $row['eventSlots'] . '</small>
+                        } else {
+                                    $output =
+                                        '<div class="card-body">
+                                    <!-- this should be a list of events joined by the user -->
+                                    <h5 class="card-title"></h5> <!-- Event Name -->
+                                    <p class="card-text">No events joined yet.</p> <!-- Event Description -->
+                                    <!-- so on and so forth -->
+                                    <!--<a href="#" class="btn btn-success" hidden>Go somewhere</a>-->
                                 </div>';
-                            }else{
-                                $output =
-                                '<div class="card-body">
-                                <!-- this should be a list of events joined by the user -->
-                                <h5 class="card-title"></h5> <!-- Event Name -->
-                                <p class="card-text">No events joined yet.</p> <!-- Event Description -->
-                                <!-- so on and so forth -->
-                                <!--<a href="#" class="btn btn-success" hidden>Go somewhere</a>-->
-                            </div>';
-                            }
-                        }
-
-                        echo $output;
-                        ?> 
->>>>>>> 6c1ffab138e0304de983bf99938c77a2303ca13c
+                                }
+                                echo $output;
+                        ?>
                     </div>
                 </div>
             </div>
