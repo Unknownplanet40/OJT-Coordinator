@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", function () {
   let Esearch = document.getElementById("EveSearchBar");
   let Eprev = document.getElementById("EvePrevious");
   let Enext = document.getElementById("EveNext");
-  let Elimit = 10;
+  let Elimit = 5;
   let EcurrentPage = 1;
   let EtotalPage = Math.ceil(Erows.length / Elimit);
   let EcurrentPageElement = document.getElementById("EveCurrentPage");

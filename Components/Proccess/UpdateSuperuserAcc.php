@@ -1,6 +1,13 @@
 <?php
 session_start();
 @include_once("../../Database/config.php");
+@include_once("../../Components/PopupAlert.php");
+
+if (!isset($_SESSION['DatahasbeenFetched'])) {
+    header("Location: ../Login.php");
+} else {
+    $ShowAlert = true;
+}
 
 if (isset($_SESSION['GlobalRole']) && $_SESSION['GlobalRole'] == "administrator") {
     $address = "../../Admin/ManageAdmin.php";

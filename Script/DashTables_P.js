@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", function () {
   let Psearch = document.getElementById("ProgSearchBar");
   let Pprev = document.getElementById("ProgPrevious");
   let Pnext = document.getElementById("ProgNext");
-  let Plimit = 10;
+  let Plimit = 5;
   let PcurrentPage = 1;
   let PtotalPage = Math.ceil(Prows.length / Plimit);
   let PcurrentPageElement = document.getElementById("ProgCurrentPage");

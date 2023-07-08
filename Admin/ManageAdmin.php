@@ -32,7 +32,7 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
 <body class="dark adminuser" style="min-width: 1080px;">
     <?php
     @include_once '../Components/AdminSidebar.php';
-    @include_once '../Components/ManageAdminModal.php';
+    @include_once '../Components/Modals/ManageAdminModal.php';
     if (isset($ShowAlert)) {
         echo NewAlertBox();
         $_SESSION['Show'] = false;
@@ -180,7 +180,7 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
                                     echo '<tr>
                                     <th scope="row">' . $i . '</th>
                                     <td class="text-center"><img src="' . $row['imagePath'] . '" alt="Profile" class="rounded-circle img-fluid" style="width: 50px; height: 50px;"></td>
-                                    <td class="text-truncate" style="max-width: 100px;">' . $row['name'] . '</td>
+                                    <td class="text-truncate" style="max-width: 100px;" title="' . $row['name'] . '">' . $row['name'] . '</td>
                                     <td class="text-truncate" style="max-width: 100px;">' . $row['admin_uname'] . '</td>
                                     <td class="text-truncate" style="max-width: 100px;">' . hiddenPasswordAdmin($row['admin_pword']) . '</td>
                                     <td hidden>' . $row['admin_pword'] . '</td>
@@ -261,6 +261,7 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
                                             let modalImage = document.querySelector("#modalImage");
                                             let modalUname = document.querySelector("#modalUname");
                                             let modalTitle = document.querySelector("#modalTitle");
+                                            let modalID = document.querySelector("#UpID");
 
                                             modalName.innerHTML = "' . $row['name'] . '";
                                             modalEmail.innerHTML = "' . $row['admin_email'] . '";
@@ -269,6 +270,7 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
                                             modalStatus.innerHTML = "' . $modalStatus . '";
                                             modalImage.setAttribute("src", "' . $row['imagePath'] . '");
                                             modalUname.innerHTML = "' . $row['admin_uname'] . '";
+                                            modalID.innerHTML = "' . $row['UID'] . '";
 
                                             if ("' . $row['status'] . '" == 1) {
                                                 modalTitle.innerHTML = "Your Information";
@@ -318,7 +320,7 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
                                                     color: "#fff",
                                                 }).then((result) => {
                                                     if (result.isConfirmed) {
-                                                        window.location.href = "../Components/Proccess/Delete.php?ID=' . $row['UID'] . '&username=' . $row['admin_uname'] . '";
+                                                        window.location.href = "../Components/Proccess/DeleteSuperuserAcc.php?id=' . $row['UID'] . '";
                                                     }
                                                 });
                                             });

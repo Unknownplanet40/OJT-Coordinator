@@ -74,7 +74,7 @@ if (isset($_SESSION['autoUsername']) && isset($_SESSION['autoPassword'])) {
                     <input type="text" class="form-control item" name="username" id="username" placeholder="Username"
                         value="<?php if (isset($uname)) {
                             echo $uname;
-                        } ?> " title="Username must contain at least 5 characters, with no special characters, no whitespaces no numbers, no UPPER/lowercase and must be unique.">
+                        } ?>" title="Username must contain at least 5 characters, with no special characters, no whitespaces no numbers, no UPPER/lowercase and must be unique.">
                 </div>
                 <div class="form-group">
                     <input type="password" class="form-control item" name="password" id="password"

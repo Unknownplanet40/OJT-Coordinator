@@ -85,21 +85,22 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
                 </div>
             </div>
             <div class="text">Events</div>
-            <div class="row row-cols-1 row-cols-md-3 g-4">
-                <?php
-                $sql = "SELECT * FROM tbl_events";
-                $result = mysqli_query($conn, $sql);
+            <div class="container-lg">
+                <div class="row row-cols-1 row-cols-md-3 g-4">
+                    <?php
+                    $sql = "SELECT * FROM tbl_events";
+                    $result = mysqli_query($conn, $sql);
 
-                if (mysqli_num_rows($result) > 0) {
+                    if (mysqli_num_rows($result) > 0) {
 
-                    while ($row = mysqli_fetch_assoc($result)) {
-                        
-                        $start = date("g:i A", strtotime($row['eventStartTime']));
-                        $end = date("g:i A", strtotime($row['eventEndTime']));
-                        $date = date("F j, Y", strtotime($row['eventDate']));
+                        while ($row = mysqli_fetch_assoc($result)) {
 
-                        $output =
-                            '
+                            $start = date("g:i A", strtotime($row['eventStartTime']));
+                            $end = date("g:i A", strtotime($row['eventEndTime']));
+                            $date = date("F j, Y", strtotime($row['eventDate']));
+
+                            $output =
+                                '
                     <div class="col">
                         <div class="card h-100">
                             <img style="ratio: 16/9" src="' . $row['eventImage'] . '" class="card-img-top"
@@ -114,30 +115,30 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
                             <div class="card-footer text-center">
                                 <!-- if the user is already registered, the button should be disabled -->
                                 ';
-                        echo $output;
-                        if ($_SESSION['GlobalJoin_an_Event'] == 1) {
-                            echo '<a class="btn btn-success" hidden>Register</a>
+                            echo $output;
+                            if ($_SESSION['GlobalJoin_an_Event'] == 1) {
+                                echo '<a class="btn btn-success" hidden>Register</a>
                             </div>
                         </div>
                     </div>';
-                        } else {
-                            echo '<a href="../Components/eventprocess.php?ID=' . $row['eventID'] . '" class="btn btn-success">Register</a>
+                            } else {
+                                echo '<a href="../Components/eventprocess.php?ID=' . $row['eventID'] . '" class="btn btn-success">Register</a>
                             </div>
                         </div>
                     </div>';
+                            }
                         }
-                    }
 
-                } else {
-                    echo '
+                    } else {
+                        echo '
                     <div class="content d-flex justify-content-center" style="margin: 10px; width: 98%;">
                         No Events Available
                     </div>';
-                }
-                ;
-                ?>
+                    }
+                    ;
+                    ?>
+                </div>
             </div>
-
             <br>
         </div>
 

@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", function () {
   let Tsearch = document.getElementById("TraineeSearchBar");
   let Tprev = document.getElementById("TraineePrevious");
   let Tnext = document.getElementById("TraineeNext");
-  let Tlimit = 10;
+  let Tlimit = 5;
   let TcurrentPage = 1;
   let TtotalPage = Math.ceil(Trows.length / Tlimit);
   let TcurrentPageElement = document.getElementById("TraineeCurrentPage");
