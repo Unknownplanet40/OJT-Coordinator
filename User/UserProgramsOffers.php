@@ -30,7 +30,7 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
 <body>
     <?php 
     @include_once '../Components/Sidebar.php';
-    @include_once '../Components/ProgramsModals.php';
+    @include_once '../Components/Modals/ProgramsModals.php';
     if (isset($ShowAlert)) {
         echo NewAlertBox();
         $_SESSION['Show'] = false;
