@@ -9,10 +9,11 @@
             <div class="modal-body">
                 <div class="row">
                     <div class="col-sm-4 text-center">
-                        <img src="https://via.placeholder.com/256" id="Mimg" class="img-fluid img-thumbnail" alt="..." width="256" height="256">
+                        <img src="https://via.placeholder.com/256" id="Mimg" class="img-fluid img-thumbnail" alt="...">
                     </div>
                     <div class="col-sm-8">
-                        <p class="card-text text-wrap" id="Mdesc"></p>
+                        <p class="card-text text-wrap" id="Mdesc" style="text-align: justify;"></p>
+                        <hr>
                         <p class="card-text"><small class="text-muted">Event Date:</small>&nbsp;<span id="Mdate"></span></p>
                         <p class="card-text"><small class="text-muted">Event Time:</small>&nbsp;<span id="Mtime"></span></p>
                         <p class="card-text"><small class="text-muted">Event Location:</small>&nbsp;<span id="Mloc"></span></p>
