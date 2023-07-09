@@ -220,30 +220,36 @@ unset($_POST['resetEvent']);
                             name="resetEvent">
                     </div>
                 </form>
-                <?php
-                if (mysqli_num_rows($result) > 0) {
-                    $i = 1;
-                    while ($row = mysqli_fetch_assoc($result)) {
+                <div class="row row-cols-1 row-cols-md-3 g-4">
+                    <?php
+                    if (mysqli_num_rows($result) > 0) {
+                        $i = 1;
+                        while ($row = mysqli_fetch_assoc($result)) {
 
-                        $start = date("g:i A", strtotime($row['eventStartTime']));
-                        $end = date("g:i A", strtotime($row['eventEndTime']));
-                        $date = date("F j, Y", strtotime($row['eventDate']));
+                            $start = date("g:i A", strtotime($row['eventStartTime']));
+                            $end = date("g:i A", strtotime($row['eventEndTime']));
+                            $date = date("F j, Y", strtotime($row['eventDate']));
 
-                        if ($row['eventEnded'] == 'true') {
-                            $status = 'Ended';
-                        } else {
-                            $status = 'Ongoing';
-                        }
+                            if ($row['eventEnded'] == 'true') {
+                                $status = 'Ended';
+                            } else {
+                                $status = 'Ongoing';
+                            }
 
-                        $output = '
+                            // limit description to 100 characters and add ... at the end
+                            $desc = $row['eventDescription'];
+                            $desc = substr($desc, 0, 100);
+                            $desc = $desc . '...';
+
+                            $output = '
             <div class="col">
                 <div class="card h-100 text-bg-dark">
-                    <img style="ratio: 16/9" src="' . $row['eventImage'] . '" class="card-img-top" alt="...">
+                    <img src="' . $row['eventImage'] . '" class="card-img-top" style="height: 200px; object-fit: cover;" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">' . $row['eventTitle'] . '</h5>
                         <p class="card-text">' . $date . '</p>
                         <p class="card-text">' . $row['eventLocation'] . '</p>
-                        <p class="card-text" style="font-size: 14px;">' . $row['eventDescription'] . '</p>
+                        <p class="card-text" style="font-size: 14px;">' . $desc . '</p>
                         <small class="text-muted">Time: ' . $start . ' - ' . $end . ' | Available Seats: ' . $row['eventSlots'] . '</small>
                     </div>
                     <div class="card-footer text-center">
@@ -275,18 +281,21 @@ unset($_POST['resetEvent']);
                     EventType.innerHTML = "' . $row['eventType'] . '";
                     EventStat.innerHTML = "' . $status . '";
                     EventOrg.innerHTML = "' . $row['eventOrganizer'] . '";
-                    EventUp.href = "AdminUpdateEvent.php?id=' . $row['eventID'] . '";
+                    EventUp.href = "../Components/Proccess/EventUpdate.php?id=' . $row['eventID'] . '";
                     });
                     </script>';
-                        echo '<div class="row row-cols-1 row-cols-md-3 g-4">';
-                        echo $output;
-                        echo '</div>';
-                        $i++;
+                            echo $output;
+                            $i++;
+                        }
+                    } else {
+                        $nodata = true;
                     }
-                } else {
+                    ?>
+                </div>
+                <?php if (isset($nodata)) {
+                    echo '<br>';
                     @include_once '../Components/Placeholders/CardPlaceholder.php';
-                }
-                ?>
+                } ?>
             </div>
             <br>
         </div>

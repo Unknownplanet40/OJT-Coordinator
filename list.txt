@@ -1,10 +1,11 @@
 This is the list of page that already done. (Please update this list when you are done with a page.)
 
-# ADMIN (4/8)
+# ADMIN (5/8)
 - AdminDashboard.php
 - AdminSystemLog.php (Need a little bit of work but it's done)
 - AdminTraineeEvaluation.php
 - ManageAccount.php (both admin and moderator)
+- AdminEvent.php
 
 # MODERATOR (0/6)
 

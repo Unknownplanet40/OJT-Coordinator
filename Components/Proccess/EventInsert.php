@@ -1,6 +1,6 @@
 <?php
 session_start();
-@include_once '../../Database/config.php';
+@include_once("../../Database/config.php");
 
 print_r($_POST);
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -93,6 +93,32 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             }
         }
     }
-    $sql = "INSERT INTO `event`(`EventTitle`, `EventLocation`, `EventDate`, `EventStart`, `EventEnd`, `EventType`, `EventCompletion`, `EventOrganizer`, `EventDescription`, `EventSlot`, `EventImage`) VALUES ('$eventitle','$eventloc','$eventdate','$eventstart','$eventend','$eventtype','$eventcom','$eventorg','$eventdesc','$eventslot','$eventimg')";
+
+    // get the last eventID in the database
+    $sql = "SELECT eventID FROM tbl_events ORDER BY eventID DESC LIMIT 1";
+    $result = mysqli_query($conn, $sql);
+    $row = mysqli_fetch_assoc($result);
+    $eventid = $row['eventID'] + 1;
+
+    // I got an error when I tried to insert the eventdesc into the database 
+    // because of the single quote (') so I used this function to replace it with (\')
+    $eventitle = str_replace("'", "\'", $eventitle);
+    $eventloc = str_replace("'", "\'", $eventloc);
+    $eventdesc = str_replace("'", "\'", $eventdesc);
+
+    $sql = "INSERT INTO tbl_events(eventID, eventTitle, eventDescription, eventImage, eventDate, eventStartTime, eventEndTime, eventType, eventCompletion, eventEnded, eventLocation, eventSlots, eventOrganizer) VALUES ('$eventid', '$eventitle', '$eventdesc', '$eventimg', '$eventdate', '$eventstart', '$eventend', '$eventtype', '$eventcom', 'false', '$eventloc', '$eventslot', '$eventorg')";
+    $result = mysqli_query($conn, $sql);
+
+    if ($result) {
+        $_SESSION['message'] = "Event has been added successfully!";
+        $_SESSION['icon'] = "success";
+        $_SESSION['Show'] = true;
+        header("Location: ../../Admin/AdminEvents.php");
+    } else {
+        $_SESSION['message'] = "Event has not been added successfully!";
+        $_SESSION['icon'] = "error";
+        $_SESSION['Show'] = true;
+        header("Location: ../../Admin/AdminEvents.php");
+    }
 }
 ?>
