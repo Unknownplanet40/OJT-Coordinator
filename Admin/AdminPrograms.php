@@ -211,7 +211,7 @@ unset($_POST['resetEvent']);
                 <hr class="mt-4 mb-4" style="background-color: white; height: 5px; border-radius: 5px;">
 
                 <!-- search bar -->
-                <form action="AdminEvents.php" method="POST" id="searchForm">
+                <form action="AdminPrograms.php" method="POST" id="searchForm">
                     <div class="input-group mb-3">
                         <input type="text" class="form-control text-bg-dark" placeholder="Search Event Title"
                             aria-label="Search Event" aria-describedby="button-addon2" name="searchEvent"
@@ -255,16 +255,16 @@ unset($_POST['resetEvent']);
                 let viewEvent' . $i . ' = document.querySelector("#viewEvent' . $i . '");
 
                 viewEvent' . $i . '.addEventListener("click", () => {
-                    let EventTitle = document.querySelector("AP_title");
+                    let EventTitle = document.querySelector("#title");
                 
-                    let EventDesc = document.querySelector("AP_desc");
-                    let EventDate = document.querySelector("AP_date");
-                    let EventTime = document.querySelector("ADP_start_time");
+                    let EventDesc = document.querySelector("#description");
+                    let EventDate = document.querySelector("#start_date");
+                    let EventTime = document.querySelector("#start_time");
                     
-                    let EventType = document.querySelector("#Mtype");
+                
                     let EventStat = document.querySelector("#Mstat");
-                    let EventOrg = document.querySelector("#Morg");
-                    let EventUp = document.querySelector("#Mup");
+                 
+                    let EventUp = document.querySelector("#end_date");
 
                     EventTitle.innerHTML = "' . $row['title'] . '";
                     
