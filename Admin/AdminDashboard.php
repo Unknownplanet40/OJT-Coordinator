@@ -23,7 +23,7 @@ if (mysqli_num_rows($result) > 0) {
 function Program($column)
 {
     global $conn;
-    $sql = "SELECT COUNT($column) FROM tbl_programs";
+    $sql = "SELECT COUNT($column) FROM tbl_trainee WHERE $column = 1";
     $result = mysqli_query($conn, $sql);
 
     if (mysqli_num_rows($result) > 0) {
@@ -134,9 +134,9 @@ function MonthlyChart($month)
                 <div class="col">
                     <div class="card h-100" style="background: linear-gradient(to right, #668bff 0%,#104dfd 100%);">
                         <div class="card-body text-light">
-                            <h5 class="card-title text-uppercase d-block text-truncate">Total Program</h5>
+                            <h5 class="card-title text-uppercase d-block text-truncate">Total Vaccinated</h5>
                             <h1 class="card-text text-center fw-bold">
-                                <?php echo Program('progID'); ?>
+                                <?php echo Program('vaccine_Completed'); ?>
                             </h1>
                         </div>
                     </div>
@@ -365,10 +365,8 @@ function MonthlyChart($month)
                                 <th scope="col" title="Date of the Program">Date</th>
                                 <th scope="col" title="Start and End Time of the Program">Time</th>
                                 <th scope="col" title="Department">Dept.</th>
-                                <th scope="col" title="Available Slots">Slots</th>
                                 <th scope="col" title="Duration of the Program in weeks">Duration</th>
                                 <th scope="col" title="Hours needed to complete the Program">Hours</th>
-                                <th scope="col" title="Program Ended">Ended</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -379,12 +377,6 @@ function MonthlyChart($month)
                             if (mysqli_num_rows($result) > 0) {
                                 $i = 1;
                                 while ($row = mysqli_fetch_assoc($result)) {
-
-                                    if ($row['closed'] == 1) {
-                                        $Closed = '<span class="text-warning">Yes</span>';
-                                    } else {
-                                        $Closed = '<span class="text-secondary">No</span>';
-                                    }
 
                                     $date = date("M d, Y", strtotime($row['start_date']));
                                     $start = date("h:i A", strtotime($row['start_time']));
@@ -398,10 +390,8 @@ function MonthlyChart($month)
                                     <td class="text-truncate" style="max-width: 100px;">' . $date . '</td>
                                     <td class="text-truncate" style="max-width: 100px;" title="' . $start . ' - ' . $end . '">' . $start . ' - ' . $end . '</td>
                                     <td class="text-truncate" style="max-width: 100px;">' . $row['department'] . '</td>
-                                    <td class="text-truncate" style="max-width: 100px;">' . $row['slots'] . '</td>
                                     <td class="text-truncate" style="max-width: 100px;">' . $row['Duration'] . ' weeks</td>
                                     <td class="text-truncate" style="max-width: 100px;">' . $row['hours'] . '</td>
-                                    <td class="text-truncate" style="max-width: 100px;">' . $Closed . '</td>
                                     ';
                                     $i++;
                                 }

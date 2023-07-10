@@ -87,12 +87,12 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
                                             </ul>
                                         </nav>
                                     </div>
-                                    
+
                                 </div>
                             </div>
                         </caption>
                         <thead>
-                        <tr>
+                            <tr>
                                 <th scope="col">#</th>
                                 <th scope="col">Avatar</th>
                                 <th scope="col">Name</th>
@@ -101,7 +101,7 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
                                 <th scope="col" hidden>Unhidden Password</th>
                                 <th scope="col">Email</th>
                                 <th scope="col">Dept.</th>
-                                <th scope="col">Status.</th>
+                                <th scope="col">Status</th>
                                 <th scope="col" hidden>id</th>
                                 <th scope="col" class="text-center">Action</th>
                         </thead>
@@ -122,29 +122,16 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
                                 }
                                 while ($row = mysqli_fetch_assoc($result)) {
 
-                                    if ($row['status'] == 1) {
-                                        if ($_SESSION['GlobalID'] == $row['UID']) {
-                                            $status = '<span class="badge bg-success">You</span>';
-                                            $modalStatus = 'Currently Signed In';
-                                        } else {
-                                            $status = '<span class="badge bg-success">Signed In</span>';
-                                            $modalStatus = 'Signed In';
-                                        }
+                                    if (isset($row['program'])) {
+                                        $status = '<span class="badge bg-success">Assigned</span>';
+                                        $modalStatus = 'Assigned';
                                     } else {
-                                        $status = '<span class="badge bg-danger">Signed Out</span>';
-                                        $modalStatus = 'Signed Out';
-                                    }
-
-/* */                                   if ($row['role'] == 'User') {
-                                        $row['role'] = 'ADMIN';
-                                    } else {
-                                        $row['role'] = 'MOD';
+                                        $status = '<span class="badge bg-danger">Pending</span>';
+                                        $modalStatus = 'Pending';
                                     }
 
                                     // format date to Januaray 1, 2021
                                     $dateCreated = date("F j, Y", strtotime($row['account_Created']));
-/* */                               
-
 
                                     echo '<tr>
                                     <th scope="row">' . $i . '</th>
@@ -161,6 +148,7 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
                                     <td class="text-truncate">
                                         <div class="d-flex justify-content-evenly">
                                         <a title="Update this account" id="UpdateAccount" class="btn btn-primary btn-sm"><img src="../Image/Update.svg" alt="Update" style="width: 20px; height: 20px;"></a>
+                                        <a title="Asign a OJT to this account" id="AsignAccount" class="btn btn-warning btn-sm"><img src="../Image/Asign.svg" alt="Update" style="width: 20px; height: 20px;"></a>
                                         <a title="View this account" id="ViewAccount" data-bs-toggle="modal" data-bs-target="#AccountDetails" class="btn btn-success btn-sm"><img src="../Image/View.svg" alt="View" style="width: 20px; height: 20px;"></a>
                                         </div>
                                         </td>
@@ -168,6 +156,7 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
                                     <script>
                                         var UpdateAccount = document.querySelectorAll("#UpdateAccount");
                                         var ViewAccount = document.querySelectorAll("#ViewAccount");
+                                        var AsignAccount = document.querySelectorAll("#AsignAccount");
 
                                         // Please note that the UpdateAccount, DeleteAccount is from ChatGPT
                                         UpdateAccount[' . ($i - 1) . '].addEventListener("click", () => {
@@ -254,6 +243,9 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
                                             modalEdit.setAttribute("href", "../Components/Proccess/UpdateSuperuserAcc_USER.php?id=' . $row['UID'] . '");
                                         });
 
+                                        AsignAccount[' . ($i - 1) . '].addEventListener("click", () => {
+                                            window.location.href = "../Components/Program.php?id=' . $row['UID'] . '";
+                                        });
 
                                     
                                         

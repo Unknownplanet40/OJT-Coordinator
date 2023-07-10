@@ -72,7 +72,7 @@
                     </a>
                 </li>
 
-                <li class="nav-link" title="Trainee's Programs Details">
+                <li class="nav-link" title="Trainee's Programs Details" hidden>
                     <a <?php echo (basename($_SERVER['PHP_SELF']) == "AdminPrograms.php") ? "class='active'" : "href='../Admin/AdminPrograms.php'"; ?>>
                         <i class='icon'>
                             <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24">
