@@ -29,7 +29,8 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
 </head>
 
 <body>
-<?php include_once '../Components/Sidebar.php';
+<?php 
+include_once '../Components/Sidebar.php';
     if (isset($ShowAlert)) {
         echo NewAlertBox();
         $_SESSION['Show'] = false;

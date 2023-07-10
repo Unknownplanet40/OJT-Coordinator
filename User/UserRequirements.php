@@ -1,7 +1,7 @@
 <?php
 session_start();
 @include_once("../Database/config.php");
-include_once '../Components/ImageUpload.php';
+include_once '../Components/FileUpload.php';
 @include_once("../Components/PopupAlert.php");
 
 $_SESSION['SAtheme'] = "light";
@@ -15,7 +15,7 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
 }
 
 if (isset($_POST['submita'])) {
-    //pl1upload();
+    Doc1_upload();
 }
 
 
@@ -75,7 +75,7 @@ if (isset($_POST['submita'])) {
                     <ol class="list-group list-group-numbered">
                         <li class="list-group-item d-flex justify-content-between align-items-start">
                             <div class="ms-2 me-auto">
-                                <div class="fw-bold">Placeholder 1</div>
+                                <div class="fw-bold">Resume</div>
                                 <p hidden>comment here</p>
                             </div>
                             <form method="POST" action="<?php basename($_SERVER['PHP_SELF']) ?>"
@@ -91,7 +91,7 @@ if (isset($_POST['submita'])) {
                         </li>
                         <li class="list-group-item d-flex justify-content-between align-items-start">
                             <div class="ms-2 me-auto">
-                                <div class="fw-bold">Placeholder 2</div>
+                                <div class="fw-bold">Placement Form</div>
                                 <p hidden>comment here</p>
                             </div>
                             <form method="POST" action="<?php basename($_SERVER['PHP_SELF']) ?>"
@@ -107,7 +107,7 @@ if (isset($_POST['submita'])) {
                         </li>
                         <li class="list-group-item d-flex justify-content-between align-items-start">
                             <div class="ms-2 me-auto">
-                                <div class="fw-bold">Placeholder 3</div>
+                                <div class="fw-bold">Birth Certificate</div>
                                 <p hidden>comment here</p>
                             </div>
                             <form method="POST" action="<?php basename($_SERVER['PHP_SELF']) ?>"
@@ -122,7 +122,7 @@ if (isset($_POST['submita'])) {
                         </li>
                         <li class="list-group-item d-flex justify-content-between align-items-start">
                             <div class="ms-2 me-auto">
-                                <div class="fw-bold">Placeholder 4</div>
+                                <div class="fw-bold">Memorandum of Agreement</div>
                                 <p hidden>comment here</p>
                             </div>
                             <form method="POST" action="<?php basename($_SERVER['PHP_SELF']) ?>"
@@ -138,7 +138,7 @@ if (isset($_POST['submita'])) {
                         </li>
                         <li class="list-group-item d-flex justify-content-between align-items-start">
                             <div class="ms-2 me-auto">
-                                <div class="fw-bold">Placeholder 5</div>
+                                <div class="fw-bold">Waiver</div>
                                 <p hidden>comment here</p>
                             </div>
                             <form method="POST" action="<?php basename($_SERVER['PHP_SELF']) ?>"
@@ -154,33 +154,129 @@ if (isset($_POST['submita'])) {
                         </li>
                         <li class="list-group-item d-flex justify-content-between align-items-start">
                             <div class="ms-2 me-auto">
-                                <div class="fw-bold">Placeholder 6</div>
+                                <div class="fw-bold">Medical Certificate</div>
                                 <p hidden>comment here</p>
                             </div>
                             <form method="POST" action="<?php basename($_SERVER['PHP_SELF']) ?>"
                                 enctype="multipart/form-data">
                                 <div class="input-group mb-3">
-                                    <input type="submit" class="btn btn-success btn-sm" id="inputGroupFileAddon03"
+                                    <input type="submit" class="btn btn-success btn-sm" id="SBfile6"
                                         name="submitf" disabled>
                                     <input type="file" name="pl6" class="form-control form-control-sm"
-                                        id="inputGroupFile03" aria-describedby="inputGroupFileAddon03"
-                                        aria-label="Upload" style="width: 98px;" disabled>
+                                        id="File6" aria-describedby="SBfile6"
+                                        aria-label="Upload" style="width: 98px;" onchange="Cfile6()">
                                 </div>
                             </form>
                         </li>
                         <li class="list-group-item d-flex justify-content-between align-items-start">
                             <div class="ms-2 me-auto">
-                                <div class="fw-bold">Placeholder 7</div>
+                                <div class="fw-bold">Good Moral Certificate</div>
                                 <p>You need to resubmit This file because of [reason]</p>
                             </div>
                             <form method="POST" action="<?php basename($_SERVER['PHP_SELF']) ?>"
                                 enctype="multipart/form-data">
                                 <div class="input-group mb-3">
-                                    <input type="submit" class="btn btn-success btn-sm" id="inputGroupFileAddon03"
+                                    <input type="submit" class="btn btn-success btn-sm" id="SBfile7"
                                         name="submitg" disabled>
                                     <input type="file" name="pl7" class="form-control form-control-sm"
-                                        id="inputGroupFile03" aria-describedby="inputGroupFileAddon03"
-                                        aria-label="Upload" style="width: 98px;" disabled>
+                                        id="File7" aria-describedby="inputGroupFileAddon03"
+                                        aria-label="Upload" style="width: 98px;" onchange="Cfile7()">
+                                </div>
+                            </form>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-start">
+                            <div class="ms-2 me-auto">
+                                <div class="fw-bold">Registration Form</div>
+                                <p>You need to resubmit This file because of [reason]</p>
+                            </div>
+                            <form method="POST" action="<?php basename($_SERVER['PHP_SELF']) ?>"
+                                enctype="multipart/form-data">
+                                <div class="input-group mb-3">
+                                    <input type="submit" class="btn btn-success btn-sm" id="SBfile8"
+                                        name="submitg" disabled>
+                                    <input type="file" name="pl8" class="form-control form-control-sm"
+                                        id="File8" aria-describedby="inputGroupFileAddon03"
+                                        aria-label="Upload" style="width: 98px;" onchange="Cfile8()">
+                                </div>
+                            </form>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-start">
+                            <div class="ms-2 me-auto">
+                                <div class="fw-bold">Parent Consent Form</div>
+                                <p>You need to resubmit This file because of [reason]</p>
+                            </div>
+                            <form method="POST" action="<?php basename($_SERVER['PHP_SELF']) ?>"
+                                enctype="multipart/form-data">
+                                <div class="input-group mb-3">
+                                    <input type="submit" class="btn btn-success btn-sm" id="SBfile9"
+                                        name="submitg" disabled>
+                                    <input type="file" name="pl9" class="form-control form-control-sm"
+                                        id="File9" aria-describedby="inputGroupFileAddon03"
+                                        aria-label="Upload" style="width: 98px;" onchange="Cfile9()">
+                                </div>
+                            </form>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-start">
+                            <div class="ms-2 me-auto">
+                                <div class="fw-bold">Evaluation Form</div>
+                                <p>You need to resubmit This file because of [reason]</p>
+                            </div>
+                            <form method="POST" action="<?php basename($_SERVER['PHP_SELF']) ?>"
+                                enctype="multipart/form-data">
+                                <div class="input-group mb-3">
+                                    <input type="submit" class="btn btn-success btn-sm" id="SBfile10"
+                                        name="submitg" disabled>
+                                    <input type="file" name="pl10" class="form-control form-control-sm"
+                                        id="File10" aria-describedby="inputGroupFileAddon03"
+                                        aria-label="Upload" style="width: 98px;" onchange="Cfile10()">
+                                </div>
+                            </form>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-start">
+                            <div class="ms-2 me-auto">
+                                <div class="fw-bold">Narrative Report</div>
+                                <p>You need to resubmit This file because of [reason]</p>
+                            </div>
+                            <form method="POST" action="<?php basename($_SERVER['PHP_SELF']) ?>"
+                                enctype="multipart/form-data">
+                                <div class="input-group mb-3">
+                                    <input type="submit" class="btn btn-success btn-sm" id="SBfile11"
+                                        name="submitg" disabled>
+                                    <input type="file" name="pl11" class="form-control form-control-sm"
+                                        id="File11" aria-describedby="inputGroupFileAddon03"
+                                        aria-label="Upload" style="width: 98px;" onchange="Cfile11()">
+                                </div>
+                            </form>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-start">
+                            <div class="ms-2 me-auto">
+                                <div class="fw-bold">Daily Time Record</div>
+                                <p>You need to resubmit This file because of [reason]</p>
+                            </div>
+                            <form method="POST" action="<?php basename($_SERVER['PHP_SELF']) ?>"
+                                enctype="multipart/form-data">
+                                <div class="input-group mb-3">
+                                    <input type="submit" class="btn btn-success btn-sm" id="SBfile12"
+                                        name="submitg" disabled>
+                                    <input type="file" name="pl12" class="form-control form-control-sm"
+                                        id="File12" aria-describedby="inputGroupFileAddon03"
+                                        aria-label="Upload" style="width: 98px;" onchange="Cfile12()">
+                                </div>
+                            </form>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-start">
+                            <div class="ms-2 me-auto">
+                                <div class="fw-bold">Certificate of Completion</div>
+                                <p>You need to resubmit This file because of [reason]</p>
+                            </div>
+                            <form method="POST" action="<?php basename($_SERVER['PHP_SELF']) ?>"
+                                enctype="multipart/form-data">
+                                <div class="input-group mb-3">
+                                    <input type="submit" class="btn btn-success btn-sm" id="SBfile13"
+                                        name="submitg" disabled>
+                                    <input type="file" name="pl13" class="form-control form-control-sm"
+                                        id="File13" aria-describedby="inputGroupFileAddon03"
+                                        aria-label="Upload" style="width: 98px;" onchange="Cfile13()">
                                 </div>
                             </form>
                         </li>

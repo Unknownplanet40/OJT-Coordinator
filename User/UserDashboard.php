@@ -74,13 +74,68 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
                         <div class="card-header">
                             Events Joined
                         </div>
-                        <div class="card-body">
-                            <!-- this should be a list of events joined by the user -->
-                            <h5 class="card-title"></h5> <!-- Event Name -->
-                            <p class="card-text">No events joined yet.</p> <!-- Event Description -->
-                            <!-- so on and so forth -->
-                            <!--<a href="#" class="btn btn-success" hidden>Go somewhere</a>-->
-                        </div>
+                        <?php
+                        $id = $_SESSION['GlobalID'];
+                        $sql = "SELECT EventID, Join_an_Event FROM tbl_trainee WHERE UID = '$id'";
+                        $result = mysqli_query($conn, $sql);
+                        $row = mysqli_fetch_assoc($result);
+                        $eventID = $row['EventID'];
+                        $join = $row['Join_an_Event'];
+
+                        if ($row['Join_an_Event'] == 1) {
+                            $sql = "SELECT * FROM tbl_events WHERE eventID = '$eventID'";
+                            $result = mysqli_query($conn, $sql);
+                            $row = mysqli_fetch_assoc($result);
+                            $currentdate = date("Y-m-d");
+                            
+                            if ($row['eventCompletion'] >= $currentdate) {
+                                $sql = "UPDATE tbl_trainee SET Join_an_Event = 0 WHERE UID = '$id'";
+                                $result = mysqli_query($conn, $sql);
+                                $sql = "UPDATE tbl_events SET eventEnded = 'true' WHERE eventID = '$eventID'";
+                                $result = mysqli_query($conn, $sql);
+
+                                $output =
+                                    '<div class="card-body">
+                                    <!-- this should be a list of events joined by the user -->
+                                    <h5 class="card-title"></h5> <!-- Event Name -->
+                                    <p class="card-text">Event has ended.</p> <!-- Event Description -->
+                                    <!-- so on and so forth -->
+                                    <!--<a href="#" class="btn btn-success" hidden>Go somewhere</a>-->
+                                </div>';
+                            } elseif ($row['eventEnded'] = 'true'){
+                                $output =
+                                    '<div class="card-body">
+                                    <!-- this should be a list of events joined by the user -->
+                                    <h5 class="card-title"></h5> <!-- Event Name -->
+                                    <p class="card-text">Event already ended.</p> <!-- Event Description -->
+                                    <!-- so on and so forth -->
+                                    <!--<a href="#" class="btn btn-success" hidden>Go somewhere</a>-->
+                                </div>';
+                            } else {
+                                $start = date("g:i A", strtotime($row['eventStartTime']));
+                                $end = date("g:i A", strtotime($row['eventEndTime']));
+                                $date = date("F j, Y", strtotime($row['eventDate']));
+
+                                $output =
+                                    $output =
+                                    '<div class="card-body">
+                                <h5 class="card-title">' . $row['eventTitle'] . '</h5>
+                                <p class="card-text">' . $date . '</p>
+                                <small class="text-muted">Time: ' . $start . ' - ' . $end . ' | Available Seats: ' . $row['eventSlots'] . '</small>
+                            </div>';
+                            }
+                        } else {
+                            $output =
+                                '<div class="card-body">
+                                    <!-- this should be a list of events joined by the user -->
+                                    <h5 class="card-title"></h5> <!-- Event Name -->
+                                    <p class="card-text">No events joined yet.</p> <!-- Event Description -->
+                                    <!-- so on and so forth -->
+                                    <!--<a href="#" class="btn btn-success" hidden>Go somewhere</a>-->
+                                </div>';
+                        }
+                        echo $output;
+                        ?>
                     </div>
                 </div>
             </div>
@@ -116,7 +171,7 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
                                 <!-- if the user is already registered, the button should be disabled -->
                                 ';
                             echo $output;
-                            if ($_SESSION['GlobalJoin_an_Event'] == 1) {
+                            if ($_SESSION['GlobalJoin_an_Event'] == 1 || $row['eventSlots'] == 0 || $row['eventEnded'] == 'true') {
                                 echo '<a class="btn btn-success" hidden>Register</a>
                             </div>
                         </div>

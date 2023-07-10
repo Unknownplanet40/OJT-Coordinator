@@ -136,16 +136,16 @@ unset($_POST['resetEvent']);
                         <div class="col-md-12">,
                             <div class="form-floating mb-3 text-light">
                                 <textarea class="form-control text-bg-dark" placeholder="Event Description"
-                                    id="EventDescription" name="EventDescription"
-                                    style="height: 150px" minlength="256"></textarea>
+                                    id="EventDescription" name="EventDescription" style="height: 150px"
+                                    minlength="256"></textarea>
                                 <label for="EventDescription">Event Description</label>
                             </div>
                         </div>
                         <div class="col-md-4">
-                            <input type="submit" class="btn btn-primary mb-1 w-50 bg-gradient" name="addEvent" id="addEvent"
-                                value="Submit">
-                            <input type="reset" class="btn btn-danger w-50 bg-gradient" name="resetEvent" id="resetEvent"
-                                value="Reset">
+                            <input type="submit" class="btn btn-primary mb-1 w-50 bg-gradient" name="addEvent"
+                                id="addEvent" value="Submit">
+                            <input type="reset" class="btn btn-danger w-50 bg-gradient" name="resetEvent"
+                                id="resetEvent" value="Reset">
                         </div>
                         <div class="col">
                             <script>
@@ -220,49 +220,57 @@ unset($_POST['resetEvent']);
                             name="resetEvent">
                     </div>
                 </form>
-                <?php
-                if (mysqli_num_rows($result) > 0) {
-                    echo '<div id="eventList">'; // Added container for event list
-                    while ($row = mysqli_fetch_assoc($result)) {
+                <div class="row row-cols-1 row-cols-md-3 g-4">
+                    <?php
+                    if (mysqli_num_rows($result) > 0) {
+                        $i = 1;
+                        while ($row = mysqli_fetch_assoc($result)) {
 
-                        $start = date("g:i A", strtotime($row['eventStartTime']));
-                        $end = date("g:i A", strtotime($row['eventEndTime']));
-                        $date = date("F j, Y", strtotime($row['eventDate']));
+                            $start = date("g:i A", strtotime($row['eventStartTime']));
+                            $end = date("g:i A", strtotime($row['eventEndTime']));
+                            $date = date("F j, Y", strtotime($row['eventDate']));
 
-                        if ($row['eventEnded'] == 'true') {
-                            $status = 'Ended';
-                        } else {
-                            $status = 'Ongoing';
-                        }
+                            if ($row['eventEnded'] == 'true') {
+                                $status = 'Ended';
+                            } else {
+                                $status = 'Ongoing';
+                            }
 
-                        $output = '<div class="row row-cols-1 row-cols-md-3 g-4">
-                                    <div class="col">
-                                        <div class="card h-100 text-bg-dark">
-                                            <img style="ratio: 16/9" src="' . $row['eventImage'] . '" class="card-img-top" alt="...">
-                                        <div class="card-body">
-                                            <h5 class="card-title">' . $row['eventTitle'] . '</h5>
-                                            <p class="card-text">' . $date . '</p>
-                                            <p class="card-text">' . $row['eventLocation'] . '</p>
-                                        <p class="card-text" style="font-size: 14px;">' . $row['eventDescription'] . '</p>
-                                        <small class="text-muted">Time: ' . $start . ' - ' . $end . ' | Available Seats: ' . $row['eventSlots'] . '</small>
-                                        </div>
-                                    <div class="card-footer text-center">
-                                        <input type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ViewEvent" value="View full details" onclick="ViewEvent(' . $row['eventID'] . ')">
-                                </div>
-                            </div>
-                        </div>
+                            // limit description to 100 characters and add ... at the end
+                            $desc = $row['eventDescription'];
+                            $desc = substr($desc, 0, 100);
+                            $desc = $desc . '...';
+
+                            $output = '
+            <div class="col">
+                <div class="card h-100 text-bg-dark">
+                    <img src="' . $row['eventImage'] . '" class="card-img-top" style="height: 200px; object-fit: cover;" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">' . $row['eventTitle'] . '</h5>
+                        <p class="card-text">' . $date . '</p>
+                        <p class="card-text">' . $row['eventLocation'] . '</p>
+                        <p class="card-text" style="font-size: 14px;">' . $desc . '</p>
+                        <small class="text-muted">Time: ' . $start . ' - ' . $end . ' | Available Seats: ' . $row['eventSlots'] . '</small>
                     </div>
-                    <script>
-                    let EventTitle = document.getElementById("Mtitle");
-                    let EventImage = document.getElementById("Mimg");
-                    let EventDesc = document.getElementById("Mdesc");
-                    let EventDate = document.getElementById("Mdate");
-                    let EventTime = document.getElementById("Mtime");
-                    let EventLoc = document.getElementById("Mloc");
-                    let EventType = document.getElementById("Mtype");
-                    let EventStat = document.getElementById("Mstat");
-                    let EventOrg = document.getElementById("Morg");
-                    let EventUp = document.getElementById("Mup");
+                    <div class="card-footer text-center">
+                        <a id="viewEvent' . $i . '" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ViewEvent" style="width: 100%;">View</a>
+                    </div>
+                </div>
+            </div>
+            <script>
+                let viewEvent' . $i . ' = document.querySelector("#viewEvent' . $i . '");
+
+                viewEvent' . $i . '.addEventListener("click", () => {
+                    let EventTitle = document.querySelector("#Mtitle");
+                    let EventImage = document.querySelector("#Mimg");
+                    let EventDesc = document.querySelector("#Mdesc");
+                    let EventDate = document.querySelector("#Mdate");
+                    let EventTime = document.querySelector("#Mtime");
+                    let EventLoc = document.querySelector("#Mloc");
+                    let EventType = document.querySelector("#Mtype");
+                    let EventStat = document.querySelector("#Mstat");
+                    let EventOrg = document.querySelector("#Morg");
+                    let EventUp = document.querySelector("#Mup");
 
                     EventTitle.innerHTML = "' . $row['eventTitle'] . '";
                     EventImage.src = "' . $row['eventImage'] . '";
@@ -273,17 +281,23 @@ unset($_POST['resetEvent']);
                     EventType.innerHTML = "' . $row['eventType'] . '";
                     EventStat.innerHTML = "' . $status . '";
                     EventOrg.innerHTML = "' . $row['eventOrganizer'] . '";
-                    EventUp.href = "AdminUpdateEvent.php?id=' . $row['eventID'] . '";
-                    </script>
-                    ';
-                        echo $output;
+                    EventUp.href = "../Components/Proccess/EventUpdate.php?id=' . $row['eventID'] . '";
+                    });
+                    </script>';
+                            echo $output;
+                            $i++;
+                        }
+                    } else {
+                        $nodata = true;
                     }
-                } else {
+                    ?>
+                </div>
+                <?php if (isset($nodata)) {
+                    echo '<br>';
                     @include_once '../Components/Placeholders/CardPlaceholder.php';
-                }
-                ?>
-                <br>
+                } ?>
             </div>
+            <br>
         </div>
     </section>
 </body>

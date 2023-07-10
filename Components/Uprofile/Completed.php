@@ -42,9 +42,9 @@
                                     placeholder="lorenzoasis1213" value="<?php echo $_SESSION['GlobalPassword']; ?>">
                             </div>
                             <div class="col-md-2">
-                                <label for="conpword" class="form-label d-block text-truncate">Confirm</label>
+                                <label for="COMconpword" class="form-label d-block text-truncate">Confirm</label>
                                 <input type="password" class="form-control form-control-sm" name="COMconpword"
-                                    id="conpword" placeholder="lorenzoasis1213" value="<?php echo $_SESSION['GlobalPassword']; ?>">
+                                    id="COMconpword" placeholder="lorenzoasis1213" value="<?php echo $_SESSION['GlobalPassword']; ?>">
                             </div>
                             <div class="col-md-8">
                                 <label for="Address" class="form-label">Address</label>
