@@ -130,12 +130,12 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
 
                                     while ($row = mysqli_fetch_assoc($result)) {
 
-                                        $evaluated = $row['evaluated'];
+                                        $evaluated = $row['Resource_Completed'];
 
-                                        if ($evaluated == "true") {
-                                            $evaluated = '<span class="badge bg-success">Evaluated</span>';
+                                        if ($evaluated == 1) {
+                                            $evaluated = '<span class="badge bg-success">Completed</span>';
                                         } else {
-                                            $evaluated = '<span class="badge bg-danger">Not Evaluated</span>';
+                                            $evaluated = '<span class="badge bg-danger">Pending</span>';
                                         }
 
                                         echo '<tr>
@@ -164,7 +164,7 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
                                     }
                                 } else {
                                     echo '<tr>
-                                <th colspan="10" class="text-center">No data available</th>
+                                <th colspan="8" class="text-center">No data available</th>
                             </tr>';
                                 }
                                 ?>
