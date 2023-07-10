@@ -24,12 +24,14 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
     <script src="../Script/SidebarScript.js"></script>
     <script src="../Script/SweetAlert2.js"></script>
     <script src="../Script/MangeAdminTable.js"></script>
+    <script defer src="../Script/Bootstrap_Script/bootstrap.bundle.js"></script>
     <title>Admin Dashboard</title>
 </head>
 
 <body class="dark adminuser" style="min-width: 1080px;">
     <?php
     @include_once '../Components/AdminSidebar.php';
+    @include_once '../Components/Modals/AdminTraineeModal.php';
     if (isset($ShowAlert)) {
         echo NewAlertBox();
         $_SESSION['Show'] = false;
@@ -39,7 +41,6 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
         <div class="text">
             <h1 class="text-warning">Traineess List</h1>
         </div>
-        <div class="container-fluid" style="width: 98%;">
         <div class="container-fluid" style="width: 98%;" id="AdminTable">
             <div class="container-lg table-responsive">
                 <div class="container mt-5 text-bg-dark rounded" style="min-width: fit-content;">
@@ -220,33 +221,34 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
                                             let modalName = document.querySelector("#modalName");
                                             let modalEmail = document.querySelector("#modalEmail");
                                             let modalDept = document.querySelector("#modalDept");
-                                            let modalRole = document.querySelector("#modalRole");
-                                            let modalCreated = document.querySelector("#modalCreated");
-                                            let modalLastLogin = document.querySelector("#ModalLastLogin");
+                                            
+                                          
+                                            let modalBirthdate = document.querySelector("#modalBirthdate");
+                                            let modalAge = document.querySelector("#modalAge");
+                                            let modalCourse = document.querySelector("#modalCourse");
+                                            let modalAddress = document.querySelector("#modalAddress");
+                                           
                                             let modalStatus = document.querySelector("#modalStatus");
                                             let modalImage = document.querySelector("#modalImage");
                                             let modalUname = document.querySelector("#modalUname");
                                             let modalTitle = document.querySelector("#modalTitle");
                                             let modalID = document.querySelector("#UpID");
 
+
+                                            modalBirthdate.innerHTML = "' . $row['birthdate'] . '";
+                                            modalAge.innerHTML = "' . $row['age'] . '";
+                                            modalCourse.innerHTML = "' . $row['course'] . '";
+                                            modalAddress.innerHTML = "' . $row['address'] . '";
                                             modalName.innerHTML = "' . $row['name'] . '";
                                             modalEmail.innerHTML = "' . $row['email'] . '";
                                             modalDept.innerHTML = "' . $row['department'] . '";
-                                            modalRole.innerHTML = "' . $row['role'] . '";
+                                            
                                             modalStatus.innerHTML = "' . $modalStatus . '";
                                             modalImage.setAttribute("src", "' . $row['image'] . '");
                                             modalUname.innerHTML = "' . $row['trainee_uname'] . '";
                                             modalID.innerHTML = "' . $row['UID'] . '";
 
-                                            if ("' . $row['status'] . '" == 1) {
-                                                modalTitle.innerHTML = "Your Information";
-                                                modalCreated.innerHTML = "' . $dateCreated . '";
-                                                modalLastLogin.innerHTML = "Now";
-                                            } else {
-                                                modalTitle.innerHTML = "Account Information";
-                                                modalCreated.innerHTML = "' . $dateCreated . '";
-                                               
-                                            }
+                                          
 
                                             let modalEdit = document.querySelector("#modalEdit");
                                             modalEdit.setAttribute("href", "../Components/Proccess/UpdateSuperuserAcc_USER.php?id=' . $row['UID'] . '");
