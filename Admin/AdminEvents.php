@@ -346,7 +346,7 @@ unset($_POST['resetEvent']);
                             $output = '
             <div class="col">
                 <div class="card h-100 text-bg-dark">
-                    <img src="' . $row['eventImage'] . '" class="card-img-top" style="height: 200px; object-fit: cover;" alt="...">
+                    <img src="' . $row['eventImage'] . '" class="card-img-top" style="max-height: 256px; object-fit: cover;" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">' . $row['eventTitle'] . '</h5>
                         <p class="card-text">' . $date . '</p>

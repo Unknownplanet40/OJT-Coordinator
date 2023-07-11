@@ -20,10 +20,30 @@ document.addEventListener("DOMContentLoaded", () => {
       // redirect to their respective profile page
       // if body has a class of adminuser, redirect to admin profile page
       if (body.classList.contains("adminuser")) {
-        profile.setAttribute("onclick", 'location.href = "#"');
-        // if the current page is the admin profile page, remove the onclick attribute
-        if (window.location.href.indexOf("#") > -1) {
-          profile.removeAttribute("onclick");
+        //get profession of the user
+        const profession = document.getElementById("profession").value;
+        var id = document.getElementById("GlobalID").value;
+
+        //check if the user is an admin or moderator
+        if (profession == "administrator") {
+          profile.setAttribute("onclick", 'location.href = ""');
+          if (window.location.href.indexOf("") > -1) {
+            profile.removeAttribute("onclick");
+          }
+        } else {
+          profile.setAttribute(
+            "onclick",
+            'location.href = "../Components/Proccess/Moderator.php?id=' +
+              id +
+              '"'
+          );
+          if (
+            window.location.href.indexOf(
+              "../Components/Proccess/Moderator.php?id=" + id
+            ) > -1
+          ) {
+            profile.removeAttribute("onclick");
+          }
         }
       } else {
         profile.setAttribute("onclick", 'location.href = "UserProfile.php"');
@@ -35,7 +55,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // The code below is for the dark mode toggle switch (uncomment to enable)
-  
+
   // Check if the dark mode state is stored in localStorage
   // const isDarkMode = localStorage.getItem("darkMode");
 

@@ -35,6 +35,8 @@
                     title="<?php echo $_SESSION['GlobalName']; ?> - <?php echo $_SESSION['GlobalRole']; ?>">
                     <?php echo $_SESSION['GlobalRole']; ?>
                 </span>
+                <input type="hidden" id="GlobalID" value="<?php echo $_SESSION['GlobalID']; ?>">
+                <input type="hidden" id="profession" value="<?php echo $_SESSION['GlobalRole']; ?>">
             </div>
         </div>
         <i class='toggle'>
