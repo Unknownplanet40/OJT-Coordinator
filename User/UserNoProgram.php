@@ -39,8 +39,8 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
         <div class="text">Program Details</div>
         <div style="margin: 10px; width: 98%;">
             <div class="text-center text-uppercase fs-5 fw-bolder">
-                You don't have any program yet. you can contact your Coordinator to join a program. <br>
-                or wait for an email from your coordinator.
+                You have not been assigned to any program yet. Please contact your administrator. <br>
+                or wait for your Coordinator to assign you to a program. Thank you!
             </div>
             <br>
         </div>
