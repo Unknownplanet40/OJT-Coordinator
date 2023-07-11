@@ -45,55 +45,10 @@ CREATE TABLE `tbl_accounts` (
 --
 
 INSERT INTO `tbl_accounts` (`ID`, `UID`, `name`, `username`, `password`, `role`, `status`) VALUES
-(1, 1, 'Ryan James Capadocia', 'ryanjames', '@Capadocia123', 'administrator', 1),
-(2, 2, 'James Veloria', 'jamesveloria', '@Veloria123', 'moderator', 0),
-(3, 1000000000, 'Lorenzo Asis', 'lorenzoasis', 'Lorenzo.asis2023', 'User', 0),
-(4, 2000000000, 'Brandon Logon', 'brandon23', 'Brandon.logon4sale', 'User', 0),
-(5, 3000000000, 'Jeric Dayandante', 'jeric20', 'Jeric@4sale', 'User', 0),
-(13, 1234567825, 'Joseph Contador', 'josephpogi23', 'Joseph@pogi23', 'User', 0),
-(14, 10, 'Administers According', 'adminaccs', '@Admin2023', 'administrator', 0);
-
---
--- Triggers `tbl_accounts`
---
-DELIMITER $$
-CREATE TRIGGER `Update_Status_Trigger` AFTER UPDATE ON `tbl_accounts` FOR EACH ROW BEGIN
-  IF NEW.role = 'user' THEN
-    UPDATE tbl_trainee SET status = NEW.status WHERE UID = NEW.UID;
-  ELSEIF NEW.role = 'administrator' THEN
-    UPDATE tbl_admin SET status = NEW.status WHERE UID = NEW.UID;
-  ELSEIF NEW.role = 'moderator' THEN
-    UPDATE tbl_admin SET status = NEW.status WHERE UID = NEW.UID;
-  END IF;
-END
-$$
-DELIMITER ;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `tbl_accounts`
---
-
-CREATE TABLE `tbl_accounts` (
-  `ID` bigint(20) NOT NULL,
-  `UID` bigint(10) DEFAULT NULL,
-  `name` varchar(30) DEFAULT NULL,
-  `username` varchar(30) DEFAULT NULL,
-  `password` varchar(30) DEFAULT NULL,
-  `role` varchar(30) DEFAULT NULL,
-  `status` int(11) DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `tbl_accounts`
---
-
-INSERT INTO `tbl_accounts` (`ID`, `UID`, `name`, `username`, `password`, `role`, `status`) VALUES
 (1, 1, 'Ryan James Capadocia', 'ryanjames', '@Capadocia123', 'administrator', 0),
 (2, 2, 'James Veloria', 'jamesveloria', '@Veloria123', 'moderator', 0),
 (3, 1000000000, 'Lorenzo Asis', 'lorenzoasis', 'Lorenzo.asis2023', 'User', 0),
-(4, 2000000000, 'Brandon Logon', 'brandon23', 'Brandon.logon4sale', 'User', 1),
+(4, 2000000000, 'Brandon Logon', 'brandon23', 'Brandon.logon4sale', 'User', 0),
 (5, 3000000000, 'Jeric Dayandante', 'jeric20', 'Jeric@4sale', 'User', 0),
 (13, 1234567825, 'Joseph Contador', 'josephpogi23', 'Joseph@pogi23', 'User', 0),
 (14, 10, 'Administers According', 'adminaccs', '@Admin2023', 'administrator', 0);
@@ -139,7 +94,7 @@ CREATE TABLE `tbl_admin` (
 --
 
 INSERT INTO `tbl_admin` (`UID`, `name`, `admin_uname`, `admin_pword`, `admin_email`, `department`, `imagePath`, `date_created`, `last_login`, `role`, `status`) VALUES
-(1, 'Ryan James Capadocia', 'ryanjames', '@Capadocia123', 'rj.caps@cvsu.edu.ph', 'BSIT', '../Image/Profile.gif', '2023-06-30', '13:28:30', 'administrator', 0),
+(1, 'Ryan James Capadocia', 'ryanjames', '@Capadocia123', 'rj.caps@cvsu.edu.ph', 'BSIT', '../Image/Profile.gif', '2023-06-30', '16:17:05', 'administrator', 0),
 (2, 'James Veloria', 'jamesveloria', '@Veloria123', 'james@gmail.com', 'BSIT', '../Image/Profile.gif', '2023-06-30', NULL, 'moderator', 0),
 (10, 'Administers According', 'adminaccs', '@Admin2023', 'Admin+Accordingly@gmail.com', 'BSIT', '../uploads/adminaccs_Credentials/adminaccs_Profile_gbypi.png', '2023-07-08', '22:15:07', 'administrator', 0);
 
@@ -175,7 +130,7 @@ CREATE TABLE `tbl_announcement` (
 --
 
 INSERT INTO `tbl_announcement` (`ID`, `Title`, `Description`, `PostedBy`, `DateAdded`, `DateEnd`, `isEnded`) VALUES
-(1, 'Announcement', 'For all the Trainees, please be reminded that the deadline for the submission of your requirements is on August 15, 2023. Thank you!', 'Company A', '2023-06-15', '2023-07-05', 0);
+(1, 'Important Meeting Announcement', 'There will be an important meeting for all employees to discuss the upcoming project.', 'Ryan James Capadocia', '2023-07-15', '2023-07-22', 0);
 
 -- --------------------------------------------------------
 
@@ -331,6 +286,14 @@ CREATE TABLE `tbl_resource` (
   `Doc13_stat` int(3) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='for Trainee Douments';
 
+--
+-- Dumping data for table `tbl_resource`
+--
+
+INSERT INTO `tbl_resource` (`ID`, `UID`, `resume`, `placement`, `Birth`, `MoA`, `Waiver`, `MedCert`, `GMCert`, `RegForm`, `consent`, `Evaform`, `NarraForm`, `TimeCard`, `COC`, `Doc1_date`, `Doc2_date`, `Doc3_date`, `Doc4_date`, `Doc5_date`, `Doc6_date`, `Doc7_date`, `Doc8_date`, `Doc9_date`, `Doc10_date`, `Doc11_date`, `Doc12_date`, `Doc13_date`, `Doc1_stat`, `Doc2_stat`, `Doc3_stat`, `Doc4_stat`, `Doc5_stat`, `Doc6_stat`, `Doc7_stat`, `Doc8_stat`, `Doc9_stat`, `Doc10_stat`, `Doc11_stat`, `Doc12_stat`, `Doc13_stat`) VALUES
+(1, 2000000000, '../uploads/brandon23_Credentials/Resume/zCcJj_brandon23_Resume.jpg', '../uploads/brandon23_Credentials/PlacementForm/kL3Zs_brandon23_PlacementForm.jpg', '../uploads/brandon23_Credentials/BirthCertificate/EGd6x_brandon23_BirthCertificate.jpg', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2023-07-11', '2023-07-11', '2023-07-11', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(2, 1000000000, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+
 -- --------------------------------------------------------
 
 --
@@ -377,7 +340,7 @@ CREATE TABLE `tbl_trainee` (
 INSERT INTO `tbl_trainee` (`UID`, `name`, `trainee_uname`, `trainee_pword`, `email`, `birthdate`, `age`, `department`, `status`, `role`, `account_Created`, `profile_Completed`, `vaccine_Completed`, `image`, `gender`, `course`, `phone`, `program`, `prog_duration`, `fulfilled_time`, `completed`, `evaluated`, `address`, `city`, `postal_code`, `province`, `Join_an_Event`, `EventID`, `Program_stat`, `Resource_Completed`) VALUES
 (1000000000, 'Lorenzo Asis', 'lorenzoasis', 'Lorenzo.asis2023', 'Lorenzo.asis2023', '1970-01-01', 23, 'BSCS', 0, 'User', '2023-06-30', 'true', 0, '../uploads/lorenzoasis_Credentials/lorenzoasis_Profile_HJTSZ.gif', '', 'BSCS-2B', '09876543219', NULL, NULL, NULL, NULL, 'true', 'Queenstown Molino 3', 'Bacoor', 4102, 'Cavite', 0, NULL, 0, 0),
 (1234567825, 'Joseph Contador', 'josephpogi23', 'Joseph@pogi23', 'joseph.contador@cvsu.edu.ph', '2004-02-09', 23, 'BSIT', 0, 'User', '2023-07-03', 'true', 1, '../uploads/josephpogi23_Credentials/josephpogi23_Profile_Tq3UZ.jpg', 'male', 'BSIT-2B', '09687363887', NULL, NULL, NULL, NULL, 'false', 'DASMA PALIRARAN BACOOR CAVITE', 'DASMA', 404, 'Dasma', 0, NULL, 0, 0),
-(2000000000, 'Brandon Logon', 'brandon23', 'Brandon.logon4sale', 'Brandon@gmail.com', '2023-07-06', 21, 'BSCS', 1, 'User', '2023-06-30', 'true', 0, '../Image/Profile.png', 'male', 'BSCS-2B', '09897867564', 'Name', '16', '640', NULL, 'false', 'Ohio', 'Columbus', 4300, 'Ohio', 0, NULL, 0, 0),
+(2000000000, 'Brandon Logon', 'brandon23', 'Brandon.logon4sale', 'Brandon@gmail.com', '2023-07-06', 21, 'BSCS', 0, 'User', '2023-06-30', 'true', 0, '../Image/Profile.png', 'male', 'BSCS-2B', '09897867564', 'Name', '16', '640', NULL, 'false', 'Ohio', 'Columbus', 4300, 'Ohio', 0, NULL, 0, 0),
 (3000000000, 'Jeric Dayandante', 'jeric20', 'Jeric@4sale', 'jeric@outlook.com', '2023-06-30', 20, 'BSIT', 0, 'User', '2023-06-30', 'true', 1, '../Image/Profile.png', 'male', 'BSIT-2B', '09675453124', NULL, NULL, NULL, NULL, 'false', 'Taga Prima banda sa imus', 'Imus', 4102, 'Cavite', 0, NULL, 0, 0);
 
 --
@@ -514,7 +477,7 @@ ALTER TABLE `tbl_programs`
 -- AUTO_INCREMENT for table `tbl_resource`
 --
 ALTER TABLE `tbl_resource`
-  MODIFY `ID` int(100) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `tbl_trainee`
