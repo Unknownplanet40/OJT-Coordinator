@@ -58,42 +58,6 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
         $Doc11_status = $row['Doc11_stat'];
         $Doc12_status = $row['Doc12_stat'];
         $Doc13_status = $row['Doc13_stat'];
-
-
-        function Stat($file, $status)
-        {
-            if (isset($status)) {
-                if ($status == 0) {
-                    $stat = "Pending";
-                } elseif ($status == 1) {
-                    $stat = "Approved";
-                } elseif ($status == 2) {
-                    $stat = "Resubmit";
-                } else {
-                    $stat = "NAN";
-                }
-            } else {
-                $stat = "NAN";
-            }
-
-            if ($file != null) {
-                $date = date("F d, Y", strtotime($file));
-            } else {
-                $date = "NAN";
-            }
-
-            if ($stat == "NAN" && $date == "NAN") {
-                $output = "";
-            } else {
-                $output = $date . " - " . $stat;
-            }
-
-            return $output;
-        }
-
-
-
-
     }
 
 }
@@ -149,6 +113,12 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                                 width="24px"></a></div>
                     <h3 class="text-center m-2 text-uppercase">
                         <?php echo $name; ?> Resource
+                        <?php
+                        $ShowAlert = true;
+                        if (isset($ShowAlert)) {
+                            echo NewAlertBox();
+                            $_SESSION['Show'] = false;
+                        } ?>
                     </h3>
                     <div></div>
                 </div>
@@ -162,10 +132,18 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                             <div class="fw-bold text-truncate">Resume</div>
                             <span class="text-muted">
                                 <?php if (isset($Doc1)) {
-                                    echo "Submitted on: " . $Doc1 . " - ";
+                                    echo "Submitted on: " . date("F j, Y", strtotime($Doc1)) . " - ";
                                 } ?>
                                 <?php if (isset($Doc1_status)) {
-                                    echo $Doc1_status;
+                                    if ($Doc1_status == 0) {
+                                        echo "Pending";
+                                    } else if ($Doc1_status == 1) {
+                                        echo "Approved";
+                                    } else if ($Doc1_status == 2) {
+                                        echo "Resubmit";
+                                    } else {
+                                        echo "Unknown";
+                                    }
                                 } ?>
                             </span>
                         </div>
@@ -191,10 +169,18 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                             <div class="fw-bold text-truncate">Placement Form</div>
                             <span class="text-muted">
                                 <?php if (isset($Doc2)) {
-                                    echo "Submitted on: " . $Doc2 . " - ";
+                                    echo "Submitted on: " . date("F j, Y", strtotime($Doc2)) . " - ";
                                 } ?>
                                 <?php if (isset($Doc2_status)) {
-                                    echo $Doc2_status;
+                                    if ($Doc2_status == 0) {
+                                        echo "Pending";
+                                    } else if ($Doc2_status == 1) {
+                                        echo "Approved";
+                                    } else if ($Doc2_status == 2) {
+                                        echo "Resubmit";
+                                    } else {
+                                        echo "Unknown";
+                                    }
                                 } ?>
                             </span>
                         </div>
@@ -220,10 +206,18 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                             <div class="fw-bold text-truncate">Birth Certificate</div>
                             <span class="text-muted">
                                 <?php if (isset($Doc3)) {
-                                    echo "Submitted on: " . $Doc3 . " - ";
+                                    echo "Submitted on: " . date("F j, Y", strtotime($Doc3)) . " - ";
                                 } ?>
                                 <?php if (isset($Doc3_status)) {
-                                    echo $Doc3_status;
+                                    if ($Doc3_status == 0) {
+                                        echo "Pending";
+                                    } else if ($Doc3_status == 1) {
+                                        echo "Approved";
+                                    } else if ($Doc3_status == 2) {
+                                        echo "Resubmit";
+                                    } else {
+                                        echo "Unknown";
+                                    }
                                 } ?>
                             </span>
                         </div>
@@ -249,10 +243,18 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                             <div class="fw-bold text-truncate">Memorandum of Agreement</div>
                             <span class="text-muted">
                                 <?php if (isset($Doc4)) {
-                                    echo "Submitted on: " . $Doc4 . " - ";
+                                    echo "Submitted on: " . date("F j, Y", strtotime($Doc4)) . " - ";
                                 } ?>
                                 <?php if (isset($Doc4_status)) {
-                                    echo $Doc4_status;
+                                    if ($Doc4_status == 0) {
+                                        echo "Pending";
+                                    } else if ($Doc4_status == 1) {
+                                        echo "Approved";
+                                    } else if ($Doc4_status == 2) {
+                                        echo "Resubmit";
+                                    } else {
+                                        echo "Unknown";
+                                    }
                                 } ?>
                             </span>
                         </div>
@@ -278,10 +280,18 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                             <div class="fw-bold text-truncate">Waiver</div>
                             <span class="text-muted">
                                 <?php if (isset($Doc5)) {
-                                    echo "Submitted on: " . $Doc5 . " - ";
+                                    echo "Submitted on: " . date("F j, Y", strtotime($Doc5)) . " - ";
                                 } ?>
                                 <?php if (isset($Doc5_status)) {
-                                    echo $Doc5_status;
+                                    if ($Doc5_status == 0) {
+                                        echo "Pending";
+                                    } else if ($Doc5_status == 1) {
+                                        echo "Approved";
+                                    } else if ($Doc5_status == 2) {
+                                        echo "Resubmit";
+                                    } else {
+                                        echo "Unknown";
+                                    }
                                 } ?>
                             </span>
                         </div>
@@ -307,15 +317,23 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                             <div class="fw-bold text-truncate">Medical Certificate</div>
                             <span class="text-muted">
                                 <?php if (isset($Doc6)) {
-                                    echo "Submitted on: " . $Doc6 . " - ";
+                                    echo "Submitted on: " . date("F j, Y", strtotime($Doc6)) . " - ";
                                 } ?>
                                 <?php if (isset($Doc6_status)) {
-                                    echo $Doc6_status;
+                                    if ($Doc6_status == 0) {
+                                        echo "Pending";
+                                    } else if ($Doc6_status == 1) {
+                                        echo "Approved";
+                                    } else if ($Doc6_status == 2) {
+                                        echo "Resubmit";
+                                    } else {
+                                        echo "Unknown";
+                                    }
                                 } ?>
                             </span>
                         </div>
                         <div>
-                        <?php
+                            <?php
                             if (isset($medical)) {
                                 echo
                                     "
@@ -336,15 +354,23 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                             <div class="fw-bold text-truncate">Good Moral Certificate</div>
                             <span class="text-muted">
                                 <?php if (isset($Doc7)) {
-                                    echo "Submitted on: " . $Doc7 . " - ";
+                                    echo "Submitted on: " . date("F j, Y", strtotime($Doc7)) . " - ";
                                 } ?>
                                 <?php if (isset($Doc7_status)) {
-                                    echo $Doc7_status;
+                                    if ($Doc7_status == 0) {
+                                        echo "Pending";
+                                    } else if ($Doc7_status == 1) {
+                                        echo "Approved";
+                                    } else if ($Doc7_status == 2) {
+                                        echo "Resubmit";
+                                    } else {
+                                        echo "Unknown";
+                                    }
                                 } ?>
                             </span>
                         </div>
                         <div>
-                        <?php
+                            <?php
                             if (isset($GMcert)) {
                                 echo
                                     "
@@ -365,15 +391,23 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                             <div class="fw-bold text-truncate">Registration Form</div>
                             <span class="text-muted">
                                 <?php if (isset($Doc8)) {
-                                    echo "Submitted on: " . $Doc8 . " - ";
+                                    echo "Submitted on: " . date("F j, Y", strtotime($Doc8)) . " - ";
                                 } ?>
                                 <?php if (isset($Doc8_status)) {
-                                    echo $Doc8_status;
+                                    if ($Doc8_status == 0) {
+                                        echo "Pending";
+                                    } else if ($Doc8_status == 1) {
+                                        echo "Approved";
+                                    } else if ($Doc8_status == 2) {
+                                        echo "Resubmit";
+                                    } else {
+                                        echo "Unknown";
+                                    }
                                 } ?>
                             </span>
                         </div>
                         <div>
-                        <?php
+                            <?php
                             if (isset($regform)) {
                                 echo
                                     "
@@ -391,47 +425,26 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                     <li
                         class="list-group-item d-flex justify-content-between align-items-start bg-transparent text-light">
                         <div class="ms-2 me-auto">
-                            <div class="fw-bold text-truncate">Parental Consent Form</div>
-                            <span class="text-muted">
-                                <?php if (isset($Doc9)) {
-                                    echo "Submitted on: " . $Doc9 . " - ";
-                                } ?>
-                                <?php if (isset($Doc9_status)) {
-                                    echo $Doc9_status;
-                                } ?>
-                            </span>
-                        </div>
-                        <div>
-                        <?php
-                            if (isset($consent)) {
-                                echo
-                                    "
-                                <a class='btn btn-sm btn-success' title='View File' href='$consent' target='_blank'>View</a>
-                                <a class='btn btn-sm btn-primary' title='Download file' href='$consent' download>Download</a>
-                                <a class='btn btn-sm btn-warning' title='Approve file' href='../Components/Proccess/ResourceProccess.php?ID=$userID&file=Doc9&status=1'>Approve</a>
-                                <a class='btn btn-sm btn-danger' title='Request for Resubmission of file' href='../Components/Proccess/ResourceProccess.php?ID=$userID&file=Doc9&status=2'>Resubmit</a>
-                                ";
-                            } else {
-                                echo "No file uploaded yet";
-                            }
-                            ?>
-                        </div>
-                    </li>
-                    <li
-                        class="list-group-item d-flex justify-content-between align-items-start bg-transparent text-light">
-                        <div class="ms-2 me-auto">
                             <div class="fw-bold text-truncate">Evaluation Form</div>
                             <span class="text-muted">
                                 <?php if (isset($Doc10)) {
-                                    echo "Submitted on: " . $Doc10 . " - ";
+                                    echo "Submitted on: " . date("F j, Y", strtotime($Doc10)) . " - ";
                                 } ?>
                                 <?php if (isset($Doc10_status)) {
-                                    echo $Doc10_status;
+                                    if ($Doc10_status == 0) {
+                                        echo "Pending";
+                                    } else if ($Doc10_status == 1) {
+                                        echo "Approved";
+                                    } else if ($Doc10_status == 2) {
+                                        echo "Resubmit";
+                                    } else {
+                                        echo "Unknown";
+                                    }
                                 } ?>
                             </span>
                         </div>
                         <div>
-                        <?php
+                            <?php
                             if (isset($eval)) {
                                 echo
                                     "
@@ -452,15 +465,23 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                             <div class="fw-bold text-truncate">Narrative Report</div>
                             <span class="text-muted">
                                 <?php if (isset($Doc11)) {
-                                    echo "Submitted on: " . $Doc11 . " - ";
+                                    echo "Submitted on: " . date("F j, Y", strtotime($Doc11)) . " - ";
                                 } ?>
                                 <?php if (isset($Doc11_status)) {
-                                    echo $Doc11_status;
+                                    if ($Doc11_status == 0) {
+                                        echo "Pending";
+                                    } else if ($Doc11_status == 1) {
+                                        echo "Approved";
+                                    } else if ($Doc11_status == 2) {
+                                        echo "Resubmit";
+                                    } else {
+                                        echo "Unknown";
+                                    }
                                 } ?>
                             </span>
                         </div>
                         <div>
-                        <?php
+                            <?php
                             if (isset($waiver)) {
                                 echo
                                     "
@@ -481,16 +502,24 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                             <div class="fw-bold text-truncate">Daily Time Record</div>
                             <span class="text-muted">
                                 <?php if (isset($Doc12)) {
-                                    echo "Submitted on: " . $Doc12 . " - ";
+                                    echo "Submitted on: " . date("F j, Y", strtotime($Doc12)) . " - ";
                                 } ?>
                                 <?php if (isset($Doc12_status)) {
-                                    echo $Doc12_status;
+                                    if ($Doc12_status == 0) {
+                                        echo "Pending";
+                                    } else if ($Doc12_status == 1) {
+                                        echo "Approved";
+                                    } else if ($Doc12_status == 2) {
+                                        echo "Resubmit";
+                                    } else {
+                                        echo "Unknown";
+                                    }
                                 } ?>
                             </span>
                         </div>
                         <div>
-                        <?php
-                            if (isset($timecard)) { 
+                            <?php
+                            if (isset($timecard)) {
                                 echo
                                     "
                                 <a class='btn btn-sm btn-success' title='View File' href='$timecard' target='_blank'>View</a>
@@ -510,15 +539,23 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                             <div class="fw-bold text-wrap">Certificate of Completion</div>
                             <span class="text-muted">
                                 <?php if (isset($Doc13)) {
-                                    echo "Submitted on: " . $Doc13 . " - ";
+                                    echo "Submitted on: " . date("F j, Y", strtotime($Doc13)) . " - ";
                                 } ?>
                                 <?php if (isset($Doc13_status)) {
-                                    echo $Doc13_status;
+                                    if ($Doc13_status == 0) {
+                                        echo "Pending";
+                                    } else if ($Doc13_status == 1) {
+                                        echo "Approved";
+                                    } else if ($Doc13_status == 2) {
+                                        echo "Resubmit";
+                                    } else {
+                                        echo "Unknown";
+                                    }
                                 } ?>
                             </span>
                         </div>
                         <div>
-                        <?php
+                            <?php
                             if (isset($COC)) {
                                 echo
                                     "

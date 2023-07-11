@@ -199,12 +199,12 @@ if (mysqli_num_rows($result) > 0) {
                                     $output =
                                         '<div class="card-body">
                                     <!-- this should be a list of events joined by the user -->
-                                    <h5 class="card-title">' . $row['title'] . '</h5> <!-- Event Title -->
-                                    <p class="card-text">' . $row['description'] . '</p> <!-- Event Description -->
+                                    <h5 class="card-title">' . $row['eventTitle'] . '</h5> <!-- Event Title -->
+                                    <p class="card-text">' . $row['eventDescription'] . '</p> <!-- Event Description -->
                                     <p class="card-text">' . $row['eventLocation'] . '</p> <!-- Event Date -->
                                     <p class="card-text">' . date("d-m-Y", strtotime($row['eventDate'])) . '</p> <!-- Event Date -->
-                                    <p class="card-text">' . date("h:i A", strtotime($row['eventTime'])) . '</p> <!-- Event Time -->
-                                    <p class="card-text">' . $row['eventduration'] . ' Weeks</p> <!-- Event Duration -->
+                                    <p class="card-text">' . date("h:i A", strtotime($row['eventStartTime'])) . ' - ' . date("h:i A", strtotime($row['eventEndTime'])) . '</p> <!-- Event Time -->
+                                    <p class="card-text">' . $row['eventOrganizer'] . ' Weeks</p> <!-- Event Duration -->
                                 </div>';
                                 } else {
                                     $output = '<div class="fw-light">You don\'t have any event joined yet.</div>';

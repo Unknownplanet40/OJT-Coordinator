@@ -364,7 +364,6 @@ function MonthlyChart($month)
                                 <th scope="col" title="Description of the Program">Description</th>
                                 <th scope="col" title="Date of the Program">Date</th>
                                 <th scope="col" title="Start and End Time of the Program">Time</th>
-                                <th scope="col" title="Department">Dept.</th>
                                 <th scope="col" title="Duration of the Program in weeks">Duration</th>
                                 <th scope="col" title="Hours needed to complete the Program">Hours</th>
                             </tr>
@@ -389,7 +388,6 @@ function MonthlyChart($month)
                                     <td class="text-truncate" style="max-width: 100px;" title="' . $row['description'] . '">' . $row['description'] . '</td>
                                     <td class="text-truncate" style="max-width: 100px;">' . $date . '</td>
                                     <td class="text-truncate" style="max-width: 100px;" title="' . $start . ' - ' . $end . '">' . $start . ' - ' . $end . '</td>
-                                    <td class="text-truncate" style="max-width: 100px;">' . $row['department'] . '</td>
                                     <td class="text-truncate" style="max-width: 100px;">' . $row['Duration'] . ' weeks</td>
                                     <td class="text-truncate" style="max-width: 100px;">' . $row['hours'] . '</td>
                                     ';

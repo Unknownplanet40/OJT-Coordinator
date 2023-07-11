@@ -6,6 +6,16 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
     header("Location: ../Login.php");
 } else {
     $ShowAlert = true;
+
+    $sql = "SELECT * FROM tbl_announcement WHERE ID=1";
+    $result = mysqli_query($conn, $sql);
+    $row = mysqli_fetch_assoc($result);
+
+    $title = $row['Title'];
+    $desc = $row['Description'];
+    $date = date("F j, Y", strtotime($row['DateAdded']));
+    $comp = date("F j, Y", strtotime($row['DateEnd']));
+    $post = $row['PostedBy'];
 }
 
 if (isset($_POST['searchEvent']) && !empty($_POST['searchEvent'])) {
@@ -55,6 +65,87 @@ unset($_POST['resetEvent']);
                     <img src="../Image/Create.svg" alt="" class="me-2" width="24" height="24">
                     <span class="m-2">Create Event</span>
                 </button>
+                <button class="btn btn-success p-2 bg-gradient" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#Announce" aria-expanded="false" aria-controls="Announce">
+                    <img src="../Image/update.svg" alt="" class="me-2" width="24" height="24">
+                    <span class="m-2">Add a Announcement</span>
+                </button>
+                <div class="collapse" id="Announce">
+                    <form class="row g-3 rounded mt-1" method="POST" action="../Components/Proccess/AnnounceUpdate.php">
+                        <input type="hidden" name="Posted" id="Posted" value="<?php echo $_SESSION['GlobalName']; ?>">
+                        <div class="col-md-12">
+                            <div class="form-floating mb-3 text-light">
+                                <input type="text" class="form-control text-bg-dark" id="AnnounceTitle"
+                                    name="AnnounceTitle" placeholder="Announcement Title" minlength="5">
+                                <label for="AnnounceTitle">Announcement Title</label>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-floating mb-3 text-light">
+                                <textarea class="form-control text-bg-dark" placeholder="Announcement Description"
+                                    id="AnnounceDescription" name="AnnounceDescription" style="height: 150px"
+                                    minlength="5"></textarea>
+                                <label for="AnnounceDescription">Announcement Description</label>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="vstack gap-2 col-md-5 mx-auto">
+                                <input type="submit" class="btn btn-primary bg-gradient" name="addAnnounce"
+                                    id="addAnnounce" value="Submit">
+                                <input type="reset" class="btn btn-danger bg-gradient" name="resetAnnounce"
+                                    id="resetAnnounce" value="Reset">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-floating mb-3 text-light">
+                                <input type="date" class="form-control text-bg-dark" id="startDate" name="startDate"
+                                    placeholder="Start Date">
+                                <label for="startDate">Start Date</label>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-floating mb-3 text-light">
+                                <input type="date" class="form-control text-bg-dark" id="EndDate" name="EndDate"
+                                    placeholder="End Date">
+                                <label for="EndDate">End Date</label>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <p class="text-danger text-center" id="Ann_error">
+                                this is for error message
+                            </p>
+                        </div>
+                        <script>
+                            let startDate = document.getElementById("startDate");
+                            let EndDate = document.getElementById("EndDate");
+                            let Ann_error = document.getElementById("Ann_error");
+
+                            Ann_error.innerHTML = "";
+
+                            // check if end date is greater than start date
+                            EndDate.addEventListener("change", function () {
+                                let start = new Date(startDate.value);
+                                let end = new Date(EndDate.value);
+                                if (end <= start) {
+                                    Ann_error.innerHTML = "End date cannot be less or equal to start date";
+                                    EndDate.value = "";
+                                } else {
+                                    Ann_error.innerHTML = "";
+                                }
+                            });
+                        </script>
+                    </form>
+
+                    <div class="alert alert-success" role="alert">
+                        <h4 class="alert-heading"><?php echo $title; ?></h4>
+                        <p><?php echo $desc; ?></p>
+                        <hr>
+                        <p class="mb-0">Posted by: <?php echo $post; ?> | Date Posted: <?php echo $date; ?> | Date
+                            End: <?php echo $comp; ?></p>
+                    </div>
+
+                    <hr class="mt-4 mb-4" style="background-color: white; height: 5px; border-radius: 5px;">
+                </div>
                 <div class="collapse" id="EventForm">
                     <form class="row g-3 rounded mt-1" method="POST" action="../Components/Proccess/EventInsert.php"
                         enctype="multipart/form-data">
@@ -208,10 +299,11 @@ unset($_POST['resetEvent']);
                         </div>
                     </form>
                 </div>
-                <hr class="mt-4 mb-4" style="background-color: white; height: 5px; border-radius: 5px;">
+
 
                 <!-- search bar -->
                 <form action="AdminEvents.php" method="POST" id="searchForm">
+                    <hr class="mt-4 mb-4" style="background-color: white; height: 5px; border-radius: 5px;">
                     <div class="input-group mb-3">
                         <input type="text" class="form-control text-bg-dark" placeholder="Search Event Title"
                             aria-label="Search Event" aria-describedby="button-addon2" name="searchEvent"
@@ -270,7 +362,7 @@ unset($_POST['resetEvent']);
                     let EventType = document.querySelector("#Mtype");
                     let EventStat = document.querySelector("#Mstat");
                     let EventOrg = document.querySelector("#Morg");
-                    let EventUp = document.querySelector("#Mup");
+                    let EventUp = document.getElementById("Mup");
 
                     EventTitle.innerHTML = "' . $row['eventTitle'] . '";
                     EventImage.src = "' . $row['eventImage'] . '";
