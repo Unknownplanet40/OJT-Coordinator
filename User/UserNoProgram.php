@@ -39,7 +39,7 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
         <div class="text">Program Details</div>
         <div style="margin: 10px; width: 98%;">
             <div class="text-center text-uppercase fs-5 fw-bolder">
-                You have not been assigned to any program yet. Please contact your administrator. <br>
+                You have not been assigned to any program yet. Please contact your Coordinator. <br>
                 or wait for your Coordinator to assign you to a program. Thank you!
             </div>
             <br>
