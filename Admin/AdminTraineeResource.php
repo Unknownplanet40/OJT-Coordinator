@@ -21,7 +21,6 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="../Style/ImportantImport.css">
-    <script src="../Script/SidebarScript.js"></script>
     <script src="../Script/SweetAlert2.js"></script>
     <script src="../Script/SidebarScript.js"></script>
     <script src="../Script/MangeAdminTable.js"></script>

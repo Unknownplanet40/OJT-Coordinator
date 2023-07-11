@@ -27,10 +27,12 @@
             </span>
 
             <div class="text logo-text">
-                <span class="name text-capitalize text-truncate" style="max-width: 155px;" title="<?php echo $_SESSION['GlobalName']; ?> - <?php echo $_SESSION['GlobalRole']; ?>">
+                <span class="name text-capitalize text-truncate" style="max-width: 155px;"
+                    title="<?php echo $_SESSION['GlobalName']; ?> - <?php echo $_SESSION['GlobalRole']; ?>">
                     <?php echo $_SESSION['GlobalName']; ?>
                 </span>
-                <span class="profession text-uppercase text-success" title="<?php echo $_SESSION['GlobalName']; ?> - <?php echo $_SESSION['GlobalRole']; ?>">
+                <span class="profession text-uppercase text-success"
+                    title="<?php echo $_SESSION['GlobalName']; ?> - <?php echo $_SESSION['GlobalRole']; ?>">
                     <?php echo $_SESSION['GlobalRole']; ?>
                 </span>
             </div>
@@ -119,31 +121,31 @@
                         <span class="text nav-text">Resouces</span>
                     </a>
                 </li>
+                <?php if ($_SESSION['GlobalRole'] == "administrator") { ?>
+                    <li class="nav-link" title="Manage Moderators Accounts">
+                        <a <?php echo (basename($_SERVER['PHP_SELF']) == "ManageAdmin.php") ? "class='active'" : "href='../Admin/ManageAdmin.php'"; ?>>
+                            <i class='icon'>
+                                <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24">
+                                    <path
+                                        d="M400-480q-66 0-113-47t-47-113q0-66 47-113t113-47q66 0 113 47t47 113q0 66-47 113t-113 47ZM120-160q-17 0-28.5-11.5T80-200v-72q0-33 17-62t47-44q51-26 115-44t141-18h14q6 0 12 2-8 18-13.5 37.5T404-360q-5 36-3 60.5t11 59.5q6 21 16 41.5t22 38.5H120Zm560-80q33 0 56.5-23.5T760-320q0-33-23.5-56.5T680-400q-33 0-56.5 23.5T600-320q0 33 23.5 56.5T680-240Zm-52 60q-12-5-22.5-10.5T584-204l-43 13q-7 2-13-.5t-10-8.5l-24-40q-4-6-2.5-13t7.5-12l33-29q-2-14-2-26t2-26l-33-29q-6-5-7.5-12t2.5-13l24-40q4-6 10-8.5t13-.5l43 13q11-8 21.5-13.5T628-460l9-44q2-7 7-11.5t12-4.5h48q7 0 12 4.5t7 11.5l9 44q12 5 22.5 11t21.5 15l42-15q7-3 13.5 0t10.5 9l24 42q4 6 3 13t-7 12l-34 29q2 12 2 25t-2 25l33 29q6 5 7.5 12t-2.5 13l-24 40q-4 6-10 8.5t-13 .5l-43-13q-11 8-21.5 13.5T732-180l-9 44q-2 7-7 11.5t-12 4.5h-48q-7 0-12-4.5t-7-11.5l-9-44Z" />
+                                </svg>
+                            </i>
+                            <span class="text nav-text">Manage</span>
+                        </a>
+                    </li>
 
-                <li class="nav-link" title="Manage Moderators Accounts">
-                    <a <?php echo (basename($_SERVER['PHP_SELF']) == "ManageAdmin.php") ? "class='active'" : "href='../Admin/ManageAdmin.php'"; ?>>
-                        <i class='icon'>
-                            <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24">
-                                <path
-                                    d="M400-480q-66 0-113-47t-47-113q0-66 47-113t113-47q66 0 113 47t47 113q0 66-47 113t-113 47ZM120-160q-17 0-28.5-11.5T80-200v-72q0-33 17-62t47-44q51-26 115-44t141-18h14q6 0 12 2-8 18-13.5 37.5T404-360q-5 36-3 60.5t11 59.5q6 21 16 41.5t22 38.5H120Zm560-80q33 0 56.5-23.5T760-320q0-33-23.5-56.5T680-400q-33 0-56.5 23.5T600-320q0 33 23.5 56.5T680-240Zm-52 60q-12-5-22.5-10.5T584-204l-43 13q-7 2-13-.5t-10-8.5l-24-40q-4-6-2.5-13t7.5-12l33-29q-2-14-2-26t2-26l-33-29q-6-5-7.5-12t2.5-13l24-40q4-6 10-8.5t13-.5l43 13q11-8 21.5-13.5T628-460l9-44q2-7 7-11.5t12-4.5h48q7 0 12 4.5t7 11.5l9 44q12 5 22.5 11t21.5 15l42-15q7-3 13.5 0t10.5 9l24 42q4 6 3 13t-7 12l-34 29q2 12 2 25t-2 25l33 29q6 5 7.5 12t-2.5 13l-24 40q-4 6-10 8.5t-13 .5l-43-13q-11 8-21.5 13.5T732-180l-9 44q-2 7-7 11.5t-12 4.5h-48q-7 0-12-4.5t-7-11.5l-9-44Z" />
-                            </svg>
-                        </i>
-                        <span class="text nav-text">Manage</span>
-                    </a>
-                </li>
-
-                <li class="nav-link">
-                    <a <?php echo (basename($_SERVER['PHP_SELF']) == "AdminSystemLog.php") ? "class='active'" : "href='../Admin/AdminSystemLog.php'"; ?>>
-                        <i class='icon'>
-                            <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24">
-                                <path
-                                    d="M680-280q25 0 42.5-17.5T740-340q0-25-17.5-42.5T680-400q-25 0-42.5 17.5T620-340q0 25 17.5 42.5T680-280Zm0 120q31 0 57-14.5t42-38.5q-22-13-47-20t-52-7q-27 0-52 7t-47 20q16 24 42 38.5t57 14.5ZM480-80q-139-35-229.5-159.5T160-516v-189q0-25 14.5-45t37.5-29l240-90q14-5 28-5t28 5l240 90q23 9 37.5 29t14.5 45v172q-19-8-39-14.5t-41-9.5v-147l-240-90-240 90v188q0 47 12.5 94t35 89.5Q310-290 342-254t71 60q11 32 29 61t41 52q-1 0-1.5.5t-1.5.5Zm200 0q-83 0-141.5-58.5T480-280q0-83 58.5-141.5T680-480q83 0 141.5 58.5T880-280q0 83-58.5 141.5T680-80ZM480-494Z" />
-                            </svg>
-                        </i>
-                        <span class="text nav-text">System Logs</span>
-                    </a>
-                </li>
-
+                    <li class="nav-link">
+                        <a <?php echo (basename($_SERVER['PHP_SELF']) == "AdminSystemLog.php") ? "class='active'" : "href='../Admin/AdminSystemLog.php'"; ?>>
+                            <i class='icon'>
+                                <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24">
+                                    <path
+                                        d="M680-280q25 0 42.5-17.5T740-340q0-25-17.5-42.5T680-400q-25 0-42.5 17.5T620-340q0 25 17.5 42.5T680-280Zm0 120q31 0 57-14.5t42-38.5q-22-13-47-20t-52-7q-27 0-52 7t-47 20q16 24 42 38.5t57 14.5ZM480-80q-139-35-229.5-159.5T160-516v-189q0-25 14.5-45t37.5-29l240-90q14-5 28-5t28 5l240 90q23 9 37.5 29t14.5 45v172q-19-8-39-14.5t-41-9.5v-147l-240-90-240 90v188q0 47 12.5 94t35 89.5Q310-290 342-254t71 60q11 32 29 61t41 52q-1 0-1.5.5t-1.5.5Zm200 0q-83 0-141.5-58.5T480-280q0-83 58.5-141.5T680-480q83 0 141.5 58.5T880-280q0 83-58.5 141.5T680-80ZM480-494Z" />
+                                </svg>
+                            </i>
+                            <span class="text nav-text">System Logs</span>
+                        </a>
+                    </li>
+                <?php } ?>
             </ul>
         </div>
 

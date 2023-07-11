@@ -28,12 +28,14 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
 </head>
 
 <body class="dark adminuser" style="min-width: 1080px;">
-    <?php 
-        @include_once '../Components/AdminSidebar.php'; 
-        @include_once '../Components/EvaluateModal.php';
+    <?php
+    @include_once '../Components/AdminSidebar.php';
+    @include_once '../Components/EvaluateModal.php';
     ?>
     <section class="home">
-        <div class="text">Evaluation</div>
+        <div class="text">
+            <h1 class="text-warning">Evaluation</h1>
+        </div>
         <p class="text-start text-secondary">
             <?php // print_r($_POST); ?>
         </p>

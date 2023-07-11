@@ -57,7 +57,9 @@ unset($_POST['resetEvent']);
     }
     ?>
     <section class="home">
-        <div class="text">Events</div>
+        <div class="text">
+            <h1 class="text-warning">Events</h1>
+        </div>
         <div class="container-fluid" style="width: 98%;">
             <div class="container-xl my-1 table-responsive">
                 <button class="btn btn-primary p-2 bg-gradient" type="button" data-bs-toggle="collapse"
@@ -137,11 +139,19 @@ unset($_POST['resetEvent']);
                     </form>
 
                     <div class="alert alert-success" role="alert">
-                        <h4 class="alert-heading"><?php echo $title; ?></h4>
-                        <p><?php echo $desc; ?></p>
+                        <h4 class="alert-heading">
+                            <?php echo $title; ?>
+                        </h4>
+                        <p>
+                            <?php echo $desc; ?>
+                        </p>
                         <hr>
-                        <p class="mb-0">Posted by: <?php echo $post; ?> | Date Posted: <?php echo $date; ?> | Date
-                            End: <?php echo $comp; ?></p>
+                        <p class="mb-0">Posted by:
+                            <?php echo $post; ?> | Date Posted:
+                            <?php echo $date; ?> | Date
+                            End:
+                            <?php echo $comp; ?>
+                        </p>
                     </div>
 
                     <hr class="mt-4 mb-4" style="background-color: white; height: 5px; border-radius: 5px;">

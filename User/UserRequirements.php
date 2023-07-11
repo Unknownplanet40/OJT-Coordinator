@@ -443,7 +443,7 @@ if (isset($_POST['submitm'])) {
                             </form>
                         </li>
                         <li class="list-group-item d-flex justify-content-between align-items-start">
-                            <div class="ms-2 me-auto" <?php echo $RegistrationForm; ?>>
+                            <div class="ms-2 me-auto">
                                 <div class="fw-bold">Registration Form</div>
                                 <p>
                                     <?php if ($row['Doc8_stat'] == 2) {

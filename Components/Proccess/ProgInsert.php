@@ -18,7 +18,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $ID = $_POST['ProgID'];
     $type = $_POST['useupdate'];
 
-    if ($type == true){
+    if ($type == true) {
         $sql = "UPDATE tbl_programs SET title = '$Title', description = '$Desc', start_date = '$Date', end_date = '$Comp', progloc = '$Location', hours = '$Hours', start_time = '$From', end_time = '$To', Duration = '$Duration', Supervisor = '$Super' WHERE progID = $ID";
     } else {
         $sql = "INSERT INTO tbl_programs(progID, title , description, start_date, end_date, progloc, hours, start_time, end_time, Duration, Supervisor) VALUES ($ID, '$Title', '$Desc', '$Date', '$Comp', '$Location', '$Hours', '$From', '$To', '$Duration', '$Super')";

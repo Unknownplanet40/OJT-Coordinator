@@ -73,7 +73,7 @@ function Greetings()
 function fetchAdminData($ID)
 {
     global $conn;
-    
+
     // Get data from database
     $sql = "SELECT * FROM tbl_admin WHERE UID = '$ID'";
     $result = mysqli_query($conn, $sql);
@@ -129,10 +129,57 @@ function fetchAdminData($ID)
 function fetchModeratorData($ID)
 {
     global $conn;
-    // get data from database
-    // after getting data from database store it in session and redirect to dashboard
 
-    echo "for moderator <br>";
+    $sql = "SELECT * FROM tbl_admin WHERE UID = '$ID'";
+    $result = mysqli_query($conn, $sql);
+
+    if (mysqli_num_rows($result) > 0) {
+        $row = mysqli_fetch_assoc($result);
+
+        // Store data in session
+        $_SESSION['GlobalID'] = $row['UID'];
+        $_SESSION['GlobalName'] = $row['name'];
+        $_SESSION['GlobalUsername'] = $row['admin_uname'];
+        $_SESSION['GlobalPassword'] = $row['admin_pword'];
+        $_SESSION['GlobalEmail'] = $row['admin_email'];
+        $_SESSION['GlobalDept'] = $row['department'];
+        $_SESSION['Profile'] = $row['imagePath'];
+        $_SESSION['GlobalRole'] = $row['role'];
+        $_SESSION['GlobalDept'] = $row['department'];
+        $_SESSION['GlobalStatus'] = $row['status'];
+        $_SESSION['GlobalAccCreated'] = $row['account_Created'];
+
+        // Update status in tbl_accounts
+        $sql = "UPDATE tbl_accounts SET status = 1 WHERE UID = '$ID'";
+        $result = mysqli_query($conn, $sql);
+
+        if ($result) {
+            // Update last_login in tbl_admin
+            $sql = "UPDATE tbl_admin SET last_login = NOW() WHERE UID = '$ID'";
+            $result = mysqli_query($conn, $sql);
+
+            if ($result) {
+                $_SESSION['message'] = Greetings() . ", " . $_SESSION['GlobalName'] . "! Welcome to your dashboard.";
+                $_SESSION['icon'] = "info";
+                $_SESSION['Show'] = true;
+                $_SESSION['DatahasbeenFetched'] = true;
+                echo "<script>console.log('" . $_SESSION['GlobalName'] . "');</script>";
+                header("Location: ../Admin/AdminDashboard.php");
+                exit;
+            }
+        }
+
+        // If any error occurs during the process
+        $_SESSION['message'] = "We encountered an error while logging you in, please try again later.";
+        $_SESSION['icon'] = "error";
+        $_SESSION['Show'] = true;
+        $_SESSION['DatahasbeenFetched'] = null;
+        logMessage("Error", "Authentication", "The file Authentication was accessed by " . $_SESSION['GlobalName'] . ".");
+        header("Location: ../Login.php");
+        exit;
+    }
+
+
 }
 
 function fetchUserData($ID)

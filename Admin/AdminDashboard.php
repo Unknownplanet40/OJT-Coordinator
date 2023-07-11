@@ -322,7 +322,6 @@ function MonthlyChart($month)
                                             </span>
                                             <input type="search" class="form-control text-bg-dark"
                                                 placeholder="Search by Name" id="ProgSearchBar">
-                                            <a href="../Admin/AdminPrograms.php" class="btn btn-outline-primary">Show more</a>
                                         </div>
                                     </div>
                                     <div class="col-4">
