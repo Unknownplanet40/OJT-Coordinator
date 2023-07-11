@@ -35,13 +35,26 @@ password:
 ```
 > **Note:** You can change the credentials in the database. or you can create a new account in the application.
 
+if you incoutered an error like this:
+```
+TCPDF ERROR:TCPDF requires the Imagick or GD extension to handle PNG images with alpha channel.
+```
+you can fix it by following this steps:
+1. open your xampp control panel
+2. click the config button of the apache module
+3. click the `php.ini`
+4. search for the `extension=gd` or `extension=imagick`
+5. remove the semicolon (;) in the beginning of the line
+6. save the file
+7. restart the apache module
+
 ## Features
 > **Note:** The following features are still under development.
 
 `I'll add the features later on.`
 
 ## Screenshots
-### Admin
+### Admin / Moderator(Coordinator)
 `for admin screenshots`
 ### Trainee
 `for trainee screenshots`
@@ -54,9 +67,9 @@ This project was created by the following students of the Cavite State Universit
 
 |       |        |
 | :---  |  :---: |
-| Date started:  | **April 21, 2021 at 12:15 AM** |
-| Date Finished: |  |
-| Duration:      |  |
+| Date started:  | **May 21, 2023 at 12:15 AM** |
+| Date Finished: | **July 11, 2023 at 6:36 PM** |
+| Duration:      | **1 month, 20 days** |
 
 ### Developers and Contributors
 <div align="center">
@@ -107,6 +120,10 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 - [Figma](https://www.figma.com/)
 - [GitHub](https://github.com/Unknownplanet40)
 - [Google Bard](https://bard.google.com/)
+- [TCPDF](https://tcpdf.org/)
+- [Heikei](https://app.haikei.app/)
+- [lordicon](https://lordicon.com/icons)
+- [BGjar](https://bgjar.com/)
 
 
 
