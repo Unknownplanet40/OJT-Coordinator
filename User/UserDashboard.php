@@ -48,25 +48,79 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
                         <div class="card-header">
                             Program Joined
                         </div>
-                        <!-- this should be the program joined by the user -->
-                        <div class="card-body">
-                            <h5 class="card-title">Web Development Internship</h5>
-                            <p class="card-text">Duration: 12 Weeks</p>
-                            <p class="card-text">Start and End Date: January 1, 2023 - March 31, 2023</p>
-                            <p class="card-text">Gain practical experience and training in web development through the
-                                Web Development Internship. Develop skills in HTML, CSS, and JavaScript, and collaborate
-                                on real-world projects under the guidance of experienced mentors.
+                        <?php
+                        $id = $_SESSION['GlobalID'];
+                        $sql = "SELECT program, prog_duration, fulfilled_time FROM tbl_trainee WHERE UID = '$id'";
+                        $result = mysqli_query($conn, $sql);
+                        $row = mysqli_fetch_assoc($result);
+                        $program = $row['program'];
+                        $duration = $row['prog_duration'];
+                        $fulfilled = $row['fulfilled_time'];
+
+                        if (isset($program)) {
+                            $sql = "SELECT * FROM tbl_programs WHERE progID = '$id'";
+                            $result = mysqli_query($conn, $sql);
+                            $row = mysqli_fetch_assoc($result);
+
+                            $current_date = date("Y-m-d");
+                            $start_date = $row['start_date'];
+                            $end_date = $row['end_date'];
+
+                            $start_datetime = new DateTime($start_date);
+                            $end_datetime = new DateTime($end_date);
+                            $current_datetime = new DateTime($current_date);
+
+                            $total_duration = $start_datetime->diff($end_datetime)->format('%a');
+                            $elapsed_duration = $start_datetime->diff($current_datetime)->format('%a');
+                            $percentage = ($elapsed_duration / $total_duration) * 100;
+                            $percentage = round($percentage, 0);
+                            $_SESSION['GlobalPercentage'] = $percentage;
+
+                            if ($percentage == 100) {
+                                $sql = "UPDATE tbl_trainee SET completed = 'true' WHERE UID = '$id'";
+                                $result = mysqli_query($conn, $sql);
+                                $_SESSION['GlobalCompleted'] = 'true';
+                            }
+
+                            $startdate = date("F j, Y", strtotime($row['start_date']));
+                            $enddate = date("F j, Y", strtotime($row['end_date']));
+                            $start = date("g:i A", strtotime($row['start_time']));
+                            $end = date("g:i A", strtotime($row['end_time']));
+
+                            if (isset($_SESSION['GlobalCompleted']) && $_SESSION['GlobalCompleted'] == 'true') {
+                                $Progoutput =
+                                    '<div class="card-body">
+                                        Program has been completed.
+                                    </div>';
+                            } else {
+                                $Progoutput =
+                                    '<div class="card-body">
+                            <h5 class="card-title">' . $row['title'] . '</h5>
+                            <p class="card-text">Duration: ' . $row['Duration'] . ' Weeks</p>
+                            <p class="card-text">Start and End Date: ' . $startdate . ' - ' . $enddate . '</p>
+                            <p class="card-text">From: ' . $start . ' to ' . $end . '</p>
+                            <p class="card-text">Supervisor: ' . $row['Supervisor'] . '</p>
+                            <p class="card-text">Description: ' . $row['description'] . '</p>
                             </p>
-                        </div>
-                        <br>
-                        <div class="card-footer">
-                            <div class="progress">
-                                <!-- this should be the progress of the user in the program -->
-                                <!-- just change the width of the div to change the progress -->
-                                <div class="progress-bar bg-success" role="progressbar" style="width: 25%;"
-                                    aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25% Complete</div>
                             </div>
-                        </div>
+                            <br>
+                            <div class="card-footer">
+                            <div class="progress">
+                                <div class="progress-bar bg-success progress-bar-striped progress-bar-animated"
+                                 role="progressbar" style="width: ' . $percentage . '%"
+                                    aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">' . $percentage . '%</div>
+                            </div>
+                            </div>';
+                            }
+                        } else {
+                            $Progoutput =
+                                '<div class="card-body">
+                            No program joined yet.
+                            </div>';
+                        }
+
+                        echo $Progoutput;
+                        ?>
                     </div>
                 </div>
                 <div class="col-sm-4">
@@ -87,7 +141,7 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
                             $result = mysqli_query($conn, $sql);
                             $row = mysqli_fetch_assoc($result);
                             $currentdate = date("Y-m-d");
-                            
+
                             if ($row['eventCompletion'] >= $currentdate) {
                                 $sql = "UPDATE tbl_trainee SET Join_an_Event = 0 WHERE UID = '$id'";
                                 $result = mysqli_query($conn, $sql);
@@ -102,7 +156,7 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
                                     <!-- so on and so forth -->
                                     <!--<a href="#" class="btn btn-success" hidden>Go somewhere</a>-->
                                 </div>';
-                            } elseif ($row['eventEnded'] = 'true'){
+                            } elseif ($row['eventEnded'] = 'true') {
                                 $output =
                                     '<div class="card-body">
                                     <!-- this should be a list of events joined by the user -->
