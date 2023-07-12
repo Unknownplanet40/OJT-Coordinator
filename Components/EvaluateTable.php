@@ -68,11 +68,11 @@
                 <thead>
                     <tr>
                         <th class="tbhead" scope="col">Question</th>
-                        <th class="text-center">U</th>
-                        <th class="text-center">NI</th>
-                        <th class="text-center">S</th>
-                        <th class="text-center">VS</th>
-                        <th class="text-center">O</th>
+                        <th class="text-center">1</th>
+                        <th class="text-center">2</th>
+                        <th class="text-center">3</th>
+                        <th class="text-center">4</th>
+                        <th class="text-center">5</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -260,10 +260,47 @@
                                 behavior's & personality of the trainee.</small>
                             <textarea class="form-control text-bg-dark" name="Comments" id="Comments" cols="30" rows="8"
                                 maxlength="1000" placeholder="Maximum of 1,000 characters"></textarea>
-                                <br>
+                            <br>
                         </td>
                     </tr>
                 </tbody>
+                <Script>
+                    // Array of radio button groups with their corresponding values
+                    var radioGroups = [
+                        { name: "Q1", value: <?php echo $Q1; ?> },
+                        { name: "Q2", value: <?php echo $Q2; ?> },
+                        { name: "Q3", value: <?php echo $Q3; ?> },
+                        { name: "Q4", value: <?php echo $Q4; ?> },
+                        { name: "Q5", value: <?php echo $Q5; ?> },
+                        { name: "Q6", value: <?php echo $Q6; ?> },
+                        { name: "Q7", value: <?php echo $Q7; ?> },
+                        { name: "Q8", value: <?php echo $Q8; ?> },
+                        { name: "Q9", value: <?php echo $Q9; ?> },
+                        { name: "Q10", value: <?php echo $Q10; ?> },
+                        { name: "Q11", value: <?php echo $Q11; ?> },
+                        { name: "Q12", value: <?php echo $Q12; ?> },
+                        { name: "Q13", value: <?php echo $Q13; ?> },
+                        { name: "Q14", value: <?php echo $Q14; ?> },
+                        { name: "Q15", value: <?php echo $Q15; ?> },
+                        { name: "Q16", value: <?php echo $Q16; ?> },
+                        { name: "Q17", value: <?php echo $Q17; ?> },
+                        { name: "Q18", value: <?php echo $Q18; ?> }
+                    ];
+
+                    // Loop over each radio button group
+                    for (var i = 0; i < radioGroups.length; i++) {
+                        var group = radioGroups[i];
+                        var btnGroup = document.getElementsByName(group.name);
+
+                        // Check the radio button based on its value
+                        for (var j = 0; j < btnGroup.length; j++) {
+                            if (btnGroup[j].value == group.value) {
+                                btnGroup[j].checked = true;
+                                break; // Exit the loop after finding a match
+                            }
+                        }
+                    }
+                </Script>
                 <tfoot>
                     <?php
                     if ($evaluated == "true") {
@@ -293,8 +330,8 @@
                             <th class="tbhead text-center text-bg-success" scope="row" colspan="6">Evaluation Result</th>
                         </tr>';
 
-                        $output = 
-                        '<div class="container-lg rounded text-bg-dark">
+                        $output =
+                            '<div class="container-lg rounded text-bg-dark">
                         <table class="table table-dark table-borderless table-sm" id="EvalResult">
                             <tbody>
                                 <tr class="text-uppercase">
@@ -346,7 +383,7 @@
                                     <td class="text-start text-success" scope="row" colspan="6">Feedback</td>
                                 </tr>
                                 <tr>
-                                    <td class="text-start text-light text-wrap user-select-none" colspan="6" style="text-align: justify;">' . $Comment .'</td>
+                                    <td class="text-start text-light text-wrap user-select-none" colspan="6" style="text-align: justify;">' . $Comment . '</td>
                                 </tr>
                             </tbody>
                         </table>

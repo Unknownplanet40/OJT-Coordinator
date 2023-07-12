@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
     $_SESSION['UserID'] = $_GET['id'];
     $UserID = $_SESSION['UserID'];
 
-    $sql = "SELECT * FROM tbl_admin WHERE UID='$UserID'";
+    $sql = "SELECT * FROM tbl_admin WHERE UID='$UserID' AND role='moderator'";
     $result = mysqli_query($conn, $sql);
 
     if ($result) {
@@ -258,12 +258,16 @@ if (isset($_POST['update'])) {
                     </div>
                     <div class="input-group mb-3">
                         <span class="input-group-text text-bg-success w-25">Position:</span>
-                        <select name="upposition" class="form-select" id="upposition"
-                            value="<?php echo isset($position) ? $position : "Not Available"; ?>">
-                            <option value="administrator">ADMINISTRATOR</option>
-                            <option value="moderator">MODERATOR</option>
+                        <select name="upposition" class="form-select" id="upposition">
+                            <option value="administrator" <?php if ($position === "administrator")
+                                echo "selected"; ?>>
+                                ADMINISTRATOR</option>
+                            <option value="moderator" <?php if ($position === "moderator")
+                                echo "selected"; ?>>MODERATOR
+                            </option>
                         </select>
                     </div>
+
                     <div class="input-group mb-3">
                         <span class="input-group-text text-bg-success w-25">Image:</span>
                         <input type="file" class="form-control" name="upimage" id="upimage"

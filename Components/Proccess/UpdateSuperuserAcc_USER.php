@@ -250,7 +250,7 @@ if (isset($_POST['update'])) {
                 </div>
             </div>
             <div class="col-md-7 text-bg-dark p-5">
-                <form action="../Proccess/update _USER.php" method="POST">
+                <form action="../Proccess/update_USER.php" method="POST">
                     <input type="hidden" name="id" value="<?php echo $UserID; ?>">
                     <div class="input-group mb-3">
                         <span class="input-group-text w-25 text-bg-success">Name:</span>
@@ -274,8 +274,7 @@ if (isset($_POST['update'])) {
                     </div>
                     <div class="input-group mb-3">
                         <span class="input-group-text text-bg-success w-25">Department:</span>
-                        <select name="updepartment" class="form-select" id="updepartment"
-                            value="<?php echo isset($department) ? $department : "Not Available"; ?>">
+                        <select name="updepartment" class="form-select" id="updepartment" value="<?php isset($department) ? print $department : print "Not Available"; ?>">
                             <option value="BSIT">Information Technology</option>
                             <option value="BSCS">Computer Science</option>
                         </select>

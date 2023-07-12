@@ -92,7 +92,7 @@ if (mysqli_num_rows($result) > 0) {
     } else {
         $RegistrationForm = "";
     }
-    
+
     if ($row['Evaform'] != null) {
         if ($row['Doc10_stat'] == 0 || $row['Doc10_stat'] == 1) {
             $EvaluationForm = "hidden";
@@ -241,55 +241,96 @@ if (isset($_POST['submitm'])) {
 
                     if ($row['resume'] != null) {
                         $count++;
+                        if ($row['Doc1_stat'] == 2) {
+                            $count--;
+                        }
                     }
                     if ($row['placement'] != null) {
                         $count++;
+                        if ($row['Doc2_stat'] == 2) {
+                            $count--;
+                        }
                     }
                     if ($row['Birth'] != null) {
                         $count++;
+                        if ($row['Doc3_stat'] == 2) {
+                            $count--;
+                        }
                     }
                     if ($row['MoA'] != null) {
                         $count++;
+                        if ($row['Doc4_stat'] == 2) {
+                            $count--;
+                        }
                     }
                     if ($row['Waiver'] != null) {
                         $count++;
+                        if ($row['Doc5_stat'] == 2) {
+                            $count--;
+                        }
                     }
                     if ($row['MedCert'] != null) {
                         $count++;
+                        if ($row['Doc6_stat'] == 2) {
+                            $count--;
+                        }
                     }
                     if ($row['GMCert'] != null) {
                         $count++;
+                        if ($row['Doc7_stat'] == 2) {
+                            $count--;
+                        }
                     }
                     if ($row['RegForm'] != null) {
                         $count++;
+                        if ($row['Doc8_stat'] == 2) {
+                            $count--;
+                        }
                     }
 
                     if (isset($_SESSION['GlobalCompleted']) && $_SESSION['GlobalCompleted'] == 'true') {
                         if ($row['Evaform'] != null) {
                             $count++;
+                            if ($row['Doc10_stat'] == 2) {
+                                $count--;
+                            }
                         }
                         if ($row['NarraForm'] != null) {
                             $count++;
+                            if ($row['Doc11_stat'] == 2) {
+                                $count--;
+                            }
                         }
                         if ($row['TimeCard'] != null) {
                             $count++;
+                            if ($row['Doc12_stat'] == 2) {
+                                $count--;
+                            }
                         }
                         if ($row['COC'] != null) {
                             $count++;
+                            if ($row['Doc13_stat'] == 2) {
+                                $count--;
+                            }
                         }
                     }
-                    
-                    $percentage = ($count / 12) * 100;
+
+                    if (isset($_SESSION['GlobalCompleted']) && $_SESSION['GlobalCompleted'] == 'false') {
+                        $percentage = ($count / 8) * 100;
+                    } else{
+                        $percentage = ($count / 12) * 100;
+                    }
                     $percentage = round($percentage);
                     if ($percentage >= 100) {
                         $percentage = 100;
-                        $sql="UPDATE tbl_trainee SET Resource_Completed = 1 WHERE UID = '" . $_SESSION['GlobalID'] . "'";
+                        $sql = "UPDATE tbl_trainee SET Resource_Completed = 1 WHERE UID = '" . $_SESSION['GlobalID'] . "'";
                         $result = mysqli_query($conn, $sql);
                     }
                     ?>
                     <div class="progress">
-                        <div class="progress-bar bg-success" role="progressbar" style="width: <?php echo $percentage; ?>%;" aria-valuenow="40"
-                            aria-valuemin="0" aria-valuemax="100"><?php echo $percentage; ?>% Complete</div>
+                        <div class="progress-bar bg-success" role="progressbar"
+                            style="width: <?php echo $percentage; ?>%;" aria-valuenow="40" aria-valuemin="0"
+                            aria-valuemax="100"><?php echo $percentage; ?>% Complete</div>
                     </div>
                     <br>
                     <ol class="list-group list-group-numbered">
@@ -303,7 +344,8 @@ if (isset($_POST['submitm'])) {
                                 </p>
                             </div>
                             <form method="POST" action="<?php basename($_SERVER['PHP_SELF']) ?>"
-                                enctype="multipart/form-data" <?php if(isset($Resume)) echo $Resume; ?>>
+                                enctype="multipart/form-data" <?php if (isset($Resume))
+                                    echo $Resume; ?>>
                                 <div class="input-group mb-3">
                                     <input type="submit" class="btn btn-success btn-sm" id="SBfile1" name="submita"
                                         disabled>
@@ -323,7 +365,8 @@ if (isset($_POST['submitm'])) {
                                 </p>
                             </div>
                             <form method="POST" action="<?php basename($_SERVER['PHP_SELF']) ?>"
-                                enctype="multipart/form-data" <?php if(isset($PlacementForm)) echo $PlacementForm; ?>>
+                                enctype="multipart/form-data" <?php if (isset($PlacementForm))
+                                    echo $PlacementForm; ?>>
                                 <div class="input-group mb-3">
                                     <input type="submit" class="btn btn-success btn-sm" id="SBfile2" name="submitb"
                                         disabled>
@@ -343,7 +386,8 @@ if (isset($_POST['submitm'])) {
                                 </p>
                             </div>
                             <form method="POST" action="<?php basename($_SERVER['PHP_SELF']) ?>"
-                                enctype="multipart/form-data" <?php if(isset($BirthCertificate)) echo $BirthCertificate; ?>>
+                                enctype="multipart/form-data" <?php if (isset($BirthCertificate))
+                                    echo $BirthCertificate; ?>>
                                 <div class="input-group mb-3">
                                     <input type="submit" class="btn btn-success btn-sm" id="SBfile3" name="submitc"
                                         disabled>
@@ -362,7 +406,8 @@ if (isset($_POST['submitm'])) {
                                 </p>
                             </div>
                             <form method="POST" action="<?php basename($_SERVER['PHP_SELF']) ?>"
-                                enctype="multipart/form-data" <?php if(isset($MemorandumOfAgreement)) echo $MemorandumOfAgreement; ?>>
+                                enctype="multipart/form-data" <?php if (isset($MemorandumOfAgreement))
+                                    echo $MemorandumOfAgreement; ?>>
                                 <div class="input-group mb-3">
                                     <input type="submit" class="btn btn-success btn-sm" id="SBfile4" name="submitd"
                                         disabled>
@@ -382,7 +427,8 @@ if (isset($_POST['submitm'])) {
                                 </p>
                             </div>
                             <form method="POST" action="<?php basename($_SERVER['PHP_SELF']) ?>"
-                                enctype="multipart/form-data" <?php if(isset($Waiver)) echo $Waiver; ?>>
+                                enctype="multipart/form-data" <?php if (isset($Waiver))
+                                    echo $Waiver; ?>>
                                 <div class="input-group mb-3">
                                     <input type="submit" class="btn btn-success btn-sm" id="SBfile5" name="submite"
                                         disabled>
@@ -402,7 +448,8 @@ if (isset($_POST['submitm'])) {
                                 </p>
                             </div>
                             <form method="POST" action="<?php basename($_SERVER['PHP_SELF']) ?>"
-                                enctype="multipart/form-data" <?php if(isset($MedicalCertificate)) echo $MedicalCertificate; ?>>
+                                enctype="multipart/form-data" <?php if (isset($MedicalCertificate))
+                                    echo $MedicalCertificate; ?>>
                                 <div class="input-group mb-3">
                                     <input type="submit" class="btn btn-success btn-sm" id="SBfile6" name="submitf"
                                         disabled>
@@ -422,7 +469,8 @@ if (isset($_POST['submitm'])) {
                                 </p>
                             </div>
                             <form method="POST" action="<?php basename($_SERVER['PHP_SELF']) ?>"
-                                enctype="multipart/form-data" <?php if(isset($GoodMoralCertificate)) echo $GoodMoralCertificate; ?>>
+                                enctype="multipart/form-data" <?php if (isset($GoodMoralCertificate))
+                                    echo $GoodMoralCertificate; ?>>
                                 <div class="input-group mb-3">
                                     <input type="submit" class="btn btn-success btn-sm" id="SBfile7" name="submitg"
                                         disabled>
@@ -442,7 +490,8 @@ if (isset($_POST['submitm'])) {
                                 </p>
                             </div>
                             <form method="POST" action="<?php basename($_SERVER['PHP_SELF']) ?>"
-                                enctype="multipart/form-data" <?php if(isset($RegistrationForm)) echo $RegistrationForm; ?>>
+                                enctype="multipart/form-data" <?php if (isset($RegistrationForm))
+                                    echo $RegistrationForm; ?>>
                                 <div class="input-group mb-3">
                                     <input type="submit" class="btn btn-success btn-sm" id="SBfile8" name="submith"
                                         disabled>
@@ -452,87 +501,92 @@ if (isset($_POST['submitm'])) {
                                 </div>
                             </form>
                         </li>
-                        <?php if (isset($_SESSION['GlobalCompleted']) && $_SESSION['GlobalCompleted'] == 'true') { ?> <!-- This will only show if the user has completed -->
-                        <li class="list-group-item d-flex justify-content-between align-items-start">
-                            <div class="ms-2 me-auto">
-                                <div class="fw-bold">Evaluation Form</div>
-                                <p>
-                                    <?php if ($row['Doc10_stat'] == 2) {
-                                        echo "You need to resubmit This file!";
-                                    } ?>
-                                </p>
-                            </div>
-                            <form method="POST" action="<?php basename($_SERVER['PHP_SELF']) ?>"
-                                enctype="multipart/form-data" <?php if(isset($EvaluationForm)) echo $EvaluationForm; ?>>
-                                <div class="input-group mb-3">
-                                    <input type="submit" class="btn btn-success btn-sm" id="SBfile10" name="submitj"
-                                        disabled>
-                                    <input type="file" name="pl10" class="form-control form-control-sm" id="File10"
-                                        aria-describedby="inputGroupFileAddon03" aria-label="Upload"
-                                        style="width: 98px;" onchange="Cfile10()">
+                        <?php if (isset($_SESSION['GlobalCompleted']) && $_SESSION['GlobalCompleted'] == 'true') { ?>
+                            <!-- This will only show if the user has completed -->
+                            <li class="list-group-item d-flex justify-content-between align-items-start">
+                                <div class="ms-2 me-auto">
+                                    <div class="fw-bold">Evaluation Form</div>
+                                    <p>
+                                        <?php if ($row['Doc10_stat'] == 2) {
+                                            echo "You need to resubmit This file!";
+                                        } ?>
+                                    </p>
                                 </div>
-                            </form>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-start">
-                            <div class="ms-2 me-auto">
-                                <div class="fw-bold">Narrative Report</div>
-                                <p>
-                                    <?php if ($row['Doc11_stat'] == 2) {
-                                        echo "You need to resubmit This file!";
-                                    } ?>
-                                </p>
-                            </div>
-                            <form method="POST" action="<?php basename($_SERVER['PHP_SELF']) ?>"
-                                enctype="multipart/form-data" <?php if(isset($NarrativeReport)) echo $NarrativeReport; ?>>
-                                <div class="input-group mb-3">
-                                    <input type="submit" class="btn btn-success btn-sm" id="SBfile11" name="submitk"
-                                        disabled>
-                                    <input type="file" name="pl11" class="form-control form-control-sm" id="File11"
-                                        aria-describedby="inputGroupFileAddon03" aria-label="Upload"
-                                        style="width: 98px;" onchange="Cfile11()">
+                                <form method="POST" action="<?php basename($_SERVER['PHP_SELF']) ?>"
+                                    enctype="multipart/form-data" <?php if (isset($EvaluationForm))
+                                        echo $EvaluationForm; ?>>
+                                    <div class="input-group mb-3">
+                                        <input type="submit" class="btn btn-success btn-sm" id="SBfile10" name="submitj"
+                                            disabled>
+                                        <input type="file" name="pl10" class="form-control form-control-sm" id="File10"
+                                            aria-describedby="inputGroupFileAddon03" aria-label="Upload"
+                                            style="width: 98px;" onchange="Cfile10()">
+                                    </div>
+                                </form>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-start">
+                                <div class="ms-2 me-auto">
+                                    <div class="fw-bold">Narrative Report</div>
+                                    <p>
+                                        <?php if ($row['Doc11_stat'] == 2) {
+                                            echo "You need to resubmit This file!";
+                                        } ?>
+                                    </p>
                                 </div>
-                            </form>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-start">
-                            <div class="ms-2 me-auto">
-                                <div class="fw-bold">Daily Time Record</div>
-                                <p>
-                                    <?php if ($row['Doc12_stat'] == 2) {
-                                        echo "You need to resubmit This file!";
-                                    } ?>
-                                </p>
-                            </div>
-                            <form method="POST" action="<?php basename($_SERVER['PHP_SELF']) ?>"
-                                enctype="multipart/form-data" <?php if(isset($DailyTimeRecord)) echo $DailyTimeRecord; ?>>
-                                <div class="input-group mb-3">
-                                    <input type="submit" class="btn btn-success btn-sm" id="SBfile12" name="submitl"
-                                        disabled>
-                                    <input type="file" name="pl12" class="form-control form-control-sm" id="File12"
-                                        aria-describedby="inputGroupFileAddon03" aria-label="Upload"
-                                        style="width: 98px;" onchange="Cfile12()">
+                                <form method="POST" action="<?php basename($_SERVER['PHP_SELF']) ?>"
+                                    enctype="multipart/form-data" <?php if (isset($NarrativeReport))
+                                        echo $NarrativeReport; ?>>
+                                    <div class="input-group mb-3">
+                                        <input type="submit" class="btn btn-success btn-sm" id="SBfile11" name="submitk"
+                                            disabled>
+                                        <input type="file" name="pl11" class="form-control form-control-sm" id="File11"
+                                            aria-describedby="inputGroupFileAddon03" aria-label="Upload"
+                                            style="width: 98px;" onchange="Cfile11()">
+                                    </div>
+                                </form>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-start">
+                                <div class="ms-2 me-auto">
+                                    <div class="fw-bold">Daily Time Record</div>
+                                    <p>
+                                        <?php if ($row['Doc12_stat'] == 2) {
+                                            echo "You need to resubmit This file!";
+                                        } ?>
+                                    </p>
                                 </div>
-                            </form>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-start">
-                            <div class="ms-2 me-auto">
-                                <div class="fw-bold">Certificate of Completion</div>
-                                <p>
-                                    <?php if ($row['Doc13_stat'] == 2) {
-                                        echo "You need to resubmit This file!";
-                                    } ?>
-                                </p>
-                            </div>
-                            <form method="POST" action="<?php basename($_SERVER['PHP_SELF']) ?>"
-                                enctype="multipart/form-data" <?php if(isset($CertificateOfCompletion)) echo $CertificateOfCompletion; ?>>
-                                <div class="input-group mb-3">
-                                    <input type="submit" class="btn btn-success btn-sm" id="SBfile13" name="submitm"
-                                        disabled>
-                                    <input type="file" name="pl13" class="form-control form-control-sm" id="File13"
-                                        aria-describedby="inputGroupFileAddon03" aria-label="Upload"
-                                        style="width: 98px;" onchange="Cfile13()">
+                                <form method="POST" action="<?php basename($_SERVER['PHP_SELF']) ?>"
+                                    enctype="multipart/form-data" <?php if (isset($DailyTimeRecord))
+                                        echo $DailyTimeRecord; ?>>
+                                    <div class="input-group mb-3">
+                                        <input type="submit" class="btn btn-success btn-sm" id="SBfile12" name="submitl"
+                                            disabled>
+                                        <input type="file" name="pl12" class="form-control form-control-sm" id="File12"
+                                            aria-describedby="inputGroupFileAddon03" aria-label="Upload"
+                                            style="width: 98px;" onchange="Cfile12()">
+                                    </div>
+                                </form>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-start">
+                                <div class="ms-2 me-auto">
+                                    <div class="fw-bold">Certificate of Completion</div>
+                                    <p>
+                                        <?php if ($row['Doc13_stat'] == 2) {
+                                            echo "You need to resubmit This file!";
+                                        } ?>
+                                    </p>
                                 </div>
-                            </form>
-                        </li>
+                                <form method="POST" action="<?php basename($_SERVER['PHP_SELF']) ?>"
+                                    enctype="multipart/form-data" <?php if (isset($CertificateOfCompletion))
+                                        echo $CertificateOfCompletion; ?>>
+                                    <div class="input-group mb-3">
+                                        <input type="submit" class="btn btn-success btn-sm" id="SBfile13" name="submitm"
+                                            disabled>
+                                        <input type="file" name="pl13" class="form-control form-control-sm" id="File13"
+                                            aria-describedby="inputGroupFileAddon03" aria-label="Upload"
+                                            style="width: 98px;" onchange="Cfile13()">
+                                    </div>
+                                </form>
+                            </li>
                         <?php } ?>
                     </ol>
                     <small class="text-muted">Note: PDF, JPG, PNG and DOCX files are allowed and maximum file size is

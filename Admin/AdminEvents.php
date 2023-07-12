@@ -78,7 +78,7 @@ unset($_POST['resetEvent']);
                         <div class="col-md-12">
                             <div class="form-floating mb-3 text-light">
                                 <input type="text" class="form-control text-bg-dark" id="AnnounceTitle"
-                                    name="AnnounceTitle" placeholder="Announcement Title" minlength="5">
+                                    name="AnnounceTitle" placeholder="Announcement Title" minlength="5" required>
                                 <label for="AnnounceTitle">Announcement Title</label>
                             </div>
                         </div>
@@ -86,7 +86,7 @@ unset($_POST['resetEvent']);
                             <div class="form-floating mb-3 text-light">
                                 <textarea class="form-control text-bg-dark" placeholder="Announcement Description"
                                     id="AnnounceDescription" name="AnnounceDescription" style="height: 150px"
-                                    minlength="5"></textarea>
+                                    minlength="5" required></textarea>
                                 <label for="AnnounceDescription">Announcement Description</label>
                             </div>
                         </div>
@@ -101,14 +101,14 @@ unset($_POST['resetEvent']);
                         <div class="col-md-4">
                             <div class="form-floating mb-3 text-light">
                                 <input type="date" class="form-control text-bg-dark" id="startDate" name="startDate"
-                                    placeholder="Start Date">
+                                    placeholder="Start Date" required>
                                 <label for="startDate">Start Date</label>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-floating mb-3 text-light">
                                 <input type="date" class="form-control text-bg-dark" id="EndDate" name="EndDate"
-                                    placeholder="End Date">
+                                    placeholder="End Date" required>
                                 <label for="EndDate">End Date</label>
                             </div>
                         </div>
@@ -162,42 +162,42 @@ unset($_POST['resetEvent']);
                         <div class="col-md-6">
                             <div class="form-floating mb-3 text-light">
                                 <input type="text" class="form-control text-bg-dark" id="EventTitle" name="EventTitle"
-                                    placeholder="Event Name">
+                                    placeholder="Event Name" minlength="5" required>
                                 <label for="EventTitle">Event Name</label>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-floating mb-3 text-light">
                                 <input type="text" class="form-control text-bg-dark" id="EventLocation"
-                                    name="EventLocation" placeholder="Event Location">
+                                    name="EventLocation" placeholder="Event Location" minlength="5" required>
                                 <label for="EventLocation">Event Location</label>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-floating mb-3 text-light">
                                 <input type="date" class="form-control text-bg-dark" id="EventDate" name="EventDate"
-                                    placeholder="Event Date">
+                                    placeholder="Event Date" required>
                                 <label for="EventDate">Event Date</label>
                             </div>
                         </div>
                         <div class="col-md-2">
                             <div class="form-floating mb-3 text-light">
                                 <input type="time" class="form-control text-bg-dark" id="EventStart" name="EventStart"
-                                    placeholder="Event Start Time">
+                                    placeholder="Event Start Time" required>
                                 <label for="EventStart">Event Start Time</label>
                             </div>
                         </div>
                         <div class="col-md-2">
                             <div class="form-floating mb-3 text-light">
                                 <input type="time" class="form-control text-bg-dark" id="EventEnd" name="EventEnd"
-                                    placeholder="Event End Time">
+                                    placeholder="Event End Time" required>
                                 <label for="EventEnd">Event End Time</label>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-floating mb-3 text-light">
                                 <select class="form-select text-bg-dark" name="EventType" id="EventType"
-                                    aria-label="Events Type">
+                                    aria-label="Events Type" required>
                                     <option selected hidden>Choose...</option>
                                     <option value="webinar">Webinar</option>
                                     <option value="workshop">Workshop</option>
@@ -211,21 +211,21 @@ unset($_POST['resetEvent']);
                         <div class="col-md-4">
                             <div class="form-floating mb-3 text-light">
                                 <input type="date" class="form-control text-bg-dark" id="EventCompletion"
-                                    name="EventCompletion" placeholder="Event Completion Date">
+                                    name="EventCompletion" placeholder="Event Completion Date" required>
                                 <label for="EventCompletion">Event Completion Date</label>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-floating mb-3 text-light">
                                 <input type="text" class="form-control text-bg-dark" id="EventOrganizer"
-                                    name="EventOrganizer" placeholder="Event Organizer">
+                                    name="EventOrganizer" placeholder="Event Organizer" required>
                                 <label for="EventOrganizer">Event Organizer</label>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-floating mb-3 text-light">
                                 <input type="number" min="5" class="form-control text-bg-dark" id="EventSlot"
-                                    name="EventSlot" placeholder="Event Slot">
+                                    name="EventSlot" placeholder="Event Slot" required>
                                 <label for="EventOrganizer">Event Slots</label>
                             </div>
                         </div>
@@ -238,7 +238,7 @@ unset($_POST['resetEvent']);
                             <div class="form-floating mb-3 text-light">
                                 <textarea class="form-control text-bg-dark" placeholder="Event Description"
                                     id="EventDescription" name="EventDescription" style="height: 150px"
-                                    minlength="256"></textarea>
+                                    minlength="5"></textarea>
                                 <label for="EventDescription">Event Description</label>
                             </div>
                         </div>
@@ -285,18 +285,6 @@ unset($_POST['resetEvent']);
                                         if (completion < date) {
                                             error.innerHTML = "Completion date cannot be less than event date";
                                             EventCompletion.value = "";
-                                        } else {
-                                            error.innerHTML = "";
-                                        }
-                                    });
-
-                                    // check if end time is greater than start time
-                                    EventEnd.addEventListener("change", function () {
-                                        let start = EventStart.value;
-                                        let end = EventEnd.value;
-                                        if (end < start) {
-                                            error.innerHTML = "End time cannot be less than start time";
-                                            EventEnd.value = "";
                                         } else {
                                             error.innerHTML = "";
                                         }
