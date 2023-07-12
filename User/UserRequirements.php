@@ -92,15 +92,7 @@ if (mysqli_num_rows($result) > 0) {
     } else {
         $RegistrationForm = "";
     }
-    if ($row['consent'] != null) {
-        if ($row['Doc9_stat'] == 0 || $row['Doc9_stat'] == 1) {
-            $ParentConsentForm = "hidden";
-        } else {
-            $ParentConsentForm = "";
-        }
-    } else {
-        $ParentConsentForm = "";
-    }
+    
     if ($row['Evaform'] != null) {
         if ($row['Doc10_stat'] == 0 || $row['Doc10_stat'] == 1) {
             $EvaluationForm = "hidden";
@@ -174,10 +166,6 @@ if (isset($_POST['submitg'])) {
 
 if (isset($_POST['submith'])) {
     Document_upload('RegistrationForm', 'pl8', 'RegForm', 'Doc8_date', 'Doc8_stat');
-}
-
-if (isset($_POST['submiti'])) {
-    Document_upload('ParentConsentForm', 'pl9', 'consent', 'Doc9_date', 'Doc9_stat');
 }
 
 if (isset($_POST['submitj'])) {
@@ -291,10 +279,12 @@ if (isset($_POST['submitm'])) {
                         }
                     }
                     
-                    $percentage = ($count / 13) * 100;
+                    $percentage = ($count / 12) * 100;
                     $percentage = round($percentage);
-                    if ($percentage > 100) {
+                    if ($percentage >= 100) {
                         $percentage = 100;
+                        $sql="UPDATE tbl_trainee SET Resource_Completed = 1 WHERE UID = '" . $_SESSION['GlobalID'] . "'";
+                        $result = mysqli_query($conn, $sql);
                     }
                     ?>
                     <div class="progress">
@@ -454,7 +444,7 @@ if (isset($_POST['submitm'])) {
                             <form method="POST" action="<?php basename($_SERVER['PHP_SELF']) ?>"
                                 enctype="multipart/form-data" <?php if(isset($RegistrationForm)) echo $RegistrationForm; ?>>
                                 <div class="input-group mb-3">
-                                    <input type="submit" class="btn btn-success btn-sm" id="SBfile8" name="submitg"
+                                    <input type="submit" class="btn btn-success btn-sm" id="SBfile8" name="submith"
                                         disabled>
                                     <input type="file" name="pl8" class="form-control form-control-sm" id="File8"
                                         aria-describedby="inputGroupFileAddon03" aria-label="Upload"
@@ -475,7 +465,7 @@ if (isset($_POST['submitm'])) {
                             <form method="POST" action="<?php basename($_SERVER['PHP_SELF']) ?>"
                                 enctype="multipart/form-data" <?php if(isset($EvaluationForm)) echo $EvaluationForm; ?>>
                                 <div class="input-group mb-3">
-                                    <input type="submit" class="btn btn-success btn-sm" id="SBfile10" name="submitg"
+                                    <input type="submit" class="btn btn-success btn-sm" id="SBfile10" name="submitj"
                                         disabled>
                                     <input type="file" name="pl10" class="form-control form-control-sm" id="File10"
                                         aria-describedby="inputGroupFileAddon03" aria-label="Upload"
@@ -495,7 +485,7 @@ if (isset($_POST['submitm'])) {
                             <form method="POST" action="<?php basename($_SERVER['PHP_SELF']) ?>"
                                 enctype="multipart/form-data" <?php if(isset($NarrativeReport)) echo $NarrativeReport; ?>>
                                 <div class="input-group mb-3">
-                                    <input type="submit" class="btn btn-success btn-sm" id="SBfile11" name="submitg"
+                                    <input type="submit" class="btn btn-success btn-sm" id="SBfile11" name="submitk"
                                         disabled>
                                     <input type="file" name="pl11" class="form-control form-control-sm" id="File11"
                                         aria-describedby="inputGroupFileAddon03" aria-label="Upload"
@@ -515,7 +505,7 @@ if (isset($_POST['submitm'])) {
                             <form method="POST" action="<?php basename($_SERVER['PHP_SELF']) ?>"
                                 enctype="multipart/form-data" <?php if(isset($DailyTimeRecord)) echo $DailyTimeRecord; ?>>
                                 <div class="input-group mb-3">
-                                    <input type="submit" class="btn btn-success btn-sm" id="SBfile12" name="submitg"
+                                    <input type="submit" class="btn btn-success btn-sm" id="SBfile12" name="submitl"
                                         disabled>
                                     <input type="file" name="pl12" class="form-control form-control-sm" id="File12"
                                         aria-describedby="inputGroupFileAddon03" aria-label="Upload"
@@ -535,7 +525,7 @@ if (isset($_POST['submitm'])) {
                             <form method="POST" action="<?php basename($_SERVER['PHP_SELF']) ?>"
                                 enctype="multipart/form-data" <?php if(isset($CertificateOfCompletion)) echo $CertificateOfCompletion; ?>>
                                 <div class="input-group mb-3">
-                                    <input type="submit" class="btn btn-success btn-sm" id="SBfile13" name="submitg"
+                                    <input type="submit" class="btn btn-success btn-sm" id="SBfile13" name="submitm"
                                         disabled>
                                     <input type="file" name="pl13" class="form-control form-control-sm" id="File13"
                                         aria-describedby="inputGroupFileAddon03" aria-label="Upload"

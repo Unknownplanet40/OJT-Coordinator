@@ -224,7 +224,7 @@ unset($_POST['resetEvent']);
                         </div>
                         <div class="col-md-4">
                             <div class="form-floating mb-3 text-light">
-                                <input type="number" max="50" min="5" class="form-control text-bg-dark" id="EventSlot"
+                                <input type="number" min="5" class="form-control text-bg-dark" id="EventSlot"
                                     name="EventSlot" placeholder="Event Slot">
                                 <label for="EventOrganizer">Event Slots</label>
                             </div>

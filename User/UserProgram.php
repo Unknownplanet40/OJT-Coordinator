@@ -156,8 +156,8 @@ if (mysqli_num_rows($result) > 0) {
             <div class="text">Progress</div>
             <div>
                 <div class="text-center text-uppercase fs-6 fw-bolder">Web Development Internship</div>
-                <div class="text-center fs-6 fw-bolder">Progress:
-                    <?php echo $_SESSION['GlobalPercentage'] ?>%
+                <div class="text-center fs-6 fw-bolder">
+                    <?php $_SESSION['GlobalPercentage'] == 100 ? print "COMPLETED" : print 'Progress: ' . $_SESSION['GlobalPercentage'] . '%'; ?>
                 </div>
                 <br>
                 <div style="display: flex; justify-content: center;">
@@ -202,7 +202,7 @@ if (mysqli_num_rows($result) > 0) {
                                     <h5 class="card-title">' . $row['eventTitle'] . '</h5> <!-- Event Title -->
                                     <p class="card-text">' . $row['eventDescription'] . '</p> <!-- Event Description -->
                                     <p class="card-text">' . $row['eventLocation'] . '</p> <!-- Event Date -->
-                                    <p class="card-text">' . date("d-m-Y", strtotime($row['eventDate'])) . '</p> <!-- Event Date -->
+                                    <p class="card-text">' . date("F j, Y", strtotime($row['eventDate'])) . '</p> <!-- Event Date -->
                                     <p class="card-text">' . date("h:i A", strtotime($row['eventStartTime'])) . ' - ' . date("h:i A", strtotime($row['eventEndTime'])) . '</p> <!-- Event Time -->
                                     <p class="card-text">' . $row['eventOrganizer'] . ' Weeks</p> <!-- Event Duration -->
                                 </div>';

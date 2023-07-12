@@ -41,7 +41,10 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
     <section class="home">
         <div class="text">Dashboard</div>
         <div class="content" style="margin: 10px; width: 98%;">
-            <?php @include_once '../Components/Announcement.php'; ?>
+            <?php
+            @include_once '../Components/Announcement.php';
+            @include_once '../Components/Modals/AdminEventModal.php';
+            ?>
             <div class="row">
                 <div class="col-sm-8">
                     <div class="card h-100">
@@ -74,9 +77,14 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
                             $elapsed_duration = $start_datetime->diff($current_datetime)->format('%a');
                             $percentage = ($elapsed_duration / $total_duration) * 100;
                             $percentage = round($percentage, 0);
-                            $_SESSION['GlobalPercentage'] = $percentage;
 
-                            if ($percentage == 100) {
+                            if ($percentage >= 100){
+                                $_SESSION['GlobalPercentage'] = 100;
+                            } else {
+                                $_SESSION['GlobalPercentage'] = $percentage;
+                            }
+
+                            if ($current_date >= $row['end_date']){
                                 $sql = "UPDATE tbl_trainee SET completed = 'true' WHERE UID = '$id'";
                                 $result = mysqli_query($conn, $sql);
                                 $_SESSION['GlobalCompleted'] = 'true';
@@ -136,27 +144,42 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
                         $eventID = $row['EventID'];
                         $join = $row['Join_an_Event'];
 
-                        if ($row['Join_an_Event'] == 1) {
+                        if ($join == 1) {
                             $sql = "SELECT * FROM tbl_events WHERE eventID = '$eventID'";
                             $result = mysqli_query($conn, $sql);
                             $row = mysqli_fetch_assoc($result);
                             $currentdate = date("Y-m-d");
 
-                            if ($row['eventCompletion'] >= $currentdate) {
+                            if ($currentdate >= $row['eventCompletion']) {
                                 $sql = "UPDATE tbl_trainee SET Join_an_Event = 0 WHERE UID = '$id'";
                                 $result = mysqli_query($conn, $sql);
-                                $sql = "UPDATE tbl_events SET eventEnded = 'true' WHERE eventID = '$eventID'";
-                                $result = mysqli_query($conn, $sql);
 
-                                $output =
-                                    '<div class="card-body">
+                                if ($result) {
+                                    $sql = "UPDATE tbl_events SET eventEnded = 'true' WHERE eventID = '$eventID'";
+                                    $result = mysqli_query($conn, $sql);
+
+                                    if ($result) {
+                                        $output =
+                                            '<div class="card-body">
+                                    <!-- this should be a list of events joined by the user -->
+                                    <h5 class="card-title"></h5> <!-- Event Name -->
+                                    <p class="card-text">Event have been Closed!</p>
+                                    <!-- so on and so forth -->
+                                    <!--<a href="#" class="btn btn-success" hidden>Go somewhere</a>-->
+                                </div>';
+                                    }
+
+                                } else {
+                                    $output =
+                                        '<div class="card-body">
                                     <!-- this should be a list of events joined by the user -->
                                     <h5 class="card-title"></h5> <!-- Event Name -->
                                     <p class="card-text">Event has ended.</p> <!-- Event Description -->
                                     <!-- so on and so forth -->
                                     <!--<a href="#" class="btn btn-success" hidden>Go somewhere</a>-->
                                 </div>';
-                            } elseif ($row['eventEnded'] = 'true') {
+                                }
+                            } elseif ($row['eventEnded'] == 'true') {
                                 $output =
                                     '<div class="card-body">
                                     <!-- this should be a list of events joined by the user -->
@@ -171,11 +194,14 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
                                 $date = date("F j, Y", strtotime($row['eventDate']));
 
                                 $output =
-                                    $output =
                                     '<div class="card-body">
-                                <h5 class="card-title">' . $row['eventTitle'] . '</h5>
-                                <p class="card-text">' . $date . '</p>
-                                <small class="text-muted">Time: ' . $start . ' - ' . $end . ' | Available Seats: ' . $row['eventSlots'] . '</small>
+                                    <div class="card-body">
+                                        <h5 class="card-title">' . $row['eventTitle'] . '</h5>
+                                        <p class="card-text">' . $date . '</p>
+                                        <p class="card-text">' . $row['eventLocation'] . '</p>
+                                        <p class="card-text" style="font-size: 14px;">' . $row['eventDescription'] . '</p>
+                                        <small class="text-muted">Time: ' . $start . ' - ' . $end . '</small>
+                                    </div>
                             </div>';
                             }
                         } else {
@@ -201,24 +227,34 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
                     $result = mysqli_query($conn, $sql);
 
                     if (mysqli_num_rows($result) > 0) {
-
+                        $i = 1;
                         while ($row = mysqli_fetch_assoc($result)) {
 
                             $start = date("g:i A", strtotime($row['eventStartTime']));
                             $end = date("g:i A", strtotime($row['eventEndTime']));
                             $date = date("F j, Y", strtotime($row['eventDate']));
 
+                            $desc = $row['eventDescription'];
+                            $desc = substr($desc, 0, 100);
+                            $desc = $desc . '...';
+
+                            if ($row['eventEnded'] == 'true') {
+                                $status = 'Ended';
+                            } else {
+                                $status = 'Ongoing';
+                            }
+
                             $output =
                                 '
                     <div class="col">
                         <div class="card h-100">
-                            <img style="ratio: 16/9" src="' . $row['eventImage'] . '" class="card-img-top"
-                                alt="...">
+                        <img src="' . $row['eventImage'] . '" class="card-img-top" style="max-height: 256px; object-fit: cover;" alt="...">
                             <div class="card-body">
                                 <h5 class="card-title">' . $row['eventTitle'] . '</h5>
                                 <p class="card-text">' . $date . '</p>
                                 <p class="card-text">' . $row['eventLocation'] . '</p>
-                                <p class="card-text" style="font-size: 14px;">' . $row['eventDescription'] . '</p>
+                                <p class="card-text">' . $status . '</p>
+                                <p class="card-text" style="font-size: 14px;">' . $desc . '</p>
                                 <small class="text-muted">Time: ' . $start . ' - ' . $end . ' | Available Seats: ' . $row['eventSlots'] . '</small>
                             </div>
                             <div class="card-footer text-center">
@@ -232,9 +268,37 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
                     </div>';
                             } else {
                                 echo '<a href="../Components/eventprocess.php?ID=' . $row['eventID'] . '" class="btn btn-success">Register</a>
+                                <a id="viewEvent' . $i . '" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#UserEvent">View</a>
                             </div>
                         </div>
-                    </div>';
+                    </div>
+                    <script>
+                    let viewEvent' . $i . ' = document.querySelector("#viewEvent' . $i . '");
+                    viewEvent' . $i . '.addEventListener("click", () => {
+                    let EventTitle = document.querySelector("#Etitle");
+                    let EventImage = document.querySelector("#Eimg");
+                    let EventDesc = document.querySelector("#Edesc");
+                    let EventDate = document.querySelector("#Edate");
+                    let EventTime = document.querySelector("#Etime");
+                    let EventLoc = document.querySelector("#Eloc");
+                    let EventType = document.querySelector("#Etype");
+                    let EventStat = document.querySelector("#Estat");
+                    let EventOrg = document.querySelector("#Eorg");
+                    let EventUp = document.getElementById("Eup");
+
+                    EventTitle.innerHTML = "' . $row['eventTitle'] . '";
+                    EventImage.src = "' . $row['eventImage'] . '";
+                    EventDesc.innerHTML = "' . $row['eventDescription'] . '";
+                    EventDate.innerHTML = "' . $date . '";
+                    EventTime.innerHTML = "' . $start . ' - ' . $end . '";
+                    EventLoc.innerHTML = "' . $row['eventLocation'] . '";
+                    EventType.innerHTML = "' . $row['eventType'] . '";
+                    EventStat.innerHTML = "' . $status . '";
+                    EventOrg.innerHTML = "' . $row['eventOrganizer'] . '";
+                    EventUp.href = "../../Components/eventprocess.php?ID=' . $row['eventID'] . '";
+                    });
+                    </script>
+                    ';
                             }
                         }
 
