@@ -196,7 +196,8 @@ if (isset($_POST['submitm'])) {
     <link rel="stylesheet" href="../Style/ImportantImport.css">
     <link rel="stylesheet" href="../Style/ReqStyle.css">
     <script src="../Script/SweetAlert2.js"></script>
-    <script src="../Script/UreqScript.js"></script>
+    <script defer src="../Script/SidebarScript.js"></script>
+    <script defer src="../Script/Bootstrap_Script/bootstrap.bundle.min.js"></script>
     <title>Requirements</title>
 </head>
 
@@ -207,397 +208,415 @@ if (isset($_POST['submitm'])) {
     ?>
     <section class="home">
         <div class="text">Your Documents</div>
-        <div class="announcement" style="margin: 10px; width: 98%; dispaly: flex; justify-content: center;">
-            <!-- if the aadmin wants to submit the requirements personally this will show -->
-            <div class="alert alert-primary" role="alert" hidden>
+        <!-- if trainee has completed the requirements a message will be shown -->
+        <div class="container-lg" hidden>
+            <div class="alert alert-primary" role="alert">
                 <h4 class="alert-heading">Hi
                     <?php echo $_SESSION['GlobalName']; ?>!
                 </h4>
-                <p>We have noticed that you have completed your requirements. We would like to have a physical copy of
-                    your requirements. Please submit it to the Office of the Registrar on the 2nd floor of the Main
-                    Building from 8:00 AM to 5:00 PM, Monday to Friday.</p>
+                <p>Congratulations! You have completed the requirements. Please wait while we check your
+                    documents.<br>
+                    Once your documents are verified, We will asign you to a company.</p>
                 <p class="mb-0">Thank you!</p>
                 <hr>
                 <small class="text-muted">This message will be removed once you have submitted your
                     requirements if you already have, please disregard this message.</small>
             </div>
-            <div class="content">
-                <div class="profile">
-                    <img src="<?php isset($_SESSION['Profile']) ? print $_SESSION['Profile'] : print "../Image/Profile.png"; ?>"
-                        alt="">
-                    <div class="d-grid gap-2">
-                        <br>
+        </div>
+        <div class="container-lg">
+            <div class="row row-cols-1 row-cols-md-2 g-4">
+                <div class="col-md-2">
+                    <div class="vstack gap-2 mb-1 mx-auto">
+                        <div class="text-center">
+                            <img src="<?php isset($_SESSION['Profile']) ? print $_SESSION['Profile'] : print "../Image/Profile.png"; ?>"
+                                alt="" width="256" height="256" class="img-fluid">
+
+                        </div>
                         <button type="button" class="btn btn-success" onclick="location.href='UserProfile.php'">Update
                             Profile</button>
                     </div>
                 </div>
-                <div class="inner-content">
-                    <?php
-                    $sql = "SELECT * FROM tbl_resource WHERE UID = '" . $_SESSION['GlobalID'] . "'";
-                    $result = mysqli_query($conn, $sql);
-                    $row = mysqli_fetch_assoc($result);
-
-                    $count = 0;
-
-                    if ($row['resume'] != null) {
-                        $count++;
-                        if ($row['Doc1_stat'] == 2) {
-                            $count--;
-                        }
-                    }
-                    if ($row['placement'] != null) {
-                        $count++;
-                        if ($row['Doc2_stat'] == 2) {
-                            $count--;
-                        }
-                    }
-                    if ($row['Birth'] != null) {
-                        $count++;
-                        if ($row['Doc3_stat'] == 2) {
-                            $count--;
-                        }
-                    }
-                    if ($row['MoA'] != null) {
-                        $count++;
-                        if ($row['Doc4_stat'] == 2) {
-                            $count--;
-                        }
-                    }
-                    if ($row['Waiver'] != null) {
-                        $count++;
-                        if ($row['Doc5_stat'] == 2) {
-                            $count--;
-                        }
-                    }
-                    if ($row['MedCert'] != null) {
-                        $count++;
-                        if ($row['Doc6_stat'] == 2) {
-                            $count--;
-                        }
-                    }
-                    if ($row['GMCert'] != null) {
-                        $count++;
-                        if ($row['Doc7_stat'] == 2) {
-                            $count--;
-                        }
-                    }
-                    if ($row['RegForm'] != null) {
-                        $count++;
-                        if ($row['Doc8_stat'] == 2) {
-                            $count--;
-                        }
-                    }
-
-                    if (isset($_SESSION['GlobalCompleted']) && $_SESSION['GlobalCompleted'] == 'true') {
-                        if ($row['Evaform'] != null) {
-                            $count++;
-                            if ($row['Doc10_stat'] == 2) {
-                                $count--;
-                            }
-                        }
-                        if ($row['NarraForm'] != null) {
-                            $count++;
-                            if ($row['Doc11_stat'] == 2) {
-                                $count--;
-                            }
-                        }
-                        if ($row['TimeCard'] != null) {
-                            $count++;
-                            if ($row['Doc12_stat'] == 2) {
-                                $count--;
-                            }
-                        }
-                        if ($row['COC'] != null) {
-                            $count++;
-                            if ($row['Doc13_stat'] == 2) {
-                                $count--;
-                            }
-                        }
-                    }
-
-                    if (isset($_SESSION['GlobalCompleted']) && $_SESSION['GlobalCompleted'] == 'false') {
-                        $percentage = ($count / 8) * 100;
-                    } else{
-                        $percentage = ($count / 12) * 100;
-                    }
-                    $percentage = round($percentage);
-                    if ($percentage >= 100) {
-                        $percentage = 100;
-                        $sql = "UPDATE tbl_trainee SET Resource_Completed = 1 WHERE UID = '" . $_SESSION['GlobalID'] . "'";
+                <div class="col-md-10">
+                    <div class="col-md-12">
+                        <?php
+                        $sql = "SELECT * FROM tbl_resource WHERE UID = '" . $_SESSION['GlobalID'] . "'";
                         $result = mysqli_query($conn, $sql);
-                    }
-                    ?>
-                    <div class="progress">
-                        <div class="progress-bar bg-success" role="progressbar"
-                            style="width: <?php echo $percentage; ?>%;" aria-valuenow="40" aria-valuemin="0"
-                            aria-valuemax="100"><?php echo $percentage; ?>% Complete</div>
+                        $row = mysqli_fetch_assoc($result);
+
+                        $count = 0;
+
+                        if ($row['resume'] != null) {
+                            $count++;
+                            if ($row['Doc1_stat'] == 2) {
+                                $count--;
+                            }
+                        }
+                        if ($row['placement'] != null) {
+                            $count++;
+                            if ($row['Doc2_stat'] == 2) {
+                                $count--;
+                            }
+                        }
+                        if ($row['Birth'] != null) {
+                            $count++;
+                            if ($row['Doc3_stat'] == 2) {
+                                $count--;
+                            }
+                        }
+                        if ($row['MoA'] != null) {
+                            $count++;
+                            if ($row['Doc4_stat'] == 2) {
+                                $count--;
+                            }
+                        }
+                        if ($row['Waiver'] != null) {
+                            $count++;
+                            if ($row['Doc5_stat'] == 2) {
+                                $count--;
+                            }
+                        }
+                        if ($row['MedCert'] != null) {
+                            $count++;
+                            if ($row['Doc6_stat'] == 2) {
+                                $count--;
+                            }
+                        }
+                        if ($row['GMCert'] != null) {
+                            $count++;
+                            if ($row['Doc7_stat'] == 2) {
+                                $count--;
+                            }
+                        }
+                        if ($row['RegForm'] != null) {
+                            $count++;
+                            if ($row['Doc8_stat'] == 2) {
+                                $count--;
+                            }
+                        }
+
+                        if (isset($_SESSION['GlobalCompleted']) && $_SESSION['GlobalCompleted'] == 'true') {
+                            if ($row['Evaform'] != null) {
+                                $count++;
+                                if ($row['Doc10_stat'] == 2) {
+                                    $count--;
+                                }
+                            }
+                            if ($row['NarraForm'] != null) {
+                                $count++;
+                                if ($row['Doc11_stat'] == 2) {
+                                    $count--;
+                                }
+                            }
+                            if ($row['TimeCard'] != null) {
+                                $count++;
+                                if ($row['Doc12_stat'] == 2) {
+                                    $count--;
+                                }
+                            }
+                            if ($row['COC'] != null) {
+                                $count++;
+                                if ($row['Doc13_stat'] == 2) {
+                                    $count--;
+                                }
+                            }
+                        }
+
+                        if (isset($_SESSION['GlobalCompleted']) && $_SESSION['GlobalCompleted'] == 'false') {
+                            $percentage = ($count / 8) * 100;
+                        } else {
+                            $percentage = ($count / 12) * 100;
+                        }
+                        $percentage = round($percentage);
+                        if ($percentage >= 100) {
+                            $percentage = 100;
+                            $sql = "UPDATE tbl_trainee SET Resource_Completed = 1 WHERE UID = '" . $_SESSION['GlobalID'] . "'";
+                            $result = mysqli_query($conn, $sql);
+                        } else {
+                            $sql = "UPDATE tbl_trainee SET Resource_Completed = 0 WHERE UID = '" . $_SESSION['GlobalID'] . "'";
+                            $result = mysqli_query($conn, $sql);
+                        }
+                        if ($percentage == 0 && $percentage < 25) {
+                            $color = "text-bg-danger";
+                        } elseif ($percentage >= 25 && $percentage < 50) {
+                            $color = "text-bg-warning";
+                        } elseif ($percentage >= 50 && $percentage < 75) {
+                            $color = "text-bg-info";
+                        } else {
+                            $color = "text-bg-success";
+                        }
+                        ?>
+                        <div class="progress bg-secondary">
+                            <div class="progress-bar <?php echo $color ?> progress-bar-striped progress-bar-animated"
+                                role="progressbar" style="width: <?php echo $percentage; ?>%;" aria-valuenow="40"
+                                aria-valuemin="0" aria-valuemax="100"><?php echo $percentage == 100 ? "COMPLETED!" : $percentage . "%"; ?></div>
+                        </div>
                     </div>
-                    <br>
-                    <ol class="list-group list-group-numbered">
-                        <li class="list-group-item d-flex justify-content-between align-items-start">
-                            <div class="ms-2 me-auto">
-                                <div class="fw-bold">Resume</div>
-                                <p>
-                                    <?php if ($row['Doc1_stat'] == 2) {
-                                        echo "You need to resubmit This file!";
-                                    } ?>
-                                </p>
-                            </div>
-                            <form method="POST" action="<?php basename($_SERVER['PHP_SELF']) ?>"
-                                enctype="multipart/form-data" <?php if (isset($Resume))
-                                    echo $Resume; ?>>
-                                <div class="input-group mb-3">
-                                    <input type="submit" class="btn btn-success btn-sm" id="SBfile1" name="submita"
-                                        disabled>
-                                    <input type="file" name="pl1" class="form-control form-control-sm" id="File1"
-                                        aria-describedby="SBfile1" aria-label="Upload" style="width: 98px;"
-                                        onchange="Cfile1()">
+                    <div class="col-md-12 mt-1" style="min-width: 420px;">
+                        <ol class="list-group list-group-numbered">
+                            <li class="list-group-item d-flex justify-content-between align-items-start">
+                                <div class="ms-2 me-auto">
+                                    <div class="fw-bold">Resume</div>
+                                    <p>
+                                        <?php if ($row['Doc1_stat'] == 2) {
+                                            echo "You need to resubmit This file!";
+                                        } ?>
+                                    </p>
                                 </div>
-                            </form>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-start">
-                            <div class="ms-2 me-auto">
-                                <div class="fw-bold">Placement Form</div>
-                                <p>
-                                    <?php if ($row['Doc2_stat'] == 2) {
-                                        echo "You need to resubmit This file!";
-                                    } ?>
-                                </p>
-                            </div>
-                            <form method="POST" action="<?php basename($_SERVER['PHP_SELF']) ?>"
-                                enctype="multipart/form-data" <?php if (isset($PlacementForm))
-                                    echo $PlacementForm; ?>>
-                                <div class="input-group mb-3">
-                                    <input type="submit" class="btn btn-success btn-sm" id="SBfile2" name="submitb"
-                                        disabled>
-                                    <input type="file" name="pl2" class="form-control form-control-sm" id="File2"
-                                        aria-describedby="SBfile2" aria-label="Upload" style="width: 98px;"
-                                        onchange="Cfile2()">
+                                <form method="POST" action="<?php basename($_SERVER['PHP_SELF']) ?>"
+                                    enctype="multipart/form-data" <?php if (isset($Resume))
+                                        echo $Resume; ?>>
+                                    <div class="input-group mb-3">
+                                        <input type="submit" class="btn btn-success btn-sm" id="SBfile1" name="submita"
+                                            disabled>
+                                        <input type="file" name="pl1" class="form-control form-control-sm" id="File1"
+                                            aria-describedby="SBfile1" aria-label="Upload" onchange="Cfile1()"
+                                            style="width: 98px;">
+                                    </div>
+                                </form>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-start">
+                                <div class="ms-2 me-auto">
+                                    <div class="fw-bold " title="Memorandum of Agreement">MoA
+                                    </div>
+                                    <p>
+                                        <?php if ($row['Doc4_stat'] == 2) {
+                                            echo "You need to resubmit this file!";
+                                        } ?>
+                                    </p>
                                 </div>
-                            </form>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-start">
-                            <div class="ms-2 me-auto">
-                                <div class="fw-bold">Birth Certificate</div>
-                                <p>
-                                    <?php if ($row['Doc3_stat'] == 2) {
-                                        echo "You need to resubmit This file!";
-                                    } ?>
-                                </p>
-                            </div>
-                            <form method="POST" action="<?php basename($_SERVER['PHP_SELF']) ?>"
-                                enctype="multipart/form-data" <?php if (isset($BirthCertificate))
-                                    echo $BirthCertificate; ?>>
-                                <div class="input-group mb-3">
-                                    <input type="submit" class="btn btn-success btn-sm" id="SBfile3" name="submitc"
-                                        disabled>
-                                    <input type="file" name="pl3" class="form-control form-control-sm" id="File3"
-                                        aria-describedby="SBfile3" aria-label="Upload" style="width: 98px;"
-                                        onchange="Cfile3()">
-                            </form>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-start">
-                            <div class="ms-2 me-auto">
-                                <div class="fw-bold">Memorandum of Agreement</div>
-                                <p>
-                                    <?php if ($row['Doc4_stat'] == 2) {
-                                        echo "You need to resubmit This file!";
-                                    } ?>
-                                </p>
-                            </div>
-                            <form method="POST" action="<?php basename($_SERVER['PHP_SELF']) ?>"
-                                enctype="multipart/form-data" <?php if (isset($MemorandumOfAgreement))
-                                    echo $MemorandumOfAgreement; ?>>
-                                <div class="input-group mb-3">
-                                    <input type="submit" class="btn btn-success btn-sm" id="SBfile4" name="submitd"
-                                        disabled>
-                                    <input type="file" name="pl4" class="form-control form-control-sm" id="File4"
-                                        aria-describedby="SBfile4" aria-label="Upload" style="width: 98px;"
-                                        onchange="Cfile4()">
-                                </div>
-                            </form>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-start">
-                            <div class="ms-2 me-auto">
-                                <div class="fw-bold">Waiver</div>
-                                <p>
-                                    <?php if ($row['Doc5_stat'] == 2) {
-                                        echo "You need to resubmit This file!";
-                                    } ?>
-                                </p>
-                            </div>
-                            <form method="POST" action="<?php basename($_SERVER['PHP_SELF']) ?>"
-                                enctype="multipart/form-data" <?php if (isset($Waiver))
-                                    echo $Waiver; ?>>
-                                <div class="input-group mb-3">
-                                    <input type="submit" class="btn btn-success btn-sm" id="SBfile5" name="submite"
-                                        disabled>
-                                    <input type="file" name="pl5" class="form-control form-control-sm" id="File5"
-                                        aria-describedby="SBfile5" aria-label="Upload" style="width: 98px;"
-                                        onchange="Cfile5()">
-                                </div>
-                            </form>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-start">
-                            <div class="ms-2 me-auto">
-                                <div class="fw-bold">Medical Certificate</div>
-                                <p>
-                                    <?php if ($row['Doc6_stat'] == 2) {
-                                        echo "You need to resubmit This file!";
-                                    } ?>
-                                </p>
-                            </div>
-                            <form method="POST" action="<?php basename($_SERVER['PHP_SELF']) ?>"
-                                enctype="multipart/form-data" <?php if (isset($MedicalCertificate))
-                                    echo $MedicalCertificate; ?>>
-                                <div class="input-group mb-3">
-                                    <input type="submit" class="btn btn-success btn-sm" id="SBfile6" name="submitf"
-                                        disabled>
-                                    <input type="file" name="pl6" class="form-control form-control-sm" id="File6"
-                                        aria-describedby="SBfile6" aria-label="Upload" style="width: 98px;"
-                                        onchange="Cfile6()">
-                                </div>
-                            </form>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-start">
-                            <div class="ms-2 me-auto">
-                                <div class="fw-bold">Good Moral Certificate</div>
-                                <p>
+
+                                <form method="POST" action="<?php basename($_SERVER['PHP_SELF']) ?>"
+                                    enctype="multipart/form-data" <?php if (isset($MemorandumOfAgreement))
+                                        echo $MemorandumOfAgreement; ?>>
+                                    <div class="input-group mb-3">
+                                        <input type="submit" class="btn btn-success btn-sm" id="SBfile4" name="submitd"
+                                            disabled>
+                                        <input type="file" name="pl4" class="form-control form-control-sm" id="File4"
+                                            aria-describedby="SBfile4" aria-label="Upload" onchange="Cfile4()"
+                                            style="width: 98px;">
+                                    </div>
+                                </form>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-start">
+                                <div class="ms-2 me-auto">
+                                    <div class="fw-bold" title="Good Moral Certificate">GMC</div>
                                     <?php if ($row['Doc7_stat'] == 2) {
                                         echo "You need to resubmit This file!";
                                     } ?>
-                                </p>
-                            </div>
-                            <form method="POST" action="<?php basename($_SERVER['PHP_SELF']) ?>"
-                                enctype="multipart/form-data" <?php if (isset($GoodMoralCertificate))
-                                    echo $GoodMoralCertificate; ?>>
-                                <div class="input-group mb-3">
-                                    <input type="submit" class="btn btn-success btn-sm" id="SBfile7" name="submitg"
-                                        disabled>
-                                    <input type="file" name="pl7" class="form-control form-control-sm" id="File7"
-                                        aria-describedby="inputGroupFileAddon03" aria-label="Upload"
-                                        style="width: 98px;" onchange="Cfile7()">
-                                </div>
-                            </form>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-start">
-                            <div class="ms-2 me-auto">
-                                <div class="fw-bold">Registration Form</div>
-                                <p>
-                                    <?php if ($row['Doc8_stat'] == 2) {
-                                        echo "You need to resubmit This file!";
-                                    } ?>
-                                </p>
-                            </div>
-                            <form method="POST" action="<?php basename($_SERVER['PHP_SELF']) ?>"
-                                enctype="multipart/form-data" <?php if (isset($RegistrationForm))
-                                    echo $RegistrationForm; ?>>
-                                <div class="input-group mb-3">
-                                    <input type="submit" class="btn btn-success btn-sm" id="SBfile8" name="submith"
-                                        disabled>
-                                    <input type="file" name="pl8" class="form-control form-control-sm" id="File8"
-                                        aria-describedby="inputGroupFileAddon03" aria-label="Upload"
-                                        style="width: 98px;" onchange="Cfile8()">
-                                </div>
-                            </form>
-                        </li>
-                        <?php if (isset($_SESSION['GlobalCompleted']) && $_SESSION['GlobalCompleted'] == 'true') { ?>
-                            <!-- This will only show if the user has completed -->
-                            <li class="list-group-item d-flex justify-content-between align-items-start">
-                                <div class="ms-2 me-auto">
-                                    <div class="fw-bold">Evaluation Form</div>
-                                    <p>
-                                        <?php if ($row['Doc10_stat'] == 2) {
-                                            echo "You need to resubmit This file!";
-                                        } ?>
                                     </p>
                                 </div>
                                 <form method="POST" action="<?php basename($_SERVER['PHP_SELF']) ?>"
-                                    enctype="multipart/form-data" <?php if (isset($EvaluationForm))
-                                        echo $EvaluationForm; ?>>
+                                    enctype="multipart/form-data" <?php if (isset($GoodMoralCertificate))
+                                        echo $GoodMoralCertificate; ?>>
                                     <div class="input-group mb-3">
-                                        <input type="submit" class="btn btn-success btn-sm" id="SBfile10" name="submitj"
+                                        <input type="submit" class="btn btn-success btn-sm" id="SBfile7" name="submitg"
                                             disabled>
-                                        <input type="file" name="pl10" class="form-control form-control-sm" id="File10"
+                                        <input type="file" name="pl7" class="form-control form-control-sm" id="File7"
                                             aria-describedby="inputGroupFileAddon03" aria-label="Upload"
-                                            style="width: 98px;" onchange="Cfile10()">
+                                            onchange="Cfile7()" style="width: 98px;">
                                     </div>
                                 </form>
                             </li>
                             <li class="list-group-item d-flex justify-content-between align-items-start">
                                 <div class="ms-2 me-auto">
-                                    <div class="fw-bold">Narrative Report</div>
+                                    <div class="fw-bold">Waiver</div>
                                     <p>
-                                        <?php if ($row['Doc11_stat'] == 2) {
+                                        <?php if ($row['Doc5_stat'] == 2) {
                                             echo "You need to resubmit This file!";
                                         } ?>
                                     </p>
                                 </div>
                                 <form method="POST" action="<?php basename($_SERVER['PHP_SELF']) ?>"
-                                    enctype="multipart/form-data" <?php if (isset($NarrativeReport))
-                                        echo $NarrativeReport; ?>>
+                                    enctype="multipart/form-data" <?php if (isset($Waiver))
+                                        echo $Waiver; ?>>
                                     <div class="input-group mb-3">
-                                        <input type="submit" class="btn btn-success btn-sm" id="SBfile11" name="submitk"
+                                        <input type="submit" class="btn btn-success btn-sm" id="SBfile5" name="submite"
                                             disabled>
-                                        <input type="file" name="pl11" class="form-control form-control-sm" id="File11"
-                                            aria-describedby="inputGroupFileAddon03" aria-label="Upload"
-                                            style="width: 98px;" onchange="Cfile11()">
+                                        <input type="file" name="pl5" class="form-control form-control-sm" id="File5"
+                                            aria-describedby="SBfile5" aria-label="Upload" onchange="Cfile5()"
+                                            style="width: 98px;">
                                     </div>
                                 </form>
                             </li>
                             <li class="list-group-item d-flex justify-content-between align-items-start">
                                 <div class="ms-2 me-auto">
-                                    <div class="fw-bold">Daily Time Record</div>
+                                    <div class="fw-bold">Birth Certificate</div>
                                     <p>
-                                        <?php if ($row['Doc12_stat'] == 2) {
+                                        <?php if ($row['Doc3_stat'] == 2) {
                                             echo "You need to resubmit This file!";
                                         } ?>
                                     </p>
                                 </div>
                                 <form method="POST" action="<?php basename($_SERVER['PHP_SELF']) ?>"
-                                    enctype="multipart/form-data" <?php if (isset($DailyTimeRecord))
-                                        echo $DailyTimeRecord; ?>>
+                                    enctype="multipart/form-data" <?php if (isset($BirthCertificate))
+                                        echo $BirthCertificate; ?>>
                                     <div class="input-group mb-3">
-                                        <input type="submit" class="btn btn-success btn-sm" id="SBfile12" name="submitl"
+                                        <input type="submit" class="btn btn-success btn-sm" id="SBfile3" name="submitc"
                                             disabled>
-                                        <input type="file" name="pl12" class="form-control form-control-sm" id="File12"
-                                            aria-describedby="inputGroupFileAddon03" aria-label="Upload"
-                                            style="width: 98px;" onchange="Cfile12()">
+                                        <input type="file" name="pl3" class="form-control form-control-sm" id="File3"
+                                            aria-describedby="SBfile3" aria-label="Upload" onchange="Cfile3()"
+                                            style="width: 98px;">
+                                </form>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-start">
+                                <div class="ms-2 me-auto">
+                                    <div class="fw-bold">Medical Certificate</div>
+                                    <p>
+                                        <?php if ($row['Doc6_stat'] == 2) {
+                                            echo "You need to resubmit This file!";
+                                        } ?>
+                                    </p>
+                                </div>
+                                <form method="POST" action="<?php basename($_SERVER['PHP_SELF']) ?>"
+                                    enctype="multipart/form-data" <?php if (isset($MedicalCertificate))
+                                        echo $MedicalCertificate; ?>>
+                                    <div class="input-group mb-3">
+                                        <input type="submit" class="btn btn-success btn-sm" id="SBfile6" name="submitf"
+                                            disabled>
+                                        <input type="file" name="pl6" class="form-control form-control-sm" id="File6"
+                                            aria-describedby="SBfile6" aria-label="Upload" onchange="Cfile6()"
+                                            style="width: 98px;">
                                     </div>
                                 </form>
                             </li>
                             <li class="list-group-item d-flex justify-content-between align-items-start">
                                 <div class="ms-2 me-auto">
-                                    <div class="fw-bold">Certificate of Completion</div>
+                                    <div class="fw-bold">Registration Form</div>
                                     <p>
-                                        <?php if ($row['Doc13_stat'] == 2) {
+                                        <?php if ($row['Doc8_stat'] == 2) {
                                             echo "You need to resubmit This file!";
                                         } ?>
                                     </p>
                                 </div>
                                 <form method="POST" action="<?php basename($_SERVER['PHP_SELF']) ?>"
-                                    enctype="multipart/form-data" <?php if (isset($CertificateOfCompletion))
-                                        echo $CertificateOfCompletion; ?>>
+                                    enctype="multipart/form-data" <?php if (isset($RegistrationForm))
+                                        echo $RegistrationForm; ?>>
                                     <div class="input-group mb-3">
-                                        <input type="submit" class="btn btn-success btn-sm" id="SBfile13" name="submitm"
+                                        <input type="submit" class="btn btn-success btn-sm" id="SBfile8" name="submith"
                                             disabled>
-                                        <input type="file" name="pl13" class="form-control form-control-sm" id="File13"
+                                        <input type="file" name="pl8" class="form-control form-control-sm" id="File8"
                                             aria-describedby="inputGroupFileAddon03" aria-label="Upload"
-                                            style="width: 98px;" onchange="Cfile13()">
+                                            onchange="Cfile8()" style="width: 98px;">
                                     </div>
                                 </form>
                             </li>
-                        <?php } ?>
-                    </ol>
-                    <small class="text-muted">Note: PDF, JPG, PNG and DOCX files are allowed and maximum file size is
-                        3mb</small>
+                            <li class="list-group-item d-flex justify-content-between align-items-start">
+                                <div class="ms-2 me-auto">
+                                    <div class="fw-bold">Placement Form</div>
+                                    <p>
+                                        <?php if ($row['Doc2_stat'] == 2) {
+                                            echo "You need to resubmit This file!";
+                                        } ?>
+                                    </p>
+                                </div>
+                                <form method="POST" action="<?php basename($_SERVER['PHP_SELF']) ?>"
+                                    enctype="multipart/form-data" <?php if (isset($PlacementForm))
+                                        echo $PlacementForm; ?>>
+                                    <div class="input-group mb-3">
+                                        <input type="submit" class="btn btn-success btn-sm" id="SBfile2" name="submitb"
+                                            disabled>
+                                        <input type="file" name="pl2" class="form-control form-control-sm" id="File2"
+                                            aria-describedby="SBfile2" aria-label="Upload" onchange="Cfile2()"
+                                            style="width: 98px;">
+                                    </div>
+                                </form>
+                            </li>
+                            <?php if (isset($_SESSION['GlobalCompleted']) && $_SESSION['GlobalCompleted'] == 'true') { ?>
+                                <!-- This will only show if the user has completed -->
+                                <li class="list-group-item d-flex justify-content-between align-items-start">
+                                    <div class="ms-2 me-auto">
+                                        <div class="fw-bold">Evaluation Form</div>
+                                        <p>
+                                            <?php if ($row['Doc10_stat'] == 2) {
+                                                echo "You need to resubmit This file!";
+                                            } ?>
+                                        </p>
+                                    </div>
+                                    <form method="POST" action="<?php basename($_SERVER['PHP_SELF']) ?>"
+                                        enctype="multipart/form-data" <?php if (isset($EvaluationForm))
+                                            echo $EvaluationForm; ?>>
+                                        <div class="input-group mb-3">
+                                            <input type="submit" class="btn btn-success btn-sm" id="SBfile10" name="submitj"
+                                                disabled>
+                                            <input type="file" name="pl10" class="form-control form-control-sm" id="File10"
+                                                aria-describedby="inputGroupFileAddon03" aria-label="Upload"
+                                                onchange="Cfile10()" style="width: 98px;">
+                                        </div>
+                                    </form>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-start">
+                                    <div class="ms-2 me-auto">
+                                        <div class="fw-bold">Narrative Report</div>
+                                        <p>
+                                            <?php if ($row['Doc11_stat'] == 2) {
+                                                echo "You need to resubmit This file!";
+                                            } ?>
+                                        </p>
+                                    </div>
+                                    <form method="POST" action="<?php basename($_SERVER['PHP_SELF']) ?>"
+                                        enctype="multipart/form-data" <?php if (isset($NarrativeReport))
+                                            echo $NarrativeReport; ?>>
+                                        <div class="input-group mb-3">
+                                            <input type="submit" class="btn btn-success btn-sm" id="SBfile11" name="submitk"
+                                                disabled>
+                                            <input type="file" name="pl11" class="form-control form-control-sm" id="File11"
+                                                aria-describedby="inputGroupFileAddon03" aria-label="Upload"
+                                                onchange="Cfile11()" style="width: 98px;">
+                                        </div>
+                                    </form>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-start">
+                                    <div class="ms-2 me-auto">
+                                        <div class="fw-bold">Daily Time Record</div>
+                                        <p>
+                                            <?php if ($row['Doc12_stat'] == 2) {
+                                                echo "You need to resubmit This file!";
+                                            } ?>
+                                        </p>
+                                    </div>
+                                    <form method="POST" action="<?php basename($_SERVER['PHP_SELF']) ?>"
+                                        enctype="multipart/form-data" <?php if (isset($DailyTimeRecord))
+                                            echo $DailyTimeRecord; ?>>
+                                        <div class="input-group mb-3">
+                                            <input type="submit" class="btn btn-success btn-sm" id="SBfile12" name="submitl"
+                                                disabled>
+                                            <input type="file" name="pl12" class="form-control form-control-sm" id="File12"
+                                                aria-describedby="inputGroupFileAddon03" aria-label="Upload"
+                                                onchange="Cfile12()" style="width: 98px;">
+                                        </div>
+                                    </form>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-start">
+                                    <div class="ms-2 me-auto">
+                                        <div class="fw-bold text-truncate" title="Certificate of Completion">COC</div>
+                                        <p>
+                                            <?php if ($row['Doc13_stat'] == 2) {
+                                                echo "You need to resubmit This file!";
+                                            } ?>
+                                        </p>
+                                    </div>
+                                    <form method="POST" action="<?php basename($_SERVER['PHP_SELF']) ?>"
+                                        enctype="multipart/form-data" <?php if (isset($CertificateOfCompletion))
+                                            echo $CertificateOfCompletion; ?>>
+                                        <div class="input-group mb-3">
+                                            <input type="submit" class="btn btn-success btn-sm" id="SBfile13" name="submitm"
+                                                disabled>
+                                            <input type="file" name="pl13" class="form-control form-control-sm" id="File13"
+                                                aria-describedby="inputGroupFileAddon03" aria-label="Upload"
+                                                onchange="Cfile13()" style="width: 98px;">
+                                        </div>
+                                    </form>
+                                </li>
+                            <?php } ?>
+                        </ol>
+                    </div>
+                    <small class="text-muted">Note: PDF, JPG, PNG and DOCX files are allowed and maximum file size
+                        is 3mb</small>
                 </div>
             </div>
         </div>
         <br>
     </section>
-    <script src="../Script/SidebarScript.js"></script>
-    <script src="../Script/Bootstrap_Script/bootstrap.bundle.js"></script>
 </body>
 
 </html>

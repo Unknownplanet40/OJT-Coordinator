@@ -323,7 +323,48 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
                                                     color: "#fff",
                                                 }).then((result) => {
                                                     if (result.isConfirmed) {
-                                                        window.location.href = "../Components/Proccess/DeleteSuperuserAcc.php?id=' . $row['UID'] . '";
+                                                        Swal.fire({
+                                                            text: "Verify your password first before you can delete this account.",
+                                                            input: "password",
+                                                            inputAttributes: {
+                                                              autocapitalize: "off",
+                                                              placeholder: "Enter your password",
+                                                            },
+                                                            showCancelButton: true,
+                                                            confirmButtonText: "Confirm",
+                                                            showLoaderOnConfirm: true,
+                                                            preConfirm: async () => {
+                                                              try {
+                                                                const password = Swal.getInput().value; // Get the password from the input field
+                                                                const response = await fetch("../Components/Proccess/PasswordConfirmation.php?password=" + password);
+                                                        
+                                                                if (!response.ok) {
+                                                                  throw new Error(response.statusText);
+                                                                }
+                                                        
+                                                                return response.json();
+                                                              } catch (error) {
+                                                                Swal.showValidationMessage(`Request failed: ${error}`);
+                                                              }
+                                                            },
+                                                            allowOutsideClick: () => !Swal.isLoading(),
+                                                            background: "#19191a",
+                                                            color: "#fff",
+                                                          }).then((result) => {
+                                                            if (result.isConfirmed && result.value.valid) {
+                                                                window.location.href = "../Components/Proccess/Delete.php?ID=' . $row['UID'] . '&username=' . $row['admin_uname'] . '";
+                                                            } else {
+                                                                Swal.fire({
+                                                                    icon: "error",
+                                                                    title: "Oops...",
+                                                                    text: "You entered an incorrect password!",
+                                                                    background: "#19191a",
+                                                                    color: "#fff",
+                                                                    showConfirmButton: false,
+                                                                    timer: 1500,
+                                                                });
+                                                            }
+                                                        });
                                                     }
                                                 });
                                             });

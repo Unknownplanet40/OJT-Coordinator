@@ -152,10 +152,10 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                             if (isset($resume)) {
                                 echo
                                     "
-                                <a class='btn btn-sm btn-success' title='View File' href='$resume' target='_blank'>View</a>
-                                <a class='btn btn-sm btn-primary' title='Download file' href='$resume' download>Download</a>
-                                <a class='btn btn-sm btn-warning' title='Approve file' href='../Components/Proccess/ResourceProccess.php?ID=$userID&file=Doc1&status=1'>Approve</a>
-                                <a class='btn btn-sm btn-danger' title='Request for Resubmission of file' href='../Components/Proccess/ResourceProccess.php?ID=$userID&file=Doc1&status=2'>Resubmit</a>
+                                <a class='btn btn-sm btn-warning' title='View File' href='$resume' target='_blank'><img src='../Image/ViewDocs.svg' alt='View' width='24px'></a>
+                                <a class='btn btn-sm btn-primary' title='Download file' href='$resume' download><img src='../Image/DownDocs.svg' alt='Download' width='24px'></a>
+                                <a class='btn btn-sm btn-success' title='Approve file' href='../Components/Proccess/ResourceProccess.php?ID=$userID&file=Doc1&status=1'><img src='../Image/thumb_up.svg' alt='Approve' width='24px'></a>
+                                <a class='btn btn-sm btn-danger' title='Request for Resubmission of file' href='../Components/Proccess/ResourceProccess.php?ID=$userID&file=Doc1&status=2'><img src='../Image/denied.svg' alt='Denied' width='24px'></a>
                                 ";
                             } else {
                                 echo "No file uploaded yet";
@@ -189,10 +189,10 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                             if (isset($placement)) {
                                 echo
                                     "
-                                <a class='btn btn-sm btn-success' title='View File' href='$placement' target='_blank'>View</a>
-                                <a class='btn btn-sm btn-primary' title='Download file' href='$placement' download>Download</a>
-                                <a class='btn btn-sm btn-warning' title='Approve file' href='../Components/Proccess/ResourceProccess.php?ID=$userID&file=Doc2&status=1'>Approve</a>
-                                <a class='btn btn-sm btn-danger' title='Request for Resubmission of file' href='../Components/Proccess/ResourceProccess.php?ID=$userID&file=Doc2&status=2'>Resubmit</a>
+                                <a class='btn btn-sm btn-warning' title='View File' href='$placement' target='_blank'><img src='../Image/ViewDocs.svg' alt='View' width='24px'></a>
+                                <a class='btn btn-sm btn-primary' title='Download file' href='$placement' download><img src='../Image/DownDocs.svg' alt='Download' width='24px'></a>
+                                <a class='btn btn-sm btn-success' title='Approve file' href='../Components/Proccess/ResourceProccess.php?ID=$userID&file=Doc1&status=1'><img src='../Image/thumb_up.svg' alt='Approve' width='24px'></a>
+                                <a class='btn btn-sm btn-danger' title='Request for Resubmission of file' href='../Components/Proccess/ResourceProccess.php?ID=$userID&file=Doc1&status=2'><img src='../Image/denied.svg' alt='Denied' width='24px'></a>
                                 ";
                             } else {
                                 echo "No file uploaded yet";
@@ -226,10 +226,10 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                             if (isset($birth)) {
                                 echo
                                     "
-                                <a class='btn btn-sm btn-success' title='View File' href='$birth' target='_blank'>View</a>
-                                <a class='btn btn-sm btn-primary' title='Download file' href='<$birth' download>Download</a>
-                                <a class='btn btn-sm btn-warning' title='Approve file' href='../Components/Proccess/ResourceProccess.php?ID=$userID&file=Doc3&status=1'>Approve</a>
-                                <a class='btn btn-sm btn-danger' title='Request for Resubmission of file' href='../Components/Proccess/ResourceProccess.php?ID=$userID&file=Doc3&status=2'>Resubmit</a>
+                                    <a class='btn btn-sm btn-warning' title='View File' href='$birth' target='_blank'><img src='../Image/ViewDocs.svg' alt='View' width='24px'></a>
+                                <a class='btn btn-sm btn-primary' title='Download file' href='$birth' download><img src='../Image/DownDocs.svg' alt='Download' width='24px'></a>
+                                <a class='btn btn-sm btn-success' title='Approve file' href='../Components/Proccess/ResourceProccess.php?ID=$userID&file=Doc1&status=1'><img src='../Image/thumb_up.svg' alt='Approve' width='24px'></a>
+                                <a class='btn btn-sm btn-danger' title='Request for Resubmission of file' href='../Components/Proccess/ResourceProccess.php?ID=$userID&file=Doc1&status=2'><img src='../Image/denied.svg' alt='Denied' width='24px'></a>
                                 ";
                             } else {
                                 echo "No file uploaded yet";
@@ -263,10 +263,10 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                             if (isset($moa)) {
                                 echo
                                     "
-                                <a class='btn btn-sm btn-success' title='View File' href='$moa' target='_blank'>View</a>
-                                <a class='btn btn-sm btn-primary' title='Download file' href='$moa' download>Download</a>
-                                <a class='btn btn-sm btn-warning' title='Approve file' href='../Components/Proccess/ResourceProccess.php?ID=$userID&file=Doc4&status=1'>Approve</a>
-                                <a class='btn btn-sm btn-danger' title='Request for Resubmission of file' href='../Components/Proccess/ResourceProccess.php?ID=$userID&file=Doc4&status=2'>Resubmit</a>
+                                    <a class='btn btn-sm btn-warning' title='View File' href='$moa' target='_blank'><img src='../Image/ViewDocs.svg' alt='View' width='24px'></a>
+                                    <a class='btn btn-sm btn-primary' title='Download file' href='$moa' download><img src='../Image/DownDocs.svg' alt='Download' width='24px'></a>
+                                    <a class='btn btn-sm btn-success' title='Approve file' href='../Components/Proccess/ResourceProccess.php?ID=$userID&file=Doc1&status=1'><img src='../Image/thumb_up.svg' alt='Approve' width='24px'></a>
+                                    <a class='btn btn-sm btn-danger' title='Request for Resubmission of file' href='../Components/Proccess/ResourceProccess.php?ID=$userID&file=Doc1&status=2'><img src='../Image/denied.svg' alt='Denied' width='24px'></a>
                                 ";
                             } else {
                                 echo "No file uploaded yet";
@@ -300,11 +300,10 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                             if (isset($waiver)) {
                                 echo
                                     "
-                                <a class='btn btn-sm btn-success' title='View File' href='$waiver' target='_blank'>View</a>
-                                <a class='btn btn-sm btn-primary' title='Download file' href='$waiver' download>Download</a>
-                                <a class='btn btn-sm btn-warning' title='Approve file' href='../Components/Proccess/ResourceProccess.php?ID=$userID&file=Doc5&status=1'>Approve</a>
-                                <a class='btn btn-sm btn-danger' title='Request for Resubmission of file' href='../Components/Proccess/ResourceProccess.php?ID=$userID&file=Doc5&status=2'>Resubmit</a>
-                                ";
+                                    <a class='btn btn-sm btn-warning' title='View File' href='$waiver' target='_blank'><img src='../Image/ViewDocs.svg' alt='View' width='24px'></a>
+                                    <a class='btn btn-sm btn-primary' title='Download file' href='$waiver' download><img src='../Image/DownDocs.svg' alt='Download' width='24px'></a>
+                                    <a class='btn btn-sm btn-success' title='Approve file' href='../Components/Proccess/ResourceProccess.php?ID=$userID&file=Doc1&status=1'><img src='../Image/thumb_up.svg' alt='Approve' width='24px'></a>
+                                    <a class='btn btn-sm btn-danger' title='Request for Resubmission of file' href='../Components/Proccess/ResourceProccess.php?ID=$userID&file=Doc1&status=2'><img src='../Image/denied.svg' alt='Denied' width='24px'></a>";
                             } else {
                                 echo "No file uploaded yet";
                             }
@@ -337,10 +336,10 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                             if (isset($medical)) {
                                 echo
                                     "
-                                <a class='btn btn-sm btn-success' title='View File' href='$medical' target='_blank'>View</a>
-                                <a class='btn btn-sm btn-primary' title='Download file' href='$medical' download>Download</a>
-                                <a class='btn btn-sm btn-warning' title='Approve file' href='../Components/Proccess/ResourceProccess.php?ID=$userID&file=Doc6&status=1'>Approve</a>
-                                <a class='btn btn-sm btn-danger' title='Request for Resubmission of file' href='../Components/Proccess/ResourceProccess.php?ID=$userID&file=Doc6&status=2'>Resubmit</a>
+                                    <a class='btn btn-sm btn-warning' title='View File' href='$medical' target='_blank'><img src='../Image/ViewDocs.svg' alt='View' width='24px'></a>
+                                    <a class='btn btn-sm btn-primary' title='Download file' href='$medical' download><img src='../Image/DownDocs.svg' alt='Download' width='24px'></a>
+                                    <a class='btn btn-sm btn-success' title='Approve file' href='../Components/Proccess/ResourceProccess.php?ID=$userID&file=Doc1&status=1'><img src='../Image/thumb_up.svg' alt='Approve' width='24px'></a>
+                                    <a class='btn btn-sm btn-danger' title='Request for Resubmission of file' href='../Components/Proccess/ResourceProccess.php?ID=$userID&file=Doc1&status=2'><img src='../Image/denied.svg' alt='Denied' width='24px'></a>
                                 ";
                             } else {
                                 echo "No file uploaded yet";
@@ -374,10 +373,10 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                             if (isset($GMcert)) {
                                 echo
                                     "
-                                <a class='btn btn-sm btn-success' title='View File' href='$GMcert' target='_blank'>View</a>
-                                <a class='btn btn-sm btn-primary' title='Download file' href='$GMcert' download>Download</a>
-                                <a class='btn btn-sm btn-warning' title='Approve file' href='../Components/Proccess/ResourceProccess.php?ID=$userID&file=Doc7&status=1'>Approve</a>
-                                <a class='btn btn-sm btn-danger' title='Request for Resubmission of file' href='../Components/Proccess/ResourceProccess.php?ID=$userID&file=Doc7&status=2'>Resubmit</a>
+                                    <a class='btn btn-sm btn-warning' title='View File' href='$GMcert' target='_blank'><img src='../Image/ViewDocs.svg' alt='View' width='24px'></a>
+                                    <a class='btn btn-sm btn-primary' title='Download file' href='$GMcert' download><img src='../Image/DownDocs.svg' alt='Download' width='24px'></a>
+                                    <a class='btn btn-sm btn-success' title='Approve file' href='../Components/Proccess/ResourceProccess.php?ID=$userID&file=Doc1&status=1'><img src='../Image/thumb_up.svg' alt='Approve' width='24px'></a>
+                                    <a class='btn btn-sm btn-danger' title='Request for Resubmission of file' href='../Components/Proccess/ResourceProccess.php?ID=$userID&file=Doc1&status=2'><img src='../Image/denied.svg' alt='Denied' width='24px'></a>
                                 ";
                             } else {
                                 echo "No file uploaded yet";
@@ -411,10 +410,10 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                             if (isset($regform)) {
                                 echo
                                     "
-                                <a class='btn btn-sm btn-success' title='View File' href='$regform' target='_blank'>View</a>
-                                <a class='btn btn-sm btn-primary' title='Download file' href='$regform' download>Download</a>
-                                <a class='btn btn-sm btn-warning' title='Approve file' href='../Components/Proccess/ResourceProccess.php?ID=$userID&file=Doc8&status=1'>Approve</a>
-                                <a class='btn btn-sm btn-danger' title='Request for Resubmission of file' href='../Components/Proccess/ResourceProccess.php?ID=$userID&file=Doc8&status=2'>Resubmit</a>
+                                    <a class='btn btn-sm btn-warning' title='View File' href='$regform' target='_blank'><img src='../Image/ViewDocs.svg' alt='View' width='24px'></a>
+                                    <a class='btn btn-sm btn-primary' title='Download file' href='$regform' download><img src='../Image/DownDocs.svg' alt='Download' width='24px'></a>
+                                    <a class='btn btn-sm btn-success' title='Approve file' href='../Components/Proccess/ResourceProccess.php?ID=$userID&file=Doc1&status=1'><img src='../Image/thumb_up.svg' alt='Approve' width='24px'></a>
+                                    <a class='btn btn-sm btn-danger' title='Request for Resubmission of file' href='../Components/Proccess/ResourceProccess.php?ID=$userID&file=Doc1&status=2'><img src='../Image/denied.svg' alt='Denied' width='24px'></a>
                                 ";
                             } else {
                                 echo "No file uploaded yet";
@@ -448,10 +447,10 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                             if (isset($eval)) {
                                 echo
                                     "
-                                <a class='btn btn-sm btn-success' title='View File' href='$eval' target='_blank'>View</a>
-                                <a class='btn btn-sm btn-primary' title='Download file' href='$eval' download>Download</a>
-                                <a class='btn btn-sm btn-warning' title='Approve file' href='../Components/Proccess/ResourceProccess.php?ID=$userID&file=Doc10&status=1'>Approve</a>
-                                <a class='btn btn-sm btn-danger' title='Request for Resubmission of file' href='../Components/Proccess/ResourceProccess.php?ID=$userID&file=Doc10&status=2'>Resubmit</a>
+                                    <a class='btn btn-sm btn-warning' title='View File' href='$eval' target='_blank'><img src='../Image/ViewDocs.svg' alt='View' width='24px'></a>
+                                    <a class='btn btn-sm btn-primary' title='Download file' href='$eval' download><img src='../Image/DownDocs.svg' alt='Download' width='24px'></a>
+                                    <a class='btn btn-sm btn-success' title='Approve file' href='../Components/Proccess/ResourceProccess.php?ID=$userID&file=Doc1&status=1'><img src='../Image/thumb_up.svg' alt='Approve' width='24px'></a>
+                                    <a class='btn btn-sm btn-danger' title='Request for Resubmission of file' href='../Components/Proccess/ResourceProccess.php?ID=$userID&file=Doc1&status=2'><img src='../Image/denied.svg' alt='Denied' width='24px'></a>
                                 ";
                             } else {
                                 echo "No file uploaded yet";
@@ -482,13 +481,13 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                         </div>
                         <div>
                             <?php
-                            if (isset($waiver)) {
+                            if (isset($narrative)) {
                                 echo
                                     "
-                                <a class='btn btn-sm btn-success' title='View File' href='$narrative' target='_blank'>View</a>
-                                <a class='btn btn-sm btn-primary' title='Download file' href='$narrative' download>Download</a>
-                                <a class='btn btn-sm btn-warning' title='Approve file' href='../Components/Proccess/ResourceProccess.php?ID=$userID&file=Doc11&status=1'>Approve</a>
-                                <a class='btn btn-sm btn-danger' title='Request for Resubmission of file' href='../Components/Proccess/ResourceProccess.php?ID=$userID&file=Doc11&status=2'>Resubmit</a>
+                                    <a class='btn btn-sm btn-warning' title='View File' href='$narrative' target='_blank'><img src='../Image/ViewDocs.svg' alt='View' width='24px'></a>
+                                    <a class='btn btn-sm btn-primary' title='Download file' href='$narrative' download><img src='../Image/DownDocs.svg' alt='Download' width='24px'></a>
+                                    <a class='btn btn-sm btn-success' title='Approve file' href='../Components/Proccess/ResourceProccess.php?ID=$userID&file=Doc1&status=1'><img src='../Image/thumb_up.svg' alt='Approve' width='24px'></a>
+                                    <a class='btn btn-sm btn-danger' title='Request for Resubmission of file' href='../Components/Proccess/ResourceProccess.php?ID=$userID&file=Doc1&status=2'><img src='../Image/denied.svg' alt='Denied' width='24px'></a>
                                 ";
                             } else {
                                 echo "No file uploaded yet";
@@ -522,10 +521,10 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                             if (isset($timecard)) {
                                 echo
                                     "
-                                <a class='btn btn-sm btn-success' title='View File' href='$timecard' target='_blank'>View</a>
-                                <a class='btn btn-sm btn-primary' title='Download file' href='$timecard' download>Download</a>
-                                <a class='btn btn-sm btn-warning' title='Approve file' href='../Components/Proccess/ResourceProccess.php?ID=$userID&file=Doc12&status=1'>Approve</a>
-                                <a class='btn btn-sm btn-danger' title='Request for Resubmission of file' href='../Components/Proccess/ResourceProccess.php?ID=$userID&file=Doc12&status=2'>Resubmit</a>
+                                    <a class='btn btn-sm btn-warning' title='View File' href='$timecard' target='_blank'><img src='../Image/ViewDocs.svg' alt='View' width='24px'></a>
+                                    <a class='btn btn-sm btn-primary' title='Download file' href='$timecard' download><img src='../Image/DownDocs.svg' alt='Download' width='24px'></a>
+                                    <a class='btn btn-sm btn-success' title='Approve file' href='../Components/Proccess/ResourceProccess.php?ID=$userID&file=Doc1&status=1'><img src='../Image/thumb_up.svg' alt='Approve' width='24px'></a>
+                                    <a class='btn btn-sm btn-danger' title='Request for Resubmission of file' href='../Components/Proccess/ResourceProccess.php?ID=$userID&file=Doc1&status=2'><img src='../Image/denied.svg' alt='Denied' width='24px'></a>
                                 ";
                             } else {
                                 echo "No file uploaded yet";
@@ -559,10 +558,10 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                             if (isset($COC)) {
                                 echo
                                     "
-                                <a class='btn btn-sm btn-success' title='View File' href='$COC' target='_blank'>View</a>
-                                <a class='btn btn-sm btn-primary' title='Download file' href='$COC' download>Download</a>
-                                <a class='btn btn-sm btn-warning' title='Approve file' href='../Components/Proccess/ResourceProccess.php?ID=$userID&file=Doc13&status=1'>Approve</a>
-                                <a class='btn btn-sm btn-danger' title='Request for Resubmission of file' href='../Components/Proccess/ResourceProccess.php?ID=$userID&file=Doc13&status=2'>Resubmit</a>
+                                    <a class='btn btn-sm btn-warning' title='View File' href='$COC' target='_blank'><img src='../Image/ViewDocs.svg' alt='View' width='24px'></a>
+                                    <a class='btn btn-sm btn-primary' title='Download file' href='$COC' download><img src='../Image/DownDocs.svg' alt='Download' width='24px'></a>
+                                    <a class='btn btn-sm btn-success' title='Approve file' href='../Components/Proccess/ResourceProccess.php?ID=$userID&file=Doc1&status=1'><img src='../Image/thumb_up.svg' alt='Approve' width='24px'></a>
+                                    <a class='btn btn-sm btn-danger' title='Request for Resubmission of file' href='../Components/Proccess/ResourceProccess.php?ID=$userID&file=Doc1&status=2'><img src='../Image/denied.svg' alt='Denied' width='24px'></a>
                                 ";
                             } else {
                                 echo "No file uploaded yet";

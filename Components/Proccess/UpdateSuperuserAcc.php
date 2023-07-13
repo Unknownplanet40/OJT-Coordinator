@@ -226,24 +226,24 @@ if (isset($_POST['update'])) {
 
                                     if (id == currentUSer) {
                                         Swal.fire({
-                                        text: "We recommend relogging into your account, whether you have updated it or not.",
-                                        icon: 'info',
-                                        allowOutsideClick: false,
-                                        showCancelButton: true,
-                                        confirmButtonColor: '#3085d6',
-                                        cancelButtonColor: '#d33',
-                                        confirmButtonText: 'Relogin',
-                                        cancelButtonText: 'Just Go Back',
-                                        background: "#19191a",
-                                        color: "#fff"
+                                            text: "We recommend relogging into your account, whether you have updated it or not.",
+                                            icon: 'info',
+                                            allowOutsideClick: false,
+                                            showCancelButton: true,
+                                            confirmButtonColor: '#3085d6',
+                                            cancelButtonColor: '#d33',
+                                            confirmButtonText: 'Relogin',
+                                            cancelButtonText: 'Just Go Back',
+                                            background: "#19191a",
+                                            color: "#fff"
 
-                                    }).then((result) => {
-                                        if (result.isConfirmed) {
-                                            window.location.href = "../../logout.php";
-                                        } else {
-                                            window.location.href = "<?php echo $address; ?>";
-                                        }
-                                    })
+                                        }).then((result) => {
+                                            if (result.isConfirmed) {
+                                                window.location.href = "../../logout.php";
+                                            } else {
+                                                window.location.href = "<?php echo $address; ?>";
+                                            }
+                                        })
                                     } else {
                                         window.location.href = "<?php echo $address; ?>";
                                     }
@@ -254,7 +254,9 @@ if (isset($_POST['update'])) {
                             </script>
                         </div>
                         <div class="col-md-8">
-                            <a id="delAct" class="btn btn-danger w-100">Delete This Account</a>
+                            <?php if ($UserID != $_SESSION['GlobalID']) { ?>
+                                <a id="delAct" class="btn btn-danger w-100">Delete This Account</a>
+                            <?php } ?>
                             <script>
                                 let delBTN = document.getElementById("delAct");
 
@@ -273,7 +275,49 @@ if (isset($_POST['update'])) {
                                         color: "#fff"
                                     }).then((result) => {
                                         if (result.isConfirmed) {
-                                            window.location.href = "DeleteSuperuserAcc.php?id=<?php echo $UserID; ?>";
+                                            Swal.fire({
+                                                text: "Verify your password first before you can delete this account.",
+                                                input: "password",
+                                                inputAttributes: {
+                                                    autocapitalize: "off",
+                                                    placeholder: "Enter your password",
+                                                },
+                                                showCancelButton: true,
+                                                confirmButtonText: "Confirm",
+                                                showLoaderOnConfirm: true,
+                                                preConfirm: async () => {
+                                                    try {
+                                                        const password = Swal.getInput().value; // Get the password from the input field
+                                                        const response = await fetch("./PasswordConfirmation.php?password=" + password);
+
+
+                                                        if (!response.ok) {
+                                                            throw new Error(response.statusText);
+                                                        }
+
+                                                        return response.json();
+                                                    } catch (error) {
+                                                        Swal.showValidationMessage(`Request failed: ${error}`);
+                                                    }
+                                                },
+                                                allowOutsideClick: () => !Swal.isLoading(),
+                                                background: "#19191a",
+                                                color: "#fff",
+                                            }).then((result) => {
+                                                if (result.isConfirmed && result.value.valid) {
+                                                    window.location.href = "DeleteSuperuserAcc.php?id=<?php echo $UserID; ?>";
+                                                } else {
+                                                    Swal.fire({
+                                                        icon: "error",
+                                                        title: "Oops...",
+                                                        text: "You entered an incorrect password!",
+                                                        background: "#19191a",
+                                                        color: "#fff",
+                                                        showConfirmButton: false,
+                                                        timer: 1500,
+                                                    });
+                                                }
+                                            });
                                         }
                                     })
                                 });
@@ -317,10 +361,13 @@ if (isset($_POST['update'])) {
                     </div>
                     <div class="input-group mb-3">
                         <span class="input-group-text text-bg-success w-25">Position:</span>
-                        <select name="upposition" class="form-select" id="upposition"
-                            value="<?php echo isset($position) ? $position : "Not Available"; ?>">
-                            <option value="administrator">ADMINISTRATOR</option>
-                            <option value="moderator">MODERATOR</option>
+                        <select name="upposition" class="form-select" id="upposition">
+                            <option value="administrator" <?php if ($position === "administrator")
+                                echo "selected"; ?>>
+                                ADMINISTRATOR</option>
+                            <option value="moderator" <?php if ($position === "moderator")
+                                echo "selected"; ?>>MODERATOR
+                            </option>
                         </select>
                     </div>
                     <div class="input-group mb-3">
