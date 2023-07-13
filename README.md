@@ -12,7 +12,7 @@ C:\xampp\htdocs
 
 4. Go to database folder and import the database file to your MySQL server.
 ```
-C:\xampp\htdocs\OJT-Coordinator\database\ojtcs.sql
+C:\xampp\htdocs\OJT-Coordinator\database\OJT_CS_Database.sql
 ```
 5. Open your browser and go to the following URL.
 ```
