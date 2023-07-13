@@ -20,17 +20,17 @@ localhost/OJT-Coordinator
 ```
 6. Login using the following credentials.
 ```
-Administrator:
-username: 
-password: 
+Administrator
+username: ryanjames
+password: @Capadocia123
 
-Moderator:
-username:
-password:
+Moderator
+username: jamesveloria
+password: @Veloria123
 
-User/Trainee:
-username: 
-password: 
+User/Trainee
+username: lorenzoasis
+password: Lorenzo.asis2023
 
 ```
 > **Note:** You can change the credentials in the database. or you can create a new account in the application.
@@ -51,16 +51,35 @@ you can fix it by following this steps:
 ## Features
 > **Note:** The following features are still under development.
 
-`I'll add the features later on.`
+- [x] Login
+- [x] Register
+- [x] Trainee page
+    - [x] User Dashboard
+    - [x] Documents Upload
+    - [x] Application status
+    - [x] Evaluation Results
+    - [x] Update Profile
+- [x] Moderator Dashboard
+    - [x] Dashboard
+    - [x] Manage OJT Applications
+    - [x] Manage Evaluation Forms
+    - [x] Manage Trainee Documents
+    - [x] Manage Events and Announcements
+- [x] Administrator Dashboard
+    - [x] Dashboard
+    - [x] Manage Users
+    - [x] Manage OJT Applications
+    - [x] Manage Evaluation Forms
+    - [x] Manage Events and Announcements
+    - [x] Manage Trainee Documents
+    - [x] Can See System Logs
 
 ## Screenshots
+see the [Screenshots](./ScreenShots) folder for more screenshots.
 ### Admin / Moderator(Coordinator)
-`for admin screenshots`
+![Admin](./ScreenShots/Moderator%20Dashboard.png)
 ### Trainee
-`for trainee screenshots`
-
-## Prototype Design
-[![Figma](./Backups/Old%20Files/Images/figma.svg)](#) <!--update the figma link here-->
+![Trainee](./ScreenShots/Trainee%20Dashboard.png)
 
 ## Information
 This project was created by the following students of the Cavite State University - Imus Campus (CvSU) in compliance to DCIT 60A - Integrated Programming and Technologies 1
@@ -96,7 +115,7 @@ This project was created by the following students of the Cavite State Universit
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
 
 
-## Acknowledgments
+## Acknowledgments & Technologies Used
 - [Bootstrap](https://getbootstrap.com/)
 - [jQuery](https://jquery.com/)
 - [Chart.js](https://www.chartjs.org/)
@@ -105,6 +124,12 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 - [Google Icons](https://fonts.google.com/icons)
 - [XAMPP](https://www.apachefriends.org/download.html)
 - [Visual Studio Code](https://code.visualstudio.com/download)
+- [Git](https://git-scm.com/downloads)
+- [PHP](https://www.php.net/downloads)
+- [MySQL](https://www.mysql.com/downloads/)
+- [HTML](https://html.com/)
+- [CSS](https://www.w3.org/Style/CSS/Overview.en.html)
+- [JavaScript](https://www.javascript.com/)
 
 
 ## Resources

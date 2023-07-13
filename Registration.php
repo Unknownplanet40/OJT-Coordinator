@@ -153,7 +153,7 @@ if (isset($_POST['register'])) {
     <link rel="stylesheet" href="./Style/SweetAlert2.css">
     <script src="./Script/SweetAlert2.js"></script>
     <script src="./Script/RegisterValidation.js"></script>
-    <script defer src="./Script/Bootstrap/bootstrap.bundle.js"></script>
+    <script defer src="./Script/Bootstrap_Script/bootstrap.bundle.js"></script>
     <link rel="shortcut icon" href="./Image/Register.svg" type="image/x-icon">
 
 </head>
@@ -194,7 +194,7 @@ if (isset($_POST['register'])) {
                             <input type="text" class="form-control item" name="email" id="email"
                                 placeholder="Email Address" value="<?php if (isset($_SESSION['temp'][2])) {
                                     echo $_SESSION['temp'][2];
-                                } ?>" title="Ex: Blk. 0 Lot 0, Village">
+                                } ?>" title="Ex. firstnameinitial.lastname@domain.tld">
                         </div>
                     </div>
                     <div class="col-6">
