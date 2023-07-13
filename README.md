@@ -1,6 +1,6 @@
 # On The Job Training (OJT) Coordinator System
 ## Description
-This is a web application that will be used by the OJT Coordinator of the Cavite State University - Imus Campus (CvSU) to manage the On The Job Training (OJT) applications of the students and the departments that are offering OJT slots. The application will also be used to monitor the progress of the students during their OJT.
+This is a web application that will help the OJT Coordinator to manage the OJT Applications, Evaluation Forms, Trainee Documents, and Events and Announcements. This application will also help the Trainee to upload their documents, view their application status, and view their evaluation results.
 
 ## Installation
 1. Download the project as a zip file.
@@ -73,6 +73,7 @@ you can fix it by following this steps:
     - [x] Manage Events and Announcements
     - [x] Manage Trainee Documents
     - [x] Can See System Logs
+- [x] Error Pages
 
 ## Screenshots
 see the [Screenshots](./ScreenShots) folder for more screenshots.
