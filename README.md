@@ -48,33 +48,6 @@ you can fix it by following this steps:
 6. save the file
 7. restart the apache module
 
-## Features
-> **Note:** The following features are still under development.
-
-- [x] Login
-- [x] Register
-- [x] Trainee page
-    - [x] User Dashboard
-    - [x] Documents Upload
-    - [x] Application status
-    - [x] Evaluation Results
-    - [x] Update Profile
-- [x] Moderator Dashboard
-    - [x] Dashboard
-    - [x] Manage OJT Applications
-    - [x] Manage Evaluation Forms
-    - [x] Manage Trainee Documents
-    - [x] Manage Events and Announcements
-- [x] Administrator Dashboard
-    - [x] Dashboard
-    - [x] Manage Users
-    - [x] Manage OJT Applications
-    - [x] Manage Evaluation Forms
-    - [x] Manage Events and Announcements
-    - [x] Manage Trainee Documents
-    - [x] Can See System Logs
-- [x] Error Pages
-
 ## Screenshots
 see the [Screenshots](./ScreenShots) folder for more screenshots.
 ### Admin / Moderator(Coordinator)
