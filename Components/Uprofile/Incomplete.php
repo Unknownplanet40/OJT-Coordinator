@@ -49,7 +49,8 @@
                             <div class="col-md-4">
                                 <label for="birth" class="form-label d-block text-truncate">Birth Date</label>
                                 <input type="date" class="form-control form-control-sm" name="birth" id="INCbirth"
-                                    placeholder="01/01/2000">
+                                    placeholder="01/01/2000" min="<?php echo $year; ?>-01-01" max="<?php echo $year; ?>-12-31">
+                                <small class="blockquote-footer" style="font-size: 12px;">We Detect that your age is <?php echo $age; ?>, thats why you can only choose the year <?php echo $year; ?>.</small>
                             </div>
                             <div class="col-md-4">
                                 <label for="phone" class="form-label">Phone</label>
@@ -65,7 +66,7 @@
                                     <option value="BSCS">BSCS</option>
                                 </select>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-2">
                                 <label for="INCsex" class="form-label d-block text-truncate">Sex</label>
                                 <select name="gender" class="form-select form-select-sm" id="INCsex">
                                     <option selected hidden>Choose...</option>
@@ -127,7 +128,7 @@
             <span class="text-danger" hidden>Note: Uploading an invalid file will result in the deletion of the
                 old
                 profile
-                picture. Please upload a valid file. (This has been Fix)</span>
+                picture. Please upload a valid file. (No worries, this has been fixed already)</span>
         </div>
     </div>
 </div>

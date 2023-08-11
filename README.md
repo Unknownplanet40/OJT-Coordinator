@@ -50,30 +50,7 @@ you can fix it by following this steps:
 
 ## Features
 > **Note:** The following features are still under development.
-
-- [x] Login
-- [x] Register
-- [x] Trainee page
-    - [x] User Dashboard
-    - [x] Documents Upload
-    - [x] Application status
-    - [x] Evaluation Results
-    - [x] Update Profile
-- [x] Moderator Dashboard
-    - [x] Dashboard
-    - [x] Manage OJT Applications
-    - [x] Manage Evaluation Forms
-    - [x] Manage Trainee Documents
-    - [x] Manage Events and Announcements
-- [x] Administrator Dashboard
-    - [x] Dashboard
-    - [x] Manage Users
-    - [x] Manage OJT Applications
-    - [x] Manage Evaluation Forms
-    - [x] Manage Events and Announcements
-    - [x] Manage Trainee Documents
-    - [x] Can See System Logs
-- [x] Error Pages
+- 
 
 ## Screenshots
 see the [Screenshots](./ScreenShots) folder for more screenshots.
@@ -89,7 +66,8 @@ This project was created by the following students of the Cavite State Universit
 | :---  |  :---: |
 | Date started:  | **May 21, 2023 at 12:15 AM** |
 | Date Finished: | **July 11, 2023 at 6:36 PM** |
-| Duration:      | **1 month, 20 days** |
+| Duration <sup>2nd Semester</sup> | **1 Month and 20 Days** |
+| Duration <sup>Mid Year - Summer Sem</sup> | **1 Month and 21 Days** |
 
 ### Developers and Contributors
 <div align="center">
@@ -104,13 +82,18 @@ This project was created by the following students of the Cavite State Universit
 
 </div>
 
-### Instructors
+### Instructors <sup>(2nd Semester)</sup>
 
 | Name | Subject |
 | :---: | :--- |
-|[**BAUTISTA, BENEDICT**](#instructor) | DCIT 60A - INTEGRATED PROGRAMMING AND TECHNOLOGIES 1 |
-|[**ALLAUIGAN, WYETH**](#instructor) | DCIT 55A - ADVANCE DATABASE MANAGEMENT SYSTEM |
-| [**MODESTO, SHAINA MARIE**](#instructor) | ITEC 65A - OPEN SOURCE TECHNOLOGY |
+|[**BAUTISTA, BENEDICT**](#instructor) | **DCIT 60A** - INTEGRATED PROGRAMMING AND TECHNOLOGIES 1 |
+|[**ALLAUIGAN, WYETH**](#instructor) | **DCIT 55A** - ADVANCE DATABASE MANAGEMENT SYSTEM |
+| [**MODESTO, SHAINA MARIE**](#instructor) | **ITEC 65A** - OPEN SOURCE TECHNOLOGY |
+
+### Instructor <sup>(Mid Year - Summer Sem)</sup>
+| Name | Subject |
+| :---: | :--- |
+|[**BAUTISTA, BENEDICT**](#instructor) | **ITEC 75A** - SYSTEM INTEGRATION AND ARCHITECTURE 1 |
 
 ## License
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details

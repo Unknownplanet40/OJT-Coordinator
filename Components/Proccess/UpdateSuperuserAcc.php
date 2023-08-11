@@ -51,8 +51,6 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
     }
 }
 
-
-
 function RandomCharacter($length)
 {
     $result = '';
@@ -226,21 +224,18 @@ if (isset($_POST['update'])) {
 
                                     if (id == currentUSer) {
                                         Swal.fire({
-                                            text: "We recommend relogging into your account, whether you have updated it or not.",
+                                            text: "The changes you made will not reflect until you re-login your account.",
                                             icon: 'info',
                                             allowOutsideClick: false,
-                                            showCancelButton: true,
+                                            showCancelButton: false,
                                             confirmButtonColor: '#3085d6',
                                             cancelButtonColor: '#d33',
-                                            confirmButtonText: 'Relogin',
-                                            cancelButtonText: 'Just Go Back',
+                                            confirmButtonText: 'Okay',
                                             background: "#19191a",
                                             color: "#fff"
 
                                         }).then((result) => {
                                             if (result.isConfirmed) {
-                                                window.location.href = "../../logout.php";
-                                            } else {
                                                 window.location.href = "<?php echo $address; ?>";
                                             }
                                         })

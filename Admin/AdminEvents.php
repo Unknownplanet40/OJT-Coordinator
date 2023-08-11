@@ -16,6 +16,26 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
     $date = date("F j, Y", strtotime($row['DateAdded']));
     $comp = date("F j, Y", strtotime($row['DateEnd']));
     $post = $row['PostedBy'];
+
+    // before loading the page, check if the event has ended
+    $sql = "SELECT * FROM tbl_events";
+    $result = mysqli_query($conn, $sql);
+
+    if (mysqli_num_rows($result) > 0) {
+        while ($row = mysqli_fetch_assoc($result)) {
+            $ID = $row['eventID'];
+            $currentDate = date("Y-m-d");
+            $eventCompletion = $row['eventCompletion'];
+            // check if the completion date is equal or greater than the current date
+            if ($eventCompletion <= $currentDate) {
+                $sql = "UPDATE tbl_events SET eventEnded='true' WHERE eventID='$ID'";
+            } else {
+                $sql = "UPDATE tbl_events SET eventEnded='false' WHERE eventID='$ID'";
+            }
+            mysqli_query($conn, $sql);
+        }
+    }
+
 }
 
 if (isset($_POST['searchEvent']) && !empty($_POST['searchEvent'])) {
@@ -29,7 +49,6 @@ if (isset($_POST['searchEvent']) && !empty($_POST['searchEvent'])) {
 $result = mysqli_query($conn, $sql);
 unset($_POST['searchEvent']);
 unset($_POST['resetEvent']);
-
 ?>
 
 <!DOCTYPE html>
@@ -43,7 +62,7 @@ unset($_POST['resetEvent']);
     <script src="../Script/SidebarScript.js"></script>
     <script src="../Script/SweetAlert2.js"></script>
     <script src="../Script/Bootstrap_Script/bootstrap.bundle.js"></script>
-    <title>Events</title>
+    <title>Events & Announcements</title>
 </head>
 
 <body class="dark adminuser" style="min-width: 1080px;">
@@ -62,16 +81,20 @@ unset($_POST['resetEvent']);
         </div>
         <div class="container-fluid" style="width: 98%;">
             <div class="container-xl my-1 table-responsive">
-                <button class="btn btn-primary p-2 bg-gradient" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#EventForm" aria-expanded="false" aria-controls="EventForm">
-                    <img src="../Image/Create.svg" alt="" class="me-2" width="24" height="24">
-                    <span class="m-2">Create Event</span>
-                </button>
-                <button class="btn btn-success p-2 bg-gradient" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#Announce" aria-expanded="false" aria-controls="Announce">
-                    <img src="../Image/update.svg" alt="" class="me-2" width="24" height="24">
-                    <span class="m-2">Add a Announcement</span>
-                </button>
+                <div class="row g-3">
+                    <div class="col-md-6 g-3">
+                        <button class="btn btn-primary p-2 bg-gradient m-2" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#EventForm" aria-expanded="false" aria-controls="EventForm" id="EventBtn">
+                            <img src="../Image/Create.svg" alt="" class="me-2" width="24" height="24">
+                            <span class="m-2">Create Event</span>
+                        </button>
+                        <button class="btn btn-success p-2 bg-gradient" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#Announce" aria-expanded="false" aria-controls="Announce" id="AnnounceBtn">
+                            <img src="../Image/update.svg" alt="" class="me-2" width="24" height="24">
+                            <span class="m-2">Announcement</span>
+                        </button>
+                    </div>
+                </div>
                 <div class="collapse" id="Announce">
                     <form class="row g-3 rounded mt-1" method="POST" action="../Components/Proccess/AnnounceUpdate.php">
                         <input type="hidden" name="Posted" id="Posted" value="<?php echo $_SESSION['GlobalName']; ?>">
@@ -138,6 +161,7 @@ unset($_POST['resetEvent']);
                         </script>
                     </form>
 
+                    <p class="text-light text-center mt-3">Announcement Preview</p>
                     <div class="alert alert-success" role="alert">
                         <h4 class="alert-heading">
                             <?php echo $title; ?>
@@ -231,7 +255,8 @@ unset($_POST['resetEvent']);
                         </div>
                         <div class="col-md-12">
                             <div class="input-group mb-3 text-bg-dark">
-                                <input type="file" class="form-control text-bg-dark" id="EventImage" name="EventImage">
+                                <input type="file" class="form-control text-bg-dark" id="EventImage" name="EventImage"
+                                    required>
                             </div>
                         </div>
                         <div class="col-md-12">,
@@ -262,9 +287,26 @@ unset($_POST['resetEvent']);
                                     let EventOrganizer = document.getElementById("EventOrganizer");
                                     let EventSlot = document.getElementById("EventSlot");
                                     let EventDescription = document.getElementById("EventDescription");
+                                    let EventImage = document.getElementById("EventImage");
                                     let error = document.querySelector(".error");
 
+                                    // current date
+
+                                    let today = new Date();
+                                    toda = today.toISOString().slice(0, 10);
+
                                     error.innerHTML = "";
+
+                                    //if event date is less than current date
+                                    EventDate.addEventListener("change", function () {
+                                        let date = new Date(EventDate.value);
+                                        if (date < today) {
+                                            error.innerHTML = "Event date cannot be less than current date, it should be in future events";
+                                            EventDate.value = "";
+                                        } else {
+                                            error.innerHTML = "";
+                                        }
+                                    });
 
                                     // check if date is grater than completion date
                                     EventDate.addEventListener("change", function () {
@@ -289,6 +331,18 @@ unset($_POST['resetEvent']);
                                             error.innerHTML = "";
                                         }
                                     });
+
+                                    // check is event image is not empty
+                                    EventImage.addEventListener("change", function () {
+                                        if (EventImage.value == "") {
+                                            error.innerHTML = "Event image cannot be empty";
+                                        } else {
+                                            error.innerHTML = "";
+                                        }
+                                    });
+
+
+
                                 });
                             </script>
                             <p class="text-danger error">
@@ -304,8 +358,8 @@ unset($_POST['resetEvent']);
                     <hr class="mt-4 mb-4" style="background-color: white; height: 5px; border-radius: 5px;">
                     <div class="input-group mb-3">
                         <input type="text" class="form-control text-bg-dark" placeholder="Search Event Title"
-                            aria-label="Search Event" aria-describedby="button-addon2" name="searchEvent"
-                            id="searchEvent">
+                            title="You can only search by event title" aria-label="Search Event"
+                            aria-describedby="button-addon2" name="searchEvent" id="searchEvent">
                         <input type="submit" value="Reset" class="btn btn-outline-danger" id="resetEvent"
                             name="resetEvent">
                     </div>
@@ -331,8 +385,30 @@ unset($_POST['resetEvent']);
                             $desc = substr($desc, 0, 100);
                             $desc = $desc . '...';
 
+                            // get how many days from the current date to the event date
+                            $currentDate = date("Y-m-d");
+                            $eventDate = $row['eventDate'];
+                            $diff = abs(strtotime($eventDate) - strtotime($currentDate));
+                            $days = floor($diff / (60 * 60 * 24));
+
+                            // if the event is less than 3 days, add a new badge
+                            if ($days <= 3) {
+                                $badge = '<span class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle"><span class="visually-hidden">New Event</span></span>';
+                            } else {
+                                $badge = '';
+                            }
+
+                            if ($row['eventEnded'] == 'true') {
+                                $distat = 'Event has ended';
+                                $btncolor = 'btn-secondary';
+                            } else {
+                                $distat = '';
+                                $btncolor = 'btn-primary';
+                            }
+
                             $output = '
             <div class="col">
+                <div class="position-relative">
                 <div class="card h-100 text-bg-dark">
                     <img src="' . $row['eventImage'] . '" class="card-img-top" style="max-height: 256px; object-fit: cover;" alt="...">
                     <div class="card-body">
@@ -343,8 +419,11 @@ unset($_POST['resetEvent']);
                         <small class="text-muted">Time: ' . $start . ' - ' . $end . ' | Available Seats: ' . $row['eventSlots'] . '</small>
                     </div>
                     <div class="card-footer text-center">
-                        <a id="viewEvent' . $i . '" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ViewEvent" style="width: 100%;">View</a>
+                        <a id="viewEvent' . $i . '" class="btn ' . $btncolor . ' mb-2" data-bs-toggle="modal" data-bs-target="#ViewEvent" style="width: 100%;">View</a>
+                        <small class="text-muted">' . $distat . '</small>
                     </div>
+                </div>
+                ' . $badge . '
                 </div>
             </div>
             <script>

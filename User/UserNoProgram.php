@@ -35,25 +35,22 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
         echo NewAlertBox();
         $_SESSION['Show'] = false;
     } ?>
-    <section class="home container-lg">
+    <section class="home">
         <div class="text">Program Details</div>
         <div style="margin: 10px; width: 98%;">
             <div class="container-lg">
                 <div class="text-center text-uppercase fs-5">
-
+                    You have not been assigned to any program yet. Please contact or wait for your Coordinator to assign you to a program. Thank you!
+                </div>
+                <br>
+                <div class="text-center">
+                    Please insure that you have completed submitting your Documents and Profile. <br>
+                    to prevent any delays in your program assignment.
                 </div>
             </div>
             <br>
-            <p></p>
-        </div>
-        <div class="container-lg sticky-bottom">
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item">Please insure that you have completed submitting your Documents and Profile.
-                </li>
-                <li class="list-group-item">You have not been assigned to any program yet. Please contact your Coordinator. <br>
-                    or wait for your Coordinator to assign you to a program. Thank you!</li>
-                <li class="list-group-item">Note: You will be able to see your program details here once you have been assigned to a program.</li>
-            </ul>
+            <p class="text-center"><small class="text-muted"><b>Note</b>: You will be able to see your
+                    program details here once you have been assigned to a program.</small></p>
         </div>
     </section>
 </body>

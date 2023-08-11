@@ -118,7 +118,7 @@ if (isset($_POST['register'])) {
                                         mkdir($tempfolderpath, 0777, true);
                                     }
 
-                                    $sql = "INSERT INTO tbl_trainee (name, email, UID, trainee_uname, trainee_pword, account_Created) VALUES ('$name', '$email', '$usn', '$username', '$password', '$date')";
+                                    $sql = "INSERT INTO tbl_trainee (name, email, UID, trainee_uname, trainee_pword, account_Created, age) VALUES ('$name', '$email', '$usn', '$username', '$password', '$date', '$age')";
                                     $result = mysqli_query($conn, $sql);
                                     if ($result) {
                                         $_SESSION['temp'] = array();

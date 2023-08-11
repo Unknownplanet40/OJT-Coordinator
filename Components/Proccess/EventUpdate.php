@@ -225,6 +225,9 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                     <li class="list-group-item text-center text-bg-dark">
                         <div class="hstack gap-3">
                             <a href="../../Admin/AdminEvents.php" class="btn btn-primary w-100">Back</a>
+                            <!-- refresh btn -->
+                            <a href="../../Components/Proccess/EventUpdate.php?id=<?php echo $EventID; ?>"
+                                class="btn btn-success w-25">Refresh</a>
                             <a class="btn btn-danger" id="delete" title="Delete this event"><img
                                     src="../../Image/Delete.svg" alt="trash" style="height: 24px;"></a>
                             <script>
@@ -250,6 +253,9 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                             </script>
                         </div>
                     </li>
+                    <li class="list-group-item text-center text-bg-dark text-danger" id="warning">
+                        <span>This is for Error Message</span>
+                    </li>
                 </ul>
             </div>
             <div class="col-md-6">
@@ -263,15 +269,16 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                                 <label for="EventTitle" class="form-label">Event Title</label>
                                 <input type="text" class="form-control" id="EventTitle" name="EventTitle" value="<?php if (isset($title)) {
                                     echo $title;
-                                } ?>">
+                                } ?>" required>
                             </div>
                         </li>
                         <li class="list-group-item bg-transparent text-light">
                             <div class="mb-3">
                                 <label for="EventDescription" class="form-label">Event Description</label>
-                                <textarea class="form-control" id="EventDescription" name="EventDescription" rows="10"><?php if (isset($desc)) {
-                                    echo $desc;
-                                } ?></textarea>
+                                <textarea class="form-control" id="EventDescription" name="EventDescription" rows="10"
+                                    required><?php if (isset($desc)) {
+                                        echo $desc;
+                                    } ?></textarea>
                             </div>
                         </li>
                         <li class="list-group-item bg-transparent text-light">
@@ -279,7 +286,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                                 <label for="EventDate" class="form-label">Event Date</label>
                                 <input type="date" class="form-control" id="EventDate" name="EventDate" value="<?php if (isset($date)) {
                                     echo $date;
-                                } ?>">
+                                } ?>" required>
                             </div>
                         </li>
                         <li class="list-group-item bg-transparent text-light">
@@ -287,7 +294,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                                 <label for="EventComp" class="form-label">Event Completion</label>
                                 <input type="date" class="form-control" id="EventComp" name="EventComp" value="<?php if (isset($comp)) {
                                     echo $comp;
-                                } ?>">
+                                } ?>" required>
                             </div>
                         </li>
                         <li class="list-group-item bg-transparent text-light">
@@ -295,7 +302,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                                 <label for="EventStartTime" class="form-label">Event Start Time</label>
                                 <input type="time" class="form-control" id="EventStartTime" name="EventStartTime" value="<?php if (isset($start)) {
                                     echo $start;
-                                } ?>">
+                                } ?>" required>
                             </div>
                         </li>
                         <li class="list-group-item bg-transparent text-light">
@@ -303,7 +310,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                                 <label for="EventEndTime" class="form-label">Event End Time</label>
                                 <input type="time" class="form-control" id="EventEndTime" name="EventEndTime" value="<?php if (isset($end)) {
                                     echo $end;
-                                } ?>">
+                                } ?>" required>
                             </div>
                         </li>
                         <li class="list-group-item bg-transparent text-light">
@@ -311,14 +318,14 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                                 <label for="EventLocation" class="form-label">Event Location</label>
                                 <input type="text" class="form-control" id="EventLocation" name="EventLocation" value="<?php if (isset($loc)) {
                                     echo $loc;
-                                } ?>">
+                                } ?>" required>
                             </div>
                         </li>
                         <li class="list-group-item bg-transparent text-light">
                             <div class="mb-3">
                                 <label for="EventType" class="form-label">Event Type</label>
                                 <select class="form-select" id="EventType" name="EventType"
-                                    value="<?php if (isset($type)) ?>">
+                                    value="<?php if (isset($type)) ?>" required>
                                     <option selected hidden>
                                         <?php if (isset($type)) {
                                             echo $type;
@@ -337,7 +344,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                                 <label for="EventSlots" class="form-label">Event Slots</label>
                                 <input type="text" class="form-control" id="EventOrg" name="EventOrg" value="<?php if (isset($org)) {
                                     echo $org;
-                                } ?>">
+                                } ?>" required>
                             </div>
                         </li>
                         <li class="list-group-item bg-transparent text-light">
@@ -345,9 +352,78 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                                 <label for="EventSlots" class="form-label">Event Slots</label>
                                 <input type="number" class="form-control" id="EventSlots" name="EventSlots" value="<?php if (isset($slot)) {
                                     echo $slot;
-                                } ?>">
+                                } ?>" required>
                             </div>
                         </li>
+                        <script>
+                            document.addEventListener("DOMContentLoaded", function () {
+                            let EventTitle = document.getElementById('EventTitle');
+                            let EventDescription = document.getElementById('EventDescription');
+                            let EventDate = document.getElementById('EventDate');
+                            let EventComp = document.getElementById('EventComp');
+                            let EventStartTime = document.getElementById('EventStartTime');
+                            let EventEndTime = document.getElementById('EventEndTime');
+                            let EventLocation = document.getElementById('EventLocation');
+                            let EventType = document.getElementById('EventType');
+                            let EventSlots = document.getElementById('EventSlots');
+                            let EventOrg = document.getElementById('EventOrg');
+                            let EventID = document.getElementById('EventID');
+                            let EventImage = document.getElementById('EventImage');
+                            let currentdate = new Date();
+                            let Error = document.getElementById('warning');
+                            console.log(currentdate);
+                            // get only date
+                            currentdate = currentdate.toISOString().slice(0, 10);
+                            console.log(currentdate);
+
+                            Error.innerHTML = "";
+
+                            //if event date is less than current date
+                            EventDate.addEventListener('change', () => {
+                                if (EventDate.value < currentdate) {
+                                    Error.innerHTML = "Event Date cannot be less than today's date, it can be today's date or any date after today's date";
+                                    EventDate.value = "";
+                                } else {
+                                    Error.innerHTML = "";
+                                }
+                            });
+
+                            //if event completion date is less than event date
+                            EventComp.addEventListener('change', () => {
+                                if (EventComp.value < EventDate.value) {
+                                    Error.innerHTML = "Event Completion Date cannot be less than to the Event Date, it can be the same date or any date after the Event Date";
+                                    EventComp.value = "";
+                                } else {
+                                    Error.innerHTML = "";
+                                }
+                            });
+
+                            //if start time is greater than end time
+                            EventStartTime.addEventListener('change', () => {
+                                if (EventStartTime.value >= EventEndTime.value) {
+                                    Error.innerHTML = "Event Start Time cannot be grater than of same as Event End Time. Please select a valid time";
+                                    EventStartTime.value = "";
+                                } else {
+                                    Error.innerHTML = "";
+                                }
+                            });
+
+                            //if end time is less than start time
+                            EventEndTime.addEventListener('change', () => {
+                                if (EventEndTime.value <= EventStartTime.value) {
+                                    Error.innerHTML = "Event End Time cannot be less than of same as Event Start Time. Please select a valid time";
+                                    EventEndTime.value = "";
+                                } else {
+                                    Error.innerHTML = "";
+                                }
+                            });
+
+
+                            setTimeout(() => {
+                                Error.innerHTML = "";
+                            }, 10500);
+                        });
+                        </script>
                         <li class="list-group-item bg-transparent text-center">
                             <input type="submit" name="upevent" class="btn btn-success w-50" value="Update Event">
                         </li>

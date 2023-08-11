@@ -91,7 +91,7 @@ if (mysqli_num_rows($result) > 0) {
         </div>
     </section>
     <script src="../Script/SidebarScript.js"></script>
-    <script src="../Script/Bootstrap_Script/bootstrap.bundle.js
+    <script src="../Script/Bootstrap_Script/bootstrap.bundle.js"></script>
 </body>
 
 </html>

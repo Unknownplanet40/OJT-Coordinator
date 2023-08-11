@@ -3,6 +3,16 @@ session_start();
 @include_once("../Database/config.php");
 @include_once("../Components/SystemLog.php");
 
+if($_SESSION['UpdateSeason']){
+    if ($_SESSION['GlobalRole'] == "administrator") {
+        fetchAdminData($_SESSION['GlobalID']);
+    } else if ($_SESSION['GlobalRole'] == "moderator") {
+        fetchModeratorData($_SESSION['GlobalID']);
+    } else {
+        fetchUserData($_SESSION['GlobalID']);
+    }
+}
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST['username'];
     $password = $_POST['password'];

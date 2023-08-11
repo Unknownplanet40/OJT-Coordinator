@@ -58,7 +58,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <a type="button" class="btn btn-primary" id="Eup" >Join</a>
+                    <a type="button" class="btn btn-success" id="Eup" >Register Now!</a>
                 </div>
             </div>
         </div>

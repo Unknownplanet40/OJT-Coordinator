@@ -20,6 +20,13 @@ if ($_SESSION['GlobalProfileCompleted'] == 'false') {
     // if the user has not completed his/her profile,
     $title = "Complete your profile";
     echo '<script>var ProfileCompleted = false;</script>';
+    //get the age from database
+    $sql = "SELECT age FROM tbl_trainee WHERE UID = " . $_SESSION['GlobalID'];
+    $result = mysqli_query($conn, $sql);
+    $row = mysqli_fetch_assoc($result);
+    $age = $row['age'];
+    $year = date("Y");
+    $year = $year - $age;
 } else {
     // if the user has completed his/her profile,
     $title = "Profile Information";

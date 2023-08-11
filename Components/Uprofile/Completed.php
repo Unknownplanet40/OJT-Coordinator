@@ -25,32 +25,55 @@
             <div class="col-xl-8">
                 <div class="container-fluid">
                     <div class="inner-content">
-                        <form class="row g-3 overflow-auto" id="COMform" method="POST" action="../Components/Uprofile/COMfunction.php">
+                        <form class="row g-3 overflow-auto" id="COMform" method="POST"
+                            action="../Components/Uprofile/COMfunction.php">
                             <div class="col-md-4">
                                 <label for="name" class="form-label">Name</label>
                                 <input type="text" class="form-control form-control-sm" name="name" id="COMname"
-                                    placeholder="John Doe" maxlength="50" value="<?php echo $_SESSION['GlobalName']; ?>">
+                                    placeholder="John Doe" maxlength="50"
+                                    value="<?php echo $_SESSION['GlobalName']; ?>">
                             </div>
                             <div class="col-md-4">
                                 <label for="uname" class="form-label d-block text-truncate ">Username</label>
                                 <input type="text" class="form-control form-control-sm" name="uname" id="COMuname"
-                                    placeholder="johndoe123" disabled value="<?php echo $_SESSION['GlobalUsername']; ?>">
+                                    placeholder="johndoe123" disabled
+                                    value="<?php echo $_SESSION['GlobalUsername']; ?>">
                             </div>
                             <div class="col-md-2">
                                 <label for="pword" class="form-label d-block text-truncate">Password</label>
                                 <input type="password" class="form-control form-control-sm" name="pword" id="COMpword"
                                     placeholder="lorenzoasis1213" value="<?php echo $_SESSION['GlobalPassword']; ?>">
+                                <input type="checkbox" id="showPassword" class="form-check-input">
+                                <label for="showPassword" class="form-check-label d-inline-block text-truncate" style="max-width: 80px;" title="Show Password">Show</label>
                             </div>
                             <div class="col-md-2">
                                 <label for="COMconpword" class="form-label d-block text-truncate">Confirm</label>
                                 <input type="password" class="form-control form-control-sm" name="COMconpword"
-                                    id="COMconpword" placeholder="lorenzoasis1213" value="<?php echo $_SESSION['GlobalPassword']; ?>">
+                                    id="COMconpword" placeholder="lorenzoasis1213"
+                                    value="<?php echo $_SESSION['GlobalPassword']; ?>">
                             </div>
                             <div class="col-md-8">
                                 <label for="Address" class="form-label">Address</label>
                                 <input type="text" class="form-control form-control-sm" name="Address" id="COMaddress"
                                     placeholder="1234 Main St" value="<?php echo $_SESSION['GlobalAddress']; ?>">
                             </div>
+                            <script>
+                                let showpass = document.getElementById("showPassword");
+                                let pass = document.getElementById("COMpword");
+                                let conpass = document.getElementById("COMconpword");
+
+                                showpass.checked = false;
+
+                                showpass.addEventListener("click", function () {
+                                    if (pass.type === "password") {
+                                        pass.type = "text";
+                                        conpass.type = "text";
+                                    } else {
+                                        pass.type = "password";
+                                        conpass.type = "password";
+                                    }
+                                });
+                            </script>
                             <div class="col-md-2">
                                 <label for="city" class="form-label">City</label>
                                 <input type="text" class="form-control form-control-sm" name="city" id="COMcity"
@@ -64,21 +87,25 @@
                             <div class="col-md-4">
                                 <label for="email" class="form-label">Email</label>
                                 <input type="email" class="form-control form-control-sm" name="email" id="COMemail"
-                                    placeholder="lorenzo.Asis@gmail.com" value="<?php echo $_SESSION['GlobalEmail']; ?>">
+                                    placeholder="lorenzo.Asis@gmail.com"
+                                    value="<?php echo $_SESSION['GlobalEmail']; ?>">
                             </div>
                             <div class="col-md-4">
                                 <label for="birth" class="form-label d-block text-truncate">Birth Date</label>
-                                <input type="date" class="form-control form-control-sm" name="birth" id="COMbirth value="<?php echo $_SESSION['GlobalBirthdate']; ?>">
+                                <input type="date" class="form-control form-control-sm" name="birth" id="COMbirth"
+                                    min="<?php echo $year; ?>-01-01" max="<?php echo $year; ?>-12-31"
+                                    value="<?php echo $_SESSION['GlobalBirthdate']; ?>">
                             </div>
                             <div class="col-md-2">
                                 <label for="COMage" class="form-label">Age</label>
                                 <input type="text" class="form-control form-control-sm" name="age" id="COMage"
-                                    placeholder="99+" maxlength="11" value="<?php echo $_SESSION['GlobalAge']; ?>">
+                                    placeholder="99+" maxlength="99" value="<?php echo $_SESSION['GlobalAge']; ?>">
                             </div>
                             <div class="col-md-2">
                                 <label for="phone" class="form-label">Phone</label>
                                 <input type="text" class="form-control form-control-sm" name="phone" id="COMphone"
-                                    placeholder="09123456789" maxlength="11" value="<?php echo $_SESSION['GlobalPhone']; ?>">
+                                    placeholder="09123456789" maxlength="11"
+                                    value="<?php echo $_SESSION['GlobalPhone']; ?>">
                             </div>
                             <div class="col-md-2">
                                 <label for="zipcode" class="form-label">Zipcode</label>
@@ -93,16 +120,21 @@
                             <div class="col-md-2">
                                 <label for="COMgender" class="form-label d-block text-truncate">Sex</label>
                                 <select id="COMgender" name="gender" class="form-select form-select-sm">
-                                    <option selected hidden><?php echo $_SESSION['GlobalGender'];
-                                    ?></option>
+                                    <option selected hidden>
+                                        <?php echo $_SESSION['GlobalGender'];
+                                        ?>
+                                    </option>
                                     <option value="male">Male</option>
                                     <option value="female">Female</option>
                                 </select>
                             </div>
                             <div class="col-md-2">
                                 <label for="COMdept" class="form-label d-block text-truncate">Dept.</label>
-                                <select id="COMdept" name="department" class="form-select form-select-sm" disabled value="<?php echo $_SESSION['GlobalDept']; ?>">
-                                    <option selected hidden><?php echo $_SESSION['GlobalDept']; ?></option>
+                                <select id="COMdept" name="department" class="form-select form-select-sm" disabled
+                                    value="<?php echo $_SESSION['GlobalDept']; ?>">
+                                    <option selected hidden>
+                                        <?php echo $_SESSION['GlobalDept']; ?>
+                                    </option>
                                     <option value="BSIT">BSIT</option>
                                     <option value="BSCS">BSCS</option>
                                 </select>
@@ -110,7 +142,9 @@
                             <div class="col-md-2">
                                 <label for="COMyearlevel" class="form-label d-block text-truncate">Year</label>
                                 <select id="COMyearlevel" name="Yearlevel" class="form-select form-select-sm" disabled>
-                                    <option selected hidden><?php echo $_SESSION['GlobalYear']; ?></option>
+                                    <option selected hidden>
+                                        <?php echo $_SESSION['GlobalYear']; ?>
+                                    </option>
                                     <option value="1">1st Year</option>
                                     <option value="2">2nd Year</option>
                                     <option value="3">3rd Year</option>
@@ -120,7 +154,9 @@
                             <div class="col-md-2">
                                 <label for="COMsec" class="form-label d-block text-truncate">Section</label>
                                 <select id="COMsec" name="Section" class="form-select form-select-sm" disabled>
-                                    <option selected hidden><?php echo $_SESSION['GlobalSection']; ?></option>
+                                    <option selected hidden>
+                                        <?php echo $_SESSION['GlobalSection']; ?>
+                                    </option>
                                     <option value="A">A</option>
                                     <option value="B">B</option>
                                     <option value="C">C</option>
@@ -158,7 +194,8 @@
                                 </script>
                             </p>
                             <div class="col-12 text-center">
-                                <input type="submit" value="Update Info" class="btn btn-success" name="COM" id="Complete">
+                                <input type="submit" value="Update Info" class="btn btn-success" name="COM"
+                                    id="Complete">
                             </div>
                         </form>
                     </div>

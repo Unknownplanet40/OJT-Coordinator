@@ -78,13 +78,13 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
                             $percentage = ($elapsed_duration / $total_duration) * 100;
                             $percentage = round($percentage, 0);
 
-                            if ($percentage >= 100){
+                            if ($percentage >= 100) {
                                 $_SESSION['GlobalPercentage'] = 100;
                             } else {
                                 $_SESSION['GlobalPercentage'] = $percentage;
                             }
 
-                            if ($current_date >= $row['end_date']){
+                            if ($current_date >= $row['end_date']) {
                                 $sql = "UPDATE tbl_trainee SET completed = 'true' WHERE UID = '$id'";
                                 $result = mysqli_query($conn, $sql);
                                 $_SESSION['GlobalCompleted'] = 'true';
@@ -295,10 +295,11 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
                     EventType.innerHTML = "' . $row['eventType'] . '";
                     EventStat.innerHTML = "' . $status . '";
                     EventOrg.innerHTML = "' . $row['eventOrganizer'] . '";
-                    EventUp.href = "../../Components/eventprocess.php?ID=' . $row['eventID'] . '";
+                    EventUp.href = "../Components/eventprocess.php?ID=' . $row['eventID'] . '";
                     });
                     </script>
                     ';
+                                $i++;
                             }
                         }
 

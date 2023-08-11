@@ -13,7 +13,7 @@ function scoreWidth($score)
 }
 ?>
 
-<div style="margin: 10px; min-width: 90%;">
+<div style="margin: 10px; min-width: 90%;" class="screenshot-element">
     <ul class="list-group">
         <li class="list-group-item text-bg-success" aria-current="true">QUALITY OF WORK</li>
         <li class="list-group-item">
@@ -314,7 +314,6 @@ function scoreWidth($score)
             <div class="form-floating">
                 <input type="text" class="form-control" value="Admin: <?php echo $evaby ?>" readonly>
                 <label for="floatingInput">Evaluated by:</label>
-
             </div>
         </div>
     </div>

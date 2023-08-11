@@ -197,7 +197,8 @@ if (isset($_POST['submitm'])) {
     <link rel="stylesheet" href="../Style/ReqStyle.css">
     <script src="../Script/SweetAlert2.js"></script>
     <script defer src="../Script/SidebarScript.js"></script>
-    <script defer src="../Script/Bootstrap_Script/bootstrap.bundle.min.js"></script>
+    <script defer src="../Script/UreqScript.js"></script>
+    <script defer src="../Script/Bootstrap_Script/bootstrap.bundle.js"></script>
     <title>Requirements</title>
 </head>
 
@@ -234,6 +235,9 @@ if (isset($_POST['submitm'])) {
                         </div>
                         <button type="button" class="btn btn-success" onclick="location.href='UserProfile.php'">Update
                             Profile</button>
+                        <!-- refresh button -->
+                        <button type="button" class="btn btn-primary" onclick="location.href='UserRequirements.php'"
+                            title="Refresh Page to see changes">Refresh</button>
                     </div>
                 </div>
                 <div class="col-md-10">
@@ -610,8 +614,14 @@ if (isset($_POST['submitm'])) {
                             <?php } ?>
                         </ol>
                     </div>
-                    <small class="text-muted">Note: PDF, JPG, PNG and DOCX files are allowed and maximum file size
+                    <small class="text-muted">Notes to remember:</small> <br>
+                    &bull; <small class="text-muted">PDF, JPG, PNG and DOCX files are allowed and maximum file size
                         is 3mb</small>
+                    <br>
+                    &bull; <small class="text-muted">You can hover over the file name to view the full form of the abbreviation.</small>
+                    <br>
+                    &bull; <small class="text-muted">If you have completed your OJT, you can now submit the Evaluation
+                        Form, Narrative Report, Daily Time Record and Certificate of Completion.</small>
                 </div>
             </div>
         </div>
