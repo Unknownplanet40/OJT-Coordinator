@@ -48,13 +48,6 @@ you can fix it by following this steps:
 6. save the file
 7. restart the apache module
 
-<<<<<<< HEAD
-## Features
-> **Note:** The following features are still under development.
-- 
-
-=======
->>>>>>> f50e7fcec679fb769fa141d8637d39b8c80d27d6
 ## Screenshots
 see the [Screenshots](./ScreenShots) folder for more screenshots.
 ### Admin / Moderator(Coordinator)
