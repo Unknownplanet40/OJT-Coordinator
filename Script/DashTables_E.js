@@ -14,13 +14,29 @@ document.addEventListener("DOMContentLoaded", function () {
   let EtotalPageElement = document.getElementById("EveTotalPage");
   let EtotalItemElement = document.getElementById("EveTotalItem");
 
+    //--------------------------------------------------------------------------------
+  let displayedRowCount = 0;
+  const maxDisplayedRows = Elimit;
+
   function filterRows() {
     let filter = Esearch.value.toUpperCase();
+    displayedRowCount = 0; // Reset displayed row count
+
     Erows.forEach(function (row) {
       let td = row.querySelector("td:nth-child(2)");
       let textValue = td.textContent || td.innerText;
-      row.style.display = textValue.toUpperCase().includes(filter) ? "" : "none";
+
+      if (
+        textValue.toUpperCase().includes(filter) &&
+        displayedRowCount < maxDisplayedRows
+      ) {
+        row.style.display = "";
+        displayedRowCount++;
+      } else {
+        row.style.display = "none";
+      }
     });
+
     updatePagination();
   }
 
@@ -28,7 +44,7 @@ document.addEventListener("DOMContentLoaded", function () {
     let start = (EcurrentPage - 1) * Elimit;
     let end = EcurrentPage * Elimit;
     Erows.forEach(function (row, index) {
-      row.style.display = (index >= start && index < end) ? "" : "none";
+      row.style.display = index >= start && index < end ? "" : "none";
     });
     updatePagination();
   }
@@ -49,6 +65,7 @@ document.addEventListener("DOMContentLoaded", function () {
   Esearch.addEventListener("keyup", function () {
     if (Esearch.value === "") {
       resetSearch();
+      showPage();
     } else {
       filterRows();
     }

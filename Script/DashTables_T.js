@@ -14,13 +14,29 @@ document.addEventListener("DOMContentLoaded", function () {
   let TtotalPageElement = document.getElementById("TraineeTotalPage");
   let TtotalItemElement = document.getElementById("TraineeTotalItem");
 
+  //--------------------------------------------------------------------------------
+  let displayedRowCount = 0;
+  const maxDisplayedRows = Tlimit;
+
   function filterRows() {
     let filter = Tsearch.value.toUpperCase();
+    displayedRowCount = 0; // Reset displayed row count
+
     Trows.forEach(function (row) {
       let td = row.querySelector("td:nth-child(2)");
       let textValue = td.textContent || td.innerText;
-      row.style.display = textValue.toUpperCase().includes(filter) ? "" : "none";
+
+      if (
+        textValue.toUpperCase().includes(filter) &&
+        displayedRowCount < maxDisplayedRows
+      ) {
+        row.style.display = "";
+        displayedRowCount++;
+      } else {
+        row.style.display = "none";
+      }
     });
+
     updatePagination();
   }
 
@@ -28,7 +44,7 @@ document.addEventListener("DOMContentLoaded", function () {
     let start = (TcurrentPage - 1) * Tlimit;
     let end = TcurrentPage * Tlimit;
     Trows.forEach(function (row, index) {
-      row.style.display = (index >= start && index < end) ? "" : "none";
+      row.style.display = index >= start && index < end ? "" : "none";
     });
     updatePagination();
   }
@@ -49,6 +65,7 @@ document.addEventListener("DOMContentLoaded", function () {
   Tsearch.addEventListener("keyup", function () {
     if (Tsearch.value === "") {
       resetSearch();
+      showPage();
     } else {
       filterRows();
     }

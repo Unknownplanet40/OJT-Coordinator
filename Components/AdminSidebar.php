@@ -136,7 +136,8 @@
                         </a>
                     </li>
 
-                    <li class="nav-link">
+                    <!-- I will disable this for now until I can figure what to do with this -->
+                    <li class="nav-link" hidden>
                         <a <?php echo (basename($_SERVER['PHP_SELF']) == "AdminSystemLog.php") ? "class='active'" : "href='../Admin/AdminSystemLog.php'"; ?>>
                             <i class='icon'>
                                 <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24">

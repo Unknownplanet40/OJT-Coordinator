@@ -2,6 +2,7 @@
 session_start();
 @include_once("../Database/config.php");
 @include_once("../Components/SystemLog.php");
+date_default_timezone_set('Asia/Manila');
 
 if($_SESSION['UpdateSeason']){
     if ($_SESSION['GlobalRole'] == "administrator") {
@@ -110,7 +111,7 @@ function fetchAdminData($ID)
 
         if ($result) {
             // Update last_login in tbl_admin
-            $sql = "UPDATE tbl_admin SET last_login = NOW() WHERE UID = '$ID'";
+            $sql = "UPDATE tbl_admin SET last_login = '" . date('Y-m-d H:i:s') . "' WHERE UID = '$ID'";
             $result = mysqli_query($conn, $sql);
 
             if ($result) {

@@ -48,6 +48,7 @@ if (mysqli_num_rows($result) > 0) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../Style/Bootstrap_Style/bootstrap.css">
+    <link rel="stylesheet" href="../Style/Fonts.css">
     <script src="../Script/SweetAlert2.js"></script>
     <script src="../Script/Bootstrap_Script/bootstrap.bundle.js"></script>
     <title>Update Event</title>
@@ -204,7 +205,7 @@ if (mysqli_num_rows($result) > 0) {
                     <input type="hidden" name="useupdate" id="useupdate" value="<?php echo $useupdate; ?>">
                     <div class="form-floating mb-3 text-light">
                         <input type="text" class="form-control text-bg-dark" id="ProgtTitle" name="ProgTitle"
-                            placeholder="Program Name">
+                            placeholder="Program Name" required>
                         <label for="ProgTitle">Program Name</label>
                     </div>
                 </div>
@@ -218,28 +219,28 @@ if (mysqli_num_rows($result) > 0) {
                 <div class="col-md-4">
                     <div class="form-floating mb-3 text-light">
                         <input type="date" class="form-control text-bg-dark" id="ProgDate" name="ProgDate"
-                            placeholder="Date">
+                            placeholder="Date" required min="<?php echo date('Y-m-d'); ?>">
                         <label for="ProgDate">Start Date</label>
                     </div>
                 </div>
                 <div class="col-md-2">
                     <div class="form-floating mb-3 text-light">
                         <input type="time" class="form-control text-bg-dark" id="ProgStart" name="ProgStart"
-                            placeholder="Start Time">
+                            placeholder="Start Time" required>
                         <label for="ProgStart">From</label>
                     </div>
                 </div>
                 <div class="col-md-2">
                     <div class="form-floating mb-3 text-light">
                         <input type="time" class="form-control text-bg-dark" id="ProgEnd" name="ProgEnd"
-                            placeholder="End Time">
+                            placeholder="End Time" required>
                         <label for="ProgEnd">To</label>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-floating mb-3 text-light">
                         <select class="form-select text-bg-dark" name="Progduration" id="Progduration"
-                            aria-label="Events Type">
+                            aria-label="Events Type" required>
                             <option selected hidden>Choose...</option>
                             <option value="4">4 Week</option>
                             <option value="8">8 Week</option>
@@ -247,7 +248,7 @@ if (mysqli_num_rows($result) > 0) {
                             <option value="16">16 Week</option>
                             <option value="20">20 Week</option>
                         </select>
-                        <label for="Progduration">Event Type</label>
+                        <label for="Progduration">Duration</label>
                     </div>
                 </div>
                 <script>
@@ -290,21 +291,21 @@ if (mysqli_num_rows($result) > 0) {
                 <div class="col-md-4">
                     <div class="form-floating mb-3 text-light">
                         <input type="date" class="form-control text-bg-dark" id="ProgCompletion" name="ProgCompletion"
-                            placeholder="End Date">
+                            placeholder="End Date" required>
                         <label for="ProgCompletion">End Date</label>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-floating mb-3 text-light">
                         <input type="text" class="form-control text-bg-dark" id="Progsuper" name="Progsuper"
-                            placeholder="Supervisor">
+                            placeholder="Supervisor" required>
                         <label for="Progsuper">Supervisor</label>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-floating mb-3 text-light">
                         <input type="number" class="form-control text-bg-dark" id="ProgHours" name="ProgHours"
-                            placeholder="Hours">
+                            placeholder="Hours" required>
                         <label for="ProgHours">Hours</label>
                     </div>
                 </div>

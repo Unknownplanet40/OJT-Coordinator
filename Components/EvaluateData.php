@@ -287,7 +287,7 @@ function scoreWidth($score)
         </div>
     </div>
     <!-- Evaluated by -->
-    <div class="row mt-3">
+    <div class="row mt-3 g-3">
         <div class="col-md-2">
             <!-- Score -->
             <div class="form-floating">
@@ -314,6 +314,44 @@ function scoreWidth($score)
             <div class="form-floating">
                 <input type="text" class="form-control" value="Admin: <?php echo $evaby ?>" readonly>
                 <label for="floatingInput">Evaluated by:</label>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-floating">
+                <input type="text" class="form-control" value="<?php echo $datetaken ?>" readonly>
+                <label for="floatingInput">Date:</label>
+            </div>
+        </div>
+        <!-- Under Construction -->
+        <div class="col-md-2" hidden>
+            <div class="form-floating mt-2">
+                <button type="button" class="btn btn-sm btn-success" id="print">Download Evaluation</button>
+                <script>
+                     let btnDownload = document.getElementById('print');
+
+                     // confermation SweetAlert2
+                        btnDownload.addEventListener('click', function() {
+                            Swal.fire({
+                                title: 'Before you download',
+                                text: "The design may differ from the actual output. Do you want to download it?",
+                                icon: 'info',
+                                showCancelButton: true,
+                                confirmButtonColor: '#3085d6',
+                                cancelButtonColor: '#d33',
+                                confirmButtonText: 'Yes, download it!',
+                                allowOutsideClick: false,
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    Swal.fire(
+                                        'Downloading...',
+                                        'Your file is currently being downloaded. Please wait.',
+                                        'success'
+                                    )
+                                    window.location.href = '../Components/generateEval.php';
+                                }
+                            })
+                        });
+                </script>
             </div>
         </div>
     </div>

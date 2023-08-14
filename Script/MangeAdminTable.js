@@ -1,70 +1,86 @@
 document.addEventListener("DOMContentLoaded", function () {
-  let table = document.getElementById("AccountTable");
-  let tbody = table.getElementsByTagName("tbody")[0];
-  let rows = tbody.getElementsByTagName("tr");
-  let seach = document.getElementById("SearchBar");
-  let prev = document.getElementById("Previous");
-  let next = document.getElementById("Next");
-  let limit = 10;
+  let TTB = document.getElementById("AccountTable");
+  let Ttbody = TTB.querySelector("tbody");
+  let Trows = Array.from(Ttbody.querySelectorAll("tr"));
+  let Tsearch = document.getElementById("SearchBar");
+  let Tprev = document.getElementById("Previous");
+  let Tnext = document.getElementById("Next");
+  let Tlimit = 5;
+  let TcurrentPage = 1;
+  let TtotalPage = Math.ceil(Trows.length / Tlimit);
+  let TcurrentPageElement = document.getElementById("CurrentPage");
+  let TtotalPageElement = document.getElementById("TotalPage");
+  let TtotalItemElement = document.getElementById("TotalItem");
 
-  seach.addEventListener("keyup", function () {
-    let filter = seach.value.toUpperCase();
-    for (let i = 0; i < limit; i++) {
-      let td = rows[i].getElementsByTagName("td")[1];
-      if (td) {
-        let textValue = td.textContent || td.innerHTML;
-        if (textValue.toUpperCase().indexOf(filter) > -1) {
-          rows[i].style.display = "";
-        } else {
-          rows[i].style.display = "none";
-        }
+  //--------------------------------------------------------------------------------
+  let displayedRowCount = 0;
+  const maxDisplayedRows = Tlimit;
+
+  function filterRows() {
+    let filter = Tsearch.value.toUpperCase();
+    displayedRowCount = 0; // Reset displayed row count
+
+    Trows.forEach(function (row) {
+      let td = row.querySelector("td:nth-child(3)");
+      let textValue = td.textContent || td.innerText;
+
+      if (
+        textValue.toUpperCase().includes(filter) &&
+        displayedRowCount < maxDisplayedRows
+      ) {
+        row.style.display = "";
+        displayedRowCount++;
+      } else {
+        row.style.display = "none";
       }
-    }
-  });
+    });
 
-  //limit table row
-  let page = 1;
-  let start = (page - 1) * limit;
-  let end = page * limit;
-  let totalPage = Math.ceil(rows.length / limit);
-  let totalItem = rows.length;
-  let currentPage = document.getElementById("CurrentPage");
-  let total = document.getElementById("TotalPage");
-  let item = document.getElementById("TotalItem");
-
-  currentPage.innerHTML = page;
-  total.innerHTML = totalPage;
-  item.innerHTML = totalItem;
+    updatePagination();
+  }
 
   function showPage() {
-    for (let i = 0; i < rows.length; i++) {
-      if (i >= start && i < end) {
-        rows[i].style.display = "";
-      } else {
-        rows[i].style.display = "none";
-      }
-    }
+    let start = (TcurrentPage - 1) * Tlimit;
+    let end = TcurrentPage * Tlimit;
+    Trows.forEach(function (row, index) {
+      row.style.display = index >= start && index < end ? "" : "none";
+    });
+    updatePagination();
   }
+
+  function updatePagination() {
+    Tprev.classList.toggle("disabled", TcurrentPage === 1);
+    Tnext.classList.toggle("disabled", TcurrentPage === TtotalPage);
+    TcurrentPageElement.textContent = TcurrentPage;
+    TtotalPageElement.textContent = TtotalPage;
+    TtotalItemElement.textContent = Trows.length;
+  }
+
+  function resetSearch() {
+    Tsearch.value = "";
+    filterRows();
+  }
+
+  Tsearch.addEventListener("keyup", function () {
+    if (Tsearch.value === "") {
+      resetSearch();
+      showPage();
+    } else {
+      filterRows();
+    }
+  });
+
+  Tprev.addEventListener("click", function () {
+    if (TcurrentPage > 1) {
+      TcurrentPage--;
+      showPage();
+    }
+  });
+
+  Tnext.addEventListener("click", function () {
+    if (TcurrentPage < TtotalPage) {
+      TcurrentPage++;
+      showPage();
+    }
+  });
   showPage();
-
-
-  prev.addEventListener("click", function () {
-    if (page > 1) {
-      page--;
-      start = (page - 1) * limit;
-      end = page * limit;
-      currentPage.innerHTML = page;
-      showPage();
-    }
-  });
-
-  next.addEventListener("click", function () {
-    if (page < totalPage) {
-      page++;
-      start = (page - 1) * limit;
-      end = page * limit;
-      currentPage.innerHTML = page;
-      showPage();
-    }
-  });
 });

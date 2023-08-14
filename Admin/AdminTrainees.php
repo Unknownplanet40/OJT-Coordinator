@@ -23,7 +23,7 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
     <link rel="stylesheet" href="../Style/ImportantImport.css">
     <script src="../Script/SidebarScript.js"></script>
     <script src="../Script/SweetAlert2.js"></script>
-    <script src="../Script/MangeAdminTable.js"></script>
+    <script defer src="../Script/MangeAdminTable.js"></script>
     <script defer src="../Script/Bootstrap_Script/bootstrap.bundle.js"></script>
     <title>Admin Dashboard</title>
 </head>

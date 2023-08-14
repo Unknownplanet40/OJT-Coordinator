@@ -31,7 +31,8 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
         $department = $row['department'];
         $position = $row['role'];
         $image = $row['image'];
-        $datecreated = $row['account_Created'];
+        $datecreated = date("F j, Y", strtotime($row['account_Created']));
+        $course = $row['course'];
         
         $status = $row['status'];
 
@@ -41,10 +42,10 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
 
         */
         if ($status == 1) {
-            $status = "Online";
+            $status = "<span class='text-success'>Online</span>";
             
         } else {
-            $status = "Offline";
+            $status = "<span class='text-danger'>Offline</span>";
         }
 
     } else {
@@ -76,6 +77,7 @@ if (isset($_POST['update'])) {
     $updepartment = $_POST['updepartment'];
     $upposition = $_POST['upposition'];
     $upimage = $_POST['upimage'];
+    $upcourse = $_POST['upcourse'];
 
     $_SESSION['tempdata'] = array(
         'upname' => $upname,
@@ -255,28 +257,30 @@ if (isset($_POST['update'])) {
                     <div class="input-group mb-3">
                         <span class="input-group-text w-25 text-bg-success">Name:</span>
                         <input type="text" class="form-control" name="upname" id="upname"
-                            value="<?php echo isset($name) ? $name : "Not Available"; ?>">
+                            value="<?php echo isset($name) ? $name : "Not Available"; ?>" required>
                     </div>
                     <div class="input-group mb-3">
                         <span class="input-group-text text-bg-success w-25">Email:</span>
                         <input type="text" class="form-control" name="upemail" id="upemail"
-                            value="<?php echo isset($email) ? $email : "Not Available"; ?>">
+                            value="<?php echo isset($email) ? $email : "Not Available"; ?>" required>
                     </div>
                     <div class="input-group mb-3">
                         <span class="input-group-text text-bg-success w-25">Username:</span>
                         <input type="text" class="form-control" name="upusername" id="upusername"
-                            value="<?php echo isset($username) ? $username : "Not Available"; ?>">
+                            value="<?php echo isset($username) ? $username : "Not Available"; ?>" required>
                     </div>
                     <div class="input-group mb-3">
                         <span class="input-group-text text-bg-success w-25">Course</span>
                         <input type="text" class="form-control" name="upcourse" id="upcourse"
-                            value="<?php echo isset($username) ? $username : "Not Available"; ?>">
+                            value="<?php echo isset($course) ? $course : "Not Available"; ?>"required>
                     </div>
                     <div class="input-group mb-3">
                         <span class="input-group-text text-bg-success w-25">Department:</span>
-                        <select name="updepartment" class="form-select" id="updepartment" value="<?php isset($department) ? print $department : print "Not Available"; ?>">
-                            <option value="BSIT">Information Technology</option>
-                            <option value="BSCS">Computer Science</option>
+                        <select name="updepartment" class="form-select" id="updepartment" required>
+                            <option value="BSIT" <?php echo $department == "BSIT" ? "selected" : ""; ?>>Information
+                                Technology</option>
+                            <option value="BSCS" <?php echo $department == "BSCS" ? "selected" : ""; ?>>Computer
+                                Science</option>
                         </select>
                     </div>
                     <div class="text-center">
@@ -296,7 +300,22 @@ if (isset($_POST['update'])) {
                         var error = document.getElementById("error");
                         setTimeout(function () {
                             error.innerHTML = "";
-                        }, 6500);
+                        }, 8500);
+
+                        let upcourse = document.getElementById("upcourse");
+
+                        let pattern = "^(BSIT|BSCS)-(1|2|3|4)[A-G]$";
+
+                        upcourse.addEventListener("keyup", function () {
+                            upcourse.value = upcourse.value.toUpperCase();
+                            if (upcourse.value.match(pattern)) {
+                                error.innerHTML = "";
+                            } else {
+                                error.innerHTML = "Invalid Course Format, <br> Please follow this format: <br> (BSIT|BSCS)-(1|2|3|4)[A-G] <br> Example: BSIT-2B";
+                            }
+                        });
+
+
                     </script>
                 </div>
             </div>

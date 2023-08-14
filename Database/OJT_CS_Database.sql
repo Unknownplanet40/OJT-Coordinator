@@ -86,7 +86,7 @@ CREATE TABLE `tbl_admin` (
   `department` varchar(20) NOT NULL,
   `imagePath` varchar(512) DEFAULT '../Image/Profile.gif',
   `date_created` date DEFAULT NULL,
-  `last_login` time DEFAULT NULL,
+  `last_login` datetime DEFAULT NULL,
   `role` varchar(20) DEFAULT 'moderator',
   `status` int(5) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='For Administrators';
@@ -96,9 +96,9 @@ CREATE TABLE `tbl_admin` (
 --
 
 INSERT INTO `tbl_admin` (`UID`, `name`, `admin_uname`, `admin_pword`, `admin_email`, `department`, `imagePath`, `date_created`, `last_login`, `role`, `status`) VALUES
-(1, 'Ryan James Capadocia', 'ryanjames', '@Capadocia123', 'rj.caps@cvsu.edu.ph', 'BSIT', '../uploads/ryanjames_Credentials/Profile/dSKde_ryanjames_Profile.gif', '2023-06-30', '00:52:06', 'administrator', 1),
-(2, 'James Veloria', 'jamesveloria', '@Veloria123', 'james@gmail.com', 'BSIT', '../uploads/jamesveloria_Credentials/Profile/fJUg1_jamesveloria_Profile.gif', '2023-06-30', '16:45:53', 'moderator', 0),
-(10, 'Administers According', 'adminaccs', '@Admin2023', 'Admin+Accordingly@gmail.com', 'BSIT', '../uploads/adminaccs_Credentials/Profile/7sXsF_adminaccs_Profile.gif', '2023-07-08', '22:15:07', 'administrator', 0);
+(1, 'Ryan James Capadocia', 'ryanjames', '@Capadocia123', 'rj.caps@cvsu.edu.ph', 'BSIT', '../uploads/ryanjames_Credentials/Profile/dSKde_ryanjames_Profile.gif', '2023-06-30', '2023-08-14 19:02:22', 'administrator', 1),
+(2, 'James Veloria', 'jamesveloria', '@Veloria123', 'james@gmail.com', 'BSIT', '../uploads/jamesveloria_Credentials/Profile/fJUg1_jamesveloria_Profile.gif', '2023-06-30', '2023-08-14 16:45:53', 'moderator', 0),
+(10, 'Administers According', 'adminaccs', '@Admin2023', 'Admin+Accordingly@gmail.com', 'BSIT', '../uploads/adminaccs_Credentials/Profile/7sXsF_adminaccs_Profile.gif', '2023-07-08', '2023-08-14 22:15:07', 'administrator', 0);
 
 --
 -- Triggers `tbl_admin`
@@ -188,6 +188,7 @@ CREATE TABLE `tbl_events` (
   `ID` int(10) NOT NULL,
   `eventID` int(10) DEFAULT NULL,
   `eventTitle` varchar(50) DEFAULT NULL,
+  `eventCreated` date DEFAULT NULL,
   `eventDescription` text DEFAULT NULL,
   `eventImage` varchar(512) DEFAULT '../Image/eventImage.jpg',
   `eventDate` date DEFAULT NULL,
@@ -205,11 +206,12 @@ CREATE TABLE `tbl_events` (
 -- Dumping data for table `tbl_events`
 --
 
-INSERT INTO `tbl_events` (`ID`, `eventID`, `eventTitle`, `eventDescription`, `eventImage`, `eventDate`, `eventStartTime`, `eventEndTime`, `eventType`, `eventCompletion`, `eventEnded`, `eventLocation`, `eventSlots`, `eventOrganizer`) VALUES
-(1, 123, 'Annual Charity Run', 'Join us for our annual charity run to raise funds for a local nonprofit organization.', '../Image/eventImage.jpg', '2023-08-15', '21:26:51', '00:27:07', 'Sports/Charity', '2023-09-15', 'false', 'Central Park', 48, 'Community Sports Club'),
-(4, 124, 'Science Fair', 'he Science Fair is an annual event where students showcase their scientific knowledge and present their innovative projects to the school community. It promotes scientific inquiry and encourages creativity in the field of science. No outsider allowed inside school.', '../uploads/Science Fair_Event/Eventimg/jngiu_Eventimg(Science Fair).jpg', '2023-07-12', '09:00:00', '12:00:00', 'other', '2023-07-30', 'true', 'School Gymnasium', 49, 'Science Department'),
-(5, 125, 'Cultural Diversity Day', 'Cultural Diversity Day celebrates the rich and diverse cultures within our school community. It includes various activities, performances, and displays representing different countries and traditions. Students and staff come together to foster inclusivity and appreciation for cultural differences.', '../uploads/Cultural Diversity Day_Event/Eventimg/dmpuk_Eventimg(Cultural Diversity Day).jpg', '2023-07-13', '10:00:00', '14:00:00', 'other', '2023-08-07', 'true', 'School Courtyard', 45, 'School Courtyard'),
-(6, 126, 'Annual School Carnival', 'Join us for a day of fun and excitement at our Annual School Carnival! This event features games, food stalls, live performances, and a variety of activities for students, parents, and the community.', '../uploads/Annual School Carnival_Event/Eventimg/smcqe_Eventimg(Annual School Carnival).jpg', '2023-10-15', '11:00:00', '16:00:00', 'other', '2023-10-30', 'false', 'School Playground', 200, 'School Parent-Teacher Associat');
+INSERT INTO `tbl_events` (`ID`, `eventID`, `eventTitle`, `eventCreated`, `eventDescription`, `eventImage`, `eventDate`, `eventStartTime`, `eventEndTime`, `eventType`, `eventCompletion`, `eventEnded`, `eventLocation`, `eventSlots`, `eventOrganizer`) VALUES
+(1, 123, 'Annual Charity Run', '2023-08-01', 'Join us for our annual charity run to raise funds for a local nonprofit organization.', '../Image/eventImage.jpg', '2023-08-15', '09:30:00', '12:00:00', 'Sports/Charity', '2023-09-15', 'false', 'Central Park', 45, 'Community Sports Club'),
+(4, 124, 'Science Fair', '2023-08-02', 'he Science Fair is an annual event where students showcase their scientific knowledge and present their innovative projects to the school community. It promotes scientific inquiry and encourages creativity in the field of science. No outsider allowed inside school.', '../uploads/Science Fair_Event/Eventimg/jngiu_Eventimg(Science Fair).jpg', '2023-07-12', '09:00:00', '12:00:00', 'other', '2023-07-30', 'true', 'School Gymnasium', 49, 'Science Department'),
+(5, 125, 'Cultural Diversity Day', '2023-08-03', 'Cultural Diversity Day celebrates the rich and diverse cultures within our school community. It includes various activities, performances, and displays representing different countries and traditions. Students and staff come together to foster inclusivity and appreciation for cultural differences.', '../uploads/Cultural Diversity Day_Event/Eventimg/dmpuk_Eventimg(Cultural Diversity Day).jpg', '2023-07-13', '10:00:00', '14:00:00', 'other', '2023-08-07', 'true', 'School Courtyard', 45, 'School Courtyard'),
+(6, 126, 'Annual School Carnival', '2023-08-12', 'Join us for a day of fun and excitement at our Annual School Carnival! This event features games, food stalls, live performances, and a variety of activities for students, parents, and the community.', '../uploads/Annual School Carnival_Event/Eventimg/smcqe_Eventimg(Annual School Carnival).jpg', '2023-10-15', '11:00:00', '16:00:00', 'other', '2023-10-30', 'false', 'School Playground', 200, 'School Parent-Teacher Associat'),
+(7, 127, 'Student Leadership Workshop', '2023-08-13', 'Join us for an engaging Student Leadership Workshop where you all have the opportunity to enhance your leadership skills, learn effective communication strategies, and collaborate with fellow students. ', '../uploads/Student Leadership Workshop_Event/Eventimg/ztdke_Eventimg(Student Leadership Workshop).png', '2023-08-13', '17:00:00', '17:20:00', 'workshop', '2023-08-13', 'true', 'School Auditorium', 98, 'School Student Council');
 
 -- --------------------------------------------------------
 
@@ -298,8 +300,8 @@ CREATE TABLE `tbl_resource` (
 --
 
 INSERT INTO `tbl_resource` (`ID`, `UID`, `resume`, `placement`, `Birth`, `MoA`, `Waiver`, `MedCert`, `GMCert`, `RegForm`, `consent`, `Evaform`, `NarraForm`, `TimeCard`, `COC`, `Doc1_date`, `Doc2_date`, `Doc3_date`, `Doc4_date`, `Doc5_date`, `Doc6_date`, `Doc7_date`, `Doc8_date`, `Doc9_date`, `Doc10_date`, `Doc11_date`, `Doc12_date`, `Doc13_date`, `Doc1_stat`, `Doc2_stat`, `Doc3_stat`, `Doc4_stat`, `Doc5_stat`, `Doc6_stat`, `Doc7_stat`, `Doc8_stat`, `Doc9_stat`, `Doc10_stat`, `Doc11_stat`, `Doc12_stat`, `Doc13_stat`) VALUES
-(1, 2000000000, '../uploads/brandon23_Credentials/Resume/zCcJj_brandon23_Resume.jpg', '../uploads/brandon23_Credentials/PlacementForm/kL3Zs_brandon23_PlacementForm.jpg', '../uploads/brandon23_Credentials/BirthCertificate/EGd6x_brandon23_BirthCertificate.jpg', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2023-07-11', '2023-07-11', '2023-07-11', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(2, 1000000000, '../uploads/lorenzoasis_Credentials/Resume/MiI57_lorenzoasis_Resume.png', '../uploads/lorenzoasis_Credentials/PlacementForm/4CNSJ_lorenzoasis_PlacementForm.pdf', '../uploads/lorenzoasis_Credentials/BirthCertificate/qkBby_lorenzoasis_BirthCertificate.jpg', '../uploads/lorenzoasis_Credentials/MemorandumOfAgreement/yXcDh_lorenzoasis_MemorandumOfAgreement.jpg', '../uploads/lorenzoasis_Credentials/Waiver/0YWty_lorenzoasis_Waiver.png', '../uploads/lorenzoasis_Credentials/MedicalCertificate/3XJ6I_lorenzoasis_MedicalCertificate.jpg', '../uploads/lorenzoasis_Credentials/GoodMoralCertificate/gFyoN_lorenzoasis_GoodMoralCertificate.png', '../uploads/lorenzoasis_Credentials/RegistrationForm/CXKwt_lorenzoasis_RegistrationForm.jpg', NULL, '../uploads/lorenzoasis_Credentials/EvaluationForm/V0Qjc_lorenzoasis_EvaluationForm.pdf', '../uploads/lorenzoasis_Credentials/NarrativeReport/46I7x_lorenzoasis_NarrativeReport.pdf', '../uploads/lorenzoasis_Credentials/DailyTimeRecord/x26dI_lorenzoasis_DailyTimeRecord.pdf', '../uploads/lorenzoasis_Credentials/CertificateOfCompletion/cXuj5_lorenzoasis_CertificateOfCompletion.pdf', '2023-07-12', '2023-07-12', '2023-07-12', '2023-07-12', '2023-07-12', '2023-07-12', '2023-07-12', '2023-07-12', NULL, '2023-07-12', '2023-07-12', '2023-07-12', '2023-07-12', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(1, 2000000000, '../uploads/brandon23_Credentials/Resume/zCcJj_brandon23_Resume.jpg', '../uploads/brandon23_Credentials/PlacementForm/kL3Zs_brandon23_PlacementForm.jpg', '../uploads/brandon23_Credentials/BirthCertificate/EGd6x_brandon23_BirthCertificate.jpg', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2023-07-11', '2023-07-11', '2023-07-11', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(2, 1000000000, '../uploads/lorenzoasis_Credentials/Resume/MiI57_lorenzoasis_Resume.png', '../uploads/lorenzoasis_Credentials/PlacementForm/SseRI_lorenzoasis_PlacementForm.pdf', '../uploads/lorenzoasis_Credentials/BirthCertificate/tjRi4_lorenzoasis_BirthCertificate.pdf', '../uploads/lorenzoasis_Credentials/MemorandumOfAgreement/yXcDh_lorenzoasis_MemorandumOfAgreement.jpg', '../uploads/lorenzoasis_Credentials/Waiver/0YWty_lorenzoasis_Waiver.png', '../uploads/lorenzoasis_Credentials/MedicalCertificate/3XJ6I_lorenzoasis_MedicalCertificate.jpg', '../uploads/lorenzoasis_Credentials/GoodMoralCertificate/Dc6Me_lorenzoasis_GoodMoralCertificate.png', '../uploads/lorenzoasis_Credentials/RegistrationForm/CXKwt_lorenzoasis_RegistrationForm.jpg', NULL, '../uploads/lorenzoasis_Credentials/EvaluationForm/V0Qjc_lorenzoasis_EvaluationForm.pdf', '../uploads/lorenzoasis_Credentials/NarrativeReport/46I7x_lorenzoasis_NarrativeReport.pdf', '../uploads/lorenzoasis_Credentials/DailyTimeRecord/x26dI_lorenzoasis_DailyTimeRecord.pdf', '../uploads/lorenzoasis_Credentials/CertificateOfCompletion/cXuj5_lorenzoasis_CertificateOfCompletion.pdf', '2023-07-12', '2023-08-13', '2023-08-13', '2023-07-12', '2023-07-12', '2023-07-12', '2023-08-13', '2023-07-12', NULL, '2023-07-12', '2023-07-12', '2023-07-12', '2023-07-12', 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
 (3, 3000000000, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
 (4, 1234567825, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
 (5, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
@@ -350,12 +352,12 @@ CREATE TABLE `tbl_trainee` (
 --
 
 INSERT INTO `tbl_trainee` (`UID`, `name`, `trainee_uname`, `trainee_pword`, `email`, `birthdate`, `age`, `department`, `status`, `role`, `account_Created`, `profile_Completed`, `vaccine_Completed`, `image`, `gender`, `course`, `phone`, `program`, `prog_duration`, `fulfilled_time`, `completed`, `evaluated`, `address`, `city`, `postal_code`, `province`, `Join_an_Event`, `EventID`, `Program_stat`, `Resource_Completed`) VALUES
-(1000000000, 'Lorenzo Asis', 'lorenzoasis', 'Lorenzo.asis2023', 'Lorenzo.asis2023', '1970-01-01', 23, 'BSCS', 0, 'User', '2023-06-30', 'true', 0, '../uploads/lorenzoasis_Credentials/lorenzoasis_Profile_HJTSZ.gif', '', 'BSCS-2B', '09876543219', 'Marketing Internship', '4', '160', 'true', 'true', 'Queenstown Molino 3', 'Bacoor', 4102, 'Cavite', 0, NULL, 0, 1),
+(1000000000, 'Lorenzo Asis', 'lorenzoasis', 'Lorenzo.asis2023', 'lorenzo.Asis@gmail.com', '1970-01-01', 23, 'BSCS', 0, 'User', '2023-06-30', 'true', 0, '../uploads/lorenzoasis_Credentials/lorenzoasis_Profile_HJTSZ.gif', 'male', 'BSCS-2B', '09876543219', 'Marketing Internship', '4', '160', 'true', 'true', 'Queenstown Molino 3', 'Bacoor', 4102, 'Cavite', 0, NULL, 0, 1),
 (1234567825, 'Joseph Contador', 'josephpogi23', 'Joseph@pogi23', 'joseph.contador@cvsu.edu.ph', '2004-02-09', 23, 'BSIT', 0, 'User', '2023-07-03', 'true', 1, '../uploads/josephpogi23_Credentials/josephpogi23_Profile_Tq3UZ.jpg', 'male', 'BSIT-2B', '09687363887', NULL, NULL, NULL, NULL, 'false', 'DASMA PALIRARAN BACOOR CAVITE', 'DASMA', 404, 'Dasma', 0, NULL, 0, 0),
 (1278654638, 'Testing One', 'testing55', 'Passwordko@123', 'test@gmail.com', '2002-08-06', 21, 'BSIT', 0, 'User', '2023-08-11', 'true', 0, '../Image/Profile.png', 'female', 'BSIT-2B', '09675645233', NULL, NULL, NULL, NULL, 'false', 'taga imus to', 'imus', 4102, 'Cavite', 1, 123, 0, 0),
-(2000000000, 'Brandon Logon', 'brandon23', 'Brandon.logon4sale', 'Brandon@gmail.com', '2023-07-06', 21, 'BSCS', 0, 'User', '2023-06-30', 'true', 0, '../uploads/josephpogi23_Credentials/brandon23_Profile_75fzg.jpeg', 'male', 'BSCS-2B', '09897867564', 'Name', '16', '640', NULL, 'false', 'Ohio', 'Columbus', 4300, 'Ohio', 0, NULL, 0, 0),
-(2023123456, 'John Smith', 'johnny23', 'SecurePassword.123', 'johnsmith@cvsu.edu.ph', '2000-07-19', 23, 'BSCS', 0, 'User', '2023-08-11', 'true', 0, '../uploads/johnny23_Credentials/johnny23_Profile_hcWNg.gif', 'male', 'BSCS-2C', '09786752324', NULL, NULL, NULL, NULL, 'false', 'iwan ko kung tagasaan to', 'baccor', 4102, 'Cavite', 0, NULL, 0, 0),
-(3000000000, 'Jeric Dayandante', 'jeric20', 'Jeric@4sale', 'jeric@outlook.com', '2023-06-30', 20, 'BSIT', 0, 'User', '2023-06-30', 'true', 1, '../Image/Profile.png', 'male', 'BSIT-2B', '09675453124', 'Web Development Internship', '8', '320', NULL, 'false', 'Taga Prima banda sa imus', 'Imus', 4102, 'Cavite', 1, 124, 0, 0);
+(2000000000, 'Brandon Logon', 'brandon23', 'Brandon.logon4sale', 'Brandon@gmail.com', '2023-07-06', 21, 'BSCS', 0, 'User', '2023-06-30', 'true', 0, '../uploads/brandon23_Credentials/brandon23_Profile_75fzg.jpeg', 'male', 'BSCS-2B', '09897867564', 'Name', '16', '640', NULL, 'false', 'Ohio', 'Columbus', 4300, 'Ohio', 0, NULL, 0, 0),
+(2023123456, 'John Smith', 'johnny23', 'SecurePassword.123', 'johnsmith@cvsu.edu.ph', '2000-07-19', 23, 'BSCS', 0, 'User', '2023-08-11', 'true', 0, '../uploads/johnny23_Credentials/johnny23_Profile_hcWNg.gif', 'male', 'BSCS-2C', '09786752324', NULL, NULL, NULL, NULL, 'false', 'iwan ko kung tagasaan to', 'baccor', 4102, 'Cavite', 0, 127, 0, 0),
+(3000000000, 'Jeric Dayandante', 'jeric20', 'Jeric@4sale', 'jeric@outlook.com', '2023-06-30', 20, 'BSIT', 0, 'User', '2023-06-30', 'true', 1, '../Image/Profile.png', 'male', 'BSIT-2B', '09675453124', 'Web Development Internship', '8', '320', NULL, 'false', 'Taga Prima banda sa imus', 'Imus', 4102, 'Cavite', 1, 123, 0, 0);
 
 --
 -- Triggers `tbl_trainee`
@@ -479,7 +481,7 @@ ALTER TABLE `tbl_evaluation`
 -- AUTO_INCREMENT for table `tbl_events`
 --
 ALTER TABLE `tbl_events`
-  MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `tbl_programs`

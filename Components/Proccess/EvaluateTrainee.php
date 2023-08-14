@@ -89,7 +89,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
     <script src="../../Script/SweetAlert2.js"></script>
     <script defer src="../../Script/Bootstrap_Script/bootstrap.bundle.js"></script>
     <script src="../../Script/jquery-3.5.1.js"></script>
-    <title> [Trainee Name] Evaluation </title>
+    <title><?php echo $name; ?> | Evaluation Result</title>
 </head>
 
 <body class="dark adminuser">
@@ -108,7 +108,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
                         icon: 'info',
                         text: 'This trainee has already been evaluated',
                         showConfirmButton: false,
-                        timer: 0001,
+                        timer: 2500,
                         didOpen: () => {
                             Swal.showLoading()
                         },
@@ -123,7 +123,28 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
                         color: '#ffffff',
                     }) 
                     </script>";
+                //echo $output;
                 @include "../../Components/EvaluateTable.php";
+            } else {
+                $output = "<script> 
+                    Swal.fire({
+                        icon: 'warning',
+                        text: 'It seems that this trainee has not yet Completed his/her Training or has not been assigned. Please be advised that you cannot evaluate a trainee that has not yet completed his/her training.',
+                        showConfirmButton: true,
+                        confirmButtonText: 'Got it',
+                        allowOutsideClick: false,
+                        allowEscapeKey: false,
+                        allowEnterKey: false,
+                        stopKeydownPropagation: false,
+                        width: '25rem',
+                        padding: '1rem',
+                        heightAuto: false,
+                        background: '#1a1a1a',
+                        color: '#ffffff',
+                    })
+                </script>";
+                //echo $output;
+                // under construction please wait for further updates
             }
             ?>
         </div>

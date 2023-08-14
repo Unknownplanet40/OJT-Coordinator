@@ -14,15 +14,31 @@ document.addEventListener("DOMContentLoaded", function () {
   let PtotalPageElement = document.getElementById("ProgTotalPage");
   let PtotalItemElement = document.getElementById("ProgTotalItem");
 
-  function filterRows() {
-    let filter = Psearch.value.toUpperCase();
-    Prows.forEach(function (row) {
-      let td = row.querySelector("td:nth-child(2)");
-      let textValue = td.textContent || td.innerText;
-      row.style.display = textValue.toUpperCase().includes(filter) ? "" : "none";
-    });
-    updatePagination();
-  }
+ //--------------------------------------------------------------------------------
+ let displayedRowCount = 0;
+ const maxDisplayedRows = Plimit;
+
+ function filterRows() {
+   let filter = Psearch.value.toUpperCase();
+   displayedRowCount = 0; // Reset displayed row count
+
+   Prows.forEach(function (row) {
+     let td = row.querySelector("td:nth-child(2)");
+     let textValue = td.textContent || td.innerText;
+
+     if (
+       textValue.toUpperCase().includes(filter) &&
+       displayedRowCount < maxDisplayedRows
+     ) {
+       row.style.display = "";
+       displayedRowCount++;
+     } else {
+       row.style.display = "none";
+     }
+   });
+
+   updatePagination();
+ }
 
   function showPage() {
     let start = (PcurrentPage - 1) * Plimit;
@@ -49,6 +65,7 @@ document.addEventListener("DOMContentLoaded", function () {
   Psearch.addEventListener("keyup", function () {
     if (Psearch.value === "") {
       resetSearch();
+      showPage();
     } else {
       filterRows();
     }
