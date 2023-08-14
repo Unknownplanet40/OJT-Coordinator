@@ -108,7 +108,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
         <div class="row">
             <div class="col-md-12 text-bg-success rounded-top">
                 <div class="d-flex justify-content-between">
-                    <div class="m-2"><a class="btn btn-sm bg-transparent" href="../Admin/AdminTraineeResource.php"
+                    <div class="m-2"><a class="btn btn-sm bg-info" href="../Admin/AdminTraineeResource.php"
                             title="Back to Trainee Resource"><img src="../Image/backspace.svg" alt="Back"
                                 width="24px"></a></div>
                     <h3 class="text-center m-2 text-uppercase">
@@ -136,13 +136,13 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                                 } ?>
                                 <?php if (isset($Doc1_status)) {
                                     if ($Doc1_status == 0) {
-                                        echo "Pending";
+                                        echo "<span class='text-warning'>Pending</span>";
                                     } else if ($Doc1_status == 1) {
-                                        echo "Approved";
+                                        echo "<span class='text-success'>Approved</span>";
                                     } else if ($Doc1_status == 2) {
-                                        echo "Resubmit";
+                                        echo "<span class='text-danger'>Rejected</span>";
                                     } else {
-                                        echo "Unknown";
+                                        echo "<span class='text-secondary'>Unknown</span>";
                                     }
                                 } ?>
                             </span>
@@ -152,13 +152,22 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                             if (isset($resume)) {
                                 echo
                                     "
-                                <a class='btn btn-sm btn-warning' title='View File' href='$resume' target='_blank'><img src='../Image/ViewDocs.svg' alt='View' width='24px'></a>
-                                <a class='btn btn-sm btn-primary' title='Download file' href='$resume' download><img src='../Image/DownDocs.svg' alt='Download' width='24px'></a>
-                                <a class='btn btn-sm btn-success' title='Approve file' href='../Components/Proccess/ResourceProccess.php?ID=$userID&file=Doc1&status=1'><img src='../Image/thumb_up.svg' alt='Approve' width='24px'></a>
-                                <a class='btn btn-sm btn-danger' title='Request for Resubmission of file' href='../Components/Proccess/ResourceProccess.php?ID=$userID&file=Doc1&status=2'><img src='../Image/denied.svg' alt='Denied' width='24px'></a>
-                                ";
+                                    <div class='dropdown'>
+                                        <button class='btn btn-sm btn-primary dropdown-toggle' type='button' id='dropdownMenuButton1' data-bs-toggle='dropdown' aria-expanded='false'>
+                                            Action
+                                        </button>
+                                        <ul class='dropdown-menu dropdown-menu-dark' aria-labelledby='dropdownMenuButton1'>
+                                            <li><a class='dropdown-item' title='View File' href='$resume' target='_blank'><img src='../Image/ReDocs.svg' alt='View' width='24px'> View</a></li>
+                                            <li><a class='dropdown-item' title='Download file' href='$resume' download><img src='../Image/DownDocs.svg' alt='Download' width='24px'> Download</a></li>
+                                            <li><hr class='dropdown-divider'></li>
+                                            <li><a class='dropdown-item' title='Approve file' href='../Components/Proccess/ResourceProccess.php?ID=$userID&file=Doc1&status=1'><img src='../Image/thumb_up.svg' alt='Approve' width='24px'> Approve This File</a></li>
+                                            <li><a class='dropdown-item' title='Request for Resubmission of file' href='../Components/Proccess/ResourceProccess.php?ID=$userID&file=Doc1&status=2'><img src='../Image/denied.svg' alt='Denied' width='24px'> Request for Resubmission</a></li>
+                                        </ul>
+                                    ";
                             } else {
-                                echo "No file uploaded yet";
+                                echo "<div class='spinner-border text-warning' role='status'>
+                                    <span class='visually-hidden'>Loading...</span>
+                                </div>";
                             }
                             ?>
                         </div>
@@ -173,13 +182,13 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                                 } ?>
                                 <?php if (isset($Doc2_status)) {
                                     if ($Doc2_status == 0) {
-                                        echo "Pending";
+                                        echo "<span class='text-warning'>Pending</span>";
                                     } else if ($Doc2_status == 1) {
-                                        echo "Approved";
+                                        echo "<span class='text-success'>Approved</span>";
                                     } else if ($Doc2_status == 2) {
-                                        echo "Resubmit";
+                                        echo "<span class='text-danger'>Rejected</span>";
                                     } else {
-                                        echo "Unknown";
+                                        echo "<span class='text-secondary'>Unknown</span>";
                                     }
                                 } ?>
                             </span>
@@ -189,13 +198,22 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                             if (isset($placement)) {
                                 echo
                                     "
-                                <a class='btn btn-sm btn-warning' title='View File' href='$placement' target='_blank'><img src='../Image/ViewDocs.svg' alt='View' width='24px'></a>
-                                <a class='btn btn-sm btn-primary' title='Download file' href='$placement' download><img src='../Image/DownDocs.svg' alt='Download' width='24px'></a>
-                                <a class='btn btn-sm btn-success' title='Approve file' href='../Components/Proccess/ResourceProccess.php?ID=$userID&file=Doc1&status=1'><img src='../Image/thumb_up.svg' alt='Approve' width='24px'></a>
-                                <a class='btn btn-sm btn-danger' title='Request for Resubmission of file' href='../Components/Proccess/ResourceProccess.php?ID=$userID&file=Doc1&status=2'><img src='../Image/denied.svg' alt='Denied' width='24px'></a>
+                                    <div class='dropdown'>
+                                        <button class='btn btn-sm btn-primary dropdown-toggle' type='button' id='dropdownMenuButton1' data-bs-toggle='dropdown' aria-expanded='false'>
+                                            Action
+                                        </button>
+                                        <ul class='dropdown-menu dropdown-menu-dark' aria-labelledby='dropdownMenuButton1'>
+                                            <li><a class='dropdown-item' title='View File' href='$placement' target='_blank'><img src='../Image/ReDocs.svg' alt='View' width='24px'> View</a></li>
+                                            <li><a class='dropdown-item' title='Download file' href='$placement' download><img src='../Image/DownDocs.svg' alt='Download' width='24px'> Download</a></li>
+                                            <li><hr class='dropdown-divider'></li>
+                                            <li><a class='dropdown-item' title='Approve file' href='../Components/Proccess/ResourceProccess.php?ID=$userID&file=Doc2&status=1'><img src='../Image/thumb_up.svg' alt='Approve' width='24px'> Approve This File</a></li>
+                                            <li><a class='dropdown-item' title='Request for Resubmission of file' href='../Components/Proccess/ResourceProccess.php?ID=$userID&file=Doc2&status=2'><img src='../Image/denied.svg' alt='Denied' width='24px'> Request for Resubmission</a></li>
+                                        </ul>
                                 ";
                             } else {
-                                echo "No file uploaded yet";
+                                echo "<div class='spinner-border text-warning' role='status'>
+                                    <span class='visually-hidden'>Loading...</span>
+                                </div>";
                             }
                             ?>
                         </div>
@@ -210,13 +228,13 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                                 } ?>
                                 <?php if (isset($Doc3_status)) {
                                     if ($Doc3_status == 0) {
-                                        echo "Pending";
+                                        echo "<span class='text-warning'>Pending</span>";
                                     } else if ($Doc3_status == 1) {
-                                        echo "Approved";
+                                        echo "<span class='text-success'>Approved</span>";
                                     } else if ($Doc3_status == 2) {
-                                        echo "Resubmit";
+                                        echo "<span class='text-danger'>Rejected</span>";
                                     } else {
-                                        echo "Unknown";
+                                        echo "<span class='text-secondary'>Unknown</span>";
                                     }
                                 } ?>
                             </span>
@@ -225,14 +243,23 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                             <?php
                             if (isset($birth)) {
                                 echo
-                                    "
-                                    <a class='btn btn-sm btn-warning' title='View File' href='$birth' target='_blank'><img src='../Image/ViewDocs.svg' alt='View' width='24px'></a>
-                                <a class='btn btn-sm btn-primary' title='Download file' href='$birth' download><img src='../Image/DownDocs.svg' alt='Download' width='24px'></a>
-                                <a class='btn btn-sm btn-success' title='Approve file' href='../Components/Proccess/ResourceProccess.php?ID=$userID&file=Doc1&status=1'><img src='../Image/thumb_up.svg' alt='Approve' width='24px'></a>
-                                <a class='btn btn-sm btn-danger' title='Request for Resubmission of file' href='../Components/Proccess/ResourceProccess.php?ID=$userID&file=Doc1&status=2'><img src='../Image/denied.svg' alt='Denied' width='24px'></a>
+                                "
+                                    <div class='dropdown'>
+                                        <button class='btn btn-sm btn-primary dropdown-toggle' type='button' id='dropdownMenuButton1' data-bs-toggle='dropdown' aria-expanded='false'>
+                                            Action
+                                        </button>
+                                        <ul class='dropdown-menu dropdown-menu-dark' aria-labelledby='dropdownMenuButton1'>
+                                            <li><a class='dropdown-item' title='View File' href='$birth' target='_blank'><img src='../Image/ReDocs.svg' alt='View' width='24px'> View</a></li>
+                                            <li><a class='dropdown-item' title='Download file' href='$birth' download><img src='../Image/DownDocs.svg' alt='Download' width='24px'> Download</a></li>
+                                            <li><hr class='dropdown-divider'></li>
+                                            <li><a class='dropdown-item' title='Approve file' href='../Components/Proccess/ResourceProccess.php?ID=$userID&file=Doc3&status=1'><img src='../Image/thumb_up.svg' alt='Approve' width='24px'> Approve This File</a></li>
+                                            <li><a class='dropdown-item' title='Request for Resubmission of file' href='../Components/Proccess/ResourceProccess.php?ID=$userID&file=Doc3&status=2'><img src='../Image/denied.svg' alt='Denied' width='24px'> Request for Resubmission</a></li>
+                                        </ul>
                                 ";
                             } else {
-                                echo "No file uploaded yet";
+                                echo "<div class='spinner-border text-warning' role='status'>
+                                    <span class='visually-hidden'>Loading...</span>
+                                </div>";
                             }
                             ?>
                         </div>
@@ -247,13 +274,13 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                                 } ?>
                                 <?php if (isset($Doc4_status)) {
                                     if ($Doc4_status == 0) {
-                                        echo "Pending";
+                                        echo "<span class='text-warning'>Pending</span>";
                                     } else if ($Doc4_status == 1) {
-                                        echo "Approved";
+                                        echo "<span class='text-success'>Approved</span>";
                                     } else if ($Doc4_status == 2) {
-                                        echo "Resubmit";
+                                        echo "<span class='text-danger'>Rejected</span>";
                                     } else {
-                                        echo "Unknown";
+                                        echo "<span class='text-secondary'>Unknown</span>";
                                     }
                                 } ?>
                             </span>
@@ -263,13 +290,22 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                             if (isset($moa)) {
                                 echo
                                     "
-                                    <a class='btn btn-sm btn-warning' title='View File' href='$moa' target='_blank'><img src='../Image/ViewDocs.svg' alt='View' width='24px'></a>
-                                    <a class='btn btn-sm btn-primary' title='Download file' href='$moa' download><img src='../Image/DownDocs.svg' alt='Download' width='24px'></a>
-                                    <a class='btn btn-sm btn-success' title='Approve file' href='../Components/Proccess/ResourceProccess.php?ID=$userID&file=Doc1&status=1'><img src='../Image/thumb_up.svg' alt='Approve' width='24px'></a>
-                                    <a class='btn btn-sm btn-danger' title='Request for Resubmission of file' href='../Components/Proccess/ResourceProccess.php?ID=$userID&file=Doc1&status=2'><img src='../Image/denied.svg' alt='Denied' width='24px'></a>
-                                ";
+                                    <div class='dropdown'>
+                                        <button class='btn btn-sm btn-primary dropdown-toggle' type='button' id='dropdownMenuButton1' data-bs-toggle='dropdown' aria-expanded='false'>
+                                            Action
+                                        </button>
+                                        <ul class='dropdown-menu dropdown-menu-dark' aria-labelledby='dropdownMenuButton1'>
+                                            <li><a class='dropdown-item' title='View File' href='$moa' target='_blank'><img src='../Image/ReDocs.svg' alt='View' width='24px'> View</a></li>
+                                            <li><a class='dropdown-item' title='Download file' href='$moa' download><img src='../Image/DownDocs.svg' alt='Download' width='24px'> Download</a></li>
+                                            <li><hr class='dropdown-divider'></li>
+                                            <li><a class='dropdown-item' title='Approve file' href='../Components/Proccess/ResourceProccess.php?ID=$userID&file=Doc4&status=1'><img src='../Image/thumb_up.svg' alt='Approve' width='24px'> Approve This File</a></li>
+                                            <li><a class='dropdown-item' title='Request for Resubmission of file' href='../Components/Proccess/ResourceProccess.php?ID=$userID&file=Doc4&status=2'><img src='../Image/denied.svg' alt='Denied' width='24px'> Request for Resubmission</a></li>
+                                        </ul>
+                                    ";
                             } else {
-                                echo "No file uploaded yet";
+                                echo "<div class='spinner-border text-warning' role='status'>
+                                    <span class='visually-hidden'>Loading...</span>
+                                </div>";
                             }
                             ?>
                         </div>
@@ -284,13 +320,13 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                                 } ?>
                                 <?php if (isset($Doc5_status)) {
                                     if ($Doc5_status == 0) {
-                                        echo "Pending";
+                                        echo "<span class='text-warning'>Pending</span>";
                                     } else if ($Doc5_status == 1) {
-                                        echo "Approved";
+                                        echo "<span class='text-success'>Approved</span>";
                                     } else if ($Doc5_status == 2) {
-                                        echo "Resubmit";
+                                        echo "<span class='text-danger'>Rejected</span>";
                                     } else {
-                                        echo "Unknown";
+                                        echo "<span class='text-secondary'>Unknown</span>";
                                     }
                                 } ?>
                             </span>
@@ -300,12 +336,22 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                             if (isset($waiver)) {
                                 echo
                                     "
-                                    <a class='btn btn-sm btn-warning' title='View File' href='$waiver' target='_blank'><img src='../Image/ViewDocs.svg' alt='View' width='24px'></a>
-                                    <a class='btn btn-sm btn-primary' title='Download file' href='$waiver' download><img src='../Image/DownDocs.svg' alt='Download' width='24px'></a>
-                                    <a class='btn btn-sm btn-success' title='Approve file' href='../Components/Proccess/ResourceProccess.php?ID=$userID&file=Doc1&status=1'><img src='../Image/thumb_up.svg' alt='Approve' width='24px'></a>
-                                    <a class='btn btn-sm btn-danger' title='Request for Resubmission of file' href='../Components/Proccess/ResourceProccess.php?ID=$userID&file=Doc1&status=2'><img src='../Image/denied.svg' alt='Denied' width='24px'></a>";
+                                    <div class='dropdown'>
+                                        <button class='btn btn-sm btn-primary dropdown-toggle' type='button' id='dropdownMenuButton1' data-bs-toggle='dropdown' aria-expanded='false'>
+                                            Action
+                                        </button>
+                                        <ul class='dropdown-menu dropdown-menu-dark' aria-labelledby='dropdownMenuButton1'>
+                                            <li><a class='dropdown-item' title='View File' href='$waiver' target='_blank'><img src='../Image/ReDocs.svg' alt='View' width='24px'> View</a></li>
+                                            <li><a class='dropdown-item' title='Download file' href='$waiver' download><img src='../Image/DownDocs.svg' alt='Download' width='24px'> Download</a></li>
+                                            <li><hr class='dropdown-divider'></li>
+                                            <li><a class='dropdown-item' title='Approve file' href='../Components/Proccess/ResourceProccess.php?ID=$userID&file=Doc5&status=1'><img src='../Image/thumb_up.svg' alt='Approve' width='24px'> Approve This File</a></li>
+                                            <li><a class='dropdown-item' title='Request for Resubmission of file' href='../Components/Proccess/ResourceProccess.php?ID=$userID&file=Doc5&status=2'><img src='../Image/denied.svg' alt='Denied' width='24px'> Request for Resubmission</a></li>
+                                        </ul>
+                                    ";
                             } else {
-                                echo "No file uploaded yet";
+                                echo "<div class='spinner-border text-warning' role='status'>
+                                    <span class='visually-hidden'>Loading...</span>
+                                </div>";
                             }
                             ?>
                         </div>
@@ -320,13 +366,13 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                                 } ?>
                                 <?php if (isset($Doc6_status)) {
                                     if ($Doc6_status == 0) {
-                                        echo "Pending";
+                                        echo "<span class='text-warning'>Pending</span>";
                                     } else if ($Doc6_status == 1) {
-                                        echo "Approved";
+                                        echo "<span class='text-success'>Approved</span>";
                                     } else if ($Doc6_status == 2) {
-                                        echo "Resubmit";
+                                        echo "<span class='text-danger'>Rejected</span>";
                                     } else {
-                                        echo "Unknown";
+                                        echo "<span class='text-secondary'>Unknown</span>";
                                     }
                                 } ?>
                             </span>
@@ -336,13 +382,22 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                             if (isset($medical)) {
                                 echo
                                     "
-                                    <a class='btn btn-sm btn-warning' title='View File' href='$medical' target='_blank'><img src='../Image/ViewDocs.svg' alt='View' width='24px'></a>
-                                    <a class='btn btn-sm btn-primary' title='Download file' href='$medical' download><img src='../Image/DownDocs.svg' alt='Download' width='24px'></a>
-                                    <a class='btn btn-sm btn-success' title='Approve file' href='../Components/Proccess/ResourceProccess.php?ID=$userID&file=Doc1&status=1'><img src='../Image/thumb_up.svg' alt='Approve' width='24px'></a>
-                                    <a class='btn btn-sm btn-danger' title='Request for Resubmission of file' href='../Components/Proccess/ResourceProccess.php?ID=$userID&file=Doc1&status=2'><img src='../Image/denied.svg' alt='Denied' width='24px'></a>
-                                ";
+                                    <div class='dropdown'>
+                                        <button class='btn btn-sm btn-primary dropdown-toggle' type='button' id='dropdownMenuButton1' data-bs-toggle='dropdown' aria-expanded='false'>
+                                            Action
+                                        </button>
+                                        <ul class='dropdown-menu dropdown-menu-dark' aria-labelledby='dropdownMenuButton1'>
+                                            <li><a class='dropdown-item' title='View File' href='$medical' target='_blank'><img src='../Image/ReDocs.svg' alt='View' width='24px'> View</a></li>
+                                            <li><a class='dropdown-item' title='Download file' href='$medical' download><img src='../Image/DownDocs.svg' alt='Download' width='24px'> Download</a></li>
+                                            <li><hr class='dropdown-divider'></li>
+                                            <li><a class='dropdown-item' title='Approve file' href='../Components/Proccess/ResourceProccess.php?ID=$userID&file=Doc6&status=1'><img src='../Image/thumb_up.svg' alt='Approve' width='24px'> Approve This File</a></li>
+                                            <li><a class='dropdown-item' title='Request for Resubmission of file' href='../Components/Proccess/ResourceProccess.php?ID=$userID&file=Doc6&status=2'><img src='../Image/denied.svg' alt='Denied' width='24px'> Request for Resubmission</a></li>
+                                        </ul>
+                                    ";
                             } else {
-                                echo "No file uploaded yet";
+                                echo "<div class='spinner-border text-warning' role='status'>
+                                    <span class='visually-hidden'>Loading...</span>
+                                </div>";
                             }
                             ?>
                         </div>
@@ -357,13 +412,13 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                                 } ?>
                                 <?php if (isset($Doc7_status)) {
                                     if ($Doc7_status == 0) {
-                                        echo "Pending";
+                                        echo "<span class='text-warning'>Pending</span>";
                                     } else if ($Doc7_status == 1) {
-                                        echo "Approved";
+                                        echo "<span class='text-success'>Approved</span>";
                                     } else if ($Doc7_status == 2) {
-                                        echo "Resubmit";
+                                        echo "<span class='text-danger'>Rejected</span>";
                                     } else {
-                                        echo "Unknown";
+                                        echo "<span class='text-secondary'>Unknown</span>";
                                     }
                                 } ?>
                             </span>
@@ -373,13 +428,22 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                             if (isset($GMcert)) {
                                 echo
                                     "
-                                    <a class='btn btn-sm btn-warning' title='View File' href='$GMcert' target='_blank'><img src='../Image/ViewDocs.svg' alt='View' width='24px'></a>
-                                    <a class='btn btn-sm btn-primary' title='Download file' href='$GMcert' download><img src='../Image/DownDocs.svg' alt='Download' width='24px'></a>
-                                    <a class='btn btn-sm btn-success' title='Approve file' href='../Components/Proccess/ResourceProccess.php?ID=$userID&file=Doc1&status=1'><img src='../Image/thumb_up.svg' alt='Approve' width='24px'></a>
-                                    <a class='btn btn-sm btn-danger' title='Request for Resubmission of file' href='../Components/Proccess/ResourceProccess.php?ID=$userID&file=Doc1&status=2'><img src='../Image/denied.svg' alt='Denied' width='24px'></a>
-                                ";
+                                    <div class='dropdown'>
+                                        <button class='btn btn-sm btn-primary dropdown-toggle' type='button' id='dropdownMenuButton1' data-bs-toggle='dropdown' aria-expanded='false'>
+                                            Action
+                                        </button>
+                                        <ul class='dropdown-menu dropdown-menu-dark' aria-labelledby='dropdownMenuButton1'>
+                                            <li><a class='dropdown-item' title='View File' href='$GMcert' target='_blank'><img src='../Image/ReDocs.svg' alt='View' width='24px'> View</a></li>
+                                            <li><a class='dropdown-item' title='Download file' href='$GMcert' download><img src='../Image/DownDocs.svg' alt='Download' width='24px'> Download</a></li>
+                                            <li><hr class='dropdown-divider'></li>
+                                            <li><a class='dropdown-item' title='Approve file' href='../Components/Proccess/ResourceProccess.php?ID=$userID&file=Doc7&status=1'><img src='../Image/thumb_up.svg' alt='Approve' width='24px'> Approve This File</a></li>
+                                            <li><a class='dropdown-item' title='Request for Resubmission of file' href='../Components/Proccess/ResourceProccess.php?ID=$userID&file=Doc7&status=2'><img src='../Image/denied.svg' alt='Denied' width='24px'> Request for Resubmission</a></li>
+                                        </ul>
+                                    ";
                             } else {
-                                echo "No file uploaded yet";
+                                echo "<div class='spinner-border text-warning' role='status'>
+                                    <span class='visually-hidden'>Loading...</span>
+                                </div>";
                             }
                             ?>
                         </div>
@@ -394,13 +458,13 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                                 } ?>
                                 <?php if (isset($Doc8_status)) {
                                     if ($Doc8_status == 0) {
-                                        echo "Pending";
+                                        echo "<span class='text-warning'>Pending</span>";
                                     } else if ($Doc8_status == 1) {
-                                        echo "Approved";
+                                        echo "<span class='text-success'>Approved</span>";
                                     } else if ($Doc8_status == 2) {
-                                        echo "Resubmit";
+                                        echo "<span class='text-danger'>Rejected</span>";
                                     } else {
-                                        echo "Unknown";
+                                        echo "<span class='text-secondary'>Unknown</span>";
                                     }
                                 } ?>
                             </span>
@@ -410,13 +474,22 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                             if (isset($regform)) {
                                 echo
                                     "
-                                    <a class='btn btn-sm btn-warning' title='View File' href='$regform' target='_blank'><img src='../Image/ViewDocs.svg' alt='View' width='24px'></a>
-                                    <a class='btn btn-sm btn-primary' title='Download file' href='$regform' download><img src='../Image/DownDocs.svg' alt='Download' width='24px'></a>
-                                    <a class='btn btn-sm btn-success' title='Approve file' href='../Components/Proccess/ResourceProccess.php?ID=$userID&file=Doc1&status=1'><img src='../Image/thumb_up.svg' alt='Approve' width='24px'></a>
-                                    <a class='btn btn-sm btn-danger' title='Request for Resubmission of file' href='../Components/Proccess/ResourceProccess.php?ID=$userID&file=Doc1&status=2'><img src='../Image/denied.svg' alt='Denied' width='24px'></a>
-                                ";
+                                    <div class='dropdown'>
+                                        <button class='btn btn-sm btn-primary dropdown-toggle' type='button' id='dropdownMenuButton1' data-bs-toggle='dropdown' aria-expanded='false'>
+                                            Action
+                                        </button>
+                                        <ul class='dropdown-menu dropdown-menu-dark' aria-labelledby='dropdownMenuButton1'>
+                                            <li><a class='dropdown-item' title='View File' href='$regform' target='_blank'><img src='../Image/ReDocs.svg' alt='View' width='24px'> View</a></li>
+                                            <li><a class='dropdown-item' title='Download file' href='$regform' download><img src='../Image/DownDocs.svg' alt='Download' width='24px'> Download</a></li>
+                                            <li><hr class='dropdown-divider'></li>
+                                            <li><a class='dropdown-item' title='Approve file' href='../Components/Proccess/ResourceProccess.php?ID=$userID&file=Doc8&status=1'><img src='../Image/thumb_up.svg' alt='Approve' width='24px'> Approve This File</a></li>
+                                            <li><a class='dropdown-item' title='Request for Resubmission of file' href='../Components/Proccess/ResourceProccess.php?ID=$userID&file=Doc8&status=2'><img src='../Image/denied.svg' alt='Denied' width='24px'> Request for Resubmission</a></li>
+                                        </ul>
+                                    ";
                             } else {
-                                echo "No file uploaded yet";
+                                echo "<div class='spinner-border text-warning' role='status'>
+                                    <span class='visually-hidden'>Loading...</span>
+                                </div>";
                             }
                             ?>
                         </div>
@@ -431,13 +504,13 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                                 } ?>
                                 <?php if (isset($Doc10_status)) {
                                     if ($Doc10_status == 0) {
-                                        echo "Pending";
+                                        echo "<span class='text-warning'>Pending</span>";
                                     } else if ($Doc10_status == 1) {
-                                        echo "Approved";
+                                        echo "<span class='text-success'>Approved</span>";
                                     } else if ($Doc10_status == 2) {
-                                        echo "Resubmit";
+                                        echo "<span class='text-danger'>Rejected</span>";
                                     } else {
-                                        echo "Unknown";
+                                        echo "<span class='text-secondary'>Unknown</span>";
                                     }
                                 } ?>
                             </span>
@@ -447,13 +520,22 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                             if (isset($eval)) {
                                 echo
                                     "
-                                    <a class='btn btn-sm btn-warning' title='View File' href='$eval' target='_blank'><img src='../Image/ViewDocs.svg' alt='View' width='24px'></a>
-                                    <a class='btn btn-sm btn-primary' title='Download file' href='$eval' download><img src='../Image/DownDocs.svg' alt='Download' width='24px'></a>
-                                    <a class='btn btn-sm btn-success' title='Approve file' href='../Components/Proccess/ResourceProccess.php?ID=$userID&file=Doc1&status=1'><img src='../Image/thumb_up.svg' alt='Approve' width='24px'></a>
-                                    <a class='btn btn-sm btn-danger' title='Request for Resubmission of file' href='../Components/Proccess/ResourceProccess.php?ID=$userID&file=Doc1&status=2'><img src='../Image/denied.svg' alt='Denied' width='24px'></a>
-                                ";
+                                    <div class='dropdown'>
+                                        <button class='btn btn-sm btn-primary dropdown-toggle' type='button' id='dropdownMenuButton1' data-bs-toggle='dropdown' aria-expanded='false'>
+                                            Action
+                                        </button>
+                                        <ul class='dropdown-menu dropdown-menu-dark' aria-labelledby='dropdownMenuButton1'>
+                                            <li><a class='dropdown-item' title='View File' href='$eval' target='_blank'><img src='../Image/ReDocs.svg' alt='View' width='24px'> View</a></li>
+                                            <li><a class='dropdown-item' title='Download file' href='$eval' download><img src='../Image/DownDocs.svg' alt='Download' width='24px'> Download</a></li>
+                                            <li><hr class='dropdown-divider'></li>
+                                            <li><a class='dropdown-item' title='Approve file' href='../Components/Proccess/ResourceProccess.php?ID=$userID&file=Doc10&status=1'><img src='../Image/thumb_up.svg' alt='Approve' width='24px'> Approve This File</a></li>
+                                            <li><a class='dropdown-item' title='Request for Resubmission of file' href='../Components/Proccess/ResourceProccess.php?ID=$userID&file=Doc10&status=2'><img src='../Image/denied.svg' alt='Denied' width='24px'> Request for Resubmission</a></li>
+                                        </ul>
+                                    ";
                             } else {
-                                echo "No file uploaded yet";
+                                echo "<div class='spinner-border text-warning' role='status'>
+                                    <span class='visually-hidden'>Loading...</span>
+                                </div>";
                             }
                             ?>
                         </div>
@@ -468,13 +550,13 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                                 } ?>
                                 <?php if (isset($Doc11_status)) {
                                     if ($Doc11_status == 0) {
-                                        echo "Pending";
+                                        echo "<span class='text-warning'>Pending</span>";
                                     } else if ($Doc11_status == 1) {
-                                        echo "Approved";
+                                        echo "<span class='text-success'>Approved</span>";
                                     } else if ($Doc11_status == 2) {
-                                        echo "Resubmit";
+                                        echo "<span class='text-danger'>Rejected</span>";
                                     } else {
-                                        echo "Unknown";
+                                        echo "<span class='text-secondary'>Unknown</span>";
                                     }
                                 } ?>
                             </span>
@@ -484,13 +566,22 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                             if (isset($narrative)) {
                                 echo
                                     "
-                                    <a class='btn btn-sm btn-warning' title='View File' href='$narrative' target='_blank'><img src='../Image/ViewDocs.svg' alt='View' width='24px'></a>
-                                    <a class='btn btn-sm btn-primary' title='Download file' href='$narrative' download><img src='../Image/DownDocs.svg' alt='Download' width='24px'></a>
-                                    <a class='btn btn-sm btn-success' title='Approve file' href='../Components/Proccess/ResourceProccess.php?ID=$userID&file=Doc1&status=1'><img src='../Image/thumb_up.svg' alt='Approve' width='24px'></a>
-                                    <a class='btn btn-sm btn-danger' title='Request for Resubmission of file' href='../Components/Proccess/ResourceProccess.php?ID=$userID&file=Doc1&status=2'><img src='../Image/denied.svg' alt='Denied' width='24px'></a>
-                                ";
+                                    <div class='dropdown'>
+                                        <button class='btn btn-sm btn-primary dropdown-toggle' type='button' id='dropdownMenuButton1' data-bs-toggle='dropdown' aria-expanded='false'>
+                                            Action
+                                        </button>
+                                        <ul class='dropdown-menu dropdown-menu-dark' aria-labelledby='dropdownMenuButton1'>
+                                            <li><a class='dropdown-item' title='View File' href='$narrative' target='_blank'><img src='../Image/ReDocs.svg' alt='View' width='24px'> View</a></li>
+                                            <li><a class='dropdown-item' title='Download file' href='$narrative' download><img src='../Image/DownDocs.svg' alt='Download' width='24px'> Download</a></li>
+                                            <li><hr class='dropdown-divider'></li>
+                                            <li><a class='dropdown-item' title='Approve file' href='../Components/Proccess/ResourceProccess.php?ID=$userID&file=Doc11&status=1'><img src='../Image/thumb_up.svg' alt='Approve' width='24px'> Approve This File</a></li>
+                                            <li><a class='dropdown-item' title='Request for Resubmission of file' href='../Components/Proccess/ResourceProccess.php?ID=$userID&file=Doc11&status=2'><img src='../Image/denied.svg' alt='Denied' width='24px'> Request for Resubmission</a></li>
+                                        </ul>
+                                    ";
                             } else {
-                                echo "No file uploaded yet";
+                                echo "<div class='spinner-border text-warning' role='status'>
+                                    <span class='visually-hidden'>Loading...</span>
+                                </div>";
                             }
                             ?>
                         </div>
@@ -505,13 +596,13 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                                 } ?>
                                 <?php if (isset($Doc12_status)) {
                                     if ($Doc12_status == 0) {
-                                        echo "Pending";
+                                        echo "<span class='text-warning'>Pending</span>";
                                     } else if ($Doc12_status == 1) {
-                                        echo "Approved";
+                                        echo "<span class='text-success'>Approved</span>";
                                     } else if ($Doc12_status == 2) {
-                                        echo "Resubmit";
+                                        echo "<span class='text-danger'>Rejected</span>";
                                     } else {
-                                        echo "Unknown";
+                                        echo "<span class='text-secondary'>Unknown</span>";
                                     }
                                 } ?>
                             </span>
@@ -521,13 +612,22 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                             if (isset($timecard)) {
                                 echo
                                     "
-                                    <a class='btn btn-sm btn-warning' title='View File' href='$timecard' target='_blank'><img src='../Image/ViewDocs.svg' alt='View' width='24px'></a>
-                                    <a class='btn btn-sm btn-primary' title='Download file' href='$timecard' download><img src='../Image/DownDocs.svg' alt='Download' width='24px'></a>
-                                    <a class='btn btn-sm btn-success' title='Approve file' href='../Components/Proccess/ResourceProccess.php?ID=$userID&file=Doc1&status=1'><img src='../Image/thumb_up.svg' alt='Approve' width='24px'></a>
-                                    <a class='btn btn-sm btn-danger' title='Request for Resubmission of file' href='../Components/Proccess/ResourceProccess.php?ID=$userID&file=Doc1&status=2'><img src='../Image/denied.svg' alt='Denied' width='24px'></a>
-                                ";
+                                    <div class='dropdown'>
+                                        <button class='btn btn-sm btn-primary dropdown-toggle' type='button' id='dropdownMenuButton1' data-bs-toggle='dropdown' aria-expanded='false'>
+                                            Action
+                                        </button>
+                                        <ul class='dropdown-menu dropdown-menu-dark' aria-labelledby='dropdownMenuButton1'>
+                                            <li><a class='dropdown-item' title='View File' href='$timecard' target='_blank'><img src='../Image/ReDocs.svg' alt='View' width='24px'> View</a></li>
+                                            <li><a class='dropdown-item' title='Download file' href='$timecard' download><img src='../Image/DownDocs.svg' alt='Download' width='24px'> Download</a></li>
+                                            <li><hr class='dropdown-divider'></li>
+                                            <li><a class='dropdown-item' title='Approve file' href='../Components/Proccess/ResourceProccess.php?ID=$userID&file=Doc12&status=1'><img src='../Image/thumb_up.svg' alt='Approve' width='24px'> Approve This File</a></li>
+                                            <li><a class='dropdown-item' title='Request for Resubmission of file' href='../Components/Proccess/ResourceProccess.php?ID=$userID&file=Doc12&status=2'><img src='../Image/denied.svg' alt='Denied' width='24px'> Request for Resubmission</a></li>
+                                        </ul>
+                                    ";
                             } else {
-                                echo "No file uploaded yet";
+                                echo "<div class='spinner-border text-warning' role='status'>
+                                    <span class='visually-hidden'>Loading...</span>
+                                </div>";
                             }
                             ?>
                         </div>
@@ -542,13 +642,13 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                                 } ?>
                                 <?php if (isset($Doc13_status)) {
                                     if ($Doc13_status == 0) {
-                                        echo "Pending";
+                                        echo "<span class='text-warning'>Pending</span>";
                                     } else if ($Doc13_status == 1) {
-                                        echo "Approved";
+                                        echo "<span class='text-success'>Approved</span>";
                                     } else if ($Doc13_status == 2) {
-                                        echo "Resubmit";
+                                        echo "<span class='text-danger'>Rejected</span>";
                                     } else {
-                                        echo "Unknown";
+                                        echo "<span class='text-secondary'>Unknown</span>";
                                     }
                                 } ?>
                             </span>
@@ -558,13 +658,22 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                             if (isset($COC)) {
                                 echo
                                     "
-                                    <a class='btn btn-sm btn-warning' title='View File' href='$COC' target='_blank'><img src='../Image/ViewDocs.svg' alt='View' width='24px'></a>
-                                    <a class='btn btn-sm btn-primary' title='Download file' href='$COC' download><img src='../Image/DownDocs.svg' alt='Download' width='24px'></a>
-                                    <a class='btn btn-sm btn-success' title='Approve file' href='../Components/Proccess/ResourceProccess.php?ID=$userID&file=Doc1&status=1'><img src='../Image/thumb_up.svg' alt='Approve' width='24px'></a>
-                                    <a class='btn btn-sm btn-danger' title='Request for Resubmission of file' href='../Components/Proccess/ResourceProccess.php?ID=$userID&file=Doc1&status=2'><img src='../Image/denied.svg' alt='Denied' width='24px'></a>
-                                ";
+                                    <div class='dropdown'>
+                                        <button class='btn btn-sm btn-primary dropdown-toggle' type='button' id='dropdownMenuButton1' data-bs-toggle='dropdown' aria-expanded='false'>
+                                            Action
+                                        </button>
+                                        <ul class='dropdown-menu dropdown-menu-dark' aria-labelledby='dropdownMenuButton1'>
+                                            <li><a class='dropdown-item' title='View File' href='$COC' target='_blank'><img src='../Image/ReDocs.svg' alt='View' width='24px'> View</a></li>
+                                            <li><a class='dropdown-item' title='Download file' href='$COC' download><img src='../Image/DownDocs.svg' alt='Download' width='24px'> Download</a></li>
+                                            <li><hr class='dropdown-divider'></li>
+                                            <li><a class='dropdown-item' title='Approve file' href='../Components/Proccess/ResourceProccess.php?ID=$userID&file=Doc13&status=1'><img src='../Image/thumb_up.svg' alt='Approve' width='24px'> Approve This File</a></li>
+                                            <li><a class='dropdown-item' title='Request for Resubmission of file' href='../Components/Proccess/ResourceProccess.php?ID=$userID&file=Doc13&status=2'><img src='../Image/denied.svg' alt='Denied' width='24px'> Request for Resubmission</a></li>
+                                        </ul>
+                                    ";
                             } else {
-                                echo "No file uploaded yet";
+                                echo "<div class='spinner-border text-warning' role='status'>
+                                    <span class='visually-hidden'>Loading...</span>
+                                </div>";
                             }
                             ?>
                         </div>

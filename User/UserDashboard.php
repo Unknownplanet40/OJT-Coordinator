@@ -2,6 +2,7 @@
 session_start();
 @include_once("../Database/config.php");
 @include_once("../Components/PopupAlert.php");
+date_default_timezone_set('Asia/Manila');
 
 $_SESSION['SAtheme'] = "light";
 
@@ -11,6 +12,35 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
     header("Location: ../User/UserProfile.php");
 } else {
     $ShowAlert = true;
+
+    // before loading the page, check if the event has ended
+    $sql = "SELECT * FROM tbl_events";
+    $result = mysqli_query($conn, $sql);
+
+    if (mysqli_num_rows($result) > 0) {
+        $currentDate = date("Y-m-d");
+        $currenttime = date("H:i:s");
+        while ($row = mysqli_fetch_assoc($result)) {
+            $ID = $row['eventID'];
+            $eventCompletion = $row['eventCompletion'];
+            $eventDateStarted = $row['eventDate'];
+            $eventEnd = $row['eventEndTime'];
+            //check if event date is equal to completion date
+            if ($eventDateStarted == $eventCompletion) {
+                //check if current time is greater than the event end time
+                if ($currenttime >= $eventEnd) {
+                    $sql = "UPDATE tbl_events SET eventEnded='true' WHERE eventID='$ID'";
+                }
+            } else {
+                //check if current date is greater than the event completion date
+                if ($currentDate >= $eventCompletion) {
+                    $sql = "UPDATE tbl_events SET eventEnded='true' WHERE eventID='$ID'";
+                }
+            }
+            mysqli_query($conn, $sql);
+        }
+    }
+
 }
 
 
@@ -137,6 +167,7 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
                             Events Joined
                         </div>
                         <?php
+
                         $id = $_SESSION['GlobalID'];
                         $sql = "SELECT EventID, Join_an_Event FROM tbl_trainee WHERE UID = '$id'";
                         $result = mysqli_query($conn, $sql);
@@ -150,71 +181,50 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
                             $row = mysqli_fetch_assoc($result);
                             $currentdate = date("Y-m-d");
 
-                            if ($currentdate >= $row['eventCompletion']) {
+                            if ($row['eventEnded'] == 'true') {
                                 $sql = "UPDATE tbl_trainee SET Join_an_Event = 0 WHERE UID = '$id'";
-                                $result = mysqli_query($conn, $sql);
+                                mysqli_query($conn, $sql);
+                                $_SESSION['GlobalJoin_an_Event'] = 0;
 
-                                if ($result) {
-                                    $sql = "UPDATE tbl_events SET eventEnded = 'true' WHERE eventID = '$eventID'";
-                                    $result = mysqli_query($conn, $sql);
-
-                                    if ($result) {
-                                        $output =
-                                            '<div class="card-body">
-                                    <!-- this should be a list of events joined by the user -->
-                                    <h5 class="card-title"></h5> <!-- Event Name -->
-                                    <p class="card-text">Event have been Closed!</p>
-                                    <!-- so on and so forth -->
-                                    <!--<a href="#" class="btn btn-success" hidden>Go somewhere</a>-->
-                                </div>';
-                                    }
-
-                                } else {
-                                    $output =
-                                        '<div class="card-body">
-                                    <!-- this should be a list of events joined by the user -->
-                                    <h5 class="card-title"></h5> <!-- Event Name -->
-                                    <p class="card-text">Event has ended.</p> <!-- Event Description -->
-                                    <!-- so on and so forth -->
-                                    <!--<a href="#" class="btn btn-success" hidden>Go somewhere</a>-->
-                                </div>';
-                                }
-                            } elseif ($row['eventEnded'] == 'true') {
-                                $output =
+                                echo
                                     '<div class="card-body">
-                                    <!-- this should be a list of events joined by the user -->
-                                    <h5 class="card-title"></h5> <!-- Event Name -->
-                                    <p class="card-text">Event already ended.</p> <!-- Event Description -->
-                                    <!-- so on and so forth -->
-                                    <!--<a href="#" class="btn btn-success" hidden>Go somewhere</a>-->
-                                </div>';
+                                        <h5 class="card-title"></h5>
+                                        <p class="card-text">No event joined yet.</p>
+                                        <p class="card-text"></p>
+                                        <p class="card-text" style="font-size: 14px;"></p>
+                                        <small class="text-muted"></small>
+                                    </div>';
                             } else {
                                 $start = date("g:i A", strtotime($row['eventStartTime']));
                                 $end = date("g:i A", strtotime($row['eventEndTime']));
                                 $date = date("F j, Y", strtotime($row['eventDate']));
+                                $comp = date("F j, Y", strtotime($row['eventCompletion']));
 
-                                $output =
+                                if ($date == $comp) {
+                                    $datecomp = '';
+                                } else {
+                                    $datecomp = ' - ' . $comp;
+                                }
+
+                                echo
                                     '<div class="card-body">
-                                    <div class="card-body">
                                         <h5 class="card-title">' . $row['eventTitle'] . '</h5>
-                                        <p class="card-text">' . $date . '</p>
+                                        <p class="card-text">' . $date . ' <small class="text-muted">' . $datecomp . '</small></p>
                                         <p class="card-text">' . $row['eventLocation'] . '</p>
                                         <p class="card-text" style="font-size: 14px;">' . $row['eventDescription'] . '</p>
                                         <small class="text-muted">Time: ' . $start . ' - ' . $end . '</small>
-                                    </div>
-                            </div>';
+                                    </div>';
                             }
                         } else {
-                            $output =
+                            echo
                                 '<div class="card-body">
-                                    <!-- this should be a list of events joined by the user -->
-                                    <h5 class="card-title"></h5> <!-- Event Name -->
-                                    <p class="card-text">No events joined yet.</p> <!-- Event Description -->
-                                    <!-- so on and so forth -->
-                                    <!--<a href="#" class="btn btn-success" hidden>Go somewhere</a>-->
-                                </div>';
+                                        <h5 class="card-title"></h5>
+                                        <p class="card-text">No event joined yet.</p>
+                                        <p class="card-text"></p>
+                                        <p class="card-text" style="font-size: 14px;"></p>
+                                        <small class="text-muted"></small>
+                                    </div>';
                         }
-                        echo $output;
                         ?>
                     </div>
                 </div>
@@ -223,7 +233,7 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
             <div class="container-lg">
                 <div class="row row-cols-1 row-cols-md-3 g-4">
                     <?php
-                    $sql = "SELECT * FROM tbl_events";
+                    $sql = "SELECT * FROM tbl_events WHERE eventEnded = 'false' ORDER BY eventDate ASC";
                     $result = mysqli_query($conn, $sql);
 
                     if (mysqli_num_rows($result) > 0) {
@@ -233,6 +243,14 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
                             $start = date("g:i A", strtotime($row['eventStartTime']));
                             $end = date("g:i A", strtotime($row['eventEndTime']));
                             $date = date("F j, Y", strtotime($row['eventDate']));
+                            $comdate = date("F j, Y", strtotime($row['eventCompletion']));
+
+                            // if date and completion date is the same, then it is a one day event
+                            if ($date == $comdate) {
+                                $comdate = '';
+                            } else {
+                                $comdate = ' - ' . $comdate;
+                            }
 
                             $desc = $row['eventDescription'];
                             $desc = substr($desc, 0, 100);
@@ -244,32 +262,49 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
                                 $status = 'Ongoing';
                             }
 
+                            // get how many days from the current date to the event date
+                            $currentDate = date("Y-m-d");
+                            $eventDate = $row['eventCreated'];
+                            $diff = abs(strtotime($eventDate) - strtotime($currentDate));
+                            $days = floor($diff / (60 * 60 * 24));
+
+                            // if the event is less than 3 days, add a new badge
+                            if ($days <= 3) {
+                                $badge = '<span class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle" title="Newly Added Event!"><span class="visually-hidden">New Event</span></span>';
+                            } else {
+                                $badge = '';
+                            }
+
                             $output =
-                                '
-                    <div class="col">
-                        <div class="card h-100">
-                        <img src="' . $row['eventImage'] . '" class="card-img-top" style="max-height: 256px; object-fit: cover;" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">' . $row['eventTitle'] . '</h5>
-                                <p class="card-text">' . $date . '</p>
-                                <p class="card-text">' . $row['eventLocation'] . '</p>
-                                <p class="card-text">' . $status . '</p>
-                                <p class="card-text" style="font-size: 14px;">' . $desc . '</p>
-                                <small class="text-muted">Time: ' . $start . ' - ' . $end . ' | Available Seats: ' . $row['eventSlots'] . '</small>
-                            </div>
-                            <div class="card-footer text-center">
-                                <!-- if the user is already registered, the button should be disabled -->
-                                ';
+                                '<div class="col">
+                                    <div class="position-relative">
+                                        <div class="card h-100">
+                                            <img src="' . $row['eventImage'] . '" class="card-img-top" style="max-height: 256px; object-fit: cover;" alt="...">
+                                                <div class="card-body">
+                                                    <h5 class="card-title">' . $row['eventTitle'] . '</h5>
+                                                    <p class="card-text">' . $date . ' <small class="text-muted">' . $comdate . '</small></p>
+                                                    <p class="card-text">' . $row['eventLocation'] . '</p>
+                                                    <p class="card-text">' . $status . '</p>
+                                                    <p class="card-text" style="font-size: 14px;">' . $desc . '</p>
+                                                    <small class="text-muted">Time: ' . $start . ' - ' . $end . ' | Available Seats: ' . $row['eventSlots'] . '</small>
+                                                </div>
+                                                <div class="card-footer text-center">
+                                    <!-- if the user is already registered, the button should be disabled -->
+                                    ';
                             echo $output;
                             if ($_SESSION['GlobalJoin_an_Event'] == 1 || $row['eventSlots'] == 0 || $row['eventEnded'] == 'true') {
                                 echo '<a class="btn btn-success" hidden>Register</a>
-                            </div>
-                        </div>
-                    </div>';
+                                                </div>
+                                            </div>
+                                    ' . $badge . '
+                                    </div>
+                                </div>';
                             } else {
                                 echo '<a href="../Components/eventprocess.php?ID=' . $row['eventID'] . '" class="btn btn-success">Register</a>
-                                <a id="viewEvent' . $i . '" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#UserEvent">View</a>
+                                    <a id="viewEvent' . $i . '" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#UserEvent">View</a>
+                                </div>
                             </div>
+                            ' . $badge . '
                         </div>
                     </div>
                     <script>
@@ -311,10 +346,10 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
                     }
                     ;
                     ?>
+                    </div>
                 </div>
+                <br>
             </div>
-            <br>
-        </div>
 
     </section>
     <script src="../Script/SidebarScript.js"></script>

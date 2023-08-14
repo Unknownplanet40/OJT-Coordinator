@@ -14,6 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $eventorg = $_POST['EventOrganizer'];
     $eventdesc = $_POST['EventDescription'];
     $eventslot = $_POST['EventSlot'];
+    $DateCreated = date("Y-m-d");
 
     function RandomCharacter($length)
     {
@@ -106,7 +107,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $eventloc = str_replace("'", "\'", $eventloc);
     $eventdesc = str_replace("'", "\'", $eventdesc);
 
-    $sql = "INSERT INTO tbl_events(eventID, eventTitle, eventDescription, eventImage, eventDate, eventStartTime, eventEndTime, eventType, eventCompletion, eventEnded, eventLocation, eventSlots, eventOrganizer) VALUES ('$eventid', '$eventitle', '$eventdesc', '$eventimg', '$eventdate', '$eventstart', '$eventend', '$eventtype', '$eventcom', 'false', '$eventloc', '$eventslot', '$eventorg')";
+    $sql = "INSERT INTO tbl_events(eventID, eventTitle, eventDescription, eventImage, eventDate, eventStartTime, eventEndTime, eventType, eventCompletion, eventEnded, eventLocation, eventSlots, eventOrganizer, eventCreated) VALUES ('$eventid', '$eventitle', '$eventdesc', '$eventimg', '$eventdate', '$eventstart', '$eventend', '$eventtype', '$eventcom', 'false', '$eventloc', '$eventslot', '$eventorg', '$DateCreated')";
     $result = mysqli_query($conn, $sql);
 
     if ($result) {

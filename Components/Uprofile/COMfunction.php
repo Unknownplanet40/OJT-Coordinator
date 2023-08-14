@@ -8,19 +8,20 @@ print_r($_POST);
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $name = $_POST['name'];
-    $email = $_POST['pword'];
+    $email = $_POST['email'];
     $address = $_POST['Address'];
     $city = $_POST['city'];
     $province = $_POST['province'];
     $mail = $_POST['email'];
     $phone = $_POST['phone'];
     $birth =  date('Y-m-d', strtotime($_POST['birth']));
-    $gender  = $_POST[$_POST['phone']];
+    $gender  = $_POST['gender'];
     $age = $_POST['age'];
+    $zip = $_POST['zipcode'];
 
     $ID = $_SESSION['GlobalID'];
 
-    $sql = "UPDATE tbl_trainee SET name = '$name', email = '$email', address = '$address', city = '$city', province = '$province', phone = '$phone', birthdate = '$birth', gender = '$gender', age = '$age' WHERE UID = $ID";
+    $sql = "UPDATE tbl_trainee SET name = '$name', email = '$email', address = '$address', city = '$city', province = '$province', phone = '$phone', birthdate = '$birth', gender = '$gender', age = '$age', postal_code = '$zip' WHERE UID = $ID";
     $result = mysqli_query($conn, $sql);
 
     if ($result) {

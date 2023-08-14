@@ -227,14 +227,12 @@ function MonthlyChart($month)
                             <tr>
                                 <th scope="col" title="Profile Picture" class="text-center">Profile</th>
                                 <th scope="col" title="Full Name">Name</th>
-                                <th scope="col">Username</th>
-                                <th scope="col" title="Email Address">Email</th>
                                 <th scope="col" title="Department">Dept.</th>
                                 <th scope="col">Gender</th>
-                                <th scope="col" title="Deployed to a field">DPY</th>
-                                <th scope="col" title="Vaccinated">VAC</th>
-                                <th scope="col" title="Evaluated the Training">EVL</th>
-                                <th scope="col" title="Completed the Training">CMP</th>
+                                <th scope="col" class="text-center" title="Deployed to a field">Deployed</th>
+                                <th scope="col" class="text-center" title="Vaccinated">Vaccinated
+                                <th scope="col" class="text-center" title="Evaluated Trainee">Evaluated</th>
+                                <th scope="col" class="text-center" title="Completed Program">Completed</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -279,20 +277,18 @@ function MonthlyChart($month)
                                     echo '<tr>
                                     <td class="text-center"><img src="' . $row['image'] . '" alt="Profile" class="rounded-circle img-fluid" style="width: 50px; height: 50px;"></td>
                                     <td class="text-truncate" style="max-width: 100px;" title="' . $row['name'] . '">' . $row['name'] . '</td>
-                                    <td class="text-truncate" style="max-width: 100px;">' . $row['trainee_uname'] . '</td>
-                                    <td class="text-truncate" style="max-width: 100px;"><a href="mailto:' . $row['email'] . '" class="text-decoration-none text-white" title="' . $row['email'] . '">' . $row['email'] . '</a></td>
                                     <td class="text-truncate" style="max-width: 100px;">' . $row['department'] . '</td>
                                     <td class="text-truncate" style="max-width: 100px;">' . $GEN . '</td>
-                                    <td class="text-truncate" style="max-width: 100px;">' . $Progstat . '</td>
-                                    <td class="text-truncate" style="max-width: 100px;">' . $Vaccinated . '</td>
-                                    <td class="text-truncate" style="max-width: 100px;">' . $Evaluated . '</td>
-                                    <td class="text-truncate" style="max-width: 100px;">' . $Status . '</td>
+                                    <td class="text-truncate text-center" style="max-width: 100px;">' . $Progstat . '</td>
+                                    <td class="text-truncate text-center" style="max-width: 100px;">' . $Vaccinated . '</td>
+                                    <td class="text-truncate text-center" style="max-width: 100px;">' . $Evaluated . '</td>
+                                    <td class="text-truncate text-center" style="max-width: 100px;">' . $Status . '</td>
                                     </tr>';
                                     $i++;
                                 }
                             } else {
                                 echo '<tr>
-                                <th colspan="10" class="text-center">No data available</th>
+                                <th colspan="10" class="text-center">No Trainee\'s in the System</th>
                             </tr>';
                             }
                             ?>
@@ -350,7 +346,7 @@ function MonthlyChart($month)
                                     </div>
                                     <div class="col-4">
                                         <div class="d-flex justify-content-center">
-                                            List of Program's in the System
+                                            List of Assigned Programs to the Trainees
                                         </div>
                                     </div>
                                 </div>
@@ -379,13 +375,14 @@ function MonthlyChart($month)
                                     $date = date("M d, Y", strtotime($row['start_date']));
                                     $start = date("h:i A", strtotime($row['start_time']));
                                     $end = date("h:i A", strtotime($row['end_time']));
+                                    $enddate = date("M d, Y", strtotime($row['end_date']));
 
 
                                     echo '<tr>
                                     <th scope="row">' . $i . '</th>
                                     <td class="text-truncate" style="max-width: 100px;" title="' . $row['title'] . '">' . $row['title'] . '</td>
                                     <td class="text-truncate" style="max-width: 100px;" title="' . $row['description'] . '">' . $row['description'] . '</td>
-                                    <td class="text-truncate" style="max-width: 100px;">' . $date . '</td>
+                                    <td class="text-truncate" style="max-width: 100px;" title="' . $date . ' - ' . $enddate . '">' . $date . ' - ' . $enddate . '</td>
                                     <td class="text-truncate" style="max-width: 100px;" title="' . $start . ' - ' . $end . '">' . $start . ' - ' . $end . '</td>
                                     <td class="text-truncate" style="max-width: 100px;">' . $row['Duration'] . ' weeks</td>
                                     <td class="text-truncate" style="max-width: 100px;">' . $row['hours'] . '</td>
@@ -468,12 +465,12 @@ function MonthlyChart($month)
                                 <th scope="col" title="Event type">Type</th>
                                 <th scope="col" title="Start and End Time of the Event">Time</th>
                                 <th scope="col" title="Available Slots">Slots</th>
-                                <th scope="col" title="Event Ended">Ended</th>
+                                <th scope="col" title="Status of the Event">Status</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php
-                            $sql = "SELECT * FROM tbl_events ORDER BY eventTitle ASC";
+                            $sql = "SELECT * FROM tbl_events ORDER BY eventDate DESC";
                             $result = mysqli_query($conn, $sql);
 
                             if (mysqli_num_rows($result) > 0) {
@@ -485,9 +482,9 @@ function MonthlyChart($month)
                                     $date = date("M d, Y", strtotime($row['eventDate']));
 
                                     if($row['eventEnded'] == 'true'){
-                                        $Ended = '<span class="text-warning">Yes</span>';
+                                        $Ended = '<span class="text-secondary">Ended</span>';
                                     }else{
-                                        $Ended = '<span class="text-secondary">No</span>';
+                                        $Ended = '<span class="text-warning">Ongoing</span>';
                                     }
 
                                     echo '<tr>
@@ -505,7 +502,7 @@ function MonthlyChart($month)
                                 }
                             } else {
                                 echo '<tr>
-                                <th colspan="10" class="text-center">No Program Available at the moment</th>
+                                <th colspan="10" class="text-center">NO EVENTS FOUND</th>
                             </tr>';
                             }
                             ?>

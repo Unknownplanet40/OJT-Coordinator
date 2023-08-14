@@ -119,11 +119,8 @@
                             </div>
                             <div class="col-md-2">
                                 <label for="COMgender" class="form-label d-block text-truncate">Sex</label>
-                                <select id="COMgender" name="gender" class="form-select form-select-sm">
-                                    <option selected hidden>
-                                        <?php echo $_SESSION['GlobalGender'];
-                                        ?>
-                                    </option>
+                                <select id="COMgender" name="gender" class="form-select form-select-sm"
+                                value="<?php echo $_SESSION['GlobalGender']; ?>">
                                     <option value="male">Male</option>
                                     <option value="female">Female</option>
                                 </select>

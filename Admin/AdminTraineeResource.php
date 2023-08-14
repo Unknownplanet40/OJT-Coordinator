@@ -39,7 +39,7 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
     ?>
     <section class="home">
         <div class="text">
-            <h1 class="text-warning">Resources of Trainees</h1>
+            <h1 class="text-warning">Documents</h1>
         </div>
         <div class="container-fluid" style="width: 98%;">
             <p class="text-start text-secondary">

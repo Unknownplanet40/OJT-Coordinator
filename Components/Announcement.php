@@ -20,9 +20,9 @@ if ($today >= $end) {
     $result = mysqli_query($conn, $sql);
     echo '<script>console.log("Announcement Ended")</script>';
 } else {
-    $output =
+    $announcement = 
         '
-            <div class="alert alert-success fade show" role="alert">
+            <div class="alert alert-success fade show user-select-none" role="alert">
                 <h4 class="alert-heading">' . $row['Title'] . '</h4>
                 <p>' . $row['Description'] . '</p>
                 <p class="mb-0 text-end">Posted by: ' . $row['PostedBy'] . '</p>
@@ -31,7 +31,7 @@ if ($today >= $end) {
             </div>
         ';
 
-    echo $output;
+    echo $announcement;
 }
 
 

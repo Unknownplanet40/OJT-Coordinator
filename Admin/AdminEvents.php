@@ -1,6 +1,7 @@
 <?php
 session_start();
 @include_once("../Database/config.php");
+date_default_timezone_set('Asia/Manila');
 
 if (!isset($_SESSION['DatahasbeenFetched'])) {
     header("Location: ../Login.php");
@@ -22,15 +23,24 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
     $result = mysqli_query($conn, $sql);
 
     if (mysqli_num_rows($result) > 0) {
+        $currentDate = date("Y-m-d");
+        $currenttime = date("H:i:s");
         while ($row = mysqli_fetch_assoc($result)) {
             $ID = $row['eventID'];
-            $currentDate = date("Y-m-d");
             $eventCompletion = $row['eventCompletion'];
-            // check if the completion date is equal or greater than the current date
-            if ($eventCompletion <= $currentDate) {
-                $sql = "UPDATE tbl_events SET eventEnded='true' WHERE eventID='$ID'";
+            $eventDateStarted = $row['eventDate'];
+            $eventEnd = $row['eventEndTime'];
+            //check if event date is equal to completion date
+            if($eventDateStarted == $eventCompletion){
+                //check if current time is greater than the event end time
+                if($currenttime >= $eventEnd){
+                    $sql = "UPDATE tbl_events SET eventEnded='true' WHERE eventID='$ID'";
+                }
             } else {
-                $sql = "UPDATE tbl_events SET eventEnded='false' WHERE eventID='$ID'";
+                //check if current date is greater than the event completion date
+                if($currentDate >= $eventCompletion){
+                    $sql = "UPDATE tbl_events SET eventEnded='true' WHERE eventID='$ID'";
+                }
             }
             mysqli_query($conn, $sql);
         }
@@ -124,14 +134,14 @@ unset($_POST['resetEvent']);
                         <div class="col-md-4">
                             <div class="form-floating mb-3 text-light">
                                 <input type="date" class="form-control text-bg-dark" id="startDate" name="startDate"
-                                    placeholder="Start Date" required>
+                                    placeholder="Start Date" required min="<?php echo date('Y-m-d'); ?>">
                                 <label for="startDate">Start Date</label>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-floating mb-3 text-light">
                                 <input type="date" class="form-control text-bg-dark" id="EndDate" name="EndDate"
-                                    placeholder="End Date" required>
+                                    placeholder="End Date" required min="<?php echo date('Y-m-d'); ?>">
                                 <label for="EndDate">End Date</label>
                             </div>
                         </div>
@@ -154,8 +164,6 @@ unset($_POST['resetEvent']);
                                 if (end <= start) {
                                     Ann_error.innerHTML = "End date cannot be less or equal to start date";
                                     EndDate.value = "";
-                                } else {
-                                    Ann_error.innerHTML = "";
                                 }
                             });
                         </script>
@@ -200,7 +208,7 @@ unset($_POST['resetEvent']);
                         <div class="col-md-4">
                             <div class="form-floating mb-3 text-light">
                                 <input type="date" class="form-control text-bg-dark" id="EventDate" name="EventDate"
-                                    placeholder="Event Date" required>
+                                    placeholder="Event Date" required min="<?php echo date('Y-m-d'); ?>">
                                 <label for="EventDate">Event Date</label>
                             </div>
                         </div>
@@ -234,8 +242,9 @@ unset($_POST['resetEvent']);
                         </div>
                         <div class="col-md-4">
                             <div class="form-floating mb-3 text-light">
-                                <input type="date" class="form-control text-bg-dark" id="EventCompletion"
-                                    name="EventCompletion" placeholder="Event Completion Date" required>
+                                <input type="date" class="form-control text-bg-dark date" id="EventCompletion"
+                                    name="EventCompletion" placeholder="Event Completion Date" required
+                                    min="<?php echo date('Y-m-d'); ?>">
                                 <label for="EventCompletion">Event Completion Date</label>
                             </div>
                         </div>
@@ -293,7 +302,7 @@ unset($_POST['resetEvent']);
                                     // current date
 
                                     let today = new Date();
-                                    toda = today.toISOString().slice(0, 10);
+                                    today = today.toISOString().slice(0, 10);
 
                                     error.innerHTML = "";
 
@@ -336,6 +345,17 @@ unset($_POST['resetEvent']);
                                     EventImage.addEventListener("change", function () {
                                         if (EventImage.value == "") {
                                             error.innerHTML = "Event image cannot be empty";
+                                        } else {
+                                            error.innerHTML = "";
+                                        }
+                                    });
+
+                                    EventEnd.addEventListener("change", function () {
+                                        let start = EventStart.value;
+                                        let end = EventEnd.value;
+                                        if (start > end) {
+                                            error.innerHTML = "Event end time cannot be less than start time";
+                                            EventEnd.value = "";
                                         } else {
                                             error.innerHTML = "";
                                         }
@@ -387,7 +407,7 @@ unset($_POST['resetEvent']);
 
                             // get how many days from the current date to the event date
                             $currentDate = date("Y-m-d");
-                            $eventDate = $row['eventDate'];
+                            $eventDate = $row['eventCreated'];
                             $diff = abs(strtotime($eventDate) - strtotime($currentDate));
                             $days = floor($diff / (60 * 60 * 24));
 

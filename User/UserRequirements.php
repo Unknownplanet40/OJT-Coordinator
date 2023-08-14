@@ -362,7 +362,11 @@ if (isset($_POST['submitm'])) {
                                     <div class="fw-bold">Resume</div>
                                     <p>
                                         <?php if ($row['Doc1_stat'] == 2) {
-                                            echo "You need to resubmit This file!";
+                                            echo "<span class='text-danger'>File Rejected! <br> Need to upload again.</span>";
+                                        } elseif ($row['Doc1_stat'] == 1) {
+                                            echo "<span class='text-success'>File Approved!</span>";
+                                        } else {
+                                            echo "<span class='text-warning'>Pending...</span>";
                                         } ?>
                                     </p>
                                 </div>
@@ -384,7 +388,11 @@ if (isset($_POST['submitm'])) {
                                     </div>
                                     <p>
                                         <?php if ($row['Doc4_stat'] == 2) {
-                                            echo "You need to resubmit this file!";
+                                            echo "<span class='text-danger'>File Rejected! <br> Need to upload again.</span>";
+                                        } elseif ($row['Doc4_stat'] == 1) {
+                                            echo "<span class='text-success'>File Approved!</span>";
+                                        } else {
+                                            echo "<span class='text-warning'>Pending...</span>";
                                         } ?>
                                     </p>
                                 </div>
@@ -404,9 +412,15 @@ if (isset($_POST['submitm'])) {
                             <li class="list-group-item d-flex justify-content-between align-items-start">
                                 <div class="ms-2 me-auto">
                                     <div class="fw-bold" title="Good Moral Certificate">GMC</div>
-                                    <?php if ($row['Doc7_stat'] == 2) {
-                                        echo "You need to resubmit This file!";
-                                    } ?>
+                                    <p>
+                                        <?php if ($row['Doc7_stat'] == 2) {
+                                            echo "<span class='text-danger'>File Rejected! <br> Need to upload again.</span>";
+                                        } elseif ($row['Doc7_stat'] == 1) {
+                                            echo "<span class='text-success'>File Approved!</span>";
+                                        } else {
+                                            echo "<span class='text-warning'>Pending...</span>";
+                                        } ?>
+                                    </p>
                                     </p>
                                 </div>
                                 <form method="POST" action="<?php basename($_SERVER['PHP_SELF']) ?>"
@@ -425,8 +439,12 @@ if (isset($_POST['submitm'])) {
                                 <div class="ms-2 me-auto">
                                     <div class="fw-bold">Waiver</div>
                                     <p>
-                                        <?php if ($row['Doc5_stat'] == 2) {
-                                            echo "You need to resubmit This file!";
+                                    <?php if ($row['Doc5_stat'] == 2) {
+                                            echo "<span class='text-danger'>File Rejected! <br> Need to upload again.</span>";
+                                        } elseif ($row['Doc5_stat'] == 1) {
+                                            echo "<span class='text-success'>File Approved!</span>";
+                                        } else {
+                                            echo "<span class='text-warning'>Pending...</span>";
                                         } ?>
                                     </p>
                                 </div>
@@ -446,8 +464,12 @@ if (isset($_POST['submitm'])) {
                                 <div class="ms-2 me-auto">
                                     <div class="fw-bold">Birth Certificate</div>
                                     <p>
-                                        <?php if ($row['Doc3_stat'] == 2) {
-                                            echo "You need to resubmit This file!";
+                                    <?php if ($row['Doc3_stat'] == 2) {
+                                            echo "<span class='text-danger'>File Rejected! <br> Need to upload again.</span>";
+                                        } elseif ($row['Doc3_stat'] == 1) {
+                                            echo "<span class='text-success'>File Approved!</span>";
+                                        } else {
+                                            echo "<span class='text-warning'>Pending...</span>";
                                         } ?>
                                     </p>
                                 </div>
@@ -466,8 +488,12 @@ if (isset($_POST['submitm'])) {
                                 <div class="ms-2 me-auto">
                                     <div class="fw-bold">Medical Certificate</div>
                                     <p>
-                                        <?php if ($row['Doc6_stat'] == 2) {
-                                            echo "You need to resubmit This file!";
+                                    <?php if ($row['Doc6_stat'] == 2) {
+                                            echo "<span class='text-danger'>File Rejected! <br> Need to upload again.</span>";
+                                        } elseif ($row['Doc6_stat'] == 1) {
+                                            echo "<span class='text-success'>File Approved!</span>";
+                                        } else {
+                                            echo "<span class='text-warning'>Pending...</span>";
                                         } ?>
                                     </p>
                                 </div>
@@ -487,8 +513,12 @@ if (isset($_POST['submitm'])) {
                                 <div class="ms-2 me-auto">
                                     <div class="fw-bold">Registration Form</div>
                                     <p>
-                                        <?php if ($row['Doc8_stat'] == 2) {
-                                            echo "You need to resubmit This file!";
+                                    <?php if ($row['Doc8_stat'] == 2) {
+                                            echo "<span class='text-danger'>File Rejected! <br> Need to upload again.</span>";
+                                        } elseif ($row['Doc8_stat'] == 1) {
+                                            echo "<span class='text-success'>File Approved!</span>";
+                                        } else {
+                                            echo "<span class='text-warning'>Pending...</span>";
                                         } ?>
                                     </p>
                                 </div>
@@ -508,10 +538,13 @@ if (isset($_POST['submitm'])) {
                                 <div class="ms-2 me-auto">
                                     <div class="fw-bold">Placement Form</div>
                                     <p>
-                                        <?php if ($row['Doc2_stat'] == 2) {
-                                            echo "You need to resubmit This file!";
+                                    <?php if ($row['Doc2_stat'] == 2) {
+                                            echo "<span class='text-danger'>File Rejected! <br> Need to upload again.</span>";
+                                        } elseif ($row['Doc2_stat'] == 1) {
+                                            echo "<span class='text-success'>File Approved!</span>";
+                                        } else {
+                                            echo "<span class='text-warning'>Pending...</span>";
                                         } ?>
-                                    </p>
                                 </div>
                                 <form method="POST" action="<?php basename($_SERVER['PHP_SELF']) ?>"
                                     enctype="multipart/form-data" <?php if (isset($PlacementForm))
@@ -531,9 +564,13 @@ if (isset($_POST['submitm'])) {
                                     <div class="ms-2 me-auto">
                                         <div class="fw-bold">Evaluation Form</div>
                                         <p>
-                                            <?php if ($row['Doc10_stat'] == 2) {
-                                                echo "You need to resubmit This file!";
-                                            } ?>
+                                        <?php if ($row['Doc10_stat'] == 2) {
+                                            echo "<span class='text-danger'>File Rejected! <br> Need to upload again.</span>";
+                                        } elseif ($row['Doc10_stat'] == 1) {
+                                            echo "<span class='text-success'>File Approved!</span>";
+                                        } else {
+                                            echo "<span class='text-warning'>Pending...</span>";
+                                        } ?>
                                         </p>
                                     </div>
                                     <form method="POST" action="<?php basename($_SERVER['PHP_SELF']) ?>"
@@ -552,9 +589,13 @@ if (isset($_POST['submitm'])) {
                                     <div class="ms-2 me-auto">
                                         <div class="fw-bold">Narrative Report</div>
                                         <p>
-                                            <?php if ($row['Doc11_stat'] == 2) {
-                                                echo "You need to resubmit This file!";
-                                            } ?>
+                                        <?php if ($row['Doc11_stat'] == 2) {
+                                            echo "<span class='text-danger'>File Rejected! <br> Need to upload again.</span>";
+                                        } elseif ($row['Doc11_stat'] == 1) {
+                                            echo "<span class='text-success'>File Approved!</span>";
+                                        } else {
+                                            echo "<span class='text-warning'>Pending...</span>";
+                                        } ?>
                                         </p>
                                     </div>
                                     <form method="POST" action="<?php basename($_SERVER['PHP_SELF']) ?>"
@@ -573,9 +614,13 @@ if (isset($_POST['submitm'])) {
                                     <div class="ms-2 me-auto">
                                         <div class="fw-bold">Daily Time Record</div>
                                         <p>
-                                            <?php if ($row['Doc12_stat'] == 2) {
-                                                echo "You need to resubmit This file!";
-                                            } ?>
+                                        <?php if ($row['Doc12_stat'] == 2) {
+                                            echo "<span class='text-danger'>File Rejected! <br> Need to upload again.</span>";
+                                        } elseif ($row['Doc12_stat'] == 1) {
+                                            echo "<span class='text-success'>File Approved!</span>";
+                                        } else {
+                                            echo "<span class='text-warning'>Pending...</span>";
+                                        } ?>
                                         </p>
                                     </div>
                                     <form method="POST" action="<?php basename($_SERVER['PHP_SELF']) ?>"
@@ -594,9 +639,13 @@ if (isset($_POST['submitm'])) {
                                     <div class="ms-2 me-auto">
                                         <div class="fw-bold text-truncate" title="Certificate of Completion">COC</div>
                                         <p>
-                                            <?php if ($row['Doc13_stat'] == 2) {
-                                                echo "You need to resubmit This file!";
-                                            } ?>
+                                        <?php if ($row['Doc13_stat'] == 2) {
+                                            echo "<span class='text-danger'>File Rejected! <br> Need to upload again.</span>";
+                                        } elseif ($row['Doc13_stat'] == 1) {
+                                            echo "<span class='text-success'>File Approved!</span>";
+                                        } else {
+                                            echo "<span class='text-warning'>Pending...</span>";
+                                        } ?>
                                         </p>
                                     </div>
                                     <form method="POST" action="<?php basename($_SERVER['PHP_SELF']) ?>"
@@ -618,7 +667,8 @@ if (isset($_POST['submitm'])) {
                     &bull; <small class="text-muted">PDF, JPG, PNG and DOCX files are allowed and maximum file size
                         is 3mb</small>
                     <br>
-                    &bull; <small class="text-muted">You can hover over the file name to view the full form of the abbreviation.</small>
+                    &bull; <small class="text-muted">You can hover over the file name to view the full form of the
+                        abbreviation.</small>
                     <br>
                     &bull; <small class="text-muted">If you have completed your OJT, you can now submit the Evaluation
                         Form, Narrative Report, Daily Time Record and Certificate of Completion.</small>

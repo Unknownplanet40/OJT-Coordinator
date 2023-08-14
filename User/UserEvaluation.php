@@ -44,6 +44,7 @@ if (mysqli_num_rows($result) > 0) {
         $Total_Score = $row['Total'];
         $fed = $row['feedback'];
         $evaby = $row['evaluated_by'];
+        $datetaken = date("M d, Y - h:i A", strtotime($row['date_Taken']));
 
     } else {
         $showForm = null;

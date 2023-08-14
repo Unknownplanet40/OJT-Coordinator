@@ -1,6 +1,7 @@
 <?php
 session_start();
 @include_once("../../Database/config.php");
+date_default_timezone_set("Asia/Manila");
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $ID = $_POST['EvID'];
