@@ -89,7 +89,7 @@
                 </li>
 
                 <li class="nav-link" title="Program Details">
-                    <a <?php echo (basename($_SERVER['PHP_SELF']) == "UserProgram.php") ? "class='active'" : "href='../User/UserProgram.php'"; ?>>
+                    <a <?php echo (basename($_SERVER['PHP_SELF']) == "UserProgram.php" || basename($_SERVER['PHP_SELF']) == "UserNoProgram.php") ? "class='active'" : "href='../User/UserProgram.php'"; ?>>
                         <i class='icon'>
                             <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 96 960 960" width="24">
                                 <path

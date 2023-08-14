@@ -19,6 +19,7 @@ if ($isdebugON) {
   } else {
     $error_codes = 0;
   }
+  $fix = 0;
 }
 
 if (isset($error_codes)) {
@@ -175,6 +176,15 @@ if (isset($error_codes)) {
       $code_title = "HTTP Version Not Supported";
       $default_message = "The server does not support the HTTP protocol version used in the request.";
       break;
+    
+      //TCPDF ERROR
+    case 1000:
+      $default_code = 1000;
+      $code_title = "TCPDF ERROR";
+      $default_message = "TCPDF requires the Imagick or GD extension to handle PNG images with alpha channel.";
+      $fix = 1;
+      break;
+
     default:
       $default_code = 404;
       $code_title = "Page Not Found";
@@ -230,7 +240,11 @@ if (isset($error_codes)) {
           <div class="action-link-wrap">
             <!--this will go to the previous page-->
             <a onclick="history.back(-1)" class="link-button link-back-button">Go Back</a>
-            <a href="" class="link-button" hidden>Extra button for later</a>
+            <?php 
+              if ($fix == 1) { 
+                echo '<a href="./Components/TCPDF/tcpdf_Fix.html" class="link-button">Here how to fix it</a>';
+              }
+            ?>
           </div>
         </div>
       </div>

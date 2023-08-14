@@ -349,10 +349,12 @@ if (isset($_POST['update'])) {
                     </div>
                     <div class="input-group mb-3">
                         <span class="input-group-text text-bg-success w-25">Department:</span>
-                        <select name="updepartment" class="form-select" id="updepartment"
-                            value="<?php echo isset($department) ? $department : "Not Available"; ?>" required>
-                            <option value="BSIT">Information Technology</option>
-                            <option value="BSCS">Computer Science</option>
+                        <select name="updepartment" class="form-select" id="updepartment" required>
+                            <option value="BSIT" <?php if ($department === "BSIT")
+                                echo "selected"; ?>>
+                                Information Technology</option>
+                            <option value="BSCS" <?php if ($department === "BSCS")
+                                echo "selected"; ?>>Computer Science
                         </select>
                     </div>
                     <div class="input-group mb-3">

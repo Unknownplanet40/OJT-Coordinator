@@ -1,4 +1,5 @@
 <?php
+
 // Include the TCPDF library
 @require_once('../Components/TCPDF/tcpdf.php');
 
@@ -20,13 +21,21 @@ $pdf->SetKeywords('OJT, PDF, Placement Form');
 // Get the captured output
 $html = ob_get_clean();
 
-// Add a page
-$pdf->AddPage();
+// Check if the GD extension is installed
+if (!extension_loaded('gd')) {
+    // The GD extension is not installed
+    header('Location: ../ErrorPage.php?error=1000');
+} else {
+    // The GD extension is installed
+    // Continue generating the PDF document
+    // Add a page
+    $pdf->AddPage();
 
-// Convert the HTML into PDF
-$pdf->writeHTML($html, true, false, true, false, '');
+    // Convert the HTML into PDF
+    $pdf->writeHTML($html, true, false, true, false, '');
 
-// Output the PDF as a file named "PlacementForm.pdf" and force download
-$pdf->Output('PlacementForm.pdf', 'D');
+    // Output the PDF as a file named "PlacementForm.pdf" and force download
+    $pdf->Output('PlacementForm.pdf', 'D');
+}
 
 ?>
