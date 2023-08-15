@@ -1,6 +1,7 @@
 <?php
 session_start();
 @include_once("../../Database/config.php");
+date_default_timezone_set('Asia/Manila');
 
 print_r($_POST);
 if ($_SERVER["REQUEST_METHOD"] == "POST") {

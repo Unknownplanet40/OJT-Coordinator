@@ -59,7 +59,7 @@ if (isset($_SESSION['autoUsername']) && isset($_SESSION['autoPassword'])) {
 <body style="color: #fff;">
     <?php echo NewAlertBox();
     $_SESSION['Show'] = false; ?>
-    <div class="container-fluid">
+    <div class="d-flex justify-content-center align-items-center">
         <div class="registration-form">
             <form method="POST" action="./Components/Authentication.php">
                 <!-- this function is used to send the data to the same page -->

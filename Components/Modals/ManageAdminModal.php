@@ -80,7 +80,7 @@
                         <div class="col-md-6 mb-3">
                             <label for="CreDept" class="form-label">Department</label>
                             <select class="form-select" id="CreDept" name="CreDept" required title="Select Department">
-                                <option selected hidden></option>
+                                <option selected hidden>Choose...</option>
                                 <option value="BSCS">Computer Science</option>
                                 <option value="BSIT">Information Technology</option>
                             </select>
@@ -88,7 +88,7 @@
                         <div class="col-md-6 mb-3">
                             <label for="CreRole" class="form-label">Role</label>
                             <select class="form-select" id="CreRole" name="CreRole" required title="Select Role">
-                                <option selected hidden></option>
+                                <option selected hidden>Choose...</option>
                                 <option value="administrator">Administrator</option>
                                 <option value="moderator">Moderator(Coordinator)</option>
                             </select>

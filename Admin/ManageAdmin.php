@@ -175,7 +175,7 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
                                     $dateCreated = date("F j, Y", strtotime($row['date_created']));
 
                                     if (isset($row['last_login'])) {
-                                        $lastlog = date("h:i A", strtotime($row['last_login']));
+                                        $lastlog = date("F j, Y - h:i A", strtotime($row['last_login']));
                                     } else {
                                         $lastlog = "Never";
                                     }
