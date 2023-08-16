@@ -2,30 +2,30 @@
     <div class="table-responsive-md rounded" style="min-width: 460px;">
         <ul class="list-group" style="min-width: 460px;">
             <li class="list-group-item text-bg-success" aria-current="true">Trainee Details</li>
-            <li class="list-group-item bg-dark">
+            <li class="list-group-item bg-light">
                 <span class="text-muted">Trainee ID: </span>
-                <b class="text-light">
+                <b class="text-dark">
                     <?php echo $ID; ?>
                 </b>
                 <input type="hidden" name="EvID" value="<?php echo $ID; ?>">
             </li>
-            <li class="list-group-item bg-dark">
+            <li class="list-group-item bg-light">
                 <span class="text-muted">Trainee Name: </span>
-                <b class="text-light">
+                <b class="text-dark">
                     <?php echo $name; ?>
                 </b>
                 <input type="hidden" name="EvName" value="<?php echo $name; ?>">
             </li>
-            <li class="list-group-item bg-dark">
+            <li class="list-group-item bg-light">
                 <span class="text-muted">Trainee Email: </span>
-                <b class="text-light">
+                <b class="text-dark">
                     <?php echo $email; ?>
                 </b>
                 <input type="hidden" name="EvEmail" value="<?php echo $email; ?>">
             </li>
-            <li class="list-group-item bg-dark">
+            <li class="list-group-item bg-light">
                 <span class="text-muted">Trainee Username: </span>
-                <b class="text-light">
+                <b class="text-dark">
                     <?php echo $trainee_uname; ?>
                 </b>
                 <input type="hidden" name="EvUname" value="<?php echo $trainee_uname; ?>">
@@ -33,14 +33,14 @@
         </ul>
         <hr class="text-muted">
         <div class="contailner-lg">
-            <table class="table table-dark caption-top table-borderless table-sm" style="min-width: 460px;">
+            <table class="table table-light caption-top table-borderless table-sm" style="min-width: 460px;">
                 <style>
                     .tbhead {
                         width: 50%;
                         min-width: 360px;
                     }
                 </style>
-                <caption class="text-center text-bg-dark rounded-top">
+                <caption class="text-center text-bg-light rounded-top">
                     <p class="text-uppercase">Trainee Evaluation Form</p>
                     <div class="row">
                         <div class="col">
@@ -258,7 +258,7 @@
                             <small class="text-muted">Comments, general impressions & observations regarding the
                                 capability,
                                 behavior's & personality of the trainee.</small>
-                            <textarea class="form-control text-bg-dark" name="Comments" id="Comments" cols="30" rows="8"
+                            <textarea class="form-control text-bg-light" name="Comments" id="Comments" cols="30" rows="8"
                                 maxlength="1000" placeholder="Maximum of 1,000 characters"></textarea>
                             <br>
                         </td>
@@ -331,8 +331,8 @@
                         </tr>';
 
                         $output =
-                            '<div class="container-lg rounded text-bg-dark">
-                        <table class="table table-dark table-borderless table-sm" id="EvalResult">
+                            '<div class="container-lg rounded text-bg-light">
+                        <table class="table table-light table-borderless table-sm" id="EvalResult">
                             <tbody>
                                 <tr class="text-uppercase">
                                     <th scope="row" class="text-center">Category</th>
@@ -383,7 +383,7 @@
                                     <td class="text-start text-success" scope="row" colspan="6">Feedback</td>
                                 </tr>
                                 <tr>
-                                    <td class="text-start text-light text-wrap user-select-none" colspan="6" style="text-align: justify;">' . $Comment . '</td>
+                                    <td class="text-start text-dark text-wrap user-select-none" colspan="6" style="text-align: justify;">' . $Comment . '</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -421,8 +421,8 @@
                             backdrop: `rgba(0,0,0,0.4)`,
                             allowOutsideClick: false,
                             allowEscapeKey: false,
-                            background: "#19191a",
-                            color: "#fff"
+                            background: "#fff",
+                            color: "#000"
                         }).then((result) => {
                             if (result.isConfirmed) {
                                 form.submit();
