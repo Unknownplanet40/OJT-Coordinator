@@ -30,14 +30,14 @@
                 position: "top",
                 text: "Gender",
                 fontSize: 18,
-                fontColor: "#fff",
+                fontColor: "#00",
                 fontFamily: "poppins",
             },
             legend: {
-                display: true,
+                display: false,
                 position: "left",
                 labels: {
-                    fontColor: "#fff",
+                    fontColor: "#000",
                     fontFamily: "poppins",
                     fontSize: 12,
                 },
@@ -45,9 +45,11 @@
                     e.stopPropagation();
                 },
             },
-            animation: {
-                animateScale: true,
-                animateRotate: true,
+            elements: {
+                arc: {
+                    borderColor: "#000",
+                    borderWidth: 1,
+                },
             },
         },
     });

@@ -197,8 +197,8 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
                                                       }
                                                     },
                                                     allowOutsideClick: () => !Swal.isLoading(),
-                                                    background: "#19191a",
-                                                    color: "#fff",
+                                                    background: "#fff",
+                                                    color: "#000",
                                                   }).then((result) => {
                                                     if (result.isConfirmed && result.value.valid) {
                                                       window.location.href = "../Components/Proccess/UpdateSuperuserAcc_USER.php?id=' . $row['UID'] . '";

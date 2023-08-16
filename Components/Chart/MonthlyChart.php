@@ -13,18 +13,18 @@
             datasets: [
                 {
                     backgroundColor: [
-                        "#FFA31A",
-                        "#FFA31A",
-                        "#FFA31A",
-                        "#FFA31A",
-                        "#FFA31A",
-                        "#FFA31A",
-                        "#FFA31A",
-                        "#FFA31A",
-                        "#FFA31A",
-                        "#FFA31A",
-                        "#FFA31A",
-                        "#FFA31A",
+                        "#3ea34c",
+                        "#3ea34c",
+                        "#3ea34c",
+                        "#3ea34c",
+                        "#3ea34c",
+                        "#3ea34c",
+                        "#3ea34c",
+                        "#3ea34c",
+                        "#3ea34c",
+                        "#3ea34c",
+                        "#3ea34c",
+                        "#3ea34c",
                     ],
                     data: [
                         <?php echo json_encode(MonthlyChart(1)); ?>,
@@ -59,7 +59,7 @@
                 position: "top",
                 text: "Monthly Registered Trainee's",
                 fontSize: 16,
-                fontColor: "#fff",
+                fontColor: "#000",
                 fontFamily: "poppins", 
             },
             legend: {
@@ -69,10 +69,10 @@
                 yAxes: [
                     {
                         gridLines: {
-                            color: "rgba(255,255,255,0.1)",
+                            color: "rgba(0,0,0,0.1)",
                         },
                         ticks: {
-                            fontColor: "#fff",
+                            fontColor: "#000",
                             fontSize: 14,
                             beginAtZero: true,
                         },
@@ -81,10 +81,10 @@
                 xAxes: [
                     {
                         gridLines: {
-                            color: "rgba(255,255,255,0.1)",
+                            color: "rgba(0,0,0,0.1)",
                         },
                         ticks: {
-                            fontColor: "#fff",
+                            fontColor: "#000",
                             fontSize: 12,
                             beginAtZero: true,
                         },

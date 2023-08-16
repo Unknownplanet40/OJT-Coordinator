@@ -84,7 +84,7 @@ if (isset($_SESSION['autoUsername']) && isset($_SESSION['autoPassword'])) {
                     <div style="margin: -20px 5px 0 5px; display: flex; justify-content: space-between;">
                         <div>
                             <input class="form-check-input" type="checkbox" id="flexCheckDefault">
-                            <label class="form-check-label" for="flexCheckDefault" style="Color: #fff;">
+                            <label class="form-check-label" for="flexCheckDefault" style="Color: #000;">
                                 Show Password
                             </label>
                         </div>
@@ -99,11 +99,14 @@ if (isset($_SESSION['autoUsername']) && isset($_SESSION['autoPassword'])) {
                         </p>
                     </div>
                 </div>
+                <div class="form-group">
+                    <p class="error text-center"></p>
+                </div>
             </form>
-            <div class="social-media error">
+            <div class="social-media error" hidden>
             </div>
-            <p class="text-muted text-center"><small>
-                    <span class="text-light">&copy; 2023. All Rights Reserved.</span>
+            <p class="text-muted text-center mt-2"><small>
+                    <span class="text-dark fw-bold">&copy; 2023. All Rights Reserved.</span>
                 </small></p>
         </div>
 

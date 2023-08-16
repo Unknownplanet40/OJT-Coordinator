@@ -234,7 +234,7 @@ if (isset($_POST['register'])) {
                     <div style="margin: -20px 5px 0 5px; display: flex; justify-content: space-between;">
                         <div>
                             <input class="form-check-input" type="checkbox" id="flexCheckDefault">
-                            <label class="form-check-label" for="flexCheckDefault" style="Color: #fff;">
+                            <label class="form-check-label" for="flexCheckDefault" style="Color: #000;">
                                 Show Password
                             </label>
                         </div>
@@ -260,8 +260,7 @@ if (isset($_POST['register'])) {
                         </p>
                     </div>
                 </div>
-            </form>
-            <div class="social-media error">
+                <div class="form-group error">
                 <p class="text-center" name="perror">
                     <?php
                     if (isset($unameAlreadyTaken)) {
@@ -338,10 +337,13 @@ if (isset($_POST['register'])) {
                         behavior: 'smooth'
                     });
                 </script>
+                </div>
+            </form>
+            <div class="social-media error" hidden>   
             </div>
-            <p class="text-light text-center"><small>
+            <p class="text-dark text-center"><small>
                     Please enter your basic information to create an account.<br>
-                    <span class="text-warning">&copy; 2023. All Rights Reserved.</span>
+                    <span class="text-success">&copy; 2023. All Rights Reserved.</span>
                 </small></p>
         </div>
     </div>

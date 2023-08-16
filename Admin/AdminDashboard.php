@@ -57,6 +57,49 @@ function femaleChart()
     }
 }
 
+// for Formating the output of the number of gender
+function formatNumberWithAbbreviation($number) {
+    $originalNumber = $number;
+    $abbreviations = array(
+        '<span class="text-secondary">K</span>',
+        '<span class="text-secondary">M</span>',
+        '<span class="text-secondary">B</span>'
+    );
+    $abbreviation = '';
+    $index = 0;
+
+    while ($number >= 1000 && $index < count($abbreviations)) {
+        $number /= 1000;
+        $abbreviation = $abbreviations[$index];
+        $index++;
+    }
+
+    if ($abbreviation !== '') {
+        $formattedNumber = number_format($number, 0) . $abbreviation;
+        $originalFormatted = number_format($originalNumber);
+    } else {
+        $formattedNumber = number_format($number);
+        $originalFormatted = number_format($originalNumber);
+    }
+
+    return array('formatted' => $formattedNumber, 'originalFormatted' => $originalFormatted);
+}
+
+$male = maleChart();
+$female = femaleChart();
+
+$maleFormattedData = formatNumberWithAbbreviation($male);
+$femaleFormattedData = formatNumberWithAbbreviation($female);
+
+$maleFormatted = $maleFormattedData['formatted'];
+$maletitle = $maleFormattedData['originalFormatted'];
+
+$femaleFormatted = $femaleFormattedData['formatted'];
+$femaletitle = $femaleFormattedData['originalFormatted'];
+
+
+
+
 function MonthlyChart($month)
 {
     global $conn;
@@ -87,7 +130,7 @@ function MonthlyChart($month)
     <title>Admin Dashboard</title>
 </head>
 
-<body class="dark adminuser user-select-none" style="min-width: 1080px;">
+<body class="adminuser user-select-none" style="min-width: 1080px;">
     <?php
     @include_once '../Components/AdminSidebar.php';
     if (isset($ShowAlert)) {
@@ -97,12 +140,13 @@ function MonthlyChart($month)
     ?>
     <section class="home">
         <div class="text">
-            <h1 class="text-warning">Dashboard</h1>
+            <h1 class="text-success">Dashboard</h1>
         </div>
         <div class="container-fluid" style="width: 98%;">
             <div class="row row-cols-1 row-cols-md-4 g-4">
                 <div class="col">
-                    <div class="card h-100" style="background: linear-gradient(to right, #2a9134 1%,#3fa34d 53%,#2a9134 100%)">
+                    <div class="card h-100"
+                        style="background: linear-gradient(to right, #2a9134 1%,#3fa34d 53%,#2a9134 100%)">
                         <div class="card-body text-light">
                             <h5 class="card-title text-uppercase d-block text-truncate">Total Trainee's</h5>
                             <h1 class="card-text text-center fw-bold">
@@ -145,16 +189,26 @@ function MonthlyChart($month)
             <br>
             <div class="row row-cols-1 row-cols-md-2 g-4">
                 <div class="col">
-                    <div class="card text-bg-dark" style="min-width: 380px;">
+                    <div class="card h-100" style="min-width: 380px;">
                         <div class="card-body">
                             <h5 class="card-title text-uppercase d-block text-truncate">Gender</h5>
                             <canvas id="gender"></canvas>
                             <?php include_once '../Components/Chart/GenderChart.php'; ?>
+                            <div class="d-flex justify-content-evenly mt-1">
+                                <p class="fs-6" title="<?php echo $maletitle; ?>">
+                                    <span class="text-uppercase" style="color: #059bff;">
+                                    Male: </span><?php echo $maleFormatted; ?>
+                                </p>
+                                <p class="fs-6" title="<?php echo $femaletitle; ?>">
+                                <span class="text-uppercase" style="color: #ff3d67;">
+                                    Female: </span><?php echo $femaleFormatted; ?>
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="col">
-                    <div class="card text-bg-dark" style="min-width: 380px;">
+                    <div class="card h-100" style="min-width: 380px;">
                         <div class="card-body">
                             <h5 class="card-title text-uppercase d-block text-truncate">Monthly Registered Trainee's
                             </h5>
@@ -169,23 +223,23 @@ function MonthlyChart($month)
             <hr class="mt-4 mb-4" style="background-color: white; height: 5px; border-radius: 5px;">
 
             <div class="container-lg table-responsive-lg">
-                <div class="container mt-5 text-bg-dark rounded" style="min-width: fit-content;">
-                    <table class="table table-hover table-dark align-middle caption-top" id="TraineeTable">
+                <div class="container mt-5 text-bg-light rounded border border-1 border-success" style="min-width: fit-content;">
+                    <table class="table table-hover align-middle caption-top" id="TraineeTable">
                         <caption>
                             <div class="container-fluid">
                                 <div class="row">
                                     <div class="col-4">
                                         <div class="input-group">
                                             <!-- In the future, I will add a Category Search -->
-                                            <span class="input-group-text text-bg-dark"
+                                            <span class="input-group-text"
                                                 title="You can search only by name">
                                                 <svg xmlns="http://www.w3.org/2000/svg" height="20"
-                                                    viewBox="0 -960 960 960" width="20" fill="var(--bs-warning)">
+                                                    viewBox="0 -960 960 960" width="20" fill="#3ea34c">
                                                     <path
                                                         d="M382.122-330.5q-102.187 0-173.861-71.674Q136.587-473.848 136.587-576q0-102.152 71.674-173.826Q279.935-821.5 382.087-821.5q102.152 0 173.826 71.674 71.674 71.674 71.674 173.861 0 40.859-12.022 76.292-12.021 35.434-33.065 64.956l212.087 212.326q12.674 12.913 12.674 28.945 0 16.033-12.913 28.707-12.674 12.674-29.326 12.674t-29.326-12.674L523.848-375.587q-29.761 21.044-65.434 33.065-35.672 12.022-76.292 12.022Zm-.035-83q67.848 0 115.174-47.326Q544.587-508.152 544.587-576q0-67.848-47.326-115.174Q449.935-738.5 382.087-738.5q-67.848 0-115.174 47.326Q219.587-643.848 219.587-576q0 67.848 47.326 115.174Q314.239-413.5 382.087-413.5Z" />
                                                 </svg>
                                             </span>
-                                            <input type="search" class="form-control text-bg-dark"
+                                            <input type="search" class="form-control"
                                                 placeholder="Search by Name" id="TraineeSearchBar">
                                             <a href="../Admin/AdminTrainees.php" class="btn btn-outline-primary">Show
                                                 more</a>
@@ -196,18 +250,19 @@ function MonthlyChart($month)
                                         <nav aria-label="Page navigation example">
                                             <ul class="pagination pagination-sm">
                                                 <li class="page-item">
-                                                    <a class="page-link text-bg-dark user-select-none" id="TraineePrevious"
-                                                        style="cursor: pointer;">
+                                                    <a class="page-link user-select-none"
+                                                        id="TraineePrevious" style="cursor: pointer;">
                                                         <span aria-hidden="true">&laquo;</span>
                                                     </a>
                                                 </li>
-                                                <li class="page-item m-1 text-bg-dark"><small
-                                                        class="text-warning text-center mx-1">Showing <span
-                                                            id="TraineeCurrentPage"></span> to <span id="TraineeTotalPage"></span> of
+                                                <li class="page-item m-1"><small
+                                                        class="text-success text-center mx-1">Showing <span
+                                                            id="TraineeCurrentPage"></span> to <span
+                                                            id="TraineeTotalPage"></span> of
                                                         <span id="TraineeTotalItem"></span> entries</small>
                                                 </li>
                                                 <li class="page-item">
-                                                    <a class="page-link text-bg-dark user-select-none" id="TraineeNext"
+                                                    <a class="page-link user-select-none" id="TraineeNext"
                                                         style="cursor: pointer;">
                                                         <span aria-hidden="true">&raquo;</span>
                                                     </a>
@@ -247,17 +302,17 @@ function MonthlyChart($month)
                                     if ($row['program'] == null) {
                                         $Progstat = '<span class="text-secondary">No</span>';
                                     } else {
-                                        $Progstat = '<span class="text-warning">Yes</span>';
+                                        $Progstat = '<span class="text-primary">Yes</span>';
                                     }
 
                                     if ($row['vaccine_Completed'] == 1) {
-                                        $Vaccinated = '<span class="text-warning">Yes</span>';
+                                        $Vaccinated = '<span class="text-primary">Yes</span>';
                                     } else {
                                         $Vaccinated = '<span class="text-secondary">No</span>';
                                     }
 
                                     if ($row['evaluated'] == 'true') {
-                                        $Evaluated = '<span class="text-warning">Yes</span>';
+                                        $Evaluated = '<span class="text-primary">Yes</span>';
                                     } else {
                                         $Evaluated = '<span class="text-secondary">No</span>';
                                     }
@@ -265,7 +320,7 @@ function MonthlyChart($month)
                                     if ($row['completed'] == null) {
                                         $Status = '<span class="text-secondary">No</span>';
                                     } else {
-                                        $Status = '<span class="text-warning">Yes</span>';
+                                        $Status = '<span class="text-primary">Yes</span>';
                                     }
 
                                     if ($row['gender'] == null) {
@@ -300,23 +355,23 @@ function MonthlyChart($month)
             <hr class="mt-4 mb-4" style="background-color: white; height: 5px; border-radius: 5px;">
 
             <div class="container-lg table-responsive-lg">
-                <div class="container mt-5 text-bg-dark rounded" style="min-width: fit-content;">
-                    <table class="table table-hover table-dark align-middle caption-top" id="ProgTable">
+                <div class="container mt-5 text-bg-light rounded border border-1 border-success" style="min-width: fit-content;">
+                    <table class="table table-hover align-middle caption-top" id="ProgTable">
                         <caption>
                             <div class="container-fluid">
                                 <div class="row">
                                     <div class="col-4">
                                         <div class="input-group">
                                             <!-- In the future, I will add a Category Search -->
-                                            <span class="input-group-text text-bg-dark"
+                                            <span class="input-group-text"
                                                 title="You can search only by name">
                                                 <svg xmlns="http://www.w3.org/2000/svg" height="20"
-                                                    viewBox="0 -960 960 960" width="20" fill="var(--bs-warning)">
+                                                    viewBox="0 -960 960 960" width="20" fill="#3ea34c">
                                                     <path
                                                         d="M382.122-330.5q-102.187 0-173.861-71.674Q136.587-473.848 136.587-576q0-102.152 71.674-173.826Q279.935-821.5 382.087-821.5q102.152 0 173.826 71.674 71.674 71.674 71.674 173.861 0 40.859-12.022 76.292-12.021 35.434-33.065 64.956l212.087 212.326q12.674 12.913 12.674 28.945 0 16.033-12.913 28.707-12.674 12.674-29.326 12.674t-29.326-12.674L523.848-375.587q-29.761 21.044-65.434 33.065-35.672 12.022-76.292 12.022Zm-.035-83q67.848 0 115.174-47.326Q544.587-508.152 544.587-576q0-67.848-47.326-115.174Q449.935-738.5 382.087-738.5q-67.848 0-115.174 47.326Q219.587-643.848 219.587-576q0 67.848 47.326 115.174Q314.239-413.5 382.087-413.5Z" />
                                                 </svg>
                                             </span>
-                                            <input type="search" class="form-control text-bg-dark"
+                                            <input type="search" class="form-control"
                                                 placeholder="Search by Name" id="ProgSearchBar">
                                         </div>
                                     </div>
@@ -325,18 +380,19 @@ function MonthlyChart($month)
                                         <nav aria-label="Page navigation example">
                                             <ul class="pagination pagination-sm">
                                                 <li class="page-item">
-                                                    <a class="page-link text-bg-dark user-select-none" id="ProgPrevious"
+                                                    <a class="page-link user-select-none" id="ProgPrevious"
                                                         style="cursor: pointer;">
                                                         <span aria-hidden="true">&laquo;</span>
                                                     </a>
                                                 </li>
-                                                <li class="page-item m-1 text-bg-dark"><small
-                                                        class="text-warning text-center mx-1">Showing <span
-                                                            id="ProgCurrentPage"></span> to <span id="ProgTotalPage"></span> of
+                                                <li class="page-item m-1"><small
+                                                        class="text-success text-center mx-1">Showing <span
+                                                            id="ProgCurrentPage"></span> to <span
+                                                            id="ProgTotalPage"></span> of
                                                         <span id="ProgTotalItem"></span> entries</small>
                                                 </li>
                                                 <li class="page-item">
-                                                    <a class="page-link text-bg-dark user-select-none" id="ProgNext"
+                                                    <a class="page-link user-select-none" id="ProgNext"
                                                         style="cursor: pointer;">
                                                         <span aria-hidden="true">&raquo;</span>
                                                     </a>
@@ -403,25 +459,26 @@ function MonthlyChart($month)
             <hr class="mt-4 mb-4" style="background-color: white; height: 5px; border-radius: 5px;">
 
             <div class="container-lg table-responsive-lg">
-                <div class="container mt-5 text-bg-dark rounded" style="min-width: fit-content;">
-                    <table class="table table-hover table-dark align-middle caption-top" id="EveTable">
+                <div class="container mt-5 text-bg-light rounded border border-1 border-success" style="min-width: fit-content;">
+                    <table class="table table-hover align-middle caption-top" id="EveTable">
                         <caption>
                             <div class="container-fluid">
                                 <div class="row">
                                     <div class="col-4">
                                         <div class="input-group">
                                             <!-- In the future, I will add a Category Search -->
-                                            <span class="input-group-text text-bg-dark"
+                                            <span class="input-group-text"
                                                 title="You can search only by name">
                                                 <svg xmlns="http://www.w3.org/2000/svg" height="20"
-                                                    viewBox="0 -960 960 960" width="20" fill="var(--bs-warning)">
+                                                    viewBox="0 -960 960 960" width="20" fill="#3ea34c">
                                                     <path
                                                         d="M382.122-330.5q-102.187 0-173.861-71.674Q136.587-473.848 136.587-576q0-102.152 71.674-173.826Q279.935-821.5 382.087-821.5q102.152 0 173.826 71.674 71.674 71.674 71.674 173.861 0 40.859-12.022 76.292-12.021 35.434-33.065 64.956l212.087 212.326q12.674 12.913 12.674 28.945 0 16.033-12.913 28.707-12.674 12.674-29.326 12.674t-29.326-12.674L523.848-375.587q-29.761 21.044-65.434 33.065-35.672 12.022-76.292 12.022Zm-.035-83q67.848 0 115.174-47.326Q544.587-508.152 544.587-576q0-67.848-47.326-115.174Q449.935-738.5 382.087-738.5q-67.848 0-115.174 47.326Q219.587-643.848 219.587-576q0 67.848 47.326 115.174Q314.239-413.5 382.087-413.5Z" />
                                                 </svg>
                                             </span>
-                                            <input type="search" class="form-control text-bg-dark"
+                                            <input type="search" class="form-control"
                                                 placeholder="Search by Name" id="EveSearchBar">
-                                            <a href="../Admin/AdminEvents.php" class="btn btn-outline-primary">Show more</a>
+                                            <a href="../Admin/AdminEvents.php" class="btn btn-outline-primary">Show
+                                                more</a>
                                         </div>
                                     </div>
                                     <div class="col-4">
@@ -429,18 +486,19 @@ function MonthlyChart($month)
                                         <nav aria-label="Page navigation example">
                                             <ul class="pagination pagination-sm">
                                                 <li class="page-item">
-                                                    <a class="page-link text-bg-dark user-select-none" id="EvePrevious"
+                                                    <a class="page-link user-select-none" id="EvePrevious"
                                                         style="cursor: pointer;">
                                                         <span aria-hidden="true">&laquo;</span>
                                                     </a>
                                                 </li>
-                                                <li class="page-item m-1 text-bg-dark"><small
-                                                        class="text-warning text-center mx-1">Showing <span
-                                                            id="EveCurrentPage"></span> to <span id="EveTotalPage"></span> of
+                                                <li class="page-item m-1"><small
+                                                        class="text-success text-center mx-1">Showing <span
+                                                            id="EveCurrentPage"></span> to <span
+                                                            id="EveTotalPage"></span> of
                                                         <span id="EveTotalItem"></span> entries</small>
                                                 </li>
                                                 <li class="page-item">
-                                                    <a class="page-link text-bg-dark user-select-none" id="EveNext"
+                                                    <a class="page-link user-select-none" id="EveNext"
                                                         style="cursor: pointer;">
                                                         <span aria-hidden="true">&raquo;</span>
                                                     </a>
@@ -481,10 +539,10 @@ function MonthlyChart($month)
                                     $end = date("h:i A", strtotime($row['eventEndTime']));
                                     $date = date("M d, Y", strtotime($row['eventDate']));
 
-                                    if($row['eventEnded'] == 'true'){
+                                    if ($row['eventEnded'] == 'true') {
                                         $Ended = '<span class="text-secondary">Ended</span>';
-                                    }else{
-                                        $Ended = '<span class="text-warning">Ongoing</span>';
+                                    } else {
+                                        $Ended = '<span class="text-primary">Ongoing</span>';
                                     }
 
                                     echo '<tr>

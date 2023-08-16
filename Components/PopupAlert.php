@@ -61,8 +61,8 @@ function NewAlertBox()
                     allowOutsideClick: false,
                     allowEscapeKey: false,
                     allowEnterKey: false,
-                    background: "#19191a",
-                    color: "#fff"
+                    background: "#fff",
+                    color: "#000"
                   });</script>';
             }
         }

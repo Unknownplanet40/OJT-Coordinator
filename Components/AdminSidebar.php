@@ -178,8 +178,8 @@
                             confirmButtonColor: '#d33',
                             cancelButtonColor: '#3085d6',
                             confirmButtonText: 'Yes, Logout!',
-                            background: '#19191a',
-                            color: '#fff',
+                            background: '#fff',
+                            color: '#000',
                         }).then((result) => {
                             if (result.isConfirmed) {
                                 //random message for the logout
@@ -202,8 +202,8 @@
                                     title: titlemessage[ranTitle],
                                     text: textmessage[ranText],
                                     allowOutsideClick: false,
-                                    background: '#19191a',
-                                    color: '#fff',
+                                    background: '#fff',
+                                    color: '#000',
                                     didOpen: () => {
                                         Swal.showLoading()
                                     },

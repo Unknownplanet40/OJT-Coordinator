@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", function () {
   form.addEventListener("submit", function (event) {
     event.preventDefault();
 
-    errorDiv.innerHTML = "";
+    errorDiv.innerHTML = "&nbsp;";
 
     var password = document.getElementById("password");
     var username = document.getElementById("username");
