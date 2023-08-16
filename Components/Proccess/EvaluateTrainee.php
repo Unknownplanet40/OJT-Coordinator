@@ -92,7 +92,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
     <title><?php echo $name; ?> | Evaluation Result</title>
 </head>
 
-<body class="dark adminuser">
+<body>
     <br>
     <div class="container-lg rounded">
         <div class="container-lg">

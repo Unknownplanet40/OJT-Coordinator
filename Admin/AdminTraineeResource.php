@@ -29,7 +29,7 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
     <title>Admin Resource</title>
 </head>
 
-<body class="dark adminuser" style="min-width: 1080px;">
+<body>
     <?php
     @include_once '../Components/AdminSidebar.php';
     if (isset($ShowAlert)) {
@@ -39,7 +39,7 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
     ?>
     <section class="home">
         <div class="text">
-            <h1 class="text-warning">Documents</h1>
+            <h1 class="text-success">Documents</h1>
         </div>
         <div class="container-fluid" style="width: 98%;">
             <p class="text-start text-secondary">
@@ -47,8 +47,8 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
             </p>
             <div class="container-fluid" style="width: 98%;">
                 <div class="container-lg table-responsive" id="AdminTable">
-                    <div class="container mt-5 text-bg-dark rounded" style="min-width: fit-content;">
-                        <table class="table table-hover table-dark align-middle caption-top" id="AccountTable">
+                    <div class="container mt-5 text-bg-light rounded" style="min-width: fit-content;">
+                        <table class="table table-hover table-light align-middle caption-top" id="AccountTable">
                             <input type="hidden" id="showPassword">
                             <caption>
                                 <div class="container-fluid">
@@ -56,7 +56,7 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
                                         <div class="col-4">
                                             <div class="input-group">
                                                 <!-- In the future, I will add a Category Search -->
-                                                <span class="input-group-text text-bg-dark"
+                                                <span class="input-group-text text-bg-light"
                                                     title="You can search only by name">
                                                     <svg xmlns="http://www.w3.org/2000/svg" height="20"
                                                         viewBox="0 -960 960 960" width="20" fill="var(--bs-warning)">

@@ -27,22 +27,22 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
     <title>Trainee Evaluation</title>
 </head>
 
-<body class="dark adminuser" style="min-width: 1080px;">
+<body>
     <?php
     @include_once '../Components/AdminSidebar.php';
     @include_once '../Components/EvaluateModal.php';
     ?>
     <section class="home">
         <div class="text">
-            <h1 class="text-warning">Evaluation</h1>
+            <h1 class="text-success">Evaluation</h1>
         </div>
         <p class="text-start text-secondary">
             <?php // print_r($_POST); ?>
         </p>
         <div class="container-fluid" style="width: 98%;">
             <div class="container-lg table-responsive" id="AdminTable">
-                <div class="container mt-5 text-bg-dark rounded" style="min-width: fit-content;">
-                    <table class="table table-hover table-dark align-middle caption-top" id="AccountTable">
+                <div class="container mt-5 text-bg-light rounded" style="min-width: fit-content;">
+                    <table class="table table-hover table-light align-middle caption-top" id="AccountTable">
                         <input type="hidden" id="showPassword">
                         <caption>
                             <div class="container-fluid">
@@ -50,15 +50,15 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
                                     <div class="col-4">
                                         <div class="input-group">
                                             <!-- In the future, I will add a Category Search -->
-                                            <span class="input-group-text text-bg-dark"
+                                            <span class="input-group-text text-bg-light"
                                                 title="You can search only by name">
                                                 <svg xmlns="http://www.w3.org/2000/svg" height="20"
-                                                    viewBox="0 -960 960 960" width="20" fill="var(--bs-warning)">
+                                                    viewBox="0 -960 960 960" width="20" fill="var(--bs-success)">
                                                     <path
                                                         d="M382.122-330.5q-102.187 0-173.861-71.674Q136.587-473.848 136.587-576q0-102.152 71.674-173.826Q279.935-821.5 382.087-821.5q102.152 0 173.826 71.674 71.674 71.674 71.674 173.861 0 40.859-12.022 76.292-12.021 35.434-33.065 64.956l212.087 212.326q12.674 12.913 12.674 28.945 0 16.033-12.913 28.707-12.674 12.674-29.326 12.674t-29.326-12.674L523.848-375.587q-29.761 21.044-65.434 33.065-35.672 12.022-76.292 12.022Zm-.035-83q67.848 0 115.174-47.326Q544.587-508.152 544.587-576q0-67.848-47.326-115.174Q449.935-738.5 382.087-738.5q-67.848 0-115.174 47.326Q219.587-643.848 219.587-576q0 67.848 47.326 115.174Q314.239-413.5 382.087-413.5Z" />
                                                 </svg>
                                             </span>
-                                            <input type="search" class="form-control text-bg-dark"
+                                            <input type="search" class="form-control text-bg-light"
                                                 placeholder="Search by Name" id="SearchBar">
                                         </div>
                                     </div>
@@ -67,18 +67,18 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
                                         <nav aria-label="Page navigation example">
                                             <ul class="pagination pagination-sm">
                                                 <li class="page-item">
-                                                    <a class="page-link text-bg-dark user-select-none" id="Previous"
+                                                    <a class="page-link text-bg-light user-select-none" id="Previous"
                                                         style="cursor: pointer;">
                                                         <span aria-hidden="true">&laquo;</span>
                                                     </a>
                                                 </li>
-                                                <li class="page-item m-1 text-bg-dark"><small
-                                                        class="text-warning text-center mx-1">Showing <span
+                                                <li class="page-item m-1 text-bg-light"><small
+                                                        class="text-success text-center mx-1">Showing <span
                                                             id="CurrentPage"></span> to <span id="TotalPage"></span> of
                                                         <span id="TotalItem"></span> entries</small>
                                                 </li>
                                                 <li class="page-item">
-                                                    <a class="page-link text-bg-dark user-select-none" id="Next"
+                                                    <a class="page-link text-bg-light user-select-none" id="Next"
                                                         style="cursor: pointer;">
                                                         <span aria-hidden="true">&raquo;</span>
                                                     </a>
@@ -135,7 +135,7 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
                                     <td class="text-start"><img src="' . $row['image'] . '" alt="Profile" class="rounded-circle img-fluid" style="width: 50px; height: 50px;"></td>
                                     <td class="text-truncate" style="max-width: 100px;">' . $row['name'] . '</td>
                                     <td class="text-truncate" style="max-width: 100px;">' . $row['trainee_uname'] . '</td>
-                                    <td class="text-truncate" style="max-width: 100px;"><a href="mailto:' . $row['email'] . '" class="text-decoration-none text-white">' . $row['email'] . '</a></td>
+                                    <td class="text-truncate" style="max-width: 100px;"><a href="mailto:' . $row['email'] . '" class="text-decoration-none text-black">' . $row['email'] . '</a></td>
                                     <td class="text-truncate" style="max-width: 100px;">' . $row['department'] . '</td>
                                     <td class="text-truncate" style="max-width: 100px;">' . $evaluated . '</td>
                                     <td hidden>' . $row['UID'] . '</td>
