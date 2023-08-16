@@ -27,7 +27,7 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
     <title>Trainee Evaluation</title>
 </head>
 
-<body>
+<body class="adminuser" style="min-width: 1080px;">
     <?php
     @include_once '../Components/AdminSidebar.php';
     @include_once '../Components/EvaluateModal.php';
