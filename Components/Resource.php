@@ -71,6 +71,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../Style/Bootstrap_Style/bootstrap.css">
+    <link rel="stylesheet" href="../Style/ColorPalette.css">
     <script src="../Script/SweetAlert2.js"></script>
     <script src="../Script/Bootstrap_Script/bootstrap.bundle.js"></script>
     <title>Resource</title>

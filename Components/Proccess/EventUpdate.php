@@ -74,6 +74,10 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
         }
 
         .bgani {
+            background-color: #e4e9f7;
+        }
+
+        .bganim {
             background: linear-gradient(147deg, #020304, #445384);
             background-size: 400% 400%;
             animation: AnimationName 25s ease infinite;
@@ -99,7 +103,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
         }
 
         ::-webkit-scrollbar-track {
-            background: var(--body-color);
+            background: #fff;
             transition: var(--tran-05);
         }
 
@@ -122,10 +126,10 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
         $_SESSION['Show'] = false;
     }
     ?>
-    <div class="container-lg">
+    <div class="container-lg rounded shadow-lg p-3 mt-5 text-bg-light">
         <div class="row">
             <div class="col-md-12">
-                <h1 class="text-center text-uppercase text-light">Update Event</h1>
+                <h1 class="text-center text-uppercase text-success fw-bold">Update Event</h1>
                 <hr>
             </div>
         </div>
@@ -241,8 +245,8 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                                         confirmButtonColor: '#3085d6',
                                         cancelButtonColor: '#d33',
                                         confirmButtonText: 'Yes, delete it!',
-                                        background: "#19191a",
-                                        color: "#fff"
+                                        background: "#fff",
+                                        color: "#000"
 
                                     }).then((result) => {
                                         if (result.isConfirmed) {
@@ -264,7 +268,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                         echo $EventID;
                     } ?>">
                     <ul class="list-group list-group-flush rounded">
-                        <li class="list-group-item bg-transparent text-light">
+                        <li class="list-group-item bg-transparent text-dark">
                             <div class="mb-3">
                                 <label for="EventTitle" class="form-label">Event Title</label>
                                 <input type="text" class="form-control" id="EventTitle" name="EventTitle" value="<?php if (isset($title)) {
@@ -272,7 +276,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                                 } ?>" required>
                             </div>
                         </li>
-                        <li class="list-group-item bg-transparent text-light">
+                        <li class="list-group-item bg-transparent text-dark">
                             <div class="mb-3">
                                 <label for="EventDescription" class="form-label">Event Description</label>
                                 <textarea class="form-control" id="EventDescription" name="EventDescription" rows="10"
@@ -281,7 +285,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                                     } ?></textarea>
                             </div>
                         </li>
-                        <li class="list-group-item bg-transparent text-light">
+                        <li class="list-group-item bg-transparent text-dark">
                             <div class="mb-3">
                                 <label for="EventDate" class="form-label">Event Date</label>
                                 <input type="date" class="form-control" id="EventDate" name="EventDate" value="<?php if (isset($date)) {
@@ -289,7 +293,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                                 } ?>" required min="<?php echo date('Y-m-d'); ?>">
                             </div>
                         </li>
-                        <li class="list-group-item bg-transparent text-light">
+                        <li class="list-group-item bg-transparent text-dark">
                             <div class="mb-3">
                                 <label for="EventComp" class="form-label">Event Completion</label>
                                 <input type="date" class="form-control" id="EventComp" name="EventComp" value="<?php if (isset($comp)) {
@@ -297,7 +301,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                                 } ?>" required min="<?php echo date($date); ?>">
                             </div>
                         </li>
-                        <li class="list-group-item bg-transparent text-light">
+                        <li class="list-group-item bg-transparent text-dark">
                             <div class="mb-3">
                                 <label for="EventStartTime" class="form-label">Event Start Time</label>
                                 <input type="time" class="form-control" id="EventStartTime" name="EventStartTime" value="<?php if (isset($start)) {
@@ -305,7 +309,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                                 } ?>" required>
                             </div>
                         </li>
-                        <li class="list-group-item bg-transparent text-light">
+                        <li class="list-group-item bg-transparent text-dark">
                             <div class="mb-3">
                                 <label for="EventEndTime" class="form-label">Event End Time</label>
                                 <input type="time" class="form-control" id="EventEndTime" name="EventEndTime" value="<?php if (isset($end)) {
@@ -313,7 +317,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                                 } ?>" required min="<?php echo date($start); ?>">
                             </div>
                         </li>
-                        <li class="list-group-item bg-transparent text-light">
+                        <li class="list-group-item bg-transparent text-dark">
                             <div class="mb-3">
                                 <label for="EventLocation" class="form-label">Event Location</label>
                                 <input type="text" class="form-control" id="EventLocation" name="EventLocation" value="<?php if (isset($loc)) {
@@ -321,7 +325,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                                 } ?>" required>
                             </div>
                         </li>
-                        <li class="list-group-item bg-transparent text-light">
+                        <li class="list-group-item bg-transparent text-dark">
                             <div class="mb-3">
                                 <label for="EventType" class="form-label">Event Type</label>
                                 <select class="form-select" id="EventType" name="EventType"
@@ -339,7 +343,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                                 </select>
                             </div>
                         </li>
-                        <li class="list-group-item bg-transparent text-light">
+                        <li class="list-group-item bg-transparent text-dark">
                             <div class="mb-3">
                                 <label for="EventSlots" class="form-label">Event Organizer</label>
                                 <input type="text" class="form-control" id="EventOrg" name="EventOrg" value="<?php if (isset($org)) {
@@ -347,7 +351,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                                 } ?>" required>
                             </div>
                         </li>
-                        <li class="list-group-item bg-transparent text-light">
+                        <li class="list-group-item bg-transparent text-dark">
                             <div class="mb-3">
                                 <label for="EventSlots" class="form-label">Event Slots</label>
                                 <input type="number" class="form-control" id="EventSlots" name="EventSlots" value="<?php if (isset($slot)) {

@@ -13,12 +13,16 @@ document.addEventListener("DOMContentLoaded", function () {
   let PcurrentPageElement = document.getElementById("ProgCurrentPage");
   let PtotalPageElement = document.getElementById("ProgTotalPage");
   let PtotalItemElement = document.getElementById("ProgTotalItem");
+  let noResult = document.getElementById("PnoResult");
 
- //--------------------------------------------------------------------------------
- let displayedRowCount = 0;
- const maxDisplayedRows = Plimit;
+  // add a hidden attribute to the noResult element
+  noResult.setAttribute("hidden", "");
 
- function filterRows() {
+  //--------------------------------------------------------------------------------
+  let displayedRowCount = 0;
+  const maxDisplayedRows = Plimit;
+
+  /* function filterRows() {
    let filter = Psearch.value.toUpperCase();
    displayedRowCount = 0; // Reset displayed row count
 
@@ -38,13 +42,48 @@ document.addEventListener("DOMContentLoaded", function () {
    });
 
    updatePagination();
- }
+   
+ } */
+
+  function filterRows() {
+    let filter = Psearch.value.toUpperCase();
+    displayedRowCount = 0; // Reset displayed row count
+
+    Prows.forEach(function (row) {
+      let td = row.querySelector("td:nth-child(2)");
+      let textValue = td.textContent || td.innerText;
+
+      if (
+        textValue.toUpperCase().includes(filter) &&
+        displayedRowCount < maxDisplayedRows
+      ) {
+        row.style.display = "";
+        displayedRowCount++;
+      } else {
+        row.style.display = "none";
+      }
+    });
+
+    updatePagination();
+
+    // Check if there are any rows displayed
+    let hasRows = Prows.some(function (row) {
+      return row.style.display !== "none";
+    });
+
+    // Show "No result found" message if no rows are displayed
+    if (!hasRows) {
+      noResult.removeAttribute("hidden");
+    } else {
+      noResult.setAttribute("hidden", "");
+    }
+  }
 
   function showPage() {
     let start = (PcurrentPage - 1) * Plimit;
     let end = PcurrentPage * Plimit;
     Prows.forEach(function (row, index) {
-      row.style.display = (index >= start && index < end) ? "" : "none";
+      row.style.display = index >= start && index < end ? "" : "none";
     });
     updatePagination();
   }

@@ -192,7 +192,7 @@
                                     },
                                 })
                                 var milliseconds = Math.floor(
-                                    Math.random() * (9999 - 1000 + 1) + 1000
+                                    Math.random() * (6800 - 1000 + 1) + 1000
                                 ).toString();
                                 setTimeout(() => {
                                     window.location.href = "../Logout.php";

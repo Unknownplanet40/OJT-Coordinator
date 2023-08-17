@@ -114,14 +114,14 @@ if (isset($_POST['update'])) {
         $_SESSION['Show'] = false;
     }
     ?>
-    <div class="container-lg text-bg-dark rounded">
+    <div class="container-lg text-light shadow-lg p-3 mt-5 mb-5 bg-body rounded">
         <div class="row">
-            <div class="col-md-12">
-                <h1 class="text-center"></h1>
+            <div class="col-md-12 mt-2">
+                <h1 class="text-center text-success text-uppercase fw-bold">Update Account</h1>
             </div>
         </div>
         <div class="row">
-            <div class="col-md-5 text-bg-dark text-center rounded">
+            <div class="col-md-5 text-center rounded">
                 <ul class="list-group">
                     <li class="list-group-item listhead">
                         <img src="<?php echo isset($image) ? "../" . $image : "../../Image/Profile.png"; ?>
@@ -278,7 +278,7 @@ if (isset($_POST['update'])) {
                     </div>
                 </div>
             </div>
-            <div class="col-md-7 text-bg-dark p-5">
+            <div class="col-md-7 p-5">
                 <form action="../Proccess/update.php" method="POST" enctype="multipart/form-data">
                     <input type="hidden" name="id" value="<?php echo $UserID; ?>">
                     <div class="input-group mb-3">

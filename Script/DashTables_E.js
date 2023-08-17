@@ -13,7 +13,10 @@ document.addEventListener("DOMContentLoaded", function () {
   let EcurrentPageElement = document.getElementById("EveCurrentPage");
   let EtotalPageElement = document.getElementById("EveTotalPage");
   let EtotalItemElement = document.getElementById("EveTotalItem");
+  let noResult = document.getElementById("EnoResult");
 
+  // add a hidden attribute to the noResult element
+  noResult.setAttribute("hidden", "");
     //--------------------------------------------------------------------------------
   let displayedRowCount = 0;
   const maxDisplayedRows = Elimit;
@@ -38,6 +41,18 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     updatePagination();
+
+    // Check if there are any rows displayed
+    let hasRows = Erows.some(function (row) {
+      return row.style.display !== "none";
+    });
+
+    // Show "No result found" message if no rows are displayed
+    if (!hasRows) {
+      noResult.removeAttribute("hidden");
+    } else {
+      noResult.setAttribute("hidden", "");
+    }
   }
 
   function showPage() {

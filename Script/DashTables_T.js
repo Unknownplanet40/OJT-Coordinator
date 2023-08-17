@@ -13,6 +13,10 @@ document.addEventListener("DOMContentLoaded", function () {
   let TcurrentPageElement = document.getElementById("TraineeCurrentPage");
   let TtotalPageElement = document.getElementById("TraineeTotalPage");
   let TtotalItemElement = document.getElementById("TraineeTotalItem");
+  let noResult = document.getElementById("TnoResult");
+
+  // add a hidden attribute to the noResult element
+  noResult.setAttribute("hidden", "");
 
   //--------------------------------------------------------------------------------
   let displayedRowCount = 0;
@@ -38,6 +42,18 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     updatePagination();
+
+    // Check if there are any rows displayed
+    let hasRows = Trows.some(function (row) {
+      return row.style.display !== "none";
+    });
+
+    // Show "No result found" message if no rows are displayed
+    if (!hasRows) {
+      noResult.removeAttribute("hidden");
+    } else {
+      noResult.setAttribute("hidden", "");
+    }
   }
 
   function showPage() {

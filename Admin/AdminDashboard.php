@@ -59,7 +59,8 @@ function femaleChart()
 }
 
 // for Formating the output of the number of gender
-function formatNumberWithAbbreviation($number) {
+function formatNumberWithAbbreviation($number)
+{
     $originalNumber = $number;
     $abbreviations = array(
         '<span class="text-secondary">K</span>',
@@ -198,11 +199,13 @@ function MonthlyChart($month)
                             <div class="d-flex justify-content-evenly mt-1">
                                 <p class="fs-6" title="<?php echo $maletitle; ?>">
                                     <span class="text-uppercase" style="color: #059bff;">
-                                    Male: </span><?php echo $maleFormatted; ?>
+                                        Male: </span>
+                                    <?php echo $maleFormatted; ?>
                                 </p>
                                 <p class="fs-6" title="<?php echo $femaletitle; ?>">
-                                <span class="text-uppercase" style="color: #ff3d67;">
-                                    Female: </span><?php echo $femaleFormatted; ?>
+                                    <span class="text-uppercase" style="color: #ff3d67;">
+                                        Female: </span>
+                                    <?php echo $femaleFormatted; ?>
                                 </p>
                             </div>
                         </div>
@@ -224,15 +227,16 @@ function MonthlyChart($month)
             <hr class="mt-4 mb-4" style="background-color: white; height: 5px; border-radius: 5px;">
 
             <div class="container-lg table-responsive-lg">
-                <div class="container mt-5 text-bg-light rounded border border-1 border-success" style="min-width: fit-content;">
+                <div class="container mt-5 text-bg-light rounded border border-1 border-success"
+                    style="min-width: fit-content;">
                     <table class="table table-hover align-middle caption-top" id="TraineeTable">
                         <caption>
                             <div class="container-fluid">
                                 <div class="row">
                                     <div class="col-4">
-                                        <div class="input-group">
+                                        <div class="input-group input-group-sm">
                                             <!-- In the future, I will add a Category Search -->
-                                            <span class="input-group-text"
+                                            <span class="input-group-text user-select-none"
                                                 title="You can search only by name">
                                                 <svg xmlns="http://www.w3.org/2000/svg" height="20"
                                                     viewBox="0 -960 960 960" width="20" fill="#3ea34c">
@@ -240,9 +244,9 @@ function MonthlyChart($month)
                                                         d="M382.122-330.5q-102.187 0-173.861-71.674Q136.587-473.848 136.587-576q0-102.152 71.674-173.826Q279.935-821.5 382.087-821.5q102.152 0 173.826 71.674 71.674 71.674 71.674 173.861 0 40.859-12.022 76.292-12.021 35.434-33.065 64.956l212.087 212.326q12.674 12.913 12.674 28.945 0 16.033-12.913 28.707-12.674 12.674-29.326 12.674t-29.326-12.674L523.848-375.587q-29.761 21.044-65.434 33.065-35.672 12.022-76.292 12.022Zm-.035-83q67.848 0 115.174-47.326Q544.587-508.152 544.587-576q0-67.848-47.326-115.174Q449.935-738.5 382.087-738.5q-67.848 0-115.174 47.326Q219.587-643.848 219.587-576q0 67.848 47.326 115.174Q314.239-413.5 382.087-413.5Z" />
                                                 </svg>
                                             </span>
-                                            <input type="search" class="form-control"
+                                            <input type="search" class="form-control form-control-sm"
                                                 placeholder="Search by Name" id="TraineeSearchBar">
-                                            <a href="../Admin/AdminTrainees.php" class="btn btn-outline-primary">Show
+                                            <a href="../Admin/AdminTrainees.php" class="btn btn-outline-success">Show
                                                 more</a>
                                         </div>
                                     </div>
@@ -251,8 +255,8 @@ function MonthlyChart($month)
                                         <nav aria-label="Page navigation example">
                                             <ul class="pagination pagination-sm">
                                                 <li class="page-item">
-                                                    <a class="page-link user-select-none"
-                                                        id="TraineePrevious" style="cursor: pointer;">
+                                                    <a class="page-link user-select-none" id="TraineePrevious"
+                                                        style="cursor: pointer;">
                                                         <span aria-hidden="true">&laquo;</span>
                                                     </a>
                                                 </li>
@@ -283,7 +287,7 @@ function MonthlyChart($month)
                             <tr>
                                 <th scope="col" title="Profile Picture" class="text-center">Profile</th>
                                 <th scope="col" title="Full Name">Name</th>
-                                <th scope="col" title="Department">Dept.</th>
+                                <th scope="col" class="text-center" title="Department">Department</th>
                                 <th scope="col">Gender</th>
                                 <th scope="col" class="text-center" title="Deployed to a field">Deployed</th>
                                 <th scope="col" class="text-center" title="Vaccinated">Vaccinated
@@ -301,27 +305,27 @@ function MonthlyChart($month)
                                 while ($row = mysqli_fetch_assoc($result)) {
 
                                     if ($row['program'] == null) {
-                                        $Progstat = '<span class="text-secondary">No</span>';
+                                        $Progstat = '<span class="text-secondary" title="This trainee is not deployed to a field"><img src="../Image/NotDone.svg" alt="Not Deployed" class="img-fluid" style="width: 25px; height: 25px;"></span>';
                                     } else {
-                                        $Progstat = '<span class="text-primary">Yes</span>';
+                                        $Progstat = '<span class="text-primary fw-bolder" title="This trainee is deployed to a field"><img src="../Image/Done.svg" alt="Deployed" class="img-fluid" style="width: 25px; height: 25px;"></span>';
                                     }
 
                                     if ($row['vaccine_Completed'] == 1) {
-                                        $Vaccinated = '<span class="text-primary">Yes</span>';
+                                        $Vaccinated = '<span class="text-primary fw-bolder" title="This trainee is vaccinated"><img src="../Image/Done.svg" alt="Vaccinated" class="img-fluid" style="width: 25px; height: 25px;"></span>';
                                     } else {
-                                        $Vaccinated = '<span class="text-secondary">No</span>';
+                                        $Vaccinated = '<span class="text-secondary" title="This trainee is not vaccinated"><img src="../Image/NotDone.svg" alt="Not Vaccinated" class="img-fluid" style="width: 25px; height: 25px;"></span>';
                                     }
 
                                     if ($row['evaluated'] == 'true') {
-                                        $Evaluated = '<span class="text-primary">Yes</span>';
+                                        $Evaluated = '<span class="text-primary fw-bolder" title="This trainee is evaluated"><img src="../Image/Done.svg" alt="Evaluated" class="img-fluid" style="width: 25px; height: 25px;"></span>';
                                     } else {
-                                        $Evaluated = '<span class="text-secondary">No</span>';
+                                        $Evaluated = '<span class="text-secondary" title="This trainee is not evaluated"><img src="../Image/NotDone.svg" alt="Not Evaluated" class="img-fluid" style="width: 25px; height: 25px;"></span>';
                                     }
 
                                     if ($row['completed'] == null) {
-                                        $Status = '<span class="text-secondary">No</span>';
+                                        $Status = '<span class="text-secondary" title="This trainee is not completed any program"><img src="../Image/NotDone.svg" alt="Not Completed" class="img-fluid" style="width: 25px; height: 25px;"></span>';
                                     } else {
-                                        $Status = '<span class="text-primary">Yes</span>';
+                                        $Status = '<span class="text-primary fw-bolder" title="This trainee is completed a program"><img src="../Image/Done.svg" alt="Completed" class="img-fluid" style="width: 25px; height: 25px;"></span>';
                                     }
 
                                     if ($row['gender'] == null) {
@@ -333,8 +337,8 @@ function MonthlyChart($month)
                                     echo '<tr>
                                     <td class="text-center"><img src="' . $row['image'] . '" alt="Profile" class="rounded-circle img-fluid" style="width: 50px; height: 50px;"></td>
                                     <td class="text-truncate" style="max-width: 100px;" title="' . $row['name'] . '">' . $row['name'] . '</td>
-                                    <td class="text-truncate" style="max-width: 100px;">' . $row['department'] . '</td>
-                                    <td class="text-truncate" style="max-width: 100px;">' . $GEN . '</td>
+                                    <td class="text-truncate text-center" style="max-width: 100px;">' . $row['department'] . '</td>
+                                    <td class="text-truncate text-center" style="max-width: 100px;">' . $GEN . '</td>
                                     <td class="text-truncate text-center" style="max-width: 100px;">' . $Progstat . '</td>
                                     <td class="text-truncate text-center" style="max-width: 100px;">' . $Vaccinated . '</td>
                                     <td class="text-truncate text-center" style="max-width: 100px;">' . $Evaluated . '</td>
@@ -349,6 +353,11 @@ function MonthlyChart($month)
                             }
                             ?>
                         </tbody>
+                        <tfoot id="TnoResult">
+                            <tr>
+                                <th colspan="10" class="text-center"><span class="text-secondary">No Result</span>
+                            </tr>
+                        </tfoot>
                     </table>
                 </div>
             </div>
@@ -356,15 +365,16 @@ function MonthlyChart($month)
             <hr class="mt-4 mb-4" style="background-color: white; height: 5px; border-radius: 5px;">
 
             <div class="container-lg table-responsive-lg">
-                <div class="container mt-5 text-bg-light rounded border border-1 border-success" style="min-width: fit-content;">
+                <div class="container mt-5 text-bg-light rounded border border-1 border-success"
+                    style="min-width: fit-content;">
                     <table class="table table-hover align-middle caption-top" id="ProgTable">
                         <caption>
                             <div class="container-fluid">
                                 <div class="row">
                                     <div class="col-4">
-                                        <div class="input-group">
+                                        <div class="input-group input-group-sm">
                                             <!-- In the future, I will add a Category Search -->
-                                            <span class="input-group-text"
+                                            <span class="input-group-text user-select-none"
                                                 title="You can search only by name">
                                                 <svg xmlns="http://www.w3.org/2000/svg" height="20"
                                                     viewBox="0 -960 960 960" width="20" fill="#3ea34c">
@@ -372,7 +382,7 @@ function MonthlyChart($month)
                                                         d="M382.122-330.5q-102.187 0-173.861-71.674Q136.587-473.848 136.587-576q0-102.152 71.674-173.826Q279.935-821.5 382.087-821.5q102.152 0 173.826 71.674 71.674 71.674 71.674 173.861 0 40.859-12.022 76.292-12.021 35.434-33.065 64.956l212.087 212.326q12.674 12.913 12.674 28.945 0 16.033-12.913 28.707-12.674 12.674-29.326 12.674t-29.326-12.674L523.848-375.587q-29.761 21.044-65.434 33.065-35.672 12.022-76.292 12.022Zm-.035-83q67.848 0 115.174-47.326Q544.587-508.152 544.587-576q0-67.848-47.326-115.174Q449.935-738.5 382.087-738.5q-67.848 0-115.174 47.326Q219.587-643.848 219.587-576q0 67.848 47.326 115.174Q314.239-413.5 382.087-413.5Z" />
                                                 </svg>
                                             </span>
-                                            <input type="search" class="form-control"
+                                            <input type="search" class="form-control form-control-sm"
                                                 placeholder="Search by Name" id="ProgSearchBar">
                                         </div>
                                     </div>
@@ -434,7 +444,6 @@ function MonthlyChart($month)
                                     $end = date("h:i A", strtotime($row['end_time']));
                                     $enddate = date("M d, Y", strtotime($row['end_date']));
 
-
                                     echo '<tr>
                                     <th scope="row">' . $i . '</th>
                                     <td class="text-truncate" style="max-width: 100px;" title="' . $row['title'] . '">' . $row['title'] . '</td>
@@ -453,6 +462,12 @@ function MonthlyChart($month)
                             }
                             ?>
                         </tbody>
+                        <!-- footer -->
+                        <tfoot id="PnoResult">
+                            <tr>
+                                <th colspan="10" class="text-center"><span class="text-secondary">No Result</span>
+                            </tr>
+                        </tfoot>
                     </table>
                 </div>
             </div>
@@ -460,15 +475,16 @@ function MonthlyChart($month)
             <hr class="mt-4 mb-4" style="background-color: white; height: 5px; border-radius: 5px;">
 
             <div class="container-lg table-responsive-lg">
-                <div class="container mt-5 text-bg-light rounded border border-1 border-success" style="min-width: fit-content;">
+                <div class="container mt-5 text-bg-light rounded border border-1 border-success"
+                    style="min-width: fit-content;">
                     <table class="table table-hover align-middle caption-top" id="EveTable">
                         <caption>
                             <div class="container-fluid">
                                 <div class="row">
                                     <div class="col-4">
-                                        <div class="input-group">
+                                        <div class="input-group input-group-sm">
                                             <!-- In the future, I will add a Category Search -->
-                                            <span class="input-group-text"
+                                            <span class="input-group-text user-select-none"
                                                 title="You can search only by name">
                                                 <svg xmlns="http://www.w3.org/2000/svg" height="20"
                                                     viewBox="0 -960 960 960" width="20" fill="#3ea34c">
@@ -476,9 +492,9 @@ function MonthlyChart($month)
                                                         d="M382.122-330.5q-102.187 0-173.861-71.674Q136.587-473.848 136.587-576q0-102.152 71.674-173.826Q279.935-821.5 382.087-821.5q102.152 0 173.826 71.674 71.674 71.674 71.674 173.861 0 40.859-12.022 76.292-12.021 35.434-33.065 64.956l212.087 212.326q12.674 12.913 12.674 28.945 0 16.033-12.913 28.707-12.674 12.674-29.326 12.674t-29.326-12.674L523.848-375.587q-29.761 21.044-65.434 33.065-35.672 12.022-76.292 12.022Zm-.035-83q67.848 0 115.174-47.326Q544.587-508.152 544.587-576q0-67.848-47.326-115.174Q449.935-738.5 382.087-738.5q-67.848 0-115.174 47.326Q219.587-643.848 219.587-576q0 67.848 47.326 115.174Q314.239-413.5 382.087-413.5Z" />
                                                 </svg>
                                             </span>
-                                            <input type="search" class="form-control"
+                                            <input type="search" class="form-control form-control-sm"
                                                 placeholder="Search by Name" id="EveSearchBar">
-                                            <a href="../Admin/AdminEvents.php" class="btn btn-outline-primary">Show
+                                            <a href="../Admin/AdminEvents.php" class="btn btn-outline-success">Show
                                                 more</a>
                                         </div>
                                     </div>
@@ -566,6 +582,11 @@ function MonthlyChart($month)
                             }
                             ?>
                         </tbody>
+                        <tfoot id="EnoResult">
+                            <tr>
+                                <th colspan="10" class="text-center"><span class="text-secondary">No Result</span>
+                            </tr>
+                        </tfoot>
                     </table>
                 </div>
             </div>

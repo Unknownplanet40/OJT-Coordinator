@@ -54,7 +54,7 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
                                 <div class="container-fluid">
                                     <div class="row">
                                         <div class="col-4">
-                                            <div class="input-group">
+                                            <div class="input-group input-group-sm">
                                                 <!-- In the future, I will add a Category Search -->
                                                 <span class="input-group-text text-bg-light"
                                                     title="You can search only by name">
@@ -64,7 +64,7 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
                                                             d="M382.122-330.5q-102.187 0-173.861-71.674Q136.587-473.848 136.587-576q0-102.152 71.674-173.826Q279.935-821.5 382.087-821.5q102.152 0 173.826 71.674 71.674 71.674 71.674 173.861 0 40.859-12.022 76.292-12.021 35.434-33.065 64.956l212.087 212.326q12.674 12.913 12.674 28.945 0 16.033-12.913 28.707-12.674 12.674-29.326 12.674t-29.326-12.674L523.848-375.587q-29.761 21.044-65.434 33.065-35.672 12.022-76.292 12.022Zm-.035-83q67.848 0 115.174-47.326Q544.587-508.152 544.587-576q0-67.848-47.326-115.174Q449.935-738.5 382.087-738.5q-67.848 0-115.174 47.326Q219.587-643.848 219.587-576q0 67.848 47.326 115.174Q314.239-413.5 382.087-413.5Z" />
                                                     </svg>
                                                 </span>
-                                                <input type="search" class="form-control"
+                                                <input type="search" class="form-control form-control-sm"
                                                     placeholder="Search by Name" id="SearchBar">
                                             </div>
                                         </div>
@@ -168,6 +168,11 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
                                 }
                                 ?>
                             </tbody>
+                            <tfoot id="noResult">
+                            <tr>
+                                <th colspan="10" class="text-center"><span class="text-secondary">No Result</span>
+                            </tr>
+                        </tfoot>
                         </table>
                     </div>
                 </div>

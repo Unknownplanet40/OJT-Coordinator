@@ -259,7 +259,7 @@
                                 capability,
                                 behavior's & personality of the trainee.</small>
                             <textarea class="form-control text-bg-light" name="Comments" id="Comments" cols="30" rows="8"
-                                maxlength="1000" placeholder="Maximum of 1,000 characters"></textarea>
+                                maxlength="1000" placeholder="Maximum of 1,000 characters"><?php echo $Comment; ?></textarea>
                             <br>
                         </td>
                     </tr>

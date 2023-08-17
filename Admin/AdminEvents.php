@@ -75,7 +75,7 @@ unset($_POST['resetEvent']);
     <title>Events & Announcements</title>
 </head>
 
-<body class="dark adminuser" style="min-width: 1080px;">
+<body class="adminuser" style="min-width: 1080px;">
     <?php
     @include_once '../Components/AdminSidebar.php';
     @include_once '../Components/Modals/AdminEventModal.php';
@@ -87,7 +87,7 @@ unset($_POST['resetEvent']);
     ?>
     <section class="home">
         <div class="text">
-            <h1 class="text-warning">Events</h1>
+            <h1 class="text-success">Events</h1>
         </div>
         <div class="container-fluid" style="width: 98%;">
             <div class="container-xl my-1 table-responsive">
@@ -105,19 +105,19 @@ unset($_POST['resetEvent']);
                         </button>
                     </div>
                 </div>
-                <div class="collapse" id="Announce">
-                    <form class="row g-3 rounded mt-1" method="POST" action="../Components/Proccess/AnnounceUpdate.php">
+                <div class="collapse bg-light p-2 rounded border border-success" id="Announce">
+                    <form class="row g-2 rounded mt-1" method="POST" action="../Components/Proccess/AnnounceUpdate.php">
                         <input type="hidden" name="Posted" id="Posted" value="<?php echo $_SESSION['GlobalName']; ?>">
                         <div class="col-md-12">
-                            <div class="form-floating mb-3 text-light">
-                                <input type="text" class="form-control text-bg-dark" id="AnnounceTitle"
+                            <div class="form-floating text-dark">
+                                <input type="text" class="form-control" id="AnnounceTitle"
                                     name="AnnounceTitle" placeholder="Announcement Title" minlength="5" required>
                                 <label for="AnnounceTitle">Announcement Title</label>
                             </div>
                         </div>
                         <div class="col-md-12">
-                            <div class="form-floating mb-3 text-light">
-                                <textarea class="form-control text-bg-dark" placeholder="Announcement Description"
+                            <div class="form-floating text-dark">
+                                <textarea class="form-control" placeholder="Announcement Description"
                                     id="AnnounceDescription" name="AnnounceDescription" style="height: 150px"
                                     minlength="5" required></textarea>
                                 <label for="AnnounceDescription">Announcement Description</label>
@@ -132,15 +132,15 @@ unset($_POST['resetEvent']);
                             </div>
                         </div>
                         <div class="col-md-4">
-                            <div class="form-floating mb-3 text-light">
-                                <input type="date" class="form-control text-bg-dark" id="startDate" name="startDate"
+                            <div class="form-floating text-dark">
+                                <input type="date" class="form-control" id="startDate" name="startDate"
                                     placeholder="Start Date" required min="<?php echo date('Y-m-d'); ?>">
                                 <label for="startDate">Start Date</label>
                             </div>
                         </div>
                         <div class="col-md-4">
-                            <div class="form-floating mb-3 text-light">
-                                <input type="date" class="form-control text-bg-dark" id="EndDate" name="EndDate"
+                            <div class="form-floating text-dark">
+                                <input type="date" class="form-control" id="EndDate" name="EndDate"
                                     placeholder="End Date" required min="<?php echo date('Y-m-d'); ?>">
                                 <label for="EndDate">End Date</label>
                             </div>
@@ -169,7 +169,7 @@ unset($_POST['resetEvent']);
                         </script>
                     </form>
 
-                    <p class="text-light text-center mt-3">Announcement Preview</p>
+                    <p class="text-dark text-center mt-3">Announcement Preview</p>
                     <div class="alert alert-success" role="alert">
                         <h4 class="alert-heading">
                             <?php echo $title; ?>
@@ -185,50 +185,49 @@ unset($_POST['resetEvent']);
                             <?php echo $comp; ?>
                         </p>
                     </div>
-
-                    <hr class="mt-4 mb-4" style="background-color: white; height: 5px; border-radius: 5px;">
                 </div>
-                <div class="collapse" id="EventForm">
+                <br>
+                <div class="collapse bg-light p-2 rounded border border-1 border-success" id="EventForm">
                     <form class="row g-3 rounded mt-1" method="POST" action="../Components/Proccess/EventInsert.php"
                         enctype="multipart/form-data">
                         <div class="col-md-6">
-                            <div class="form-floating mb-3 text-light">
-                                <input type="text" class="form-control text-bg-dark" id="EventTitle" name="EventTitle"
+                            <div class="form-floating text-dark">
+                                <input type="text" class="form-control" id="EventTitle" name="EventTitle"
                                     placeholder="Event Name" minlength="5" required>
                                 <label for="EventTitle">Event Name</label>
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <div class="form-floating mb-3 text-light">
-                                <input type="text" class="form-control text-bg-dark" id="EventLocation"
+                            <div class="form-floating text-dark">
+                                <input type="text" class="form-control" id="EventLocation"
                                     name="EventLocation" placeholder="Event Location" minlength="5" required>
                                 <label for="EventLocation">Event Location</label>
                             </div>
                         </div>
                         <div class="col-md-4">
-                            <div class="form-floating mb-3 text-light">
-                                <input type="date" class="form-control text-bg-dark" id="EventDate" name="EventDate"
+                            <div class="form-floating text-dark">
+                                <input type="date" class="form-control" id="EventDate" name="EventDate"
                                     placeholder="Event Date" required min="<?php echo date('Y-m-d'); ?>">
                                 <label for="EventDate">Event Date</label>
                             </div>
                         </div>
                         <div class="col-md-2">
-                            <div class="form-floating mb-3 text-light">
-                                <input type="time" class="form-control text-bg-dark" id="EventStart" name="EventStart"
+                            <div class="form-floating text-dark">
+                                <input type="time" class="form-control" id="EventStart" name="EventStart"
                                     placeholder="Event Start Time" required>
                                 <label for="EventStart">Event Start Time</label>
                             </div>
                         </div>
                         <div class="col-md-2">
-                            <div class="form-floating mb-3 text-light">
-                                <input type="time" class="form-control text-bg-dark" id="EventEnd" name="EventEnd"
+                            <div class="form-floating text-dark">
+                                <input type="time" class="form-control" id="EventEnd" name="EventEnd"
                                     placeholder="Event End Time" required>
                                 <label for="EventEnd">Event End Time</label>
                             </div>
                         </div>
                         <div class="col-md-4">
-                            <div class="form-floating mb-3 text-light">
-                                <select class="form-select text-bg-dark" name="EventType" id="EventType"
+                            <div class="form-floating text-dark">
+                                <select class="form-select" name="EventType" id="EventType"
                                     aria-label="Events Type" required>
                                     <option selected hidden>Choose...</option>
                                     <option value="webinar">Webinar</option>
@@ -241,36 +240,36 @@ unset($_POST['resetEvent']);
                             </div>
                         </div>
                         <div class="col-md-4">
-                            <div class="form-floating mb-3 text-light">
-                                <input type="date" class="form-control text-bg-dark date" id="EventCompletion"
+                            <div class="form-floating text-dark">
+                                <input type="date" class="form-control date" id="EventCompletion"
                                     name="EventCompletion" placeholder="Event Completion Date" required
                                     min="<?php echo date('Y-m-d'); ?>">
                                 <label for="EventCompletion">Event Completion Date</label>
                             </div>
                         </div>
                         <div class="col-md-4">
-                            <div class="form-floating mb-3 text-light">
-                                <input type="text" class="form-control text-bg-dark" id="EventOrganizer"
+                            <div class="form-floating text-dark">
+                                <input type="text" class="form-control" id="EventOrganizer"
                                     name="EventOrganizer" placeholder="Event Organizer" required>
                                 <label for="EventOrganizer">Event Organizer</label>
                             </div>
                         </div>
                         <div class="col-md-4">
-                            <div class="form-floating mb-3 text-light">
-                                <input type="number" min="5" class="form-control text-bg-dark" id="EventSlot"
+                            <div class="form-floating text-dark">
+                                <input type="number" min="5" class="form-control" id="EventSlot"
                                     name="EventSlot" placeholder="Event Slot" required>
                                 <label for="EventOrganizer">Event Slots</label>
                             </div>
                         </div>
                         <div class="col-md-12">
-                            <div class="input-group mb-3 text-bg-dark">
-                                <input type="file" class="form-control text-bg-dark" id="EventImage" name="EventImage"
+                            <div class="input-group">
+                                <input type="file" class="form-control" id="EventImage" name="EventImage"
                                     required>
                             </div>
                         </div>
-                        <div class="col-md-12">,
-                            <div class="form-floating mb-3 text-light">
-                                <textarea class="form-control text-bg-dark" placeholder="Event Description"
+                        <div class="col-md-12">
+                            <div class="form-floating mb-1 text-dark">
+                                <textarea class="form-control" placeholder="Event Description"
                                     id="EventDescription" name="EventDescription" style="height: 150px"
                                     minlength="5"></textarea>
                                 <label for="EventDescription">Event Description</label>
@@ -360,9 +359,6 @@ unset($_POST['resetEvent']);
                                             error.innerHTML = "";
                                         }
                                     });
-
-
-
                                 });
                             </script>
                             <p class="text-danger error">
@@ -377,7 +373,7 @@ unset($_POST['resetEvent']);
                 <form action="AdminEvents.php" method="POST" id="searchForm">
                     <hr class="mt-4 mb-4" style="background-color: white; height: 5px; border-radius: 5px;">
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control text-bg-dark" placeholder="Search Event Title"
+                        <input type="text" class="form-control" placeholder="Search Event Title"
                             title="You can only search by event title" aria-label="Search Event"
                             aria-describedby="button-addon2" name="searchEvent" id="searchEvent">
                         <input type="submit" value="Reset" class="btn btn-outline-danger" id="resetEvent"
@@ -439,7 +435,7 @@ unset($_POST['resetEvent']);
                             $output = '
             <div class="col">
                 <div class="position-relative">
-                <div class="card h-100 text-bg-dark">
+                <div class="card h-100 ">
                     <img src="' . $row['eventImage'] . '" class="card-img-top" style="max-height: 256px; object-fit: cover;" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">' . $row['eventTitle'] . '</h5>

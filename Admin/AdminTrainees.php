@@ -28,7 +28,7 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
     <title>Admin Dashboard</title>
 </head>
 
-<body class="dark adminuser" style="min-width: 1080px;">
+<body class="adminuser" style="min-width: 1080px;">
     <?php
     @include_once '../Components/AdminSidebar.php';
     @include_once '../Components/Modals/AdminTraineeModal.php';
@@ -39,27 +39,27 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
     ?>
     <section class="home">
         <div class="text">
-            <h1 class="text-warning">Trainees</h1>
+            <h1 class="text-success">Trainees</h1>
         </div>
         <div class="container-fluid" style="width: 98%;" id="AdminTable">
             <div class="container-lg table-responsive">
-                <div class="container mt-5 text-bg-dark rounded" style="min-width: fit-content;">
-                    <table class="table table-hover table-dark align-middle caption-top" id="AccountTable">
+                <div class="container mt-5 text-bg-light rounded border border-1 border-success" style="min-width: fit-content;">
+                    <table class="table table-hover table-light align-middle caption-top" id="AccountTable">
                         <caption>
                             <div class="container-fluid">
                                 <div class="row">
                                     <div class="col-4">
-                                        <div class="input-group">
+                                        <div class="input-group input-group-sm mb-3">
                                             <!-- In the future, I will add a Category Search -->
-                                            <span class="input-group-text text-bg-dark"
+                                            <span class="input-group-text input-group-sm"
                                                 title="You can search only by name">
                                                 <svg xmlns="http://www.w3.org/2000/svg" height="20"
-                                                    viewBox="0 -960 960 960" width="20" fill="var(--bs-warning)">
+                                                    viewBox="0 -960 960 960" width="20" fill="var(--bs-success)">
                                                     <path
                                                         d="M382.122-330.5q-102.187 0-173.861-71.674Q136.587-473.848 136.587-576q0-102.152 71.674-173.826Q279.935-821.5 382.087-821.5q102.152 0 173.826 71.674 71.674 71.674 71.674 173.861 0 40.859-12.022 76.292-12.021 35.434-33.065 64.956l212.087 212.326q12.674 12.913 12.674 28.945 0 16.033-12.913 28.707-12.674 12.674-29.326 12.674t-29.326-12.674L523.848-375.587q-29.761 21.044-65.434 33.065-35.672 12.022-76.292 12.022Zm-.035-83q67.848 0 115.174-47.326Q544.587-508.152 544.587-576q0-67.848-47.326-115.174Q449.935-738.5 382.087-738.5q-67.848 0-115.174 47.326Q219.587-643.848 219.587-576q0 67.848 47.326 115.174Q314.239-413.5 382.087-413.5Z" />
                                                 </svg>
                                             </span>
-                                            <input type="search" class="form-control text-bg-dark"
+                                            <input type="search" class="form-control form-control-sm"
                                                 placeholder="Search by Name" id="SearchBar">
                                         </div>
                                     </div>
@@ -68,18 +68,18 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
                                         <nav aria-label="Page navigation example">
                                             <ul class="pagination pagination-sm">
                                                 <li class="page-item">
-                                                    <a class="page-link text-bg-dark user-select-none" id="Previous"
+                                                    <a class="page-link user-select-none" id="Previous"
                                                         style="cursor: pointer;">
                                                         <span aria-hidden="true">&laquo;</span>
                                                     </a>
                                                 </li>
-                                                <li class="page-item m-1 text-bg-dark"><small
-                                                        class="text-warning text-center mx-1">Showing <span
+                                                <li class="page-item m-1"><small
+                                                        class="text-success text-center mx-1">Showing <span
                                                             id="CurrentPage"></span> to <span id="TotalPage"></span> of
                                                         <span id="TotalItem"></span> entries</small>
                                                 </li>
                                                 <li class="page-item">
-                                                    <a class="page-link text-bg-dark user-select-none" id="Next"
+                                                    <a class="page-link user-select-none" id="Next"
                                                         style="cursor: pointer;">
                                                         <span aria-hidden="true">&raquo;</span>
                                                     </a>
@@ -130,7 +130,9 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
                                         $modalStatus = 'Pending';
                                     }
 
-                                    // format date to Januaray 1, 2021
+                                    // F - full month name, j - day without leading 0, Y - full year
+                                    // h - 12 hour format, i - minutes, s - seconds, a - lowercase AM or PM
+                                    // H - 24 hour format, I - capital AM or PM
                                     $dateCreated = date("F j, Y", strtotime($row['account_Created']));
 
                                     echo '<tr>
@@ -140,7 +142,7 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
                                     <td class="text-truncate" style="max-width: 100px;">' . $row['trainee_uname'] . '</td>
                                     <td class="text-truncate" style="max-width: 100px;">' . hiddenPasswordAdmin($row['trainee_pword']) . '</td>
                                     <td hidden>' . $row['trainee_pword'] . '</td>
-                                    <td class="text-truncate" style="max-width: 100px;"><a href="mailto:' . $row['email'] . '" class="text-decoration-none text-white">' . $row['email'] . '</a></td>
+                                    <td class="text-truncate" style="max-width: 100px;"><a href="mailto:' . $row['email'] . '" class="text-decoration-none text-dark">' . $row['email'] . '</a></td>
                                     <td class="text-truncate" style="max-width: 100px;">' . $row['department'] . '</td>
                                     
                                     <td class="text-truncate" style="max-width: 100px;">' . $status . '</td>
@@ -272,6 +274,11 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
                             }
                             ?>
                         </tbody>
+                        <tfoot id="noResult">
+                            <tr>
+                                <th colspan="10" class="text-center"><span class="text-secondary">No Result</span>
+                            </tr>
+                        </tfoot>
                     </table>
                 </div>
             </div>
