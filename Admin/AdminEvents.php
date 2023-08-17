@@ -396,8 +396,18 @@ unset($_POST['resetEvent']);
 
                             if ($row['eventEnded'] == 'true') {
                                 $status = 'Ended';
+                                $newstatus = '';
                             } else {
-                                $status = 'Ongoing';
+                                if ($row['eventDate'] == date('Y-m-d')) {
+                                    $status = 'Today';
+                                    $newstatus = '- ' . $status;
+                                } else if ($row['eventDate'] > date('Y-m-d')) {
+                                    $status = '- ' . 'Upcoming';
+                                    $newstatus = $status;
+                                } else if ($row['eventDate'] < date('Y-m-d')) {
+                                    $status = 'Ongoing';
+                                    $newstatus = '- ' . $status;
+                                }
                             }
 
                             // limit description to 100 characters and add ... at the end
@@ -433,7 +443,7 @@ unset($_POST['resetEvent']);
                     <img src="' . $row['eventImage'] . '" class="card-img-top" style="max-height: 256px; object-fit: cover;" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">' . $row['eventTitle'] . '</h5>
-                        <p class="card-text">' . $date . '</p>
+                        <p class="card-text">' . $date . ' <small class="text-muted">' . $newstatus . '</small></p>
                         <p class="card-text">' . $row['eventLocation'] . '</p>
                         <p class="card-text" style="font-size: 14px;">' . $desc . '</p>
                         <small class="text-muted">Time: ' . $start . ' - ' . $end . ' | Available Seats: ' . $row['eventSlots'] . '</small>

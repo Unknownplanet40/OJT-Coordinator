@@ -200,9 +200,9 @@ if (isset($_POST['register'])) {
                     <div class="col-6">
                         <div class="form-group">
                             <input type="text" class="form-control item" name="usn" id="usn"
-                                placeholder="University Serial Number" value="<?php if (isset($_SESSION['temp'][3])) {
+                                placeholder="Identification Number" value="<?php if (isset($_SESSION['temp'][3])) {
                                     echo $_SESSION['temp'][3];
-                                } ?>" title="USN must be 10 numeric characters only">
+                                } ?>" title="ID must be 10 numeric characters only">
                         </div>
                     </div>
                 </div>
@@ -341,7 +341,7 @@ if (isset($_POST['register'])) {
             </form>
             <div class="social-media error" hidden>   
             </div>
-            <p class="text-dark text-center"><small>
+            <p class="text-dark text-center fw-bold"><small>
                     Please enter your basic information to create an account.<br>
                     <span class="text-success">&copy; 2023. All Rights Reserved.</span>
                 </small></p>

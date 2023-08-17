@@ -52,6 +52,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION['message'] = "Account Updated Successfully.";
             $_SESSION['icon'] = "success";
             $_SESSION['Show'] = true;
+            $_SESSION['isUpdated'] = 'true';
             header("location: $_SERVER[HTTP_REFERER]");
         } else {
             $_SESSION['message'] = "Account Update Failed.";
@@ -120,6 +121,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     $_SESSION['message'] = "Successfully Updated.";
                     $_SESSION['icon'] = "success";
                     $_SESSION['Show'] = true;
+                    $_SESSION['isUpdated'] = 'true';
                     header("location: $_SERVER[HTTP_REFERER]");
                 } else {
                     $_SESSION['message'] = "Update Failed.";

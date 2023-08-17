@@ -49,6 +49,7 @@ if (mysqli_num_rows($result) > 0) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../Style/Bootstrap_Style/bootstrap.css">
     <link rel="stylesheet" href="../Style/Fonts.css">
+    <link rel="stylesheet" href="../Style/ColorPalette.css">
     <script src="../Script/SweetAlert2.js"></script>
     <script src="../Script/Bootstrap_Script/bootstrap.bundle.js"></script>
     <title>Update Event</title>
@@ -64,7 +65,11 @@ if (mysqli_num_rows($result) > 0) {
         }
 
         .bgani {
-            background: linear-gradient(147deg, #020304, #445384);
+            background: #e4e9f7;
+        }
+
+        .bganim {
+            background: linear-gradient(147deg, #ffffff, #448454);
             background-size: 400% 400%;
             animation: AnimationName 25s ease infinite;
         }
@@ -120,12 +125,12 @@ if (mysqli_num_rows($result) > 0) {
             </button>
         </p>
         <div class="collapse" id="AlreadybeenAsigned">
-            <div class="card card-body bg-transparent">
+            <div class="card card-body bg-transparent border-0">
                 <div class="row">
                     <div class="col-md-2"></div>
-                    <div class="col-md-8">
-                        <div class="container-lg rounded shadow-lg mb-2 bg-dark">
-                            <table class="table table-borderless text-bg-dark">
+                    <div class="col-md-8 bg-light rounded shadow-lg">
+                        <div class="container-lg mb-2">
+                            <table class="table table-borderless">
                                 <tr>
                                     <td class="text-end"><span class="text-muted">Title</span></td>
                                     <td>
@@ -204,42 +209,42 @@ if (mysqli_num_rows($result) > 0) {
                     <input type="hidden" name="ProgID" id="ProgID" value="<?php echo $ProgID; ?>">
                     <input type="hidden" name="useupdate" id="useupdate" value="<?php echo $useupdate; ?>">
                     <div class="form-floating mb-3 text-light">
-                        <input type="text" class="form-control text-bg-dark" id="ProgtTitle" name="ProgTitle"
+                        <input type="text" class="form-control" id="ProgtTitle" name="ProgTitle"
                             placeholder="Program Name" required>
-                        <label for="ProgTitle">Program Name</label>
+                        <label for="ProgTitle" class="text-dark">Program Name</label>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-floating mb-3 text-light">
-                        <input type="text" class="form-control text-bg-dark" id="ProgLocation" name="ProgLocation"
+                        <input type="text" class="form-control " id="ProgLocation" name="ProgLocation"
                             placeholder="Program Location">
-                        <label for="ProgLocation">Program Location</label>
+                        <label for="ProgLocation" class="text-dark">Program Location</label>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-floating mb-3 text-light">
-                        <input type="date" class="form-control text-bg-dark" id="ProgDate" name="ProgDate"
+                        <input type="date" class="form-control " id="ProgDate" name="ProgDate"
                             placeholder="Date" required min="<?php echo date('Y-m-d'); ?>">
-                        <label for="ProgDate">Start Date</label>
+                        <label for="ProgDate" class="text-dark">Start Date</label>
                     </div>
                 </div>
                 <div class="col-md-2">
                     <div class="form-floating mb-3 text-light">
-                        <input type="time" class="form-control text-bg-dark" id="ProgStart" name="ProgStart"
+                        <input type="time" class="form-control " id="ProgStart" name="ProgStart"
                             placeholder="Start Time" required>
-                        <label for="ProgStart">From</label>
+                        <label for="ProgStart" class="text-dark">From</label>
                     </div>
                 </div>
                 <div class="col-md-2">
                     <div class="form-floating mb-3 text-light">
-                        <input type="time" class="form-control text-bg-dark" id="ProgEnd" name="ProgEnd"
+                        <input type="time" class="form-control " id="ProgEnd" name="ProgEnd"
                             placeholder="End Time" required>
-                        <label for="ProgEnd">To</label>
+                        <label for="ProgEnd" class="text-dark">To</label>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-floating mb-3 text-light">
-                        <select class="form-select text-bg-dark" name="Progduration" id="Progduration"
+                        <select class="form-select " name="Progduration" id="Progduration"
                             aria-label="Events Type" required>
                             <option selected hidden>Choose...</option>
                             <option value="4">4 Week</option>
@@ -248,7 +253,7 @@ if (mysqli_num_rows($result) > 0) {
                             <option value="16">16 Week</option>
                             <option value="20">20 Week</option>
                         </select>
-                        <label for="Progduration">Duration</label>
+                        <label for="Progduration" class="text-dark">Duration</label>
                     </div>
                 </div>
                 <script>
@@ -284,31 +289,34 @@ if (mysqli_num_rows($result) > 0) {
                                 // Calculate the total hours
                                 let totalHours = numberOfWeeks * numberOfHoursPerWeek;
                                 Hours.value = totalHours;
+                                // add title attribute in Hours
+                                Hours.setAttribute("title", "You have to complete " + totalHours + " hours in " + numberOfWeeks + " weeks");
                             });
                         }
                     });
                 </script>
                 <div class="col-md-4">
                     <div class="form-floating mb-3 text-light">
-                        <input type="date" class="form-control text-bg-dark" id="ProgCompletion" name="ProgCompletion"
-                            placeholder="End Date" required>
-                        <label for="ProgCompletion">End Date</label>
+                        <input type="date" class="form-control " id="ProgCompletion" name="ProgCompletion"
+                            placeholder="End Date" required title="This will automatically calculate" readonly>
+                        <label for="ProgCompletion" class="text-dark">End Date</label>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-floating mb-3 text-light">
-                        <input type="text" class="form-control text-bg-dark" id="Progsuper" name="Progsuper"
+                        <input type="text" class="form-control " id="Progsuper" name="Progsuper"
                             placeholder="Supervisor" required>
-                        <label for="Progsuper">Supervisor</label>
+                        <label for="Progsuper" class="text-dark">Supervisor</label>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-floating mb-3 text-light">
-                        <input type="number" class="form-control text-bg-dark" id="ProgHours" name="ProgHours"
-                            placeholder="Hours" required>
-                        <label for="ProgHours">Hours</label>
+                        <input type="number" class="form-control " id="ProgHours" name="ProgHours"
+                            placeholder="Hours" required readonly>
+                        <label for="ProgHours" class="text-dark">Hours</label>
                     </div>
                 </div>
+                <small class="text-muted">Note: End Date and Hours will be automatically calculated.</small>
                 <div class="col-md-2">
                     <div class="vstack gap-2">
                         <input type="submit" class="btn btn-primary mb-1 bg-gradient" name="addEvent" id="addEvent"
@@ -320,9 +328,9 @@ if (mysqli_num_rows($result) > 0) {
                 </div>
                 <div class="col-md-10">
                     <div class="form-floating mb-3 text-light">
-                        <textarea class="form-control text-bg-dark" placeholder="Description" id="ProgDescription"
-                            name="ProgDescription" style="height: 138px" minlength="256"></textarea>
-                        <label for="ProgDescription">Description</label>
+                        <textarea class="form-control " placeholder="Description" id="ProgDescription"
+                            name="ProgDescription" style="height: 138px" minlength="5"></textarea>
+                        <label for="ProgDescription" class="text-dark">Description</label>
                     </div>
                 </div>
                 <div class="col">
@@ -338,6 +346,7 @@ if (mysqli_num_rows($result) > 0) {
                             let EventCompletion = document.getElementById("ProgCompletion");
                             let EventOrganizer = document.getElementById("Progsuper");
                             let EventSlot = document.getElementById("ProgSlot");
+                            let EventHours = document.getElementById("ProgHours");
                             let EventDescription = document.getElementById("ProgDescription");
                             let error = document.querySelector(".error");
 
@@ -354,6 +363,7 @@ if (mysqli_num_rows($result) > 0) {
                                     } else {
                                         error.innerHTML = "";
                                     }
+                                    EventType.value = "Choose...";
                                 });
                             }
 
@@ -379,14 +389,26 @@ if (mysqli_num_rows($result) > 0) {
                                     if (end < start) {
                                         error.innerHTML = "End time cannot be less than start time";
                                         EventEnd.value = "";
+                                        EventHours.value = "";
+
                                     } else {
                                         error.innerHTML = "";
                                     }
                                 });
                             }
+
+                            // check if date is selected or not empty
+                            EventType.addEventListener("change", function () {
+                                if (EventDate.value == "") {
+                                    error.innerHTML = "Please select a Starting Date first";
+                                    // set default value of EventType to Choose...
+                                    EventHours.value = "Choose...";
+                                    
+                                }
+                            });
                         });
                     </script>
-                    <p class="text-danger error">
+                    <p class="text-danger text-center error">
                         this is for error message
                     </p>
                 </div>

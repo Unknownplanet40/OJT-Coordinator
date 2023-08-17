@@ -108,11 +108,12 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
         <div class="row">
             <div class="col-md-12 text-bg-success rounded-top">
                 <div class="d-flex justify-content-between">
-                    <div class="m-2"><a class="btn btn-sm bg-info" href="../Admin/AdminTraineeResource.php"
-                            title="Back to Trainee Resource"><img src="../Image/backspace.svg" alt="Back"
-                                width="24px"></a></div>
+                    <div class="mt-2">
+                        <input class="btn btn-primary btn-sm fw-bold text-uppercase" type="button" value="Back"
+                            onclick="window.location.href='../Admin/AdminTraineeResource.php'" title="Back to Trainee Documents">
+                    </div>
                     <h3 class="text-center m-2 text-uppercase">
-                        <?php echo $name; ?> Resource
+                        <?php echo $name; ?> Documents
                         <?php
                         $ShowAlert = true;
                         if (isset($ShowAlert)) {
@@ -123,11 +124,11 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                     <div></div>
                 </div>
             </div>
-            <div class=" col-md-12 " style=" background-color: rgba(0,0,0,0.2); backdrop-filter: blur(5px);">
+            <div class=" col-md-12" style=" background-color: rgba(0,0,0,0.2); backdrop-filter: blur(10px);">
                 <br>
                 <ol class="list-group list-group-numbered">
                     <li
-                        class="list-group-item d-flex justify-content-between align-items-start bg-transparent text-light">
+                        class="list-group-item d-flex justify-content-between align-items-start">
                         <div class="ms-2 me-auto">
                             <div class="fw-bold text-truncate">Resume</div>
                             <span class="text-muted">
@@ -156,7 +157,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                                         <button class='btn btn-sm btn-primary dropdown-toggle' type='button' id='dropdownMenuButton1' data-bs-toggle='dropdown' aria-expanded='false'>
                                             Action
                                         </button>
-                                        <ul class='dropdown-menu dropdown-menu-dark' aria-labelledby='dropdownMenuButton1'>
+                                        <ul class='dropdown-menu' aria-labelledby='dropdownMenuButton1'>
                                             <li><a class='dropdown-item' title='View File' href='$resume' target='_blank'><img src='../Image/ReDocs.svg' alt='View' width='24px'> View</a></li>
                                             <li><a class='dropdown-item' title='Download file' href='$resume' download><img src='../Image/DownDocs.svg' alt='Download' width='24px'> Download</a></li>
                                             <li><hr class='dropdown-divider'></li>
@@ -173,7 +174,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                         </div>
                     </li>
                     <li
-                        class="list-group-item d-flex justify-content-between align-items-start bg-transparent text-light">
+                        class="list-group-item d-flex justify-content-between align-items-start ">
                         <div class="ms-2 me-auto">
                             <div class="fw-bold text-truncate">Placement Form</div>
                             <span class="text-muted">
@@ -202,7 +203,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                                         <button class='btn btn-sm btn-primary dropdown-toggle' type='button' id='dropdownMenuButton1' data-bs-toggle='dropdown' aria-expanded='false'>
                                             Action
                                         </button>
-                                        <ul class='dropdown-menu dropdown-menu-dark' aria-labelledby='dropdownMenuButton1'>
+                                        <ul class='dropdown-menu ' aria-labelledby='dropdownMenuButton1'>
                                             <li><a class='dropdown-item' title='View File' href='$placement' target='_blank'><img src='../Image/ReDocs.svg' alt='View' width='24px'> View</a></li>
                                             <li><a class='dropdown-item' title='Download file' href='$placement' download><img src='../Image/DownDocs.svg' alt='Download' width='24px'> Download</a></li>
                                             <li><hr class='dropdown-divider'></li>
@@ -219,7 +220,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                         </div>
                     </li>
                     <li
-                        class="list-group-item d-flex justify-content-between align-items-start bg-transparent text-light">
+                        class="list-group-item d-flex justify-content-between align-items-start ">
                         <div class="ms-2 me-auto">
                             <div class="fw-bold text-truncate">Birth Certificate</div>
                             <span class="text-muted">
@@ -243,12 +244,12 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                             <?php
                             if (isset($birth)) {
                                 echo
-                                "
+                                    "
                                     <div class='dropdown'>
                                         <button class='btn btn-sm btn-primary dropdown-toggle' type='button' id='dropdownMenuButton1' data-bs-toggle='dropdown' aria-expanded='false'>
                                             Action
                                         </button>
-                                        <ul class='dropdown-menu dropdown-menu-dark' aria-labelledby='dropdownMenuButton1'>
+                                        <ul class='dropdown-menu ' aria-labelledby='dropdownMenuButton1'>
                                             <li><a class='dropdown-item' title='View File' href='$birth' target='_blank'><img src='../Image/ReDocs.svg' alt='View' width='24px'> View</a></li>
                                             <li><a class='dropdown-item' title='Download file' href='$birth' download><img src='../Image/DownDocs.svg' alt='Download' width='24px'> Download</a></li>
                                             <li><hr class='dropdown-divider'></li>
@@ -265,7 +266,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                         </div>
                     </li>
                     <li
-                        class="list-group-item d-flex justify-content-between align-items-start bg-transparent text-light">
+                        class="list-group-item d-flex justify-content-between align-items-start  ">
                         <div class="ms-2 me-auto">
                             <div class="fw-bold text-truncate">Memorandum of Agreement</div>
                             <span class="text-muted">
@@ -294,7 +295,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                                         <button class='btn btn-sm btn-primary dropdown-toggle' type='button' id='dropdownMenuButton1' data-bs-toggle='dropdown' aria-expanded='false'>
                                             Action
                                         </button>
-                                        <ul class='dropdown-menu dropdown-menu-dark' aria-labelledby='dropdownMenuButton1'>
+                                        <ul class='dropdown-menu ' aria-labelledby='dropdownMenuButton1'>
                                             <li><a class='dropdown-item' title='View File' href='$moa' target='_blank'><img src='../Image/ReDocs.svg' alt='View' width='24px'> View</a></li>
                                             <li><a class='dropdown-item' title='Download file' href='$moa' download><img src='../Image/DownDocs.svg' alt='Download' width='24px'> Download</a></li>
                                             <li><hr class='dropdown-divider'></li>
@@ -311,7 +312,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                         </div>
                     </li>
                     <li
-                        class="list-group-item d-flex justify-content-between align-items-start bg-transparent text-light">
+                        class="list-group-item d-flex justify-content-between align-items-start  ">
                         <div class="ms-2 me-auto">
                             <div class="fw-bold text-truncate">Waiver</div>
                             <span class="text-muted">
@@ -340,7 +341,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                                         <button class='btn btn-sm btn-primary dropdown-toggle' type='button' id='dropdownMenuButton1' data-bs-toggle='dropdown' aria-expanded='false'>
                                             Action
                                         </button>
-                                        <ul class='dropdown-menu dropdown-menu-dark' aria-labelledby='dropdownMenuButton1'>
+                                        <ul class='dropdown-menu ' aria-labelledby='dropdownMenuButton1'>
                                             <li><a class='dropdown-item' title='View File' href='$waiver' target='_blank'><img src='../Image/ReDocs.svg' alt='View' width='24px'> View</a></li>
                                             <li><a class='dropdown-item' title='Download file' href='$waiver' download><img src='../Image/DownDocs.svg' alt='Download' width='24px'> Download</a></li>
                                             <li><hr class='dropdown-divider'></li>
@@ -357,7 +358,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                         </div>
                     </li>
                     <li
-                        class="list-group-item d-flex justify-content-between align-items-start bg-transparent text-light">
+                        class="list-group-item d-flex justify-content-between align-items-start  ">
                         <div class="ms-2 me-auto">
                             <div class="fw-bold text-truncate">Medical Certificate</div>
                             <span class="text-muted">
@@ -386,7 +387,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                                         <button class='btn btn-sm btn-primary dropdown-toggle' type='button' id='dropdownMenuButton1' data-bs-toggle='dropdown' aria-expanded='false'>
                                             Action
                                         </button>
-                                        <ul class='dropdown-menu dropdown-menu-dark' aria-labelledby='dropdownMenuButton1'>
+                                        <ul class='dropdown-menu ' aria-labelledby='dropdownMenuButton1'>
                                             <li><a class='dropdown-item' title='View File' href='$medical' target='_blank'><img src='../Image/ReDocs.svg' alt='View' width='24px'> View</a></li>
                                             <li><a class='dropdown-item' title='Download file' href='$medical' download><img src='../Image/DownDocs.svg' alt='Download' width='24px'> Download</a></li>
                                             <li><hr class='dropdown-divider'></li>
@@ -403,7 +404,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                         </div>
                     </li>
                     <li
-                        class="list-group-item d-flex justify-content-between align-items-start bg-transparent text-light">
+                        class="list-group-item d-flex justify-content-between align-items-start  ">
                         <div class="ms-2 me-auto">
                             <div class="fw-bold text-truncate">Good Moral Certificate</div>
                             <span class="text-muted">
@@ -432,7 +433,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                                         <button class='btn btn-sm btn-primary dropdown-toggle' type='button' id='dropdownMenuButton1' data-bs-toggle='dropdown' aria-expanded='false'>
                                             Action
                                         </button>
-                                        <ul class='dropdown-menu dropdown-menu-dark' aria-labelledby='dropdownMenuButton1'>
+                                        <ul class='dropdown-menu ' aria-labelledby='dropdownMenuButton1'>
                                             <li><a class='dropdown-item' title='View File' href='$GMcert' target='_blank'><img src='../Image/ReDocs.svg' alt='View' width='24px'> View</a></li>
                                             <li><a class='dropdown-item' title='Download file' href='$GMcert' download><img src='../Image/DownDocs.svg' alt='Download' width='24px'> Download</a></li>
                                             <li><hr class='dropdown-divider'></li>
@@ -449,7 +450,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                         </div>
                     </li>
                     <li
-                        class="list-group-item d-flex justify-content-between align-items-start bg-transparent text-light">
+                        class="list-group-item d-flex justify-content-between align-items-start  ">
                         <div class="ms-2 me-auto">
                             <div class="fw-bold text-truncate">Registration Form</div>
                             <span class="text-muted">
@@ -478,7 +479,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                                         <button class='btn btn-sm btn-primary dropdown-toggle' type='button' id='dropdownMenuButton1' data-bs-toggle='dropdown' aria-expanded='false'>
                                             Action
                                         </button>
-                                        <ul class='dropdown-menu dropdown-menu-dark' aria-labelledby='dropdownMenuButton1'>
+                                        <ul class='dropdown-menu ' aria-labelledby='dropdownMenuButton1'>
                                             <li><a class='dropdown-item' title='View File' href='$regform' target='_blank'><img src='../Image/ReDocs.svg' alt='View' width='24px'> View</a></li>
                                             <li><a class='dropdown-item' title='Download file' href='$regform' download><img src='../Image/DownDocs.svg' alt='Download' width='24px'> Download</a></li>
                                             <li><hr class='dropdown-divider'></li>
@@ -495,7 +496,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                         </div>
                     </li>
                     <li
-                        class="list-group-item d-flex justify-content-between align-items-start bg-transparent text-light">
+                        class="list-group-item d-flex justify-content-between align-items-start  ">
                         <div class="ms-2 me-auto">
                             <div class="fw-bold text-truncate">Evaluation Form</div>
                             <span class="text-muted">
@@ -524,7 +525,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                                         <button class='btn btn-sm btn-primary dropdown-toggle' type='button' id='dropdownMenuButton1' data-bs-toggle='dropdown' aria-expanded='false'>
                                             Action
                                         </button>
-                                        <ul class='dropdown-menu dropdown-menu-dark' aria-labelledby='dropdownMenuButton1'>
+                                        <ul class='dropdown-menu ' aria-labelledby='dropdownMenuButton1'>
                                             <li><a class='dropdown-item' title='View File' href='$eval' target='_blank'><img src='../Image/ReDocs.svg' alt='View' width='24px'> View</a></li>
                                             <li><a class='dropdown-item' title='Download file' href='$eval' download><img src='../Image/DownDocs.svg' alt='Download' width='24px'> Download</a></li>
                                             <li><hr class='dropdown-divider'></li>
@@ -541,7 +542,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                         </div>
                     </li>
                     <li
-                        class="list-group-item d-flex justify-content-between align-items-start bg-transparent text-light">
+                        class="list-group-item d-flex justify-content-between align-items-start  ">
                         <div class="ms-2 me-auto">
                             <div class="fw-bold text-truncate">Narrative Report</div>
                             <span class="text-muted">
@@ -570,7 +571,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                                         <button class='btn btn-sm btn-primary dropdown-toggle' type='button' id='dropdownMenuButton1' data-bs-toggle='dropdown' aria-expanded='false'>
                                             Action
                                         </button>
-                                        <ul class='dropdown-menu dropdown-menu-dark' aria-labelledby='dropdownMenuButton1'>
+                                        <ul class='dropdown-menu ' aria-labelledby='dropdownMenuButton1'>
                                             <li><a class='dropdown-item' title='View File' href='$narrative' target='_blank'><img src='../Image/ReDocs.svg' alt='View' width='24px'> View</a></li>
                                             <li><a class='dropdown-item' title='Download file' href='$narrative' download><img src='../Image/DownDocs.svg' alt='Download' width='24px'> Download</a></li>
                                             <li><hr class='dropdown-divider'></li>
@@ -587,7 +588,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                         </div>
                     </li>
                     <li
-                        class="list-group-item d-flex justify-content-between align-items-start bg-transparent text-light">
+                        class="list-group-item d-flex justify-content-between align-items-start  ">
                         <div class="ms-2 me-auto">
                             <div class="fw-bold text-truncate">Daily Time Record</div>
                             <span class="text-muted">
@@ -616,7 +617,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                                         <button class='btn btn-sm btn-primary dropdown-toggle' type='button' id='dropdownMenuButton1' data-bs-toggle='dropdown' aria-expanded='false'>
                                             Action
                                         </button>
-                                        <ul class='dropdown-menu dropdown-menu-dark' aria-labelledby='dropdownMenuButton1'>
+                                        <ul class='dropdown-menu ' aria-labelledby='dropdownMenuButton1'>
                                             <li><a class='dropdown-item' title='View File' href='$timecard' target='_blank'><img src='../Image/ReDocs.svg' alt='View' width='24px'> View</a></li>
                                             <li><a class='dropdown-item' title='Download file' href='$timecard' download><img src='../Image/DownDocs.svg' alt='Download' width='24px'> Download</a></li>
                                             <li><hr class='dropdown-divider'></li>
@@ -633,7 +634,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                         </div>
                     </li>
                     <li
-                        class="list-group-item d-flex justify-content-between align-items-start bg-transparent text-light">
+                        class="list-group-item d-flex justify-content-between align-items-start  ">
                         <div class="ms-2 me-auto">
                             <div class="fw-bold text-wrap">Certificate of Completion</div>
                             <span class="text-muted">
@@ -662,7 +663,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                                         <button class='btn btn-sm btn-primary dropdown-toggle' type='button' id='dropdownMenuButton1' data-bs-toggle='dropdown' aria-expanded='false'>
                                             Action
                                         </button>
-                                        <ul class='dropdown-menu dropdown-menu-dark' aria-labelledby='dropdownMenuButton1'>
+                                        <ul class='dropdown-menu ' aria-labelledby='dropdownMenuButton1'>
                                             <li><a class='dropdown-item' title='View File' href='$COC' target='_blank'><img src='../Image/ReDocs.svg' alt='View' width='24px'> View</a></li>
                                             <li><a class='dropdown-item' title='Download file' href='$COC' download><img src='../Image/DownDocs.svg' alt='Download' width='24px'> Download</a></li>
                                             <li><hr class='dropdown-divider'></li>
@@ -679,6 +680,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                         </div>
                     </li>
                 </ol>
+            <br>
             </div>
         </div>
     </div>

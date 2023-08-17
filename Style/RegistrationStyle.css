@@ -1,4 +1,12 @@
 @import url(./ColorPalette.css);
+@import url(./Font.css);
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins";
+}
 
 :root {
   --form-width: 680px;
@@ -10,7 +18,7 @@
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--body-color);
+  background: #fff;
   transition: var(--tran-05);
 }
 

@@ -8,15 +8,13 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     $upname = $_POST['upname'];
     $upemail = $_POST['upemail'];
     $upusername = $_POST['upusername'];
-    $uppassword = $_POST['uppassword'];
     $updepartment = $_POST['updepartment'];
-    $upposition = $_POST['upposition'];
     $upcourse = $_POST['upcourse'];
 
         print_r($_FILES);
         print_r($_POST);
         echo "if";
-        $sql = "UPDATE tbl_trainee SET name='$upname', email='$upemail', trainee_uname='$upusername', trainee_pword='$uppassword', department='$updepartment',  course='$upcourse' WHERE UID='$UserID'";
+        $sql = "UPDATE tbl_trainee SET name='$upname', email='$upemail', trainee_uname='$upusername', department='$updepartment',  course='$upcourse' WHERE UID='$UserID'";
         $result = mysqli_query($conn, $sql);
 
         if ($result) {

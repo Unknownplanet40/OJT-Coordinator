@@ -8,6 +8,7 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
     header("Location: ../Login.php");
 } else {
     $ShowAlert = true;
+    $_SESSION['isUpdated'] = 'false';
 }
 
 $sql = "SELECT COUNT(UID), COUNT(program), COUNT(completed) FROM tbl_trainee;";

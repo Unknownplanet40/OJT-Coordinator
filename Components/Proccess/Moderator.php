@@ -30,11 +30,11 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
         $status = $row['status'];
 
         $datecreated = date("F j, Y", strtotime($datecreated));
-        $lastlogin = date("h:i A", strtotime($lastlogin));
+        $lastlogin = date("F j, Y - h:i A", strtotime($lastlogin));
         if ($status == 1) {
-            $status = "Online";
+            $status = "<span class='text-success'>Online</span>";
         } else {
-            $status = "Offline";
+            $status = "<span class='text-danger'>Offline</span>";
         }
 
     } else {
@@ -194,31 +194,84 @@ if (isset($_POST['update'])) {
                             <a id="back" class="btn btn-primary w-100">Back</a>
                             <script>
                                 let backBTN = document.getElementById("back");
+                                let isUpdated = "<?php echo $_SESSION['isUpdated']; ?>";
+
+                                console.log(isUpdated);
 
                                 backBTN.addEventListener("click", function () {
                                     // get id
                                     let id = "<?php echo $UserID; ?>";
                                     let currentUSer = "<?php echo $_SESSION['GlobalID']; ?>";
 
-                                    swal.fire({
-                                        text: "Saving...",
-                                        icon: 'info',
-                                        allowOutsideClick: false,
-                                        showConfirmButton: false,
-                                        background: "#19191a",
-                                        color: "#fff",
-                                        timer: 2000,
-                                        timerProgressBar: true,
-                                        didOpen: () => {
-                                            Swal.showLoading()
-                                        }
-                                    }).then((result) => {
-                                        if (result.dismiss === Swal.DismissReason.timer) {
-                                            if (id == currentUSer) {
-                                                window.location.href = "../../Admin/AdminDashboard.php";
+                                    if (isUpdated == 'true') {
+                                        /* swal.fire({
+                                            text: "Saving...",
+                                            icon: 'info',
+                                            allowOutsideClick: false,
+                                            showConfirmButton: false,
+                                            background: "#fff",
+                                            color: "#000",
+                                            width: "25rem",
+                                            padding: "1rem",
+                                            timer: 2000,
+                                            timerProgressBar: true,
+                                            didOpen: () => {
+                                                Swal.showLoading()
                                             }
-                                        }
-                                    })
+                                        }).then((result) => {
+                                            if (result.dismiss === Swal.DismissReason.timer) {
+                                                if (id == currentUSer) {
+                                                    window.location.href = "../../Admin/AdminDashboard.php";
+                                                }
+                                            }
+                                        }) */
+                                        swal.fire({
+                                                title: "Changes has been made!",
+                                                text: "You need to re-login your account to see the changes.",
+                                                icon: "info",
+                                                showCancelButton: false,
+                                                confirmButtonColor: "#3085d6",
+                                                cancelButtonColor: "#d33",
+                                                confirmButtonText: "logout",
+                                                background: "#fff",
+                                                color: "#000",
+                                            }).then((result) => {
+                                                if (result.isConfirmed) {
+                                                    //random message for the logout
+                                                    const titlemessage = [
+                                                        'Logging out...',
+                                                        'See you soon...',
+                                                        'Bye bye...',
+                                                        'Have a nice day...',
+                                                        'Goodbye...',];
+                                                    const textmessage = [
+                                                        'Please wait while we are logging you out',
+                                                        'Closing your session',
+                                                        'Clearing your session',
+                                                        'Please wait, where saving your data',
+                                                        'Please wait a moment'];
+                                                    const ranText = Math.floor(Math.random() * textmessage.length);
+                                                    const ranTitle = Math.floor(Math.random() * titlemessage.length);
+
+                                                    Swal.fire({
+                                                        title: titlemessage[ranTitle],
+                                                        text: textmessage[ranText],
+                                                        allowOutsideClick: false,
+                                                        didOpen: () => {
+                                                            Swal.showLoading()
+                                                        },
+                                                    })
+                                                    var milliseconds = Math.floor(
+                                                        Math.random() * (9999 - 1000 + 1) + 1000
+                                                    ).toString();
+                                                    setTimeout(() => {
+                                                        window.location.href = "../../logout.php";
+                                                    }, milliseconds)
+                                                }
+                                            })
+                                    } else {
+                                        window.location.href = "../../Admin/AdminDashboard.php";
+                                    }
                                 });
                             </script>
                         </div>
@@ -252,8 +305,10 @@ if (isset($_POST['update'])) {
                         <span class="input-group-text text-bg-success w-25">Department:</span>
                         <select name="updepartment" class="form-select" id="updepartment"
                             value="<?php echo isset($department) ? $department : "Not Available"; ?>">
-                            <option value="BSIT">Information Technology</option>
-                            <option value="BSCS">Computer Science</option>
+                            <option value="BSIT" <?php if ($department === "BSIT")
+                                echo "selected"; ?>>Information Technology</option>
+                            <option value="BSCS" <?php if ($department === "BSCS")
+                                echo "selected"; ?>>Computer Science</option>
                         </select>
                     </div>
                     <div class="input-group mb-3">

@@ -8,8 +8,8 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
     header("Location: ../Login.php");
 } else {
     $ShowAlert = true;
+    $_SESSION['isUpdated'] = 'false';
 }
-
 ?>
 
 
@@ -222,13 +222,15 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
                                                 });
                                             } else {
                                                 Swal.fire({
-                                                    text: "We need to verify your password first before you can update this account.",
+                                                    icon: "warning",
+                                                    title: "Confirm your password",
+                                                    text: "Your are about to update an account. Verify your password first before you can proceed.",
                                                     input: "password",
                                                     inputAttributes: {
                                                       autocapitalize: "off",
                                                       placeholder: "Enter your password",
                                                     },
-                                                    showCancelButton: true,
+                                                    showCancelButton: false,
                                                     confirmButtonText: "Confirm",
                                                     showLoaderOnConfirm: true,
                                                     preConfirm: async () => {
@@ -246,11 +248,21 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
                                                       }
                                                     },
                                                     allowOutsideClick: () => !Swal.isLoading(),
-                                                    background: "#19191a",
-                                                    color: "#fff",
+                                                    background: "#fff",
+                                                    color: "#000",
                                                   }).then((result) => {
                                                     if (result.isConfirmed && result.value.valid) {
                                                       window.location.href = "../Components/Proccess/UpdateSuperuserAcc.php?id=' . $row['UID'] . '";
+                                                    } else {
+                                                        Swal.fire({
+                                                            icon: "error",
+                                                            title: "Oops...",
+                                                            text: "You entered an incorrect password!",
+                                                            background: "#fff",
+                                                            color: "#000",
+                                                            showConfirmButton: false,
+                                                            timer: 1500,
+                                                        });
                                                     }
                                                   });
                                             }

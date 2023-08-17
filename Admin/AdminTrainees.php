@@ -172,7 +172,8 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
                                                     color: "#fff",
                                                 });
                                             } else {
-                                                Swal.fire({
+                                                /* Swal.fire({
+                                                    //text: "You are about to update an account that is not yours. Please enter your password to continue.",
                                                     text: "We need to verify your password first before you can update this account.",
                                                     input: "password",
                                                     inputAttributes: {
@@ -203,7 +204,19 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
                                                     if (result.isConfirmed && result.value.valid) {
                                                       window.location.href = "../Components/Proccess/UpdateSuperuserAcc_USER.php?id=' . $row['UID'] . '";
                                                     }
-                                                  });
+                                                }); */
+                                                //warning
+                                                Swal.fire({
+                                                    icon: "warning",
+                                                    title: "Reminder",
+                                                    text: "Please be reminded that you can only modify some of the information of this account.",
+                                                    background: "#fff",
+                                                    color: "#000",
+                                                }).then((result) => {
+                                                    if (result.isConfirmed) {
+                                                        window.location.href = "../Components/Proccess/UpdateSuperuserAcc_USER.php?id=' . $row['UID'] . '";
+                                                    }
+                                                });
                                             }
                                           });
                                         ViewAccount[' . ($i - 1) . '].addEventListener("click", () => {

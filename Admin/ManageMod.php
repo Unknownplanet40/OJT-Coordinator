@@ -8,6 +8,7 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
     header("Location: ../Login.php");
 } else {
     $ShowAlert = true;
+    $_SESSION['isUpdated'] = 'false';
 }
 
 ?>
@@ -50,7 +51,8 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
                     <div class="collapse navbar-collapse" id="navbarNavDropdown">
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                             <li class="nav-item" id="Tabs">
-                                <a class="nav-link" id="AdminTab" style="cursor: pointer;" href="../Admin/ManageAdmin.php">Administrator</a>
+                                <a class="nav-link" id="AdminTab" style="cursor: pointer;"
+                                    href="../Admin/ManageAdmin.php">Administrator</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link active" id="ModTab" style="cursor: pointer;">Moderator</a>
@@ -180,7 +182,7 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
                                     }
 
                                     //
-
+                            
                                     echo '<tr>
                                     <th scope="row">' . $i . '</th>
                                     <td class="text-center"><img src="' . $row['imagePath'] . '" alt="Profile" class="rounded-circle img-fluid" style="width: 50px; height: 50px;"></td>
@@ -221,13 +223,15 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
                                                 });
                                             } else {
                                                 Swal.fire({
-                                                    text: "We need to verify your password first before you can update this account.",
+                                                    icon: "warning",
+                                                    title: "Confirm your password",
+                                                    text: "Your are about to update an account. Verify your password first before you can proceed.",
                                                     input: "password",
                                                     inputAttributes: {
                                                       autocapitalize: "off",
                                                       placeholder: "Enter your password",
                                                     },
-                                                    showCancelButton: true,
+                                                    showCancelButton: false,
                                                     confirmButtonText: "Confirm",
                                                     showLoaderOnConfirm: true,
                                                     preConfirm: async () => {
@@ -245,13 +249,23 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
                                                       }
                                                     },
                                                     allowOutsideClick: () => !Swal.isLoading(),
-                                                    background: "#19191a",
-                                                    color: "#fff",
+                                                    background: "#fff",
+                                                    color: "#000",
                                                   }).then((result) => {
                                                     if (result.isConfirmed && result.value.valid) {
                                                       window.location.href = "../Components/Proccess/UpdateSuperuserAcc.php?id=' . $row['UID'] . '";
+                                                    } else {
+                                                        Swal.fire({
+                                                            icon: "error",
+                                                            title: "Oops...",
+                                                            text: "You entered an incorrect password!",
+                                                            background: "#fff",
+                                                            color: "#000",
+                                                            showConfirmButton: false,
+                                                            timer: 1500,
+                                                        });
                                                     }
-                                                  });
+                                                });
                                             }
                                           });
                                         ViewAccount[' . ($i - 1) . '].addEventListener("click", () => {

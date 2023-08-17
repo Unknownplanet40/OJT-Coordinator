@@ -33,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
         $image = $row['image'];
         $datecreated = date("F j, Y", strtotime($row['account_Created']));
         $course = $row['course'];
-        
+
         $status = $row['status'];
 
         /*
@@ -43,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
         */
         if ($status == 1) {
             $status = "<span class='text-success'>Online</span>";
-            
+
         } else {
             $status = "<span class='text-danger'>Offline</span>";
         }
@@ -123,7 +123,7 @@ if (isset($_POST['update'])) {
         }
 
         body {
-            background-color: var(--clr-background);
+            background-color: #e4e9f7;
         }
 
         .listhead {
@@ -144,64 +144,72 @@ if (isset($_POST['update'])) {
         $_SESSION['Show'] = false;
     }
     ?>
-    <div class="container-lg text-bg-dark rounded">
+    <div class="container-lg text-light shadow-lg p-3 mt-5 mb-5 bg-body rounded">
         <div class="row">
-            <div class="col-md-12">
-                <h1 class="text-center">Update Account</h1>
+            <div class="col-md-12 mt-2">
+                <h1 class="text-center text-success text-uppercase fw-bold">Update Account</h1>
             </div>
         </div>
         <div class="row">
-            <div class="col-md-5 text-bg-dark text-center rounded">
+            <div class="col-md-5 text-center rounded">
                 <ul class="list-group">
-                    <li class="list-group-item listhead">
+                    <li class="list-group-item listhead text-center border-0" style="min-height: 256px;">
                         <img src="<?php echo isset($image) ? "../" . $image : "../../Image/Profile.png"; ?>
-                        " class="img-fluid m-1 img-thumbnail" width="256" height="256">
+                        " class="img-fluid m-1 rounded" style="min-height: 256px; min-width: 256px; max-height: 256px; max-width: 256px;">
                     </li>
-                    <li class="list-group-item d-flex justify-content-between align-items-center text-muted">
+                    <li
+                        class="list-group-item d-flex justify-content-between align-items-center text-muted text-bg-dark">
                         Name:
-                        <span class="text-end text-dark user-select-none">
+                        <span class="text-end text-light user-select-none">
                             <?php echo isset($name) ? $name : "Not Available"; ?>
                         </span>
                     </li>
-                    <li class="list-group-item d-flex justify-content-between align-items-center text-muted">
+                    <li
+                        class="list-group-item d-flex justify-content-between align-items-center text-muted text-bg-dark">
                         Email:
-                        <span class="text-end text-dark user-select-none">
+                        <span class="text-end text-light user-select-none">
                             <?php echo isset($email) ? $email : "Not Available"; ?>
                         </span>
                     </li>
-                    <li class="list-group-item d-flex justify-content-between align-items-center text-muted">
+                    <li
+                        class="list-group-item d-flex justify-content-between align-items-center text-muted text-bg-dark">
                         Username:
-                        <span class="text-end text-dark user-select-none">
+                        <span class="text-end text-light user-select-none">
                             <?php echo isset($username) ? $username : "Not Available"; ?>
                         </span>
                     </li>
-                    <li class="list-group-item d-flex justify-content-between align-items-center text-muted">
+                    <li
+                        class="list-group-item d-flex justify-content-between align-items-center text-muted text-bg-dark">
                         Department:
-                        <span class="text-end text-dark user-select-none">
+                        <span class="text-end text-light user-select-none">
                             <?php echo isset($department) ? $department : "Not Available"; ?>
                         </span>
                     </li>
-                    <li class="list-group-item d-flex justify-content-between align-items-center text-muted">
+                    <li
+                        class="list-group-item d-flex justify-content-between align-items-center text-muted text-bg-dark">
                         Date Created:
-                        <span class="text-end text-dark user-select-none">
+                        <span class="text-end text-light user-select-none">
                             <?php echo isset($datecreated) ? $datecreated : "Not Available"; ?>
                         </span>
                     </li>
-                    <li class="list-group-item d-flex justify-content-between align-items-center text-muted">
+                    <li
+                        class="list-group-item d-flex justify-content-between align-items-center text-muted text-bg-dark">
                         Last Login:
-                        <span class="text-end text-dark user-select-none">
+                        <span class="text-end text-light user-select-none">
                             <?php echo isset($lastlogin) ? $lastlogin : "Not Available"; ?>
                         </span>
                     </li>
-                    <li class="list-group-item d-flex justify-content-between align-items-center text-muted">
+                    <li
+                        class="list-group-item d-flex justify-content-between align-items-center text-muted text-bg-dark">
                         Position Assigned:
-                        <span class="text-end text-dark user-select-none">
+                        <span class="text-end text-light user-select-none">
                             <?php echo isset($position) ? $position : "Not Available"; ?>
                         </span>
                     </li>
-                    <li class="list-group-item d-flex justify-content-between align-items-center text-muted">
+                    <li
+                        class="list-group-item d-flex justify-content-between align-items-center text-muted text-bg-dark">
                         Current Status:
-                        <span class="text-end text-dark user-select-none text">
+                        <span class="text-end text-light user-select-none text">
                             <?php echo isset($status) ? $status : "Not Available"; ?>
                         </span>
                     </li>
@@ -220,24 +228,24 @@ if (isset($_POST['update'])) {
 
                                     if (id == currentUSer) {
                                         Swal.fire({
-                                        text: "We recommend relogging into your account, whether you have updated it or not.",
-                                        icon: 'info',
-                                        allowOutsideClick: false,
-                                        showCancelButton: true,
-                                        confirmButtonColor: '#3085d6',
-                                        cancelButtonColor: '#d33',
-                                        confirmButtonText: 'Relogin',
-                                        cancelButtonText: 'Just Go Back',
-                                        background: "#19191a",
-                                        color: "#fff"
+                                            text: "We recommend relogging into your account, whether you have updated it or not.",
+                                            icon: 'info',
+                                            allowOutsideClick: false,
+                                            showCancelButton: true,
+                                            confirmButtonColor: '#3085d6',
+                                            cancelButtonColor: '#d33',
+                                            confirmButtonText: 'Relogin',
+                                            cancelButtonText: 'Just Go Back',
+                                            background: "#fff",
+                                            color: "#000"
 
-                                    }).then((result) => {
-                                        if (result.isConfirmed) {
-                                            window.location.href = "../../logout.php";
-                                        } else {
-                                            window.location.href = "<?php echo $address; ?>";
-                                        }
-                                    })
+                                        }).then((result) => {
+                                            if (result.isConfirmed) {
+                                                window.location.href = "../../logout.php";
+                                            } else {
+                                                window.location.href = "<?php echo $address; ?>";
+                                            }
+                                        })
                                     } else {
                                         window.location.href = "<?php echo $address; ?>";
                                     }
@@ -247,11 +255,11 @@ if (isset($_POST['update'])) {
 
                             </script>
                         </div>
-                        
+
                     </div>
                 </div>
             </div>
-            <div class="col-md-7 text-bg-dark p-5">
+            <div class="col-md-7 p-5 mt-4">
                 <form action="../Proccess/update_USER.php" method="POST">
                     <input type="hidden" name="id" value="<?php echo $UserID; ?>">
                     <div class="input-group mb-3">
@@ -262,7 +270,7 @@ if (isset($_POST['update'])) {
                     <div class="input-group mb-3">
                         <span class="input-group-text text-bg-success w-25">Email:</span>
                         <input type="text" class="form-control" name="upemail" id="upemail"
-                            value="<?php echo isset($email) ? $email : "Not Available"; ?>" required>
+                            value="<?php echo isset($email) ? $email : "Not Available"; ?>" required pattern="^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$">
                     </div>
                     <div class="input-group mb-3">
                         <span class="input-group-text text-bg-success w-25">Username:</span>
@@ -272,7 +280,7 @@ if (isset($_POST['update'])) {
                     <div class="input-group mb-3">
                         <span class="input-group-text text-bg-success w-25">Course</span>
                         <input type="text" class="form-control" name="upcourse" id="upcourse"
-                            value="<?php echo isset($course) ? $course : "Not Available"; ?>"required>
+                            value="<?php echo isset($course) ? $course : "Not Available"; ?>" required pattern="^(BSIT|BSCS)-(1|2|3|4)[A-G]$">
                     </div>
                     <div class="input-group mb-3">
                         <span class="input-group-text text-bg-success w-25">Department:</span>
@@ -289,29 +297,51 @@ if (isset($_POST['update'])) {
                 </form>
                 <!-- Error Message -->
                 <div class="m-5">
-                    <p class="text-danger text-center fs-5" id="error">
+                    <p class="text-danger text-center fs-5">
+                    <div class="alert alert-danger" id="error" role="alert" style="display: none;">
+                        <span class="text-danger">Invalid Course Format</span> <br>
+                        <small class="text-muted">Please follow this format: (BSIT|BSCS)-(1-4)[A-G]</small> <br>
+                        <span class="text-muted">Example: <?php echo isset($course) ? $course : "BSIT-2B"; ?></span>
                         <?php
                         foreach ($error as $err) {
                             echo $err . "<br>";
                         }
                         ?>
+                    </div>
+
                     </p>
                     <script>
                         var error = document.getElementById("error");
                         setTimeout(function () {
-                            error.innerHTML = "";
+                            error.style.display = "none";
                         }, 8500);
 
                         let upcourse = document.getElementById("upcourse");
+                        let updepartment = document.getElementById("updepartment");
+                        let update = document.getElementById("update");
 
                         let pattern = "^(BSIT|BSCS)-(1|2|3|4)[A-G]$";
 
                         upcourse.addEventListener("keyup", function () {
                             upcourse.value = upcourse.value.toUpperCase();
                             if (upcourse.value.match(pattern)) {
-                                error.innerHTML = "";
+                                error.style.display = "none";
+                                update.disabled = false;
                             } else {
-                                error.innerHTML = "Invalid Course Format, <br> Please follow this format: <br> (BSIT|BSCS)-(1|2|3|4)[A-G] <br> Example: BSIT-2B";
+                                error.style.display = "block";
+                                update.disabled = true;
+                                //error.innerHTML = "Invalid Course Format, <br> Please follow this format: <br> (BSIT|BSCS)-(1|2|3|4)[A-G] <br> Example: BSIT-2B";
+                            }
+                        });
+
+                        //if updepartment is BSCS, then the upcourse should be BSCS
+                        updepartment.addEventListener("change", function () {
+                            // get last 3 characters
+                            let last3 = upcourse.value.slice(-3);
+                            if (updepartment.value == "BSCS") {
+                                upcourse.value = "BSCS" + last3;
+                            } else {
+                                upcourse.value = "BSIT" + last3;
                             }
                         });
 
