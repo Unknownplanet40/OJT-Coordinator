@@ -9,7 +9,15 @@
     <link rel="stylesheet" href="./Style/ImportantImport.css">
     <title>Please Wait...</title>
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Poppins";
+        }
+
         body {
+            background-color: #e4e9f7;
             background: url(./Image/bg-redirect.svg);
             background-repeat: no-repeat;
             background-size: cover;
@@ -39,14 +47,14 @@
     </style>
 </head>
 
-<body class="text-bg-dark">
+<body class="text-bg-light">
     <div class="cont container-fluid">
-        <div class="spinner-border text-light" role="status">
+        <div class="spinner-border text-success" role="status">
             <span class="visually-hidden">Loading...</span>
         </div>
-        <h1>Please Wait While We Redirect You</h1>
-        <p class="size"></p>
-        <p>If you are not redirected in 5 seconds, click <a href="./login.php">here</a>.</p>
+        <h1 class="text-dark fw-bold">Please Wait While We Redirect You</h1>
+        <p class="size text-warning"></p>
+        <p class="text-muted">If you are not redirected in 5 seconds, click <a href="./login.php">here</a>.</p>
     </div>
     <!-- This is just a esthetic thing, it's not important,
         but in case it fails to redirect, it will show a link to the login page -->
