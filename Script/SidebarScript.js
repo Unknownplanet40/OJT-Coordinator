@@ -2,8 +2,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const body = document.querySelector("body");
   const sidebar = body.querySelector("nav");
   const toggle = body.querySelector(".toggle");
-  const modeSwitch = body.querySelector(".toggle-switch");
-  const modeText = body.querySelector(".mode-text");
   const profile = document.querySelector(".logo-text");
 
   toggle.addEventListener("click", () => {

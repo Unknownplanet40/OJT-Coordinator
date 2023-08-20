@@ -258,8 +258,9 @@
                             <small class="text-muted">Comments, general impressions & observations regarding the
                                 capability,
                                 behavior's & personality of the trainee.</small>
-                            <textarea class="form-control text-bg-light" name="Comments" id="Comments" cols="30" rows="8"
-                                maxlength="1000" placeholder="Maximum of 1,000 characters"><?php echo $Comment; ?></textarea>
+                            <textarea class="form-control text-bg-light" name="Comments" id="Comments" cols="30"
+                                rows="8" maxlength="1000"
+                                placeholder="Maximum of 1,000 characters"><?php echo $Comment; ?></textarea>
                             <br>
                         </td>
                     </tr>
@@ -383,7 +384,7 @@
                                     <td class="text-start text-success" scope="row" colspan="6">Feedback</td>
                                 </tr>
                                 <tr>
-                                    <td class="text-start text-dark text-wrap user-select-none" colspan="6" style="text-align: justify;">' . $Comment . '</td>
+                                    <td class="" colspan="6"><textarea class="form-control text-bg-light" id="Feedback" readonly>' . $Comment . '</textarea></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -393,6 +394,24 @@
                         </tr>';
                     }
                     ?>
+                    <script>
+                        // adjust the height of the specific textarea based on its content
+                        $(document).ready(function () {
+                            let feedback = document.getElementById("Feedback");
+
+                            if (feedback) {
+                                // scroll height + 10px to prevent the scroll bar from showing
+                                feedback.style.height = (feedback.scrollHeight + 10) + "px";
+
+                                $(feedback).on('input', function () {
+                                    this.style.height = 'auto';
+                                    this.style.height = (this.scrollHeight + 10) + 'px';
+                                });
+                                
+                            }
+                        });
+
+                    </script>
                 </tfoot>
             </table>
         </div>

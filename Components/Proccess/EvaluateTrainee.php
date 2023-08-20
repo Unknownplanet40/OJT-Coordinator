@@ -47,7 +47,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
                 $Q16 = $row['Q16'];
                 $Q17 = $row['Q17'];
                 $Q18 = $row['Q18'];
-                $Comment = $row['feedback'];
+                $Comment = str_replace("\'", "'", $row['feedback']);
                 $QualityOfWork = $row['QoW'];
                 $Productivity = $row['Prod'];
                 $WorkHabitsTalentsSkills = $row['WHTS'];

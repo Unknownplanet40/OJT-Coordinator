@@ -148,7 +148,7 @@
                                 d="M613 747q-11-13-11-29.5t11-27.5l74-74H400q-17 0-28.5-11.5T360 576q0-17 11.5-28.5T400 536h287l-74-74q-12-12-12-28.5t12-28.5q11-12 27.5-12t27.5 11l144 144q6 6 8.5 13t2.5 15q0 8-2.5 15t-8.5 13L668 748q-13 13-28.5 11.5T613 747ZM200 936q-33 0-56.5-23.5T120 856V296q0-33 23.5-56.5T200 216h240q17 0 28.5 11.5T480 256q0 17-11.5 28.5T440 296H200v560h240q17 0 28.5 11.5T480 896q0 17-11.5 28.5T440 936H200Z" />
                         </svg>
                     </i>
-                    <span class="text nav-text">Logout</span>
+                    <span class="text nav-text" style="cursor: pointer;">Logout</span>
                 </a>
                 <script>
                     const logout = document.querySelector('.logout');
@@ -157,8 +157,7 @@
                     logout.addEventListener('click', function (e) {
                         e.preventDefault();
                         Swal.fire({
-                            title: 'Are you sure?',
-                            text: "You want to logout?",
+                            text: "Are you sure you want to logout?",
                             icon: 'warning',
                             allowOutsideClick: false,
                             showCancelButton: true,

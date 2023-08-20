@@ -435,14 +435,14 @@ unset($_POST['resetEvent']);
                             $output = '
             <div class="col">
                 <div class="position-relative">
-                <div class="card h-100 ">
+                <div class="card h-100 user-select-none">
                     <img src="' . $row['eventImage'] . '" class="card-img-top" style="max-height: 256px; object-fit: cover;" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">' . $row['eventTitle'] . '</h5>
                         <p class="card-text">' . $date . ' <small class="text-muted">' . $newstatus . '</small></p>
                         <p class="card-text">' . $row['eventLocation'] . '</p>
                         <p class="card-text" style="font-size: 14px;">' . $desc . '</p>
-                        <small class="text-muted">Time: ' . $start . ' - ' . $end . ' | Available Seats: ' . $row['eventSlots'] . '</small>
+                        <small class="text-muted">Time: ' . $start . ' - ' . $end . ' <br> Available Seats: ' . $row['eventSlots'] . '</small>
                     </div>
                     <div class="card-footer text-center">
                         <a id="viewEvent' . $i . '" class="btn ' . $btncolor . ' mb-2" data-bs-toggle="modal" data-bs-target="#ViewEvent" style="width: 100%;">View</a>

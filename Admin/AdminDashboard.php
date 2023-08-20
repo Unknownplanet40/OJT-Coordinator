@@ -33,6 +33,18 @@ function Program($column)
     }
 }
 
+function studentassign($columnID)
+{
+    global $conn;
+    $sql = "SELECT COUNT(UID) FROM tbl_trainee WHERE program = '$columnID'";
+    $result = mysqli_query($conn, $sql);
+
+    if (mysqli_num_rows($result) > 0) {
+        $row = mysqli_fetch_row($result);
+        return $row[0];
+    }
+}
+
 //gender chart
 function maleChart()
 {
@@ -63,9 +75,10 @@ function formatNumberWithAbbreviation($number)
 {
     $originalNumber = $number;
     $abbreviations = array(
-        '<span class="text-secondary">K</span>',
-        '<span class="text-secondary">M</span>',
-        '<span class="text-secondary">B</span>'
+        'K',
+        'M',
+        'B',
+        'T',
     );
     $abbreviation = '';
     $index = 0;
@@ -189,30 +202,47 @@ function MonthlyChart($month)
                 </div>
             </div>
             <br>
+            <style>
+                .cardimg {
+                    background-image: url("../Image/ProfBG.svg");
+                    background-repeat: no-repeat;
+                    background-size: cover;
+                    background-position: center;
+                }
+
+                .blurback {
+                    backdrop-filter: blur(10px);
+                }
+            </style>
             <div class="row row-cols-1 row-cols-md-2 g-4">
                 <div class="col">
-                    <div class="card h-100" style="min-width: 380px;">
+                    <div class="card h-100 cardimg border border-1 border-success" style="min-width: 380px;">
                         <div class="card-body">
                             <h5 class="card-title text-uppercase d-block text-truncate">Gender</h5>
-                            <canvas id="gender"></canvas>
+                            <canvas id="gender"
+                                title="There are <?php echo $maleFormatted; ?> Male's, and <?php echo $femaleFormatted ?> Female's in the system."
+                                style="cursor: pointer;"></canvas>
                             <?php include_once '../Components/Chart/GenderChart.php'; ?>
-                            <div class="d-flex justify-content-evenly mt-1">
-                                <p class="fs-6" title="<?php echo $maletitle; ?>">
-                                    <span class="text-uppercase" style="color: #059bff;">
-                                        Male: </span>
-                                    <?php echo $maleFormatted; ?>
-                                </p>
-                                <p class="fs-6" title="<?php echo $femaletitle; ?>">
-                                    <span class="text-uppercase" style="color: #ff3d67;">
-                                        Female: </span>
-                                    <?php echo $femaleFormatted; ?>
-                                </p>
+                            <div class=" text-center" hidden>
+                                <div
+                                    class="d-flex justify-content-evenly mt-2 text-center text-light rounded blurback shadow-lg border border-1 border-success bg-transparent">
+                                    <p class="fs-5 fw-bold mt-3 p-0 text-dark " title="<?php echo $maletitle; ?>">
+                                        <span class="text-uppercase" style="/*color: #059bff;*/">
+                                            Male: </span>
+                                        <?php echo $maleFormatted; ?>
+                                    </p>
+                                    <p class="fs-6 mt-3 p-0" title="<?php echo $femaletitle; ?>">
+                                        <span class="text-uppercase" style="color: #ff3d67;">
+                                            Female: </span>
+                                        <?php echo $femaleFormatted; ?>
+                                    </p>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="col">
-                    <div class="card h-100" style="min-width: 380px;">
+                    <div class="card h-100 cardimg border border-1 border-success" style="min-width: 380px;">
                         <div class="card-body">
                             <h5 class="card-title text-uppercase d-block text-truncate">Monthly Registered Trainee's
                             </h5>
@@ -428,6 +458,7 @@ function MonthlyChart($month)
                                 <th scope="col" title="Start and End Time of the Program">Time</th>
                                 <th scope="col" title="Duration of the Program in weeks">Duration</th>
                                 <th scope="col" title="Hours needed to complete the Program">Hours</th>
+                                <th scope="col"></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -452,6 +483,38 @@ function MonthlyChart($month)
                                     <td class="text-truncate" style="max-width: 100px;" title="' . $start . ' - ' . $end . '">' . $start . ' - ' . $end . '</td>
                                     <td class="text-truncate" style="max-width: 100px;">' . $row['Duration'] . ' weeks</td>
                                     <td class="text-truncate" style="max-width: 100px;">' . $row['hours'] . '</td>
+                                    <td class="text-truncate" style="max-width: 100px;"><a title="Show more Details" id="showmore' . $i . '" class="btn btn-sm" style="background: linear-gradient(to right, #2a9134 1%,#3fa34d 53%,#2a9134 100%)"><img src="../Image/assessment.gif" alt="Program" style="width: 16px; height: 16px;"></a></td>
+                                    </tr>
+
+                                    <script>
+                                    let showmore' . $i . ' = document.getElementById("showmore' . $i . '");
+
+                                    showmore' . $i . '.addEventListener("click", () => {
+                                        Swal.fire({
+                                            title: "' . $row['title'] . '",
+                                            html: `<div class="container-fluid text-start">
+                                            <div class="card">
+                                            <div class="card-body">
+                                                <p class="card-text fs-6 text-center">' . $row['description'] . '</p>
+                                                <p class="card-text text-start">' . $row['progloc'] . '</p>
+                                                <small class="card-muted text-start text-success">There are ' . studentassign($row['title']) . ' trainee\'s assigned to this program.</small>
+                                                <p class="">' . $date . ' - ' . $enddate . ' <br> ' . $start . ' - ' . $end . '</p>
+                                                <p class="text-start"><small class="text-muted">' . $row['Duration'] . ' weeks - ' . $row['hours'] . ' hours</small></p>
+                                            </div>
+                                        </div>
+                                            </div>`,
+                                            showCloseButton: false,
+                                            showConfirmButton: true,
+                                            confirmButtonText: "Close",
+                                            focusConfirm: false,
+                                            timer: 10000,
+                                            timerProgressBar: true,
+                                            customClass: {
+                                                container: "my-swal"
+                                            }
+                                        });
+                                    });
+                                    </script>
                                     ';
                                     $i++;
                                 }

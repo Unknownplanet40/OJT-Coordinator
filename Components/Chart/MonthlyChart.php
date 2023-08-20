@@ -13,18 +13,18 @@
             datasets: [
                 {
                     backgroundColor: [
-                        "#3ea34c",
-                        "#3ea34c",
-                        "#3ea34c",
-                        "#3ea34c",
-                        "#3ea34c",
-                        "#3ea34c",
-                        "#3ea34c",
-                        "#3ea34c",
-                        "#3ea34c",
-                        "#3ea34c",
-                        "#3ea34c",
-                        "#3ea34c",
+                        "#844cf7",
+                        "#844cf7",
+                        "#844cf7",
+                        "#844cf7",
+                        "#844cf7",
+                        "#844cf7",
+                        "#844cf7",
+                        "#844cf7",
+                        "#844cf7",
+                        "#844cf7",
+                        "#844cf7",
+                        "#844cf7",
                     ],
                     data: [
                         <?php echo json_encode(MonthlyChart(1)); ?>,
@@ -44,8 +44,6 @@
                     //add php data here
                     // to get data from php use this "json_encode($data)"
                     // example: data: <php echo json_encode($data); >,
-                    // mag isip kayo kung pano nyo ilalagay sa data yung data from php
-                    // pwede rin kayo gumamit ng loop para sa data
 
                 },
             ],
@@ -60,7 +58,7 @@
                 text: "Monthly Registered Trainee's",
                 fontSize: 16,
                 fontColor: "#000",
-                fontFamily: "poppins", 
+                fontFamily: "poppins",
             },
             legend: {
                 display: false,
@@ -75,6 +73,8 @@
                             fontColor: "#000",
                             fontSize: 14,
                             beginAtZero: true,
+                            fontFamily: "poppins",
+                            fontStyle: "bold",
                         },
                     },
                 ],
@@ -86,7 +86,9 @@
                         ticks: {
                             fontColor: "#000",
                             fontSize: 12,
+                            fontFamily: "poppins",
                             beginAtZero: true,
+                            fontStyle: "bold",
                         },
                     },
                 ],

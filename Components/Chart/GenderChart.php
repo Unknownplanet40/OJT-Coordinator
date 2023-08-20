@@ -1,11 +1,15 @@
 <script>
     var gender = document.getElementById("gender").getContext("2d");
+    let male = "Male: " + <?php echo json_encode($maleFormatted); ?>;
+    let female = "Female: " + <?php echo json_encode($femaleFormatted); ?>;
     var myChart = new Chart(gender, {
         // list all type of chart here
         // bar, line, pie, doughnut, radar, polarArea, bubble, scatter
         type: "pie", //gender pie chart
         data: {
-            labels: ["Male", "Female"], // add php label here
+            
+
+            labels: [male,female], //add php data here
             datasets: [
                 {
                     backgroundColor: [
@@ -16,7 +20,7 @@
                     // to get data from php use this "json_encode($data)"
                     // try ko hanapin yung pinagkunan ko ng code na to para mas maintindihan nyo
                     data: [
-                        <?php echo json_encode(maleChart()); ?>, 
+                        <?php echo json_encode(maleChart()); ?>,
                         <?php echo json_encode(femaleChart()); ?>
                     ],
                 },
@@ -34,12 +38,13 @@
                 fontFamily: "poppins",
             },
             legend: {
-                display: false,
-                position: "left",
+                display: true,
+                position: "right",
                 labels: {
                     fontColor: "#000",
                     fontFamily: "poppins",
-                    fontSize: 12,
+                    fontSize: 16,
+                    fontStyle: "bold",
                 },
                 onClick: function (e) {
                     e.stopPropagation();
@@ -51,6 +56,10 @@
                     borderWidth: 1,
                 },
             },
+            // remove hover effect
+            hover: { mode: null },
+            tooltips: { enabled: false },
+
         },
     });
 </script>

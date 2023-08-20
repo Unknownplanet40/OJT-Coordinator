@@ -25,6 +25,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $Q18 = $_POST['Q18'];
     $Comment = $_POST['Comments'];
 
+    // check if comment have ' or " and replace it with \' or \"
+    $Comment = str_replace("'", "\'", $Comment);
+
+
     $address = "EvaluateTrainee.php?ID=" . $ID;
 
     // check if Q1 to Q18 don't have a value
