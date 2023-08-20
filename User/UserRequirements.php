@@ -19,6 +19,7 @@ $sql = "SELECT * FROM tbl_resource WHERE UID = '" . $_SESSION['GlobalID'] . "'";
 $result = mysqli_query($conn, $sql);
 if (mysqli_num_rows($result) > 0) {
     $row = mysqli_fetch_assoc($result);
+    
     if ($row['resume'] != null) {
         if ($row['Doc1_stat'] == 0 || $row['Doc1_stat'] == 1) {
             $Resume = "hidden";
@@ -130,6 +131,7 @@ if (mysqli_num_rows($result) > 0) {
         $CertificateOfCompletion = "";
     }
 } else {
+    // when the user has not submitted any requirements
     $sql = "INSERT INTO tbl_resource (UID) VALUES ('" . $_SESSION['GlobalID'] . "')";
     $result = mysqli_query($conn, $sql);
 }
@@ -248,11 +250,14 @@ if (isset($_POST['submitm'])) {
                         $row = mysqli_fetch_assoc($result);
 
                         $count = 0;
+                        $completed = 0;
 
                         if ($row['resume'] != null) {
                             $count++;
+                            $completed++;
                             if ($row['Doc1_stat'] == 2) {
                                 $count--;
+                                $completed--;
                             }
                         }
                         if ($row['placement'] != null) {
@@ -325,27 +330,32 @@ if (isset($_POST['submitm'])) {
                             }
                         }
 
-                        if (isset($_SESSION['GlobalCompleted']) && $_SESSION['GlobalCompleted'] == 'false') {
+                        //range between 0 - 8
+                        if ($count >= 0 && $count <= 8) {
                             $percentage = ($count / 8) * 100;
-                        } else {
+                        } elseif ($count >= 9 && $count <= 12) {
                             $percentage = ($count / 12) * 100;
                         }
                         $percentage = round($percentage);
+
                         if ($percentage >= 100) {
                             $percentage = 100;
-                            $sql = "UPDATE tbl_trainee SET Resource_Completed = 1 WHERE UID = '" . $_SESSION['GlobalID'] . "'";
-                            $result = mysqli_query($conn, $sql);
-                        } else {
-                            $sql = "UPDATE tbl_trainee SET Resource_Completed = 0 WHERE UID = '" . $_SESSION['GlobalID'] . "'";
-                            $result = mysqli_query($conn, $sql);
+                            if ($count >= 12) {
+                                $sql = "UPDATE tbl_trainee SET Resource_Completed = 1 WHERE UID = '" . $_SESSION['GlobalID'] . "'";
+                                $result = mysqli_query($conn, $sql);
+                            } else {
+                                $sql = "UPDATE tbl_trainee SET Resource_Completed = 0 WHERE UID = '" . $_SESSION['GlobalID'] . "'";
+                                $result = mysqli_query($conn, $sql);
+                            }
                         }
-                        if ($percentage == 0 && $percentage < 25) {
+
+                        if ($percentage == 0 && $percentage <= 25) {
                             $color = "text-bg-danger";
-                        } elseif ($percentage >= 25 && $percentage < 50) {
+                        } elseif ($percentage >= 26 && $percentage <= 50) {
                             $color = "text-bg-warning";
-                        } elseif ($percentage >= 50 && $percentage < 75) {
+                        } elseif ($percentage >= 51 && $percentage <= 75) {
                             $color = "text-bg-info";
-                        } else {
+                        } elseif ($percentage >= 6 && $percentage <= 100) {
                             $color = "text-bg-success";
                         }
                         ?>
@@ -439,7 +449,7 @@ if (isset($_POST['submitm'])) {
                                 <div class="ms-2 me-auto">
                                     <div class="fw-bold">Waiver</div>
                                     <p>
-                                    <?php if ($row['Doc5_stat'] == 2) {
+                                        <?php if ($row['Doc5_stat'] == 2) {
                                             echo "<span class='text-danger'>File Rejected! <br> Need to upload again.</span>";
                                         } elseif ($row['Doc5_stat'] == 1) {
                                             echo "<span class='text-success'>File Approved!</span>";
@@ -464,7 +474,7 @@ if (isset($_POST['submitm'])) {
                                 <div class="ms-2 me-auto">
                                     <div class="fw-bold">Birth Certificate</div>
                                     <p>
-                                    <?php if ($row['Doc3_stat'] == 2) {
+                                        <?php if ($row['Doc3_stat'] == 2) {
                                             echo "<span class='text-danger'>File Rejected! <br> Need to upload again.</span>";
                                         } elseif ($row['Doc3_stat'] == 1) {
                                             echo "<span class='text-success'>File Approved!</span>";
@@ -488,7 +498,7 @@ if (isset($_POST['submitm'])) {
                                 <div class="ms-2 me-auto">
                                     <div class="fw-bold">Medical Certificate</div>
                                     <p>
-                                    <?php if ($row['Doc6_stat'] == 2) {
+                                        <?php if ($row['Doc6_stat'] == 2) {
                                             echo "<span class='text-danger'>File Rejected! <br> Need to upload again.</span>";
                                         } elseif ($row['Doc6_stat'] == 1) {
                                             echo "<span class='text-success'>File Approved!</span>";
@@ -513,7 +523,7 @@ if (isset($_POST['submitm'])) {
                                 <div class="ms-2 me-auto">
                                     <div class="fw-bold">Registration Form</div>
                                     <p>
-                                    <?php if ($row['Doc8_stat'] == 2) {
+                                        <?php if ($row['Doc8_stat'] == 2) {
                                             echo "<span class='text-danger'>File Rejected! <br> Need to upload again.</span>";
                                         } elseif ($row['Doc8_stat'] == 1) {
                                             echo "<span class='text-success'>File Approved!</span>";
@@ -538,7 +548,7 @@ if (isset($_POST['submitm'])) {
                                 <div class="ms-2 me-auto">
                                     <div class="fw-bold">Placement Form</div>
                                     <p>
-                                    <?php if ($row['Doc2_stat'] == 2) {
+                                        <?php if ($row['Doc2_stat'] == 2) {
                                             echo "<span class='text-danger'>File Rejected! <br> Need to upload again.</span>";
                                         } elseif ($row['Doc2_stat'] == 1) {
                                             echo "<span class='text-success'>File Approved!</span>";
@@ -564,13 +574,13 @@ if (isset($_POST['submitm'])) {
                                     <div class="ms-2 me-auto">
                                         <div class="fw-bold">Evaluation Form</div>
                                         <p>
-                                        <?php if ($row['Doc10_stat'] == 2) {
-                                            echo "<span class='text-danger'>File Rejected! <br> Need to upload again.</span>";
-                                        } elseif ($row['Doc10_stat'] == 1) {
-                                            echo "<span class='text-success'>File Approved!</span>";
-                                        } else {
-                                            echo "<span class='text-warning'>Pending...</span>";
-                                        } ?>
+                                            <?php if ($row['Doc10_stat'] == 2) {
+                                                echo "<span class='text-danger'>File Rejected! <br> Need to upload again.</span>";
+                                            } elseif ($row['Doc10_stat'] == 1) {
+                                                echo "<span class='text-success'>File Approved!</span>";
+                                            } else {
+                                                echo "<span class='text-warning'>Pending...</span>";
+                                            } ?>
                                         </p>
                                     </div>
                                     <form method="POST" action="<?php basename($_SERVER['PHP_SELF']) ?>"
@@ -589,13 +599,13 @@ if (isset($_POST['submitm'])) {
                                     <div class="ms-2 me-auto">
                                         <div class="fw-bold">Narrative Report</div>
                                         <p>
-                                        <?php if ($row['Doc11_stat'] == 2) {
-                                            echo "<span class='text-danger'>File Rejected! <br> Need to upload again.</span>";
-                                        } elseif ($row['Doc11_stat'] == 1) {
-                                            echo "<span class='text-success'>File Approved!</span>";
-                                        } else {
-                                            echo "<span class='text-warning'>Pending...</span>";
-                                        } ?>
+                                            <?php if ($row['Doc11_stat'] == 2) {
+                                                echo "<span class='text-danger'>File Rejected! <br> Need to upload again.</span>";
+                                            } elseif ($row['Doc11_stat'] == 1) {
+                                                echo "<span class='text-success'>File Approved!</span>";
+                                            } else {
+                                                echo "<span class='text-warning'>Pending...</span>";
+                                            } ?>
                                         </p>
                                     </div>
                                     <form method="POST" action="<?php basename($_SERVER['PHP_SELF']) ?>"
@@ -614,13 +624,13 @@ if (isset($_POST['submitm'])) {
                                     <div class="ms-2 me-auto">
                                         <div class="fw-bold">Daily Time Record</div>
                                         <p>
-                                        <?php if ($row['Doc12_stat'] == 2) {
-                                            echo "<span class='text-danger'>File Rejected! <br> Need to upload again.</span>";
-                                        } elseif ($row['Doc12_stat'] == 1) {
-                                            echo "<span class='text-success'>File Approved!</span>";
-                                        } else {
-                                            echo "<span class='text-warning'>Pending...</span>";
-                                        } ?>
+                                            <?php if ($row['Doc12_stat'] == 2) {
+                                                echo "<span class='text-danger'>File Rejected! <br> Need to upload again.</span>";
+                                            } elseif ($row['Doc12_stat'] == 1) {
+                                                echo "<span class='text-success'>File Approved!</span>";
+                                            } else {
+                                                echo "<span class='text-warning'>Pending...</span>";
+                                            } ?>
                                         </p>
                                     </div>
                                     <form method="POST" action="<?php basename($_SERVER['PHP_SELF']) ?>"
@@ -639,13 +649,13 @@ if (isset($_POST['submitm'])) {
                                     <div class="ms-2 me-auto">
                                         <div class="fw-bold text-truncate" title="Certificate of Completion">COC</div>
                                         <p>
-                                        <?php if ($row['Doc13_stat'] == 2) {
-                                            echo "<span class='text-danger'>File Rejected! <br> Need to upload again.</span>";
-                                        } elseif ($row['Doc13_stat'] == 1) {
-                                            echo "<span class='text-success'>File Approved!</span>";
-                                        } else {
-                                            echo "<span class='text-warning'>Pending...</span>";
-                                        } ?>
+                                            <?php if ($row['Doc13_stat'] == 2) {
+                                                echo "<span class='text-danger'>File Rejected! <br> Need to upload again.</span>";
+                                            } elseif ($row['Doc13_stat'] == 1) {
+                                                echo "<span class='text-success'>File Approved!</span>";
+                                            } else {
+                                                echo "<span class='text-warning'>Pending...</span>";
+                                            } ?>
                                         </p>
                                     </div>
                                     <form method="POST" action="<?php basename($_SERVER['PHP_SELF']) ?>"
@@ -670,8 +680,10 @@ if (isset($_POST['submitm'])) {
                     &bull; <small class="text-muted">You can hover over the file name to view the full form of the
                         abbreviation.</small>
                     <br>
-                    &bull; <small class="text-muted">If you have completed your OJT, you can now submit the Evaluation
-                        Form, Narrative Report, Daily Time Record and Certificate of Completion.</small>
+                    &bull; <small class="text-muted">If you have completed your OJT, you can now submit the <b
+                            class="text-success">Evaluation
+                            Form</b>, <b class="text-success">Narrative Report</b>, <b class="text-success">Daily Time
+                            Record</b> and <b class="text-success">Certificate of Completion</b>.</small>
                 </div>
             </div>
         </div>

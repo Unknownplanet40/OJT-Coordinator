@@ -213,7 +213,13 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
                                         <p class="card-text">' . $row['eventLocation'] . '</p>
                                         <p class="card-text" style="font-size: 14px;">' . $row['eventDescription'] . '</p>
                                         <small class="text-muted">Time: ' . $start . ' - ' . $end . '</small>
-                                    </div>';
+                                        <br>
+                                    </div>
+                                    <div class="card-footer text-end">
+                                        <a href="" class="btn btn-danger btn-sm" title="Unjoin to this event">Unjoin</a>
+                                    </div>
+                                    
+                                    ';
                             }
                         } else {
                             echo
@@ -278,7 +284,7 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
                             $output =
                                 '<div class="col">
                                     <div class="position-relative">
-                                        <div class="card h-100">
+                                        <div class="card h-100 border border-success shadow-lg user-select-none">
                                             <img src="' . $row['eventImage'] . '" class="card-img-top" style="max-height: 256px; object-fit: cover;" alt="...">
                                                 <div class="card-body">
                                                     <h5 class="card-title">' . $row['eventTitle'] . '</h5>
@@ -286,7 +292,7 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
                                                     <p class="card-text">' . $row['eventLocation'] . '</p>
                                                     <p class="card-text">' . $status . '</p>
                                                     <p class="card-text" style="font-size: 14px;">' . $desc . '</p>
-                                                    <small class="text-muted">Time: ' . $start . ' - ' . $end . ' | Available Seats: ' . $row['eventSlots'] . '</small>
+                                                    <small class="text-muted">Time: ' . $start . ' - ' . $end . ' <br> Available Seats: ' . $row['eventSlots'] . '</small>
                                                 </div>
                                                 <div class="card-footer text-center">
                                     <!-- if the user is already registered, the button should be disabled -->

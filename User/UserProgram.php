@@ -45,7 +45,7 @@ if (mysqli_num_rows($result) > 0) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../Style/ImportantImport.css">
-    <link rel="stylesheet" href="../Style/Sidebar.css">
+    <link rel="stylesheet" href="../Style/SidebarStyle.css">
     <script src="../Script/SweetAlert2.js"></script>
     <title>Program Details</title>
 </head>
@@ -63,8 +63,9 @@ if (mysqli_num_rows($result) > 0) {
             <div class="text-center text-uppercase fs-3 fw-bolder">
                 <?php echo $title ?>
             </div>
-            <div style="display: flex; justify-content: center;">
-                <div class="fs-5 text-center mt-2 mb-2" style="width: 75%;">
+            <div
+            style="display: flex; justify-content: center; max-width: 90%; margin: auto;">
+                <div class="fs-5 text-center mt-2 mb-2 text-break" style="width: 75%;">
                     <?php echo $description ?>
                 </div>
             </div>
