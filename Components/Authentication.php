@@ -43,6 +43,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 }
                 unset($_SESSION['autoUsername']);
                 unset($_SESSION['autoPassword']);
+
+                // this will delete the file EvalData.txt
+                $file = "../Components/EvaluatePDF/EvalData.txt";
+                if (file_exists($file)) {
+                    unlink($file);
+                }
+
             } else {
                 $_SESSION['message'] = "Invalid username or password.";
                 $_SESSION['icon'] = "error";

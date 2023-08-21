@@ -2,6 +2,18 @@
 session_start();
 @include_once("./Database/config.php");
 @include_once("./Components/SystemLog.php");
+date_default_timezone_set("Asia/Manila");
+
+//check if file exists
+if (file_exists('temp.txt')) {
+    // asign the data from the text file to a variable
+    $data = file_get_contents('temp.txt');
+    // explode the data from the text file to an array
+    $temp = explode("\n", $data);
+    // assign the array to a session
+    $_SESSION['temp'] = $temp;
+}
+
 
 if (isset($_POST['register'])) {
     $name = $_POST['Traineename'];
@@ -23,7 +35,20 @@ if (isset($_POST['register'])) {
     //current date format YYYY-MM-DD
     $date = date("Y-m-d");
 
-    $_SESSION['temp'] = array($name, $age, $email, $usn, $username, $password, $confirm);
+    $file = 'temp.txt';
+    $data = $name . "\n" . $age . "\n" . $email . "\n" . $usn . "\n" . $username . "\n" . $password . "\n" . $confirm;
+
+    if (!file_exists($file)) {
+        $handle = fopen($file, 'w');
+        fwrite($handle, $data);
+        fclose($handle);
+    } else {
+        $current = file_get_contents($file);
+        $handle = fopen($file, 'w');
+        fwrite($handle, $data);
+        fclose($handle);
+    }
+
 
     // check if fields are empty
     if ($name == "" || $age == "" || $email == "" || $usn == "" || $username == "" || $password == "" || $confirm == "") {
@@ -117,7 +142,6 @@ if (isset($_POST['register'])) {
                                     } else if (!file_exists($tempfolderpath)) {
                                         mkdir($tempfolderpath, 0777, true);
                                     }
-
                                     $sql = "INSERT INTO tbl_trainee (name, email, UID, trainee_uname, trainee_pword, account_Created, age) VALUES ('$name', '$email', '$usn', '$username', '$password', '$date', '$age')";
                                     $result = mysqli_query($conn, $sql);
                                     if ($result) {
@@ -125,6 +149,11 @@ if (isset($_POST['register'])) {
                                         $success = "Account successfully created";
                                         $_SESSION['autoUsername'] = $username;
                                         $_SESSION['autoPassword'] = $password;
+
+                                        //remove the temp file
+                                        if (file_exists('temp.txt')) {
+                                            unlink('temp.txt');
+                                        }
                                     } else {
                                         $error[] = "Error in creating account";
                                     }
@@ -175,16 +204,16 @@ if (isset($_POST['register'])) {
                     <div class="col-8">
                         <div class="form-group">
                             <input type="text" class="form-control item" name="Traineename" id="Traineename"
-                                placeholder="Name" value="<?php if (isset($_SESSION['temp'][0])) {
-                                    echo $_SESSION['temp'][0];
-                                } ?>" title="Name must contain at least 3 characters, with whitespaces and UPPER/lowercase letters only">
+                                placeholder="Name"
+                                value="<?php isset($_SESSION['temp'][0]) ? print $_SESSION['temp'][0] : '' ?>"
+                                title="Name must contain at least 3 characters, with whitespaces and UPPER/lowercase letters only">
                         </div>
                     </div>
                     <div class="col-4">
                         <div class="form-group">
-                            <input type="text" class="form-control item" name="age" id="age" placeholder="Age" value="<?php if (isset($_SESSION['temp'][1])) {
-                                echo $_SESSION['temp'][1];
-                            } ?>" title="Age must be 18 years old and above">
+                            <input type="text" class="form-control item" name="age" id="age" placeholder="Age"
+                                value="<?php isset($_SESSION['temp'][1]) ? print $_SESSION['temp'][1] : '' ?>"
+                                title="Age must be 18 years old and above">
                         </div>
                     </div>
                 </div>
@@ -192,42 +221,41 @@ if (isset($_POST['register'])) {
                     <div class="col-6">
                         <div class="form-group">
                             <input type="text" class="form-control item" name="email" id="email"
-                                placeholder="Email Address" value="<?php if (isset($_SESSION['temp'][2])) {
-                                    echo $_SESSION['temp'][2];
-                                } ?>" title="Ex. firstnameinitial.lastname@domain.tld">
+                                placeholder="Email Address"
+                                value="<?php isset($_SESSION['temp'][2]) ? print $_SESSION['temp'][2] : '' ?>"
+                                title="Ex. firstnameinitial.lastname@domain.tld">
                         </div>
                     </div>
                     <div class="col-6">
                         <div class="form-group">
                             <input type="text" class="form-control item" name="usn" id="usn"
-                                placeholder="Identification Number" value="<?php if (isset($_SESSION['temp'][3])) {
-                                    echo $_SESSION['temp'][3];
-                                } ?>" title="ID must be 10 numeric characters only">
+                                placeholder="Identification Number"
+                                value="<?php isset($_SESSION['temp'][3]) ? print $_SESSION['temp'][3] : '' ?>"
+                                title="ID must be 10 numeric characters only">
                         </div>
                     </div>
                 </div>
                 <div class="form-group">
                     <input type="text" class="form-control item" name="username" id="username" placeholder="Username"
-                        value="<?php if (isset($_SESSION['temp'][4])) {
-                            echo $_SESSION['temp'][4];
-                        } ?>" title="Username must contain at least 5 characters, with no special characters, no whitespaces no numbers, no UPPER/lowercase and must be unique.">
+                        value="<?php isset($_SESSION['temp'][4]) ? print $_SESSION['temp'][4] : '' ?>"
+                        title="Username must contain at least 5 characters, with no special characters, no whitespaces, no UPPER/lowercase and must be unique.">
                 </div>
                 <div class="form-group">
                     <div class="row">
                         <div class="col-6">
                             <div class="form-group">
                                 <input type="password" class="form-control item" name="password" id="password"
-                                    placeholder="Password" value="<?php if (isset($temp[5])) {
-                                        echo $temp[5];
-                                    } ?>" title="Password must contain at least 8 characters, with atleast 1 number, UPPER/lowercase, a special character and must match the Confirm password">
+                                    placeholder="Password"
+                                    value="<?php isset($_SESSION['temp'][5]) ? print $_SESSION['temp'][5] : '' ?>"
+                                    title="Password must contain at least 8 characters, with atleast 1 number, UPPER/lowercase, a special character and must match the Confirm password">
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="form-group">
                                 <input type="password" class="form-control item" name="confirm" id="confirm"
-                                    placeholder="Confirm Password" value="<?php if (isset($temp[6])) {
-                                        echo $temp[6];
-                                    } ?>" title="Password must contain at least 8 characters, with atleast 1 number, UPPER/lowercase, a special character and must match the Password">
+                                    placeholder="Confirm Password"
+                                    value="<?php isset($_SESSION['temp'][6]) ? print $_SESSION['temp'][6] : '' ?>"
+                                    title="Password must contain at least 8 characters, with atleast 1 number, UPPER/lowercase, a special character and must match the Password">
                             </div>
                         </div>
                     </div>
@@ -261,51 +289,51 @@ if (isset($_POST['register'])) {
                     </div>
                 </div>
                 <div class="form-group error">
-                <p class="text-center" name="perror">
-                    <?php
-                    if (isset($unameAlreadyTaken)) {
-                        echo "<script>Swal.fire({
+                    <p class="text-center" name="perror">
+                        <?php
+                        if (isset($unameAlreadyTaken)) {
+                            echo "<script>Swal.fire({
                             icon: 'error',
                             text: '$unameAlreadyTaken',
-                            background: '#19191a',
-                            color: '#fff',
+                            background: '#fff',
+                            color: '#000',
                           })</script>";
-                    } else if (isset($emailAlreadyTaken)) {
-                        echo "<script>Swal.fire({
+                        } else if (isset($emailAlreadyTaken)) {
+                            echo "<script>Swal.fire({
                             icon: 'error',
                             text: '$emailAlreadyTaken',
-                            background: '#19191a',
-                            color: '#fff',
+                            background: '#fff',
+                            color: '#000',
                           })</script>";
-                    } else if (isset($usnAlreadyTaken)) {
-                        echo "<script>Swal.fire({
+                        } else if (isset($usnAlreadyTaken)) {
+                            echo "<script>Swal.fire({
                             icon: 'error',
                             text: '$usnAlreadyTaken',
-                            background: '#19191a',
-                            color: '#fff',
+                            background: '#fff',
+                            color: '#000',
                           })</script>";
-                    } else if (isset($success)) {
-                        echo '<script>Swal.fire({
+                        } else if (isset($success)) {
+                            echo '<script>Swal.fire({
                             title: "Please wait...",
                             html: "We are creating your account",
                             allowOutsideClick: false,
                             showConfirmButton: false,
-                            background: "#19191a",
-                            color: "#fff",
+                            background: "#fff",
+                            color: "#000",
                             onBeforeOpen: () => {
                               Swal.showLoading();
                             },
                           })
                           var randommilliseconds = Math.floor(
-                            Math.random() * (9999 - 1000 + 1) + 1000
+                            Math.random() * (7000 - 500 + 1) + 1000
                           ).toString();
                           setTimeout(function () {
                                 Swal.fire({
                                     icon: "success",
                                     title: "Success!",
                                     text: "' . $success . '",
-                                    background: "#19191a",
-                                    color: "#fff",
+                                    background: "#fff",
+                                    color: "#000",
                                     allowOutsideClick: false,
                                     showCancelButton: true,
                                     confirmButtonColor: "#3085d6",
@@ -319,27 +347,27 @@ if (isset($_POST['register'])) {
                                 });
                                 }, randommilliseconds);
                             </script>';
-                    } else if (isset($error)) {
-                        foreach ($error as $value) {
-                            echo $value;
+                        } else if (isset($error)) {
+                            foreach ($error as $value) {
+                                echo $value;
+                            }
+                        } else {
+                            // this will not be executed unless there is an error in the code
+                            logMessage("Error", "Registration", "There is an error in the registration process of the trainee");
                         }
-                    } else {
-                        // this will not be executed unless there is an error in the code
-                        logMessage("Error", "Registration", "There is an error in the registration process of the trainee");
-                    }
-                    ?>
-                </p>
-                <script>
-                    setTimeout(function () {
-                        document.getElementsByName("perror")[0].innerHTML = "";
-                    }, 6500);
-                    document.querySelector('.error').scrollIntoView({
-                        behavior: 'smooth'
-                    });
-                </script>
+                        ?>
+                    </p>
+                    <script>
+                        setTimeout(function () {
+                            document.getElementsByName("perror")[0].innerHTML = "";
+                        }, 6500);
+                        document.querySelector('.error').scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                    </script>
                 </div>
             </form>
-            <div class="social-media error" hidden>   
+            <div class="social-media error" hidden>
             </div>
             <p class="text-dark text-center fw-bold"><small>
                     Please enter your basic information to create an account.<br>

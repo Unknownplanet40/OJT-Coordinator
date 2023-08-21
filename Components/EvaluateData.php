@@ -11,6 +11,60 @@ function scoreWidth($score)
     }
     return '<div class="progress-bar ' . $color . '" role="progressbar" aria-label="Segment one" style="width: ' . $score_width . '%">' . $score . '</div>';
 }
+
+function generateData(){
+    $questionTitles = [
+        '1. Accuracy of completed work according to the operational standards',
+        '2. Thoroughness & attention to detail in performing the assigned tasks',
+        '3. Neatness & presentation of work',
+        '1. Effective use of time',
+        '2. Task Accomplished',
+        '3. Prompt completion of work assignments',
+        '4. Useful or effective application of knowledge & skills',
+        '1. Appropriate Attire',
+        '2. Appropriate Grooming',
+        '3. Attendance & punctuality',
+        '4. Ability to communicate effectively to guest, supervisor & colleagues',
+        '5. Ability to think independently',
+        '6. Ability to remain calm & in control when presented with stressful situations',
+        '7. Demonstrates an interest & willingness to learn the task required to maintain operational standards',
+        '1. Demonstrates positive relationship with the establishment\'s workers',
+        '2. Relates effectively with visitors in a friendly & courteous manner',
+        '3. Accepts suggestions, directions & constructive criticism from employees & supervisors',
+        '4. Cooperative team player',
+    ];
+    
+    $questions_count = count($questionTitles);
+    //                1              2              3              4              5 
+    $ratings = [';X; ; ; ; ;', '; ;X; ; ; ;', '; ; ;X; ; ;', '; ; ; ;X; ;', '; ; ; ; ;X;'];
+    
+    $content = '';
+    
+    // Loop through all questions
+    for ($i = 0; $i < $questions_count; $i++) {
+        $questionNumber = $i + 1;
+        $questionTitle = $questionTitles[$i];
+    
+        // Get the rating for the current question
+        $questionKey = 'Q' . $questionNumber;
+        $ratingIndex = $$questionKey - 1;
+    
+        // Add the question title and rating to the content
+        $content .= $questionTitle . $ratings[$ratingIndex] . "\n";
+    }
+    
+    // Now, $content contains the formatted content for all questions
+    // Save the content to a file
+    $filename = 'eval.txt';
+    $handle = fopen($filename, 'w');
+    fwrite($handle, $content);
+    fclose($handle);
+    
+    //move file to another directory
+    $source = $filename;
+    $destination = '../Components/EvaluatePDF/' . $filename;
+    rename($source, $destination);
+}
 ?>
 
 <div style="margin: 10px; min-width: 90%;" class="screenshot-element">
@@ -323,34 +377,40 @@ function scoreWidth($score)
             </div>
         </div>
         <!-- Under Construction -->
-        <div class="col-md-2" hidden>
+        <div class="col-md-2">
             <div class="form-floating mt-2">
                 <button type="button" class="btn btn-sm btn-success" id="print">Download Evaluation</button>
                 <script>
-                     let btnDownload = document.getElementById('print');
+                    let btnDownload = document.getElementById('print');
 
-                     // confermation SweetAlert2
-                        btnDownload.addEventListener('click', function() {
+                    // confermation SweetAlert2
+                    btnDownload.addEventListener('click', function () {
+                        Swal.fire({
+                            title: 'Before you download',
+                            text: "This feature is under development. It may not work properly. Do you want to continue?",
+                            icon: 'info',
+                            showCancelButton: true,
+                            confirmButtonColor: '#3085d6',
+                            cancelButtonColor: '#d33',
+                            confirmButtonText: 'Yes!',
+                            allowOutsideClick: false,
+                        }).then((result) => {
                             Swal.fire({
-                                title: 'Before you download',
-                                text: "The design may differ from the actual output. Do you want to download it?",
-                                icon: 'info',
-                                showCancelButton: true,
-                                confirmButtonColor: '#3085d6',
-                                cancelButtonColor: '#d33',
-                                confirmButtonText: 'Yes, download it!',
+                                title: 'Please wait...',
                                 allowOutsideClick: false,
+                                showConfirmButton: false,
+                                timer: 3000,
+                                timerProgressBar: true,
+                                onOpen: () => {
+                                    Swal.showLoading();
+                                }
                             }).then((result) => {
-                                if (result.isConfirmed) {
-                                    Swal.fire(
-                                        'Downloading...',
-                                        'Your file is currently being downloaded. Please wait.',
-                                        'success'
-                                    )
-                                    window.location.href = '../Components/generateEval.php';
+                                if (result.dismiss === Swal.DismissReason.timer) {
+                                    window.location.href = '../Components/EvaluatePDF/pdftest.php';
                                 }
                             })
-                        });
+                        })
+                    });
                 </script>
             </div>
         </div>
