@@ -15,40 +15,22 @@ class MYPDF extends TCPDF
         $this->SetFont('helvetica', 'R', 1);
         //color to white
         $this->SetTextColor(255, 255, 255);
-        // Title
-        $this->Cell(0, 0, '111111', 0, 1, 'C', 0);
+        $this->Cell(0, 0, 'This is just a Seperator', 0, 1, 'C', 0);
 
         // ---------------------------------------------------------
-        // Set font
-        $this->SetFont('helvetica', 'R', 10);
+        // Set font and color for the text
         $this->SetTextColor(0, 0, 0);
-        // Title
+        $this->SetFont('helvetica', 'R', 10);
         $this->Cell(0, 0, 'Republic of the Philippines', 0, 1, 'C', 0);
-
-        // Set font
         $this->SetFont('helvetica', 'B', 16);
-        // Title
         $this->Cell(0, 0, 'CAVITE STATE UNIVERSITY', 0, 1, 'C', 0);
-
-        // Set font
         $this->SetFont('helvetica', 'B', 8);
-        // Title
         $this->Cell(0, 0, 'Imus Campus', 0, 1, 'C', 0);
-
-        // Set font
         $this->SetFont('helvetica', 'R', 8);
-        // Title
         $this->Cell(0, 0, 'Cavite Civic Center, Palico IV, Imus, Cavite', 0, 1, 'C', 0);
-
-        // Set font
         $this->SetFont('helvetica', 'R', 8);
-        // Title
-
         $this->Cell(0, 0, '(046) 471-6770 / (460) 471-6607', 0, 1, 'C', 0);
-
-        // Set font
         $this->SetFont('helvetica', 'B', 8);
-        // Title
         $this->Cell(0, 0, 'cvsu-imus.edu.ph', 0, 1, 'C', 0, 'https://cvsu-imus.edu.ph/', 0, false, 'T', 'M');
     }
 
@@ -212,7 +194,8 @@ $pdf->display('info.txt');
 // ---------------------------------------------------------
 
 //Close and output PDF document
-$pdf->Output('example_003.pdf', 'I');
+// I - send to browser, D - download file, F - save file locally
+$pdf->Output('example_003.pdf', 'D');
 
 //============================================================+
 // END OF FILE
