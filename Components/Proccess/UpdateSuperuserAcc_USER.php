@@ -152,7 +152,7 @@ if (isset($_POST['update'])) {
         </div>
         <div class="row">
             <div class="col-md-5 text-center rounded">
-                <ul class="list-group border border-1 border-success">
+                <ul class="list-group shadow-lg">
                     <li class="list-group-item listhead text-center border-0" style="min-height: 256px;">
                         <img src="<?php echo isset($image) ? "../" . $image : "../../Image/Profile.png"; ?>
                         " class="img-fluid m-1 rounded" style="min-height: 256px; min-width: 256px; max-height: 256px; max-width: 256px;">
@@ -207,8 +207,8 @@ if (isset($_POST['update'])) {
                         </span>
                     </li>
                     <li
-                        class="list-group-item d-flex justify-content-between align-items-center text-muted" style="background: linear-gradient(to left, #2a9134 1%,#3fa34d 53%,#2a9134 100%)">
-                        <span class="text-light user-select-none">Current Status:</span>
+                        class="list-group-item d-flex justify-content-between align-items-center text-muted text-bg-dark">
+                        Current Status:
                         <span class="text-end text-light user-select-none text">
                             <?php echo isset($status) ? $status : "Not Available"; ?>
                         </span>
