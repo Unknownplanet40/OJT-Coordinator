@@ -4,7 +4,7 @@
     <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="Vtitle">Event Name</h1>
+                <h1 class="modal-title fs-5 text-break" id="Vtitle">Event Name</h1>
             </div>
             <div class="modal-body">
                 <div class="row">
@@ -12,7 +12,7 @@
                         <img src="https://via.placeholder.com/256" id="Vimg" class="img-fluid img-thumbnail" alt="...">
                     </div>
                     <div class="col-sm-8">
-                        <p class="card-text text-wrap" id="Vdesc" style="text-align: justify;"></p>
+                        <p class="card-text text-wrap text-break" id="Vdesc" style="text-align: justify;"></p>
                         <hr>
                         <p class="card-text"><small class="text-muted">Event Date:</small>&nbsp;<span id="Vdate"></span></p>
                         <p class="card-text"><small class="text-muted">Time (Time In/Out):</small>&nbsp;<span id="Vtime"></span></p>

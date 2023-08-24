@@ -156,7 +156,7 @@ if (mysqli_num_rows($result) > 0) {
             <br>
             <div class="text">Progress</div>
             <div>
-                <div class="text-center text-uppercase fs-6 fw-bolder">Web Development Internship</div>
+                <div class="text-center text-uppercase fs-6 fw-bolder"><?php echo $title ?></div>
                 <div class="text-center fs-6 fw-bolder">
                     <?php $_SESSION['GlobalPercentage'] == 100 ? print "COMPLETED" : print 'Progress: ' . $_SESSION['GlobalPercentage'] . '%'; ?>
                 </div>

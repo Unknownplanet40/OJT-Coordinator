@@ -45,6 +45,11 @@ if (mysqli_num_rows($result) > 0) {
         $fed = $row['feedback'];
         $evaby = $row['evaluated_by'];
         $datetaken = date("M d, Y - h:i A", strtotime($row['date_Taken']));
+        $QoW = $row['QoW'];
+        $Prod = $row['Prod'];
+        $WHTS = $row['WHTS'];
+        $IWR = $row['IWR'];
+        
 
     } else {
         $showForm = null;
@@ -52,9 +57,7 @@ if (mysqli_num_rows($result) > 0) {
 
 
 } else {
-    $_SESSION['message'] = "Not yet Evaluated!";
-    $_SESSION['icon'] = "info";
-    $_SESSION['Show'] = true;
+    
 }
 
 

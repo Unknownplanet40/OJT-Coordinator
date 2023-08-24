@@ -1,5 +1,6 @@
 <?php
 session_start();
+date_default_timezone_set('Asia/Manila');
 
 @require_once("../../Components/TCPDF/tcpdf.php");
 
@@ -41,6 +42,8 @@ class MYPDF extends TCPDF
         $this->SetY(-15);
         // Set font
         $this->SetFont('helvetica', 'I', 8);
+        // date and time generated
+        $this->Cell(0, 10, 'Date Generated: ' . date("M d, Y - h:i A"), 0, false, 'L', 0, '', 0, false, 'T', 'M');
         // Page number
         $this->Cell(0, 10, 'Page ' . $this->getAliasNumPage() . '/' . $this->getAliasNbPages(), 0, false, 'C', 0, '', 0, false, 'T', 'M');
     }
@@ -74,12 +77,20 @@ class MYPDF extends TCPDF
     public function display($file)
     {
         $data = $this->Info($file);
-        $this->SetY(200);
+        $this->SetY(190);
         $this->setTextColor(0, 0, 0);
-        $this->SetFont('helvetica', 'R', 16);
-        $this->Cell(0, 0, 'Score: ' . $data[0][0], 0, 1, 'L', 0);
-        $this->Cell(0, 0, 'Date: ' . $data[0][1], 0, 1, 'L', 0);
-        $this->Cell(0, 0, 'Name: ' . $data[0][2], 0, 1, 'L', 0);
+        $this->SetFont('helvetica', 'R', 12);
+        $this->Cell(0, 0, $data[3][0] . ': ' . $data[3][1], 0, 1, 'L', 0); // Evaluation for: Name
+        $this->Cell(0, 0, $data[0][0] . ': ' . $data[0][1], 0, 1, 'L', 0); // Evaluated by: Name
+        $this->Cell(0, 0, $data[1][0] . ': ' . $data[1][1], 0, 1, 'L', 0); // Date Taken: Date
+        $this->Cell(0, 0, $data[2][0] . ': ' . $data[2][1], 0, 1, 'L', 0); // Score: Score
+        $this->Ln();
+        $this->Cell(0, 0, $data[4][0] . ': ', 0, 1, 'L', 0); // Feedback:
+        // after 4 lines, add a line break
+        // display feedback
+        for ($i = 1; $i < count($data[4]); $i++) {
+            $this->Cell(0, 0, $data[4][$i], 0, 1, 'C', 0);
+        }
     }
 
 
@@ -144,10 +155,10 @@ $pdf = new MYPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8',
 
 // set document information
 $pdf->SetCreator(PDF_CREATOR);
-$pdf->SetAuthor('Nicola Asuni');
-$pdf->SetTitle('TCPDF Example 003');
-$pdf->SetSubject('TCPDF Tutorial');
-$pdf->SetKeywords('TCPDF, PDF, example, test, guide');
+$pdf->SetAuthor('CvSU-Imus');
+$pdf->SetTitle('Evaluation Report');
+$pdf->SetSubject('Evaluation Report');
+$pdf->SetKeywords('Evaluation, Report, PDF, TCPDF');
 
 // set default header data
 $pdf->SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, PDF_HEADER_TITLE, PDF_HEADER_STRING);
@@ -182,24 +193,19 @@ $pdf->SetY(50);
 // column titles
 $header = array('Question', '1', '2', '3', '4', '5');
 
-$data1 = $pdf->LoadData('eval.txt');
+$data1 = $pdf->LoadData($_SESSION['GlobalUsername'] . '_EvalData.txt');
 
 $pdf->ColoredTable($header, $data1);
-$pdf->display('info.txt');
+$pdf->display($_SESSION['GlobalUsername'] . '_EvalInfo.txt');
 
-
-
-
+//get name then add to new variable
+$name = $_SESSION['GlobalName'] . ' Evaluation Report.pdf';
 
 // ---------------------------------------------------------
 
 //Close and output PDF document
 // I - send to browser, D - download file, F - save file locally
-$pdf->Output('example_003.pdf', 'D');
-
-//============================================================+
-// END OF FILE
-//============================================================+
+$pdf->Output($name, 'D');
 
 
 

@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 // Include the TCPDF library
 @require_once('../Components/TCPDF/tcpdf.php');
@@ -34,8 +35,36 @@ if (!extension_loaded('gd')) {
     // Convert the HTML into PDF
     $pdf->writeHTML($html, true, false, true, false, '');
 
+    $pdf->setY(230);
+    //signature
+
+    $sql = "SELECT * FROM tbl_admin";
+    $result = mysqli_query($conn, $sql);
+
+    // Store the names in an array
+    $names = array();
+    while ($row = mysqli_fetch_assoc($result)) {
+        $names[] = $row['name'];
+    }
+
+    // Randomly select a name from the array
+    $randomName = $names[array_rand($names)];
+
+    $pdf->Cell(80, 0, '___________________________', 0, 1, 'C');
+    $pdf->Cell(80, 0, $_SESSION['GlobalName'], 0, 1, 'C');
+    $pdf->Cell(80, 0, 'Trainee', 0, 1, 'C');
+
+    $pdf->setY(260);
+
+    $pdf->Cell(80, 0, '___________________________', 0, 1, 'C');
+    $pdf->Cell(80, 0, $randomName, 0, 1, 'C');
+    $pdf->Cell(80, 0, 'OJT Coordinator', 0, 1, 'C');
+
+
+
     // Output the PDF as a file named "PlacementForm.pdf" and force download
     $pdf->Output('PlacementForm.pdf', 'D');
 }
+
 
 ?>

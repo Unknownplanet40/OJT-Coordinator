@@ -253,19 +253,18 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
                                                     color: "#000",
                                                   }).then((result) => {
                                                     if (result.isConfirmed && result.value.valid) {
-                                                      window.location.href = "../Components/Proccess/UpdateSuperuserAcc.php?id=' . $row['UID'] . '";
-                                                    } else {
-                                                        Swal.fire({
-                                                            icon: "error",
-                                                            title: "Oops...",
-                                                            text: "You entered an incorrect password!",
-                                                            background: "#fff",
-                                                            color: "#000",
-                                                            showConfirmButton: false,
-                                                            timer: 1500,
-                                                        });
-                                                    }
-                                                });
+                                                        window.location.href = "../Components/Proccess/UpdateSuperuserAcc.php?id=' . $row['UID'] . '";
+                                                      } else if (result.isConfirmed && !result.value.valid) {
+                                                          Swal.fire({
+                                                              icon: "error",
+                                                              title: "Oops...",
+                                                              text: "You entered an incorrect password!",
+                                                              background: "#fff",
+                                                              color: "#000",
+                                                              showConfirmButton: false,
+                                                              timer: 1500,
+                                                          });
+                                                      }
                                             }
                                           });
                                         ViewAccount[' . ($i - 1) . '].addEventListener("click", () => {

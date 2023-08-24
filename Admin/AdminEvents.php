@@ -372,7 +372,7 @@ unset($_POST['resetEvent']);
                 <!-- search bar -->
                 <form action="AdminEvents.php" method="POST" id="searchForm">
                     <hr class="mt-4 mb-4" style="background-color: white; height: 5px; border-radius: 5px;">
-                    <div class="input-group mb-3">
+                    <div class="input-group mb-3 w-75 mx-auto">
                         <input type="text" class="form-control" placeholder="Search Event Title"
                             title="You can only search by event title" aria-label="Search Event"
                             aria-describedby="button-addon2" name="searchEvent" id="searchEvent">
@@ -436,7 +436,7 @@ unset($_POST['resetEvent']);
             <div class="col">
                 <div class="position-relative">
                 <div class="card h-100 user-select-none">
-                    <img src="' . $row['eventImage'] . '" class="card-img-top" style="max-height: 256px; object-fit: cover;" alt="...">
+                <img src="' . $row['eventImage'] . '" class="card-img-top" style="object-fit: cover; aspect-ratio: 16/9;" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">' . $row['eventTitle'] . '</h5>
                         <p class="card-text">' . $date . ' <small class="text-muted">' . $newstatus . '</small></p>

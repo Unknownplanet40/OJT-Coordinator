@@ -216,7 +216,7 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
                                         <br>
                                     </div>
                                     <div class="card-footer text-end">
-                                        <a href="" class="btn btn-danger btn-sm" title="Unjoin to this event">Unjoin</a>
+                                        <a href="../Components/Proccess/UnjoinEvent.php" class="btn btn-danger btn-sm" title="Unjoin to this event">Unjoin</a>
                                     </div>
                                     
                                     ';
@@ -285,13 +285,13 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
                                 '<div class="col">
                                     <div class="position-relative">
                                         <div class="card h-100 border border-success shadow-lg user-select-none">
-                                            <img src="' . $row['eventImage'] . '" class="card-img-top" style="max-height: 256px; object-fit: cover;" alt="...">
+                                        <img src="' . $row['eventImage'] . '" class="card-img-top" style="object-fit: cover; aspect-ratio: 16/9;" alt="...">
                                                 <div class="card-body">
                                                     <h5 class="card-title">' . $row['eventTitle'] . '</h5>
                                                     <p class="card-text">' . $date . ' <small class="text-muted">' . $comdate . '</small></p>
                                                     <p class="card-text">' . $row['eventLocation'] . '</p>
                                                     <p class="card-text">' . $status . '</p>
-                                                    <p class="card-text" style="font-size: 14px;">' . $desc . '</p>
+                                                    <p class="card-text text-break" style="font-size: 14px;">' . $desc . '</p>
                                                     <small class="text-muted">Time: ' . $start . ' - ' . $end . ' <br> Available Seats: ' . $row['eventSlots'] . '</small>
                                                 </div>
                                                 <div class="card-footer text-center">

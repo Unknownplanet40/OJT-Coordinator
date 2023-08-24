@@ -11,6 +11,11 @@ if (isset($_SESSION['GlobalRole'])) {
         $sql = "UPDATE tbl_accounts SET status = 0 WHERE UID = '" . $_SESSION['GlobalID'] . "'";
     } else {
         $sql = "UPDATE tbl_accounts SET status = 0 WHERE UID = '" . $_SESSION['GlobalID'] . "'";
+
+        if (file_exists("./Components/EvaluatePDF/". $_SESSION['GlobalUsername'] . '_EvalData.txt')) {
+            unlink("./Components/EvaluatePDF/". $_SESSION['GlobalUsername'] . '_EvalData.txt');
+            unlink("./Components/EvaluatePDF/". $_SESSION['GlobalUsername'] . '_EvalInfo.txt');
+        }
     }
 }
 $result = mysqli_query($conn, $sql);

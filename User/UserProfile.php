@@ -40,6 +40,13 @@ if (isset($_SESSION['GlobalVaccCompleted']) && $_SESSION['GlobalVaccCompleted'] 
     echo '<script>var VaccCompleted = false;</script>';
     echo '<script>console.log(VaccCompleted);</script>';
 }
+
+if($_SESSION['GlobalProfileCompleted'] == 'true'){
+    $disabled = "";
+} else {
+    $disabled = "disabled";
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -228,7 +235,7 @@ if (isset($_SESSION['GlobalVaccCompleted']) && $_SESSION['GlobalVaccCompleted'] 
                             <div class="row">
                                 <div class="col-md-6 text-center">
                                     <input type="submit" name="vaccine" id="vaccine" class="btn btn-primary btn-sm w-50"
-                                        value="Submit">
+                                        value="Submit" <?php echo $disabled; ?>>
                                 </div>
                                 <div class="col-md-6">
                                     <p class="text-danger" id="VACerror">

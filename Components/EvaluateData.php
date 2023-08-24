@@ -2,17 +2,38 @@
 function scoreWidth($score)
 {
     $score_width = $score * 20;
-    if ($score >= 4) {
-        $color = 'text-bg-success';
-    } else if ($score >= 2) {
-        $color = 'text-bg-warning';
-    } else {
-        $color = 'text-bg-danger';
+    switch ($score) {
+        case 1:
+            $color = 'text-bg-danger';
+            $value = 'Unacceptable';
+            break;
+        case 2:
+            $color = 'text-bg-danger';
+            $value = 'Needs Improvement';
+            break;
+        case 3:
+            $color = 'text-bg-warning';
+            $value = 'Satisfactory';
+            break;
+        case 4:
+            $color = 'text-bg-info';
+            $value = 'Very Satisfactory';
+            break;
+        case 5:
+            $color = 'text-bg-success';
+            $value = 'Outstanding';
+            break;
+        default:
+            $color = 'text-bg-danger';
+            $value = 'Unacceptable';
+            break;
     }
-    return '<div class="progress-bar ' . $color . '" role="progressbar" aria-label="Segment one" style="width: ' . $score_width . '%">' . $score . '</div>';
+    return '<div class="progress-bar ' . $color . '" role="progressbar" aria-label="Segment one" style="width: ' . $score_width . '%; cursor: default;" title="' . $value . '">' . $score . ' - ' . $value . '</div>';
 }
 
-function generateData(){
+function generateData()
+{
+    global $Q1, $Q2, $Q3, $Q4, $Q5, $Q6, $Q7, $Q8, $Q9, $Q10, $Q11, $Q12, $Q13, $Q14, $Q15, $Q16, $Q17, $Q18, $fed, $evaby, $datetaken, $Total_Score, $grade;
     $questionTitles = [
         '1. Accuracy of completed work according to the operational standards',
         '2. Thoroughness & attention to detail in performing the assigned tasks',
@@ -33,43 +54,68 @@ function generateData(){
         '3. Accepts suggestions, directions & constructive criticism from employees & supervisors',
         '4. Cooperative team player',
     ];
-    
+
     $questions_count = count($questionTitles);
     //                1              2              3              4              5 
-    $ratings = [';X; ; ; ; ;', '; ;X; ; ; ;', '; ; ;X; ; ;', '; ; ; ;X; ;', '; ; ; ; ;X;'];
-    
+    $ratings = [';*; ; ; ; ;', '; ;*; ; ; ;', '; ; ;*; ; ;', '; ; ; ;*; ;', '; ; ; ; ;*;'];
+
     $content = '';
-    
+    $info = '';
+
     // Loop through all questions
     for ($i = 0; $i < $questions_count; $i++) {
         $questionNumber = $i + 1;
         $questionTitle = $questionTitles[$i];
-    
+
         // Get the rating for the current question
         $questionKey = 'Q' . $questionNumber;
         $ratingIndex = $$questionKey - 1;
-    
+
         // Add the question title and rating to the content
         $content .= $questionTitle . $ratings[$ratingIndex] . "\n";
     }
-    
+
+    $breakFeedback = wordwrap($fed, 90, ";", true);
+
+    $info .= "Evaluated by; " . $evaby . "\n";
+    $info .= "Date; " . $datetaken . "\n";
+    $info .= "Overall Score; " . $Total_Score . "% - " . $grade . "\n";
+    $info .= "Trainee Name; " . $_SESSION['GlobalName'] . "\n";
+    $info .= "Feedback; " . $breakFeedback . "\n";
+
+
     // Now, $content contains the formatted content for all questions
     // Save the content to a file
-    $filename = 'eval.txt';
-    $handle = fopen($filename, 'w');
-    fwrite($handle, $content);
-    fclose($handle);
-    
+    $fileData = $_SESSION['GlobalUsername'] . '_EvalData.txt';
+    $handle1 = fopen($fileData, 'w');
+    fwrite($handle1, $content);
+    fclose($handle1);
+
     //move file to another directory
-    $source = $filename;
-    $destination = '../Components/EvaluatePDF/' . $filename;
+    $source = $fileData;
+    $destination = '../Components/EvaluatePDF/' . $fileData;
     rename($source, $destination);
+
+    //get the data from EvalInfo.txt
+    $FileInfo = $_SESSION['GlobalUsername'] . '_EvalInfo.txt';
+    $handle2 = fopen($FileInfo, 'w');
+    fwrite($handle2, $info);
+    fclose($handle2);
+
+    //move file to another directory
+    $source = $FileInfo;
+    $destination = '../Components/EvaluatePDF/' . $FileInfo;
+    rename($source, $destination);
+
 }
+
+
 ?>
 
 <div style="margin: 10px; min-width: 90%;" class="screenshot-element">
     <ul class="list-group">
-        <li class="list-group-item text-bg-success" aria-current="true">QUALITY OF WORK</li>
+        <li class="list-group-item text-light" aria-current="true" style="background-color: #3ea34c;">QUALITY OF WORK
+        </li>
         <li class="list-group-item">
             <div class="row">
                 <div class="col-md-4">
@@ -112,7 +158,7 @@ function generateData(){
                 </div>
             </div>
         </li>
-        <li class="list-group-item text-bg-success" aria-current="true">PRODUCTIVITY</li>
+        <li class="list-group-item text-light" aria-current="true" style="background-color: #3ea34c;">PRODUCTIVITY</li>
         <li class="list-group-item">
             <div class="row">
                 <div class="col-md-4">
@@ -168,7 +214,8 @@ function generateData(){
                 </div>
             </div>
         </li>
-        <li class="list-group-item text-bg-success" aria-current="true">WORK HABITS, TALENTS & SKILLS</li>
+        <li class="list-group-item text-light" aria-current="true" style="background-color: #3ea34c;">WORK HABITS,
+            TALENTS & SKILLS</li>
         <li class="list-group-item">
             <div class="row">
                 <div class="col-md-4">
@@ -267,7 +314,8 @@ function generateData(){
                 </div>
             </div>
         </li>
-        <li class="list-group-item text-bg-success" aria-current="true">INTERPERSONAL WORK RELATIONSHIP</li>
+        <li class="list-group-item text-light" aria-current="true" style="background-color: #3ea34c;">INTERPERSONAL WORK
+            RELATIONSHIP</li>
         <li class="list-group-item">
             <div class="row">
                 <div class="col-md-4">
@@ -331,12 +379,18 @@ function generateData(){
     <div class="row">
         <div class="col-md-12">
             <div class="form-floating">
-                <textarea class="form-control" style="resize:none; height: 256px;" readonly>
-                    <?php
-                    echo $fed;
-                    ?>
+                <textarea class="form-control" readonly>
+                    <?php echo $fed; ?>
                     </textarea>
                 <label for="floatingTextarea2" class="text-success"></label>
+                <script>
+                    //auto resize textarea
+                    var tx = document.getElementsByTagName('textarea');
+                    for (var i = 0; i < tx.length; i++) {
+                        tx[i].setAttribute('style', 'height:' + (tx[i].scrollHeight) + 'px;overflow-y:hidden;');
+                        tx[i].addEventListener("input", OnInput, false);
+                    }
+                </script>
             </div>
         </div>
     </div>
@@ -359,6 +413,7 @@ function generateData(){
                 } else {
                     $grade = 'Poor';
                 }
+                generateData();
                 ?>
                 <input type="text" class="form-control" value="<?php echo $Total_Score . '% - ' . $grade ?>" readonly>
                 <label for="floatingInput">Overall Score:</label>
@@ -378,7 +433,7 @@ function generateData(){
         </div>
         <!-- Under Construction -->
         <div class="col-md-2">
-            <div class="form-floating mt-2">
+            <div class="form-floating mt-3">
                 <button type="button" class="btn btn-sm btn-success" id="print">Download Evaluation</button>
                 <script>
                     let btnDownload = document.getElementById('print');
@@ -386,30 +441,34 @@ function generateData(){
                     // confermation SweetAlert2
                     btnDownload.addEventListener('click', function () {
                         Swal.fire({
-                            title: 'Before you download',
-                            text: "This feature is under development. It may not work properly. Do you want to continue?",
-                            icon: 'info',
+                            text: "Would you like to download a copy of this evaluation?",
+                            icon: 'question',
                             showCancelButton: true,
                             confirmButtonColor: '#3085d6',
                             cancelButtonColor: '#d33',
-                            confirmButtonText: 'Yes!',
+                            confirmButtonText: 'Yes Download it!',
                             allowOutsideClick: false,
+
                         }).then((result) => {
-                            Swal.fire({
-                                title: 'Please wait...',
-                                allowOutsideClick: false,
-                                showConfirmButton: false,
-                                timer: 3000,
-                                timerProgressBar: true,
-                                onOpen: () => {
-                                    Swal.showLoading();
-                                }
-                            }).then((result) => {
-                                if (result.dismiss === Swal.DismissReason.timer) {
-                                    window.location.href = '../Components/EvaluatePDF/pdftest.php';
-                                }
-                            })
-                        })
+                            if (result.isConfirmed) {
+                                Swal.fire({
+                                    title: 'Please wait...',
+                                    allowOutsideClick: false,
+                                    showConfirmButton: false,
+                                    timer: 3000,
+                                    timerProgressBar: true,
+                                    onOpen: () => {
+                                        Swal.showLoading();
+                                    }
+                                }).then((result) => {
+                                    if (result.dismiss === Swal.DismissReason.timer) {
+                                        window.location.href = '../Components/EvaluatePDF/GenerateEval.php';
+                                    }
+                                });
+                            } else if (result.dismiss === Swal.DismissReason.cancel) {
+                                // Do nothing
+                            }
+                        });
                     });
                 </script>
             </div>

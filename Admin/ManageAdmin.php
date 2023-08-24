@@ -253,7 +253,7 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
                                                   }).then((result) => {
                                                     if (result.isConfirmed && result.value.valid) {
                                                       window.location.href = "../Components/Proccess/UpdateSuperuserAcc.php?id=' . $row['UID'] . '";
-                                                    } else {
+                                                    } else if (result.isConfirmed && !result.value.valid) {
                                                         Swal.fire({
                                                             icon: "error",
                                                             title: "Oops...",

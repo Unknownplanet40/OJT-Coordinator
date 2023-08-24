@@ -12,131 +12,129 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
     header("Location: ../User/UserProfile.php");
 } else {
     $ShowAlert = true;
-}
 
-// check if the current user has already submitted the requirements
-$sql = "SELECT * FROM tbl_resource WHERE UID = '" . $_SESSION['GlobalID'] . "'";
-$result = mysqli_query($conn, $sql);
-if (mysqli_num_rows($result) > 0) {
-    $row = mysqli_fetch_assoc($result);
-    
-    if ($row['resume'] != null) {
-        if ($row['Doc1_stat'] == 0 || $row['Doc1_stat'] == 1) {
-            $Resume = "hidden";
+    // check if the current user has already submitted the requirements
+    $sql = "SELECT * FROM tbl_resource WHERE UID = '" . $_SESSION['GlobalID'] . "'";
+    $result = mysqli_query($conn, $sql);
+    if (mysqli_num_rows($result) > 0) {
+        $row = mysqli_fetch_assoc($result);
+
+        if ($row['resume'] != null) {
+            if ($row['Doc1_stat'] == 0 || $row['Doc1_stat'] == 1) {
+                $Resume = "hidden";
+            } else {
+                $Resume = "";
+                $mess = "You need to resubmit This file!";
+            }
         } else {
             $Resume = "";
-            $mess = "You need to resubmit This file!";
         }
-    } else {
-        $Resume = "";
-    }
-    if ($row['placement'] != null) {
-        if ($row['Doc2_stat'] == 0 || $row['Doc2_stat'] == 1) {
-            $PlacementForm = "hidden";
+        if ($row['placement'] != null) {
+            if ($row['Doc2_stat'] == 0 || $row['Doc2_stat'] == 1) {
+                $PlacementForm = "hidden";
+            } else {
+                $PlacementForm = "";
+            }
         } else {
             $PlacementForm = "";
         }
-    } else {
-        $PlacementForm = "";
-    }
-    if ($row['Birth'] != null) {
-        if ($row['Doc3_stat'] == 0 || $row['Doc3_stat'] == 1) {
-            $BirthCertificate = "hidden";
+        if ($row['Birth'] != null) {
+            if ($row['Doc3_stat'] == 0 || $row['Doc3_stat'] == 1) {
+                $BirthCertificate = "hidden";
+            } else {
+                $BirthCertificate = "";
+            }
         } else {
             $BirthCertificate = "";
         }
-    } else {
-        $BirthCertificate = "";
-    }
-    if ($row['MoA'] != null) {
-        if ($row['Doc4_stat'] == 0 || $row['Doc4_stat'] == 1) {
-            $MemorandumOfAgreement = "hidden";
+        if ($row['MoA'] != null) {
+            if ($row['Doc4_stat'] == 0 || $row['Doc4_stat'] == 1) {
+                $MemorandumOfAgreement = "hidden";
+            } else {
+                $MemorandumOfAgreement = "";
+            }
         } else {
             $MemorandumOfAgreement = "";
         }
-    } else {
-        $MemorandumOfAgreement = "";
-    }
-    if ($row['Waiver'] != null) {
-        if ($row['Doc5_stat'] == 0 || $row['Doc5_stat'] == 1) {
-            $Waiver = "hidden";
+        if ($row['Waiver'] != null) {
+            if ($row['Doc5_stat'] == 0 || $row['Doc5_stat'] == 1) {
+                $Waiver = "hidden";
+            } else {
+                $Waiver = "";
+            }
         } else {
             $Waiver = "";
         }
-    } else {
-        $Waiver = "";
-    }
-    if ($row['MedCert'] != null) {
-        if ($row['Doc6_stat'] == 0 || $row['Doc6_stat'] == 1) {
-            $MedicalCertificate = "hidden";
+        if ($row['MedCert'] != null) {
+            if ($row['Doc6_stat'] == 0 || $row['Doc6_stat'] == 1) {
+                $MedicalCertificate = "hidden";
+            } else {
+                $MedicalCertificate = "";
+            }
         } else {
             $MedicalCertificate = "";
         }
-    } else {
-        $MedicalCertificate = "";
-    }
-    if ($row['GMCert'] != null) {
-        if ($row['Doc7_stat'] == 0 || $row['Doc7_stat'] == 1) {
-            $GoodMoralCertificate = "hidden";
+        if ($row['GMCert'] != null) {
+            if ($row['Doc7_stat'] == 0 || $row['Doc7_stat'] == 1) {
+                $GoodMoralCertificate = "hidden";
+            } else {
+                $GoodMoralCertificate = "";
+            }
         } else {
             $GoodMoralCertificate = "";
         }
-    } else {
-        $GoodMoralCertificate = "";
-    }
-    if ($row['RegForm'] != null) {
-        if ($row['Doc8_stat'] == 0 || $row['Doc8_stat'] == 1) {
-            $RegistrationForm = "hidden";
+        if ($row['RegForm'] != null) {
+            if ($row['Doc8_stat'] == 0 || $row['Doc8_stat'] == 1) {
+                $RegistrationForm = "hidden";
+            } else {
+                $RegistrationForm = "";
+            }
         } else {
             $RegistrationForm = "";
         }
-    } else {
-        $RegistrationForm = "";
-    }
 
-    if ($row['Evaform'] != null) {
-        if ($row['Doc10_stat'] == 0 || $row['Doc10_stat'] == 1) {
-            $EvaluationForm = "hidden";
+        if ($row['Evaform'] != null) {
+            if ($row['Doc10_stat'] == 0 || $row['Doc10_stat'] == 1) {
+                $EvaluationForm = "hidden";
+            } else {
+                $EvaluationForm = "";
+            }
         } else {
             $EvaluationForm = "";
         }
-    } else {
-        $EvaluationForm = "";
-    }
-    if ($row['NarraForm'] != null) {
-        if ($row['Doc11_stat'] == 0 || $row['Doc11_stat'] == 1) {
-            $NarrativeReport = "hidden";
+        if ($row['NarraForm'] != null) {
+            if ($row['Doc11_stat'] == 0 || $row['Doc11_stat'] == 1) {
+                $NarrativeReport = "hidden";
+            } else {
+                $NarrativeReport = "";
+            }
         } else {
             $NarrativeReport = "";
         }
-    } else {
-        $NarrativeReport = "";
-    }
-    if ($row['TimeCard'] != null) {
-        if ($row['Doc12_stat'] == 0 || $row['Doc12_stat'] == 1) {
-            $DailyTimeRecord = "hidden";
+        if ($row['TimeCard'] != null) {
+            if ($row['Doc12_stat'] == 0 || $row['Doc12_stat'] == 1) {
+                $DailyTimeRecord = "hidden";
+            } else {
+                $DailyTimeRecord = "";
+            }
         } else {
             $DailyTimeRecord = "";
         }
-    } else {
-        $DailyTimeRecord = "";
-    }
-    if ($row['COC'] != null) {
-        if ($row['Doc13_stat'] == 0 || $row['Doc13_stat'] == 1) {
-            $CertificateOfCompletion = "hidden";
+        if ($row['COC'] != null) {
+            if ($row['Doc13_stat'] == 0 || $row['Doc13_stat'] == 1) {
+                $CertificateOfCompletion = "hidden";
+            } else {
+                $CertificateOfCompletion = "";
+            }
         } else {
             $CertificateOfCompletion = "";
         }
     } else {
-        $CertificateOfCompletion = "";
+        // when the user has not submitted any requirements
+        $sql = "INSERT INTO tbl_resource (UID) VALUES ('" . $_SESSION['GlobalID'] . "')";
+        $result = mysqli_query($conn, $sql);
     }
-} else {
-    // when the user has not submitted any requirements
-    $sql = "INSERT INTO tbl_resource (UID) VALUES ('" . $_SESSION['GlobalID'] . "')";
-    $result = mysqli_query($conn, $sql);
 }
-
-
 
 if (isset($_POST['submita'])) {
     Document_upload('Resume', 'pl1', 'resume', 'Doc1_date', 'Doc1_stat');
@@ -365,7 +363,7 @@ if (isset($_POST['submitm'])) {
                                 aria-valuemin="0" aria-valuemax="100"><?php echo $percentage == 100 ? "COMPLETED!" : $percentage . "%"; ?></div>
                         </div>
                     </div>
-                    <div class="col-md-12 mt-1" style="min-width: 420px;">
+                    <div class="col-md-12 mt-1" style="min-width: 480px;">
                         <ol class="list-group list-group-numbered">
                             <li class="list-group-item d-flex justify-content-between align-items-start">
                                 <div class="ms-2 me-auto">
@@ -394,7 +392,8 @@ if (isset($_POST['submitm'])) {
                             </li>
                             <li class="list-group-item d-flex justify-content-between align-items-start">
                                 <div class="ms-2 me-auto">
-                                    <div class="fw-bold " title="Memorandum of Agreement">MoA
+                                    <div class="fw-bold " title="Memorandum of Agreement">Memorandum of
+                                        Agreement
                                     </div>
                                     <p>
                                         <?php if ($row['Doc4_stat'] == 2) {
@@ -421,7 +420,8 @@ if (isset($_POST['submitm'])) {
                             </li>
                             <li class="list-group-item d-flex justify-content-between align-items-start">
                                 <div class="ms-2 me-auto">
-                                    <div class="fw-bold" title="Good Moral Certificate">GMC</div>
+                                    <div class="fw-bold" title="Good Moral Certificate">Good Moral
+                                        Certificate </div>
                                     <p>
                                         <?php if ($row['Doc7_stat'] == 2) {
                                             echo "<span class='text-danger'>File Rejected! <br> Need to upload again.</span>";

@@ -42,10 +42,10 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
 
         */
         if ($status == 1) {
-            $status = "<span class='text-success'>Online</span>";
+            $status = "<span class='text-success fw-bold'>Online</span>";
 
         } else {
-            $status = "<span class='text-danger'>Offline</span>";
+            $status = "<span class='text-danger fw-bold'>Offline</span>";
         }
 
     } else {
@@ -152,63 +152,63 @@ if (isset($_POST['update'])) {
         </div>
         <div class="row">
             <div class="col-md-5 text-center rounded">
-                <ul class="list-group">
+                <ul class="list-group border border-1 border-success">
                     <li class="list-group-item listhead text-center border-0" style="min-height: 256px;">
                         <img src="<?php echo isset($image) ? "../" . $image : "../../Image/Profile.png"; ?>
                         " class="img-fluid m-1 rounded" style="min-height: 256px; min-width: 256px; max-height: 256px; max-width: 256px;">
                     </li>
                     <li
-                        class="list-group-item d-flex justify-content-between align-items-center text-muted text-bg-dark">
-                        Name:
+                        class="list-group-item d-flex justify-content-between align-items-center text-muted" style="background: linear-gradient(to right, #2a9134 1%,#3fa34d 53%,#2a9134 100%)">
+                        <span class="text-light user-select-none">Name:</span>
                         <span class="text-end text-light user-select-none">
                             <?php echo isset($name) ? $name : "Not Available"; ?>
                         </span>
                     </li>
                     <li
-                        class="list-group-item d-flex justify-content-between align-items-center text-muted text-bg-dark">
-                        Email:
+                        class="list-group-item d-flex justify-content-between align-items-center text-muted" style="background: linear-gradient(to left, #2a9134 1%,#3fa34d 53%,#2a9134 100%)">
+                        <span class="text-light user-select-none">Email Address:</span>
                         <span class="text-end text-light user-select-none">
                             <?php echo isset($email) ? $email : "Not Available"; ?>
                         </span>
                     </li>
                     <li
-                        class="list-group-item d-flex justify-content-between align-items-center text-muted text-bg-dark">
-                        Username:
+                        class="list-group-item d-flex justify-content-between align-items-center text-muted" style="background: linear-gradient(to right, #2a9134 1%,#3fa34d 53%,#2a9134 100%)">
+                        <span class="text-light user-select-none">Username:</span>
                         <span class="text-end text-light user-select-none">
                             <?php echo isset($username) ? $username : "Not Available"; ?>
                         </span>
                     </li>
                     <li
-                        class="list-group-item d-flex justify-content-between align-items-center text-muted text-bg-dark">
-                        Department:
+                        class="list-group-item d-flex justify-content-between align-items-center text-muted" style="background: linear-gradient(to left, #2a9134 1%,#3fa34d 53%,#2a9134 100%)">
+                        <span class="text-light user-select-none">Department:</span>
                         <span class="text-end text-light user-select-none">
                             <?php echo isset($department) ? $department : "Not Available"; ?>
                         </span>
                     </li>
                     <li
-                        class="list-group-item d-flex justify-content-between align-items-center text-muted text-bg-dark">
-                        Date Created:
+                        class="list-group-item d-flex justify-content-between align-items-center text-muted " style="background: linear-gradient(to right, #2a9134 1%,#3fa34d 53%,#2a9134 100%)">
+                        <span class="text-light user-select-none">Date Created:</span>
                         <span class="text-end text-light user-select-none">
                             <?php echo isset($datecreated) ? $datecreated : "Not Available"; ?>
                         </span>
                     </li>
                     <li
-                        class="list-group-item d-flex justify-content-between align-items-center text-muted text-bg-dark">
-                        Last Login:
+                        class="list-group-item d-flex justify-content-between align-items-center text-muted" style="background: linear-gradient(to left, #2a9134 1%,#3fa34d 53%,#2a9134 100%)">
+                        <span class="text-light user-select-none">Last Login:</span>
                         <span class="text-end text-light user-select-none">
                             <?php echo isset($lastlogin) ? $lastlogin : "Not Available"; ?>
                         </span>
                     </li>
                     <li
-                        class="list-group-item d-flex justify-content-between align-items-center text-muted text-bg-dark">
-                        Position Assigned:
+                        class="list-group-item d-flex justify-content-between align-items-center text-muted" style="background: linear-gradient(to right, #2a9134 1%,#3fa34d 53%,#2a9134 100%)">
+                        <span class="text-light user-select-none">Account Type:</span>
                         <span class="text-end text-light user-select-none">
                             <?php echo isset($position) ? $position : "Not Available"; ?>
                         </span>
                     </li>
                     <li
-                        class="list-group-item d-flex justify-content-between align-items-center text-muted text-bg-dark">
-                        Current Status:
+                        class="list-group-item d-flex justify-content-between align-items-center text-muted" style="background: linear-gradient(to left, #2a9134 1%,#3fa34d 53%,#2a9134 100%)">
+                        <span class="text-light user-select-none">Current Status:</span>
                         <span class="text-end text-light user-select-none text">
                             <?php echo isset($status) ? $status : "Not Available"; ?>
                         </span>

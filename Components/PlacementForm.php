@@ -72,7 +72,7 @@ if (mysqli_num_rows($result) > 0) {
 <body>
     <header>
         <div>
-            <img src="../Image/Header.png" alt="Header" class="img-fluid">
+            <img hidden src="../Image/Header.png" alt="Header" class="img-fluid">
         </div>
     </header>
     <main>
@@ -160,48 +160,7 @@ if (mysqli_num_rows($result) > 0) {
             </span>
         </h4>
     </main>
-    <br>
-    <footer class="footer mt-auto py-3 bg-light sticky-bottom">
-        <div class="container-fluid">
-            <table>
-                <tr>
-                    <td>
-                        <div>
-                            <?php
-                            $sql = "SELECT * FROM tbl_admin";
-                            $result = mysqli_query($conn, $sql);
-                            
-                            // Store the names in an array
-                            $names = array();
-                            while ($row = mysqli_fetch_assoc($result)) {
-                                $names[] = $row['name'];
-                            }
-                            
-                            // Randomly select a name from the array
-                            $randomName = $names[array_rand($names)];
-                            ?>
-
-
-                            <h6 style="text-align: center;" class="fw-bold">Approved By:</h6>
-                            <h6 class="fw-bold" style="text-align: center;">
-                                ______________________________________________</h6>
-                            <h4 class="fw-bold mb-0" style="text-align: center;"><?php echo $randomName; ?></h4>
-                            <p class="fw-bold" style="text-align: center;">Coordinator</p>
-                        </div>
-                    </td>
-                    <td>
-                        <div>
-                            <h6 style="text-align: center;" class="fw-bold">Noted By:</h6>
-                            <h6 class="fw-bold" style="text-align: center;">
-                                ______________________________________________</h6>
-                            <h4 class="fw-bold mb-0" style="text-align: center;"><?php echo $super; ?></h4>
-                            <p class="fw-bold" style="text-align: center;">Supervisor</p>
-                        </div>
-                    </td>
-                </tr>
-            </table>
-        </div>
-    </footer>
+    
 </body>
 
 </html>

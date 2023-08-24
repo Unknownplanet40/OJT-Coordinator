@@ -170,8 +170,8 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
                                                     icon: "error",
                                                     title: "Oops...",
                                                     text: "You cannot update an account that is currently signed in!",
-                                                    background: "#19191a",
-                                                    color: "#fff",
+                                                    background: "#fff",
+                                                    color: "#000",
                                                 });
                                             } else {
                                                 /* Swal.fire({
