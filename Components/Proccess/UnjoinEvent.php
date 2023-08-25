@@ -1,6 +1,7 @@
 <?php
 session_start();
 @include_once("../../Database/config.php");
+@include_once("../../Components/PopupAlert");
 date_default_timezone_set('Asia/Manila');
 
 $UID = $_SESSION['GlobalID'];
@@ -37,15 +38,13 @@ if (mysqli_num_rows($result) > 0) {
     }
 
     $remaining_time = implode(', ', $nonZeroComponents);
+    $_SESSION['remaining_time'] = $remaining_time;
 
 
 
     echo "<script>console.log('Debug Objects: " . $remaining_time . "' );</script>";
 
     if ($current_date == $completion_date) {
-        $_SESSION['message'] = "You can't unjoin the event because the event is almost done. Remaining time: " . $remaining_time . " Please wait for the event to be completed. Thank you!";
-        $_SESSION['icon'] = "info";
-        $_SESSION['Show'] = true;
         header("Location: ../../User/UserDashboard.php");
     } else {
         $sql = "UPDATE tbl_events SET eventSlots = eventSlots + 1 WHERE EventID = '$EventID'";

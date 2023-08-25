@@ -32,6 +32,25 @@ if (mysqli_num_rows($result) > 0) {
     $duration = $row['Duration'];
     $Supervisor = $row['Supervisor'];
     $_SESSION['USERID'] = $row['progID'];
+
+    // difference between start time and end time
+    $date1 = new DateTime($row['start_time']);
+    $date2 = new DateTime($row['end_time']);
+    $interval = $date1->diff($date2);
+
+    // count how many hours are there that need to be completed every day
+    $total_hours = $interval->format('%h');
+
+    /// check if its double digit
+    if ($interval->format('%h') <= 1) {
+        $total_hours = $interval->format('%h Hour per day');
+    } else {
+        $total_hours = $interval->format('%h Hours per day');
+    }
+
+
+
+
 }
 
 
@@ -63,8 +82,7 @@ if (mysqli_num_rows($result) > 0) {
             <div class="text-center text-uppercase fs-3 fw-bolder">
                 <?php echo $title ?>
             </div>
-            <div
-            style="display: flex; justify-content: center; max-width: 90%; margin: auto;">
+            <div style="display: flex; justify-content: center; max-width: 90%; margin: auto;">
                 <div class="fs-5 text-center mt-2 mb-2 text-break" style="width: 75%;">
                     <?php echo $description ?>
                 </div>
@@ -78,14 +96,15 @@ if (mysqli_num_rows($result) > 0) {
                             <li class="list-group-item"><span class="fw-bold">Start Date: </span>
                                 <?php echo $startDate ?>
                             </li>
-                            <li class="list-group-item"><span class="fw-bold">End Date: </span>
+                            <li class="list-group-item"><span class="fw-bold">Estimated End Date: </span>
                                 <?php echo $endDate ?>
                             </li>
                             <li class="list-group-item"><span class="fw-bold">Location: </span>
                                 <?php echo $location ?>
                             </li>
-                            <li class="list-group-item"><span class="fw-bold">Hours: </span>
-                                <?php echo $hours ?> hours
+                            <li class="list-group-item"><span class="fw-bold">Hours Needed: </span>
+                                <?php echo $hours ?> hours /
+                                <?php echo $total_hours ?>
                             </li>
                             <li class="list-group-item"><span class="fw-bold">Start Time: </span>
                                 <?php echo $start_time ?>
@@ -139,10 +158,11 @@ if (mysqli_num_rows($result) > 0) {
                                 <ul class="list-group shadow-lg">
                                     <li class="list-group-item text-bg-success text-center text-uppercase">Download your
                                         Placement Form</li>
-                                    <li class="list-group-item"><a id="btnDownload" class="btn btn-success">Download</a></li>
+                                    <li class="list-group-item"><a id="btnDownload" class="btn btn-success">Download</a>
+                                    </li>
                                     <script>
                                         let btnDownload = document.getElementById("btnDownload");
-                                        btnDownload.addEventListener("click", function() {
+                                        btnDownload.addEventListener("click", function () {
                                             window.location.href = "../Components/generatepdf.php?ID=<?php echo $_SESSION['GlobalID'] ?>";
                                         });
                                     </script>
@@ -156,9 +176,15 @@ if (mysqli_num_rows($result) > 0) {
             <br>
             <div class="text">Progress</div>
             <div>
-                <div class="text-center text-uppercase fs-6 fw-bolder"><?php echo $title ?></div>
+                <div class="text-center text-uppercase fs-6 fw-bolder">
+                    <?php echo $title ?>
+                </div>
                 <div class="text-center fs-6 fw-bolder">
                     <?php $_SESSION['GlobalPercentage'] == 100 ? print "COMPLETED" : print 'Progress: ' . $_SESSION['GlobalPercentage'] . '%'; ?>
+                </div>
+                <div class="text-center">
+                    <small class="text-muted">This progress bar is based on the estimated Date of completion, <br> it
+                        may not be accurate as it depends on the trainee's performance.</small>
                 </div>
                 <br>
                 <div style="display: flex; justify-content: center;">
@@ -166,6 +192,7 @@ if (mysqli_num_rows($result) > 0) {
                         <div class="progress-bar progress-bar-striped progress-bar-animated bg-success"
                             role="progressbar" style="width: <?php echo $_SESSION['GlobalPercentage'] ?>%;"
                             aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"><?php echo $_SESSION['GlobalPercentage'] ?>%</div>
+
                     </div>
                 </div>
             </div>
@@ -206,12 +233,21 @@ if (mysqli_num_rows($result) > 0) {
                                     <p class="card-text">' . date("F j, Y", strtotime($row['eventDate'])) . '</p> <!-- Event Date -->
                                     <p class="card-text">' . date("h:i A", strtotime($row['eventStartTime'])) . ' - ' . date("h:i A", strtotime($row['eventEndTime'])) . '</p> <!-- Event Time -->
                                     <p class="card-text">' . $row['eventOrganizer'] . ' Weeks</p> <!-- Event Duration -->
-                                </div>';
+                                </div>
+                                ';
                                 } else {
                                     $output = '<div class="fw-light">You don\'t have any event joined yet.</div>';
                                 }
                                 echo $output;
                                 ?>
+                            </div>
+                        </li>
+                        <li
+                            class="list-group-item d-flex justify-content-between align-items-start list-group-item-success">
+                            <div class="ms-2 me-auto">
+                                <div class="text-muted">
+                                    If you wish to withdraw from the event, you can navigate to your dashboard and click
+                                    on the "Unjoin" button.</div>
                             </div>
                         </li>
                     </ol>

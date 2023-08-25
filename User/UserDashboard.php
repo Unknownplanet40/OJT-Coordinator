@@ -40,7 +40,6 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
             mysqli_query($conn, $sql);
         }
     }
-
 }
 
 
@@ -66,7 +65,19 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
     if (isset($ShowAlert)) {
         echo NewAlertBox();
         $_SESSION['Show'] = false;
-    } ?>
+    } 
+    if (isset($_SESSION['remaining_time']) && $_SESSION['remaining_time'] != null) {
+        echo "<script>swal.fire({
+            icon: 'info',
+            html: '<span style=\"text-align: justify;\">You can\'t unjoin the event yet. Because it\'s almost over. please wait for the remaining time to end.</span>',
+            footer: 'Remaining Time: " . $_SESSION['remaining_time'] . "',
+            allowOutsideClick: false,
+            allowEscapeKey: false,
+            allowEnterKey: false
+          });</script>";
+        unset($_SESSION['remaining_time']);
+    }
+    ?>
 
     <section class="home">
         <div class="text">Dashboard</div>
