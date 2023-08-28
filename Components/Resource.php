@@ -62,6 +62,14 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
 
 }
 
+if ($Doc1_status == 1 || $Doc2_status == 1 || $Doc3_status == 1 || $Doc4_status == 1 || $Doc5_status == 1 || $Doc6_status == 1 || $Doc7_status == 1 || $Doc8_status == 1 || $Doc9_status == 1 || $Doc10_status == 1 || $Doc11_status == 1 || $Doc12_status == 1 || $Doc13_status == 1) {
+    $sql = "UPDATE tbl_trainee SET Resource_Completed = 1 WHERE UID = '$userID'";
+    mysqli_query($conn, $sql);
+} else {
+    $sql = "UPDATE tbl_trainee SET Resource_Completed = 0 WHERE UID = '$userID'";
+    mysqli_query($conn, $sql);
+}
+
 ?>
 
 <!DOCTYPE html>

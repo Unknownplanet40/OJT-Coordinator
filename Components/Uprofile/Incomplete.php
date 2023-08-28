@@ -6,7 +6,7 @@
                     style="min-width: 256px;">
                     <?php
                     if (isset($_SESSION['Profile'])) {
-                        echo '<img class="rounded shadow-lg img-fluid img-thumbnail" src="' . $_SESSION['Profile'] . '" alt="Profile Picture" style="width: 256px;">';
+                        echo '<img class="rounded shadow-lg img-fluid img-thumbnail" src="' . $_SESSION['Profile'] . '" alt="Profile Picture" style="width: 256px; height: 256px;">';
                     } else {
                         echo '<img class="rounded shadow-lg img-fluid img-thumbnail" src="../Image/Profile.png" alt="Profile Picture" style="width: 256px;">';
                     }

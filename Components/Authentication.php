@@ -111,6 +111,7 @@ function fetchAdminData($ID)
         $_SESSION['GlobalDept'] = $row['department'];
         $_SESSION['GlobalStatus'] = $row['status'];
         $_SESSION['GlobalAccCreated'] = $row['account_Created'];
+        $_SESSION['GlobalSecQue'] = $row['security_Question'];
 
         // Update status in tbl_accounts
         $sql = "UPDATE tbl_accounts SET status = 1 WHERE UID = '$ID'";
@@ -222,6 +223,7 @@ function fetchUserData($ID)
         $_SESSION['GlobalRole'] = $row['role'];
         $_SESSION['GlobalAccCreated'] = $row['account_Created'];
         $_SESSION['GlobalProfileCompleted'] = $row['profile_Completed'];
+        $_SESSION['GlobalVaccinated'] = $row['vaccine_Completed'];
         $_SESSION['Profile'] = $row['image'];
         $_SESSION['GlobalGender'] = $row['gender'];
         $_SESSION['GlobalPhone'] = $row['phone'];
@@ -237,6 +239,7 @@ function fetchUserData($ID)
         $_SESSION['GlobalProvince'] = $row['province'];
         $_SESSION['GlobalJoin_an_Event'] = $row['Join_an_Event'];
         $_SESSION['GlobalEventID'] = $row['EventID'];
+        $_SESSION['GlobalSecQue'] = $row['security_Question'];
 
         $course = explode("-", $_SESSION['GlobalCourse']);
         $endtext = $course[1];
@@ -246,16 +249,16 @@ function fetchUserData($ID)
 
         switch ($year) {
             case '1':
-                $_SESSION['GlobalYear'] = "1st Year";
+                $_SESSION['GlobalYear'] = 1;
                 break;
             case '2':
-                $_SESSION['GlobalYear'] = "2nd Year";
+                $_SESSION['GlobalYear'] = 2;
                 break;
             case '3':
-                $_SESSION['GlobalYear'] = "3rd Year";
+                $_SESSION['GlobalYear'] = 3;
                 break;
             case '4':
-                $_SESSION['GlobalYear'] = "4th Year";
+                $_SESSION['GlobalYear'] = 4;
                 break;
             default:
                 $_SESSION['GlobalYear'] = $year;

@@ -206,8 +206,7 @@ if (isset($_POST['update'])) {
                             <?php echo isset($position) ? $position : "Not Available"; ?>
                         </span>
                     </li>
-                    <li
-                        class="list-group-item d-flex justify-content-between align-items-center text-muted text-bg-dark">
+                    <li class="list-group-item d-flex justify-content-between align-items-center text-muted text-bg-dark" style="display: none;">
                         Current Status:
                         <span class="text-end text-light user-select-none text">
                             <?php echo isset($status) ? $status : "Not Available"; ?>

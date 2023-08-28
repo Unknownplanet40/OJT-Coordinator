@@ -2,5 +2,7 @@
     "files.exclude": {
         "**/.github": true,
         "**/.vscode": true
-    }
+    },
+    "editor.inlineSuggest.enabled": true,
+    "editor.inlineSuggest.suppressSuggestions": false
 }

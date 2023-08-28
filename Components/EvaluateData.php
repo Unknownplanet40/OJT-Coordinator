@@ -112,7 +112,7 @@ function generateData()
 
 ?>
 
-<div style="margin: 10px; min-width: 90%;" class="screenshot-element">
+<div class="container-xl">
     <ul class="list-group">
         <li class="list-group-item text-light" aria-current="true" style="background-color: #3ea34c;">QUALITY OF WORK
         </li>
@@ -395,7 +395,7 @@ function generateData()
         </div>
     </div>
     <!-- Evaluated by -->
-    <div class="row mt-3 g-3">
+    <div class="row mt-3 g-3 mb-3">
         <div class="col-md-2">
             <!-- Score -->
             <div class="form-floating">
@@ -433,7 +433,7 @@ function generateData()
         </div>
         <!-- Under Construction -->
         <div class="col-md-2">
-            <div class="form-floating mt-3">
+            <div class="form-floating">
                 <button type="button" class="btn btn-sm btn-success" id="print">Download Evaluation</button>
                 <script>
                     let btnDownload = document.getElementById('print');

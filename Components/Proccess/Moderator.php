@@ -312,8 +312,9 @@ if (isset($_POST['update'])) {
                         </select>
                     </div>
                     <div class="input-group mb-3">
+                    <input type="hidden" name="upposition" value="<?php echo $position; ?>">
                         <span class="input-group-text text-bg-success w-25">Position:</span>
-                        <select name="upposition" class="form-select" id="upposition">
+                        <select class="form-select" id="upposition" title="You cannot change your position." disabled>
                             <option value="administrator" <?php if ($position === "administrator")
                                 echo "selected"; ?>>
                                 ADMINISTRATOR</option>

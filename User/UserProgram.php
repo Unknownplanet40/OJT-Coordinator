@@ -225,15 +225,15 @@ if (mysqli_num_rows($result) > 0) {
                                     $row = mysqli_fetch_assoc($result);
 
                                     $output =
-                                        '<div class="card-body">
-                                    <!-- this should be a list of events joined by the user -->
-                                    <h5 class="card-title">' . $row['eventTitle'] . '</h5> <!-- Event Title -->
-                                    <p class="card-text">' . $row['eventDescription'] . '</p> <!-- Event Description -->
-                                    <p class="card-text">' . $row['eventLocation'] . '</p> <!-- Event Date -->
-                                    <p class="card-text">' . date("F j, Y", strtotime($row['eventDate'])) . '</p> <!-- Event Date -->
-                                    <p class="card-text">' . date("h:i A", strtotime($row['eventStartTime'])) . ' - ' . date("h:i A", strtotime($row['eventEndTime'])) . '</p> <!-- Event Time -->
-                                    <p class="card-text">' . $row['eventOrganizer'] . ' Weeks</p> <!-- Event Duration -->
-                                </div>
+                                    '<div class="card-body">
+                                        <!-- this should be a list of events joined by the user -->
+                                        <h5 class="card-title">' . $row['eventTitle'] . '</h5> <!-- Event Title -->
+                                        <p class="card-text">' . $row['eventDescription'] . '</p> <!-- Event Description -->
+                                        <p class="card-text">' . $row['eventLocation'] . '</p> <!-- Event Date -->
+                                        <p class="card-text">' . date("F j, Y", strtotime($row['eventDate'])) . '</p> <!-- Event Date -->
+                                        <p class="card-text">' . date("h:i A", strtotime($row['eventStartTime'])) . ' - ' . date("h:i A", strtotime($row['eventEndTime'])) . '</p> <!-- Event Time -->
+                                        <p class="card-text">' . $row['eventOrganizer'] . ' Weeks</p> <!-- Event Duration -->
+                                    </div>
                                 ';
                                 } else {
                                     $output = '<div class="fw-light">You don\'t have any event joined yet.</div>';
@@ -247,7 +247,8 @@ if (mysqli_num_rows($result) > 0) {
                             <div class="ms-2 me-auto">
                                 <div class="text-muted">
                                     If you wish to withdraw from the event, you can navigate to your dashboard and click
-                                    on the "Unjoin" button.</div>
+                                    on the "Unjoin" button.
+                                </div>
                             </div>
                         </li>
                     </ol>

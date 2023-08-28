@@ -20,11 +20,12 @@ if ($today >= $end) {
     $result = mysqli_query($conn, $sql);
     echo '<script>console.log("Announcement Ended")</script>';
 } else {
-    $announcement = 
+    $announcement =
         '
-            <div class="alert alert-success fade show user-select-none" role="alert">
+            <div class="alert alert-success fade alert-dismissible show user-select-none" role="alert">
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 <h4 class="alert-heading">' . $row['Title'] . '</h4>
-                <p>' . $row['Description'] . '</p>
+                <p class="text-break">' . $row['Description'] . '</p>
                 <p class="mb-0 text-end">Posted by: ' . $row['PostedBy'] . '</p>
                 <hr>
                 <p class="mb-0 text-end">' . $date . ' | <small class="text-muted">Days Left Before Announcement Ends: ' . $days . '</small></p>

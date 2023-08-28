@@ -12,6 +12,83 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
     header("Location: ../User/UserProfile.php");
 } else {
     $ShowAlert = true;
+}
+
+$acceptedfile = array('pdf', 'docx', 'doc', 'png', 'jpg', 'jpeg');
+
+if (isset($_POST['submita'])) {
+    Document_upload('Resume', 'pl1', 'resume', 'Doc1_date', 'Doc1_stat');
+}
+
+if (isset($_POST['submitb'])) {
+    Document_upload('PlacementForm', 'pl2', 'placement', 'Doc2_date', 'Doc2_stat');
+}
+
+if (isset($_POST['submitc'])) {
+    Document_upload('BirthCertificate', 'pl3', 'Birth', 'Doc3_date', 'Doc3_stat');
+}
+
+if (isset($_POST['submitd'])) {
+    Document_upload('MemorandumOfAgreement', 'pl4', 'MoA', 'Doc4_date', 'Doc4_stat');
+}
+
+if (isset($_POST['submite'])) {
+    Document_upload('Waiver', 'pl5', 'Waiver', 'Doc5_date', 'Doc5_stat');
+}
+
+if (isset($_POST['submitf'])) {
+    Document_upload('MedicalCertificate', 'pl6', 'MedCert', 'Doc6_date', 'Doc6_stat');
+}
+
+if (isset($_POST['submitg'])) {
+    Document_upload('GoodMoralCertificate', 'pl7', 'GMCert', 'Doc7_date', 'Doc7_stat');
+}
+
+if (isset($_POST['submith'])) {
+    Document_upload('RegistrationForm', 'pl8', 'RegForm', 'Doc8_date', 'Doc8_stat');
+}
+
+if (isset($_POST['submitj'])) {
+    Document_upload('EvaluationForm', 'pl10', 'Evaform', 'Doc10_date', 'Doc10_stat');
+}
+
+if (isset($_POST['submitk'])) {
+    Document_upload('NarrativeReport', 'pl11', 'NarraForm', 'Doc11_date', 'Doc11_stat');
+}
+
+if (isset($_POST['submitl'])) {
+    Document_upload('DailyTimeRecord', 'pl12', 'TimeCard', 'Doc12_date', 'Doc12_stat');
+}
+
+if (isset($_POST['submitm'])) {
+    Document_upload('CertificateOfCompletion', 'pl13', 'COC', 'Doc13_date', 'Doc13_stat');
+}
+
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../Style/ImportantImport.css">
+    <link rel="stylesheet" href="../Style/ReqStyle.css">
+    <script src="../Script/SweetAlert2.js"></script>
+    <script defer src="../Script/SidebarScript.js"></script>
+    <script defer src="../Script/UreqScript.js"></script>
+    <script defer src="../Script/Bootstrap_Script/bootstrap.bundle.js"></script>
+    <title>Requirements</title>
+</head>
+
+<body>
+    <?php include_once '../Components/Sidebar.php';
+    echo NewAlertBox();
+    $_SESSION['Show'] = false;
+    unset($_SESSION['message']);
+    unset($_SESSION['icon']);
 
     // check if the current user has already submitted the requirements
     $sql = "SELECT * FROM tbl_resource WHERE UID = '" . $_SESSION['GlobalID'] . "'";
@@ -129,83 +206,24 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
         } else {
             $CertificateOfCompletion = "";
         }
+
+        // check if the user has completed the requirements
+        if ($row['Doc1_stat'] == 1 && $row['Doc2_stat'] == 1 && $row['Doc3_stat'] == 1 && $row['Doc4_stat'] == 1 && $row['Doc5_stat'] == 1 && $row['Doc6_stat'] == 1 && $row['Doc7_stat'] == 1 && $row['Doc8_stat'] == 1 && $row['Doc10_stat'] == 1 && $row['Doc11_stat'] == 1 && $row['Doc12_stat'] == 1 && $row['Doc13_stat'] == 1) {
+            $sql = "UPDATE tbl_trainee SET Resource_Completed = 1 WHERE UID = '" . $_SESSION['GlobalID'] . "'";
+            $result = mysqli_query($conn, $sql);
+            $_SESSION['GlobalCompleted'] = 'true';
+        } else {
+            $sql = "UPDATE tbl_trainee SET Resource_Completed = 0 WHERE UID = '" . $_SESSION['GlobalID'] . "'";
+            $result = mysqli_query($conn, $sql);
+            $_SESSION['GlobalCompleted'] = 'false';
+        }
+
+
     } else {
         // when the user has not submitted any requirements
         $sql = "INSERT INTO tbl_resource (UID) VALUES ('" . $_SESSION['GlobalID'] . "')";
         $result = mysqli_query($conn, $sql);
     }
-}
-
-if (isset($_POST['submita'])) {
-    Document_upload('Resume', 'pl1', 'resume', 'Doc1_date', 'Doc1_stat');
-}
-
-if (isset($_POST['submitb'])) {
-    Document_upload('PlacementForm', 'pl2', 'placement', 'Doc2_date', 'Doc2_stat');
-}
-
-if (isset($_POST['submitc'])) {
-    Document_upload('BirthCertificate', 'pl3', 'Birth', 'Doc3_date', 'Doc3_stat');
-}
-
-if (isset($_POST['submitd'])) {
-    Document_upload('MemorandumOfAgreement', 'pl4', 'MoA', 'Doc4_date', 'Doc4_stat');
-}
-
-if (isset($_POST['submite'])) {
-    Document_upload('Waiver', 'pl5', 'Waiver', 'Doc5_date', 'Doc5_stat');
-}
-
-if (isset($_POST['submitf'])) {
-    Document_upload('MedicalCertificate', 'pl6', 'MedCert', 'Doc6_date', 'Doc6_stat');
-}
-
-if (isset($_POST['submitg'])) {
-    Document_upload('GoodMoralCertificate', 'pl7', 'GMCert', 'Doc7_date', 'Doc7_stat');
-}
-
-if (isset($_POST['submith'])) {
-    Document_upload('RegistrationForm', 'pl8', 'RegForm', 'Doc8_date', 'Doc8_stat');
-}
-
-if (isset($_POST['submitj'])) {
-    Document_upload('EvaluationForm', 'pl10', 'Evaform', 'Doc10_date', 'Doc10_stat');
-}
-
-if (isset($_POST['submitk'])) {
-    Document_upload('NarrativeReport', 'pl11', 'NarraForm', 'Doc11_date', 'Doc11_stat');
-}
-
-if (isset($_POST['submitl'])) {
-    Document_upload('DailyTimeRecord', 'pl12', 'TimeCard', 'Doc12_date', 'Doc12_stat');
-}
-
-if (isset($_POST['submitm'])) {
-    Document_upload('CertificateOfCompletion', 'pl13', 'COC', 'Doc13_date', 'Doc13_stat');
-}
-?>
-
-<!DOCTYPE html>
-<html lang="en">
-
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../Style/ImportantImport.css">
-    <link rel="stylesheet" href="../Style/ReqStyle.css">
-    <script src="../Script/SweetAlert2.js"></script>
-    <script defer src="../Script/SidebarScript.js"></script>
-    <script defer src="../Script/UreqScript.js"></script>
-    <script defer src="../Script/Bootstrap_Script/bootstrap.bundle.js"></script>
-    <title>Requirements</title>
-</head>
-
-<body>
-    <?php include_once '../Components/Sidebar.php';
-    echo NewAlertBox();
-    $_SESSION['Show'] = false;
     ?>
     <section class="home">
         <div class="text">Your Documents</div>
@@ -331,8 +349,10 @@ if (isset($_POST['submitm'])) {
                         //range between 0 - 8
                         if ($count >= 0 && $count <= 8) {
                             $percentage = ($count / 8) * 100;
+                            $Phase = "First Part Completed (1/2)";
                         } elseif ($count >= 9 && $count <= 12) {
                             $percentage = ($count / 12) * 100;
+                            $Phase = "Completed";
                         }
                         $percentage = round($percentage);
 
@@ -360,7 +380,9 @@ if (isset($_POST['submitm'])) {
                         <div class="progress bg-secondary">
                             <div class="progress-bar <?php echo $color ?> progress-bar-striped progress-bar-animated"
                                 role="progressbar" style="width: <?php echo $percentage; ?>%;" aria-valuenow="40"
-                                aria-valuemin="0" aria-valuemax="100"><?php echo $percentage == 100 ? "COMPLETED!" : $percentage . "%"; ?></div>
+                                aria-valuemin="0" aria-valuemax="100"><?php echo $percentage == 100 ? $Phase : $percentage . "%"; ?>
+                            </div>
+                            
                         </div>
                     </div>
                     <div class="col-md-12 mt-1" style="min-width: 480px;">
@@ -386,9 +408,13 @@ if (isset($_POST['submitm'])) {
                                             disabled>
                                         <input type="file" name="pl1" class="form-control form-control-sm" id="File1"
                                             aria-describedby="SBfile1" aria-label="Upload" onchange="Cfile1()"
-                                            style="width: 98px;">
+                                            style="width: 98px;" accept=".pdf,.docx,.png,.jpg">
                                     </div>
                                 </form>
+
+                                <a href="<?php echo $row['resume'] ?>" target="_blank" class="btn btn-primary btn-sm ms-2"
+                                    title="View File" <?php if ($row['resume'] == null) echo "hidden"; ?>><img src="../Image/documents.svg"
+                                        alt="" width="20" height="20"></a>
                             </li>
                             <li class="list-group-item d-flex justify-content-between align-items-start">
                                 <div class="ms-2 me-auto">
@@ -414,9 +440,13 @@ if (isset($_POST['submitm'])) {
                                             disabled>
                                         <input type="file" name="pl4" class="form-control form-control-sm" id="File4"
                                             aria-describedby="SBfile4" aria-label="Upload" onchange="Cfile4()"
-                                            style="width: 98px;">
+                                            style="width: 98px;" accept=".pdf,.docx,.png,.jpg">
                                     </div>
                                 </form>
+
+                                <a href="<?php echo $row['MoA'] ?>" target="_blank" class="btn btn-primary btn-sm ms-2"
+                                    title="View File" <?php if ($row['MoA'] == null) echo "hidden"; ?>><img src="../Image/documents.svg"
+                                        alt="" width="20" height="20"></a>
                             </li>
                             <li class="list-group-item d-flex justify-content-between align-items-start">
                                 <div class="ms-2 me-auto">
@@ -441,9 +471,13 @@ if (isset($_POST['submitm'])) {
                                             disabled>
                                         <input type="file" name="pl7" class="form-control form-control-sm" id="File7"
                                             aria-describedby="inputGroupFileAddon03" aria-label="Upload"
-                                            onchange="Cfile7()" style="width: 98px;">
+                                            onchange="Cfile7()" style="width: 98px;" accept=".pdf,.docx,.png,.jpg">
                                     </div>
                                 </form>
+
+                                <a href="<?php echo $row['GMCert'] ?>" target="_blank" class="btn btn-primary btn-sm ms-2"
+                                    title="View File" <?php if ($row['GMCert'] == null) echo "hidden"; ?>><img src="../Image/documents.svg"
+                                        alt="" width="20" height="20"></a>
                             </li>
                             <li class="list-group-item d-flex justify-content-between align-items-start">
                                 <div class="ms-2 me-auto">
@@ -466,9 +500,13 @@ if (isset($_POST['submitm'])) {
                                             disabled>
                                         <input type="file" name="pl5" class="form-control form-control-sm" id="File5"
                                             aria-describedby="SBfile5" aria-label="Upload" onchange="Cfile5()"
-                                            style="width: 98px;">
+                                            style="width: 98px;" accept=".pdf,.docx,.png,.jpg">
                                     </div>
                                 </form>
+
+                                <a href="<?php echo $row['Waiver'] ?>" target="_blank" class="btn btn-primary btn-sm ms-2"
+                                    title="View File" <?php if ($row['Waiver'] == null) echo "hidden"; ?>><img src="../Image/documents.svg"
+                                        alt="" width="20" height="20"></a>
                             </li>
                             <li class="list-group-item d-flex justify-content-between align-items-start">
                                 <div class="ms-2 me-auto">
@@ -491,8 +529,13 @@ if (isset($_POST['submitm'])) {
                                             disabled>
                                         <input type="file" name="pl3" class="form-control form-control-sm" id="File3"
                                             aria-describedby="SBfile3" aria-label="Upload" onchange="Cfile3()"
-                                            style="width: 98px;">
+                                            style="width: 98px;" accept=".pdf,.docx,.png,.jpg">
+                                    </div>
                                 </form>
+
+                                <a href="<?php echo $row['Birth'] ?>" target="_blank" class="btn btn-primary btn-sm ms-2"
+                                    title="View File" <?php if ($row['Birth'] == null) echo "hidden"; ?>><img src="../Image/documents.svg"
+                                        alt="" width="20" height="20"></a>
                             </li>
                             <li class="list-group-item d-flex justify-content-between align-items-start">
                                 <div class="ms-2 me-auto">
@@ -515,9 +558,13 @@ if (isset($_POST['submitm'])) {
                                             disabled>
                                         <input type="file" name="pl6" class="form-control form-control-sm" id="File6"
                                             aria-describedby="SBfile6" aria-label="Upload" onchange="Cfile6()"
-                                            style="width: 98px;">
+                                            style="width: 98px;" accept=".pdf,.docx,.png,.jpg">
                                     </div>
                                 </form>
+
+                                <a href="<?php echo $row['MedCert'] ?>" target="_blank" class="btn btn-primary btn-sm ms-2"
+                                    title="View File" <?php if ($row['MedCert'] == null) echo "hidden"; ?>><img src="../Image/documents.svg"
+                                        alt="" width="20" height="20"></a>
                             </li>
                             <li class="list-group-item d-flex justify-content-between align-items-start">
                                 <div class="ms-2 me-auto">
@@ -540,9 +587,13 @@ if (isset($_POST['submitm'])) {
                                             disabled>
                                         <input type="file" name="pl8" class="form-control form-control-sm" id="File8"
                                             aria-describedby="inputGroupFileAddon03" aria-label="Upload"
-                                            onchange="Cfile8()" style="width: 98px;">
+                                            onchange="Cfile8()" style="width: 98px;" accept=".pdf,.docx,.png,.jpg">
                                     </div>
                                 </form>
+
+                                <a href="<?php echo $row['RegForm'] ?>" target="_blank" class="btn btn-primary btn-sm ms-2"
+                                    title="View File" <?php if ($row['RegForm'] == null) echo "hidden"; ?>><img src="../Image/documents.svg"
+                                        alt="" width="20" height="20"></a>
                             </li>
                             <li class="list-group-item d-flex justify-content-between align-items-start">
                                 <div class="ms-2 me-auto">
@@ -564,9 +615,13 @@ if (isset($_POST['submitm'])) {
                                             disabled>
                                         <input type="file" name="pl2" class="form-control form-control-sm" id="File2"
                                             aria-describedby="SBfile2" aria-label="Upload" onchange="Cfile2()"
-                                            style="width: 98px;">
+                                            style="width: 98px;" accept=".pdf,.docx,.png,.jpg">
                                     </div>
                                 </form>
+
+                                <a href="<?php echo $row['placement'] ?>" target="_blank" class="btn btn-primary btn-sm ms-2"
+                                    title="View File" <?php if ($row['placement'] == null) echo "hidden"; ?>><img src="../Image/documents.svg"
+                                        alt="" width="20" height="20"></a>
                             </li>
                             <?php if (isset($_SESSION['GlobalCompleted']) && $_SESSION['GlobalCompleted'] == 'true') { ?>
                                 <!-- This will only show if the user has completed -->
@@ -591,9 +646,13 @@ if (isset($_POST['submitm'])) {
                                                 disabled>
                                             <input type="file" name="pl10" class="form-control form-control-sm" id="File10"
                                                 aria-describedby="inputGroupFileAddon03" aria-label="Upload"
-                                                onchange="Cfile10()" style="width: 98px;">
+                                                onchange="Cfile10()" style="width: 98px;" accept=".pdf,.docx,.png,.jpg">
                                         </div>
                                     </form>
+
+                                    <a href="<?php echo $row['Evaform'] ?>" target="_blank" class="btn btn-primary btn-sm ms-2"
+                                        title="View File" <?php if ($row['Evaform'] == null) echo "hidden"; ?>><img src="../Image/documents.svg"
+                                            alt="" width="20" height="20"></a>
                                 </li>
                                 <li class="list-group-item d-flex justify-content-between align-items-start">
                                     <div class="ms-2 me-auto">
@@ -616,9 +675,13 @@ if (isset($_POST['submitm'])) {
                                                 disabled>
                                             <input type="file" name="pl11" class="form-control form-control-sm" id="File11"
                                                 aria-describedby="inputGroupFileAddon03" aria-label="Upload"
-                                                onchange="Cfile11()" style="width: 98px;">
+                                                onchange="Cfile11()" style="width: 98px;" accept=".pdf,.docx,.png,.jpg">
                                         </div>
                                     </form>
+
+                                    <a href="<?php echo $row['NarraForm'] ?>" target="_blank" class="btn btn-primary btn-sm ms-2"
+                                        title="View File" <?php if ($row['NarraForm'] == null) echo "hidden"; ?>><img src="../Image/documents.svg"
+                                            alt="" width="20" height="20"></a>
                                 </li>
                                 <li class="list-group-item d-flex justify-content-between align-items-start">
                                     <div class="ms-2 me-auto">
@@ -641,9 +704,13 @@ if (isset($_POST['submitm'])) {
                                                 disabled>
                                             <input type="file" name="pl12" class="form-control form-control-sm" id="File12"
                                                 aria-describedby="inputGroupFileAddon03" aria-label="Upload"
-                                                onchange="Cfile12()" style="width: 98px;">
+                                                onchange="Cfile12()" style="width: 98px;" accept=".pdf,.docx,.png,.jpg">
                                         </div>
                                     </form>
+
+                                    <a href="<?php echo $row['TimeCard'] ?>" target="_blank" class="btn btn-primary btn-sm ms-2"
+                                        title="View File" <?php if ($row['TimeCard'] == null) echo "hidden"; ?>><img src="../Image/documents.svg"
+                                            alt="" width="20" height="20"></a>
                                 </li>
                                 <li class="list-group-item d-flex justify-content-between align-items-start">
                                     <div class="ms-2 me-auto">
@@ -666,15 +733,20 @@ if (isset($_POST['submitm'])) {
                                                 disabled>
                                             <input type="file" name="pl13" class="form-control form-control-sm" id="File13"
                                                 aria-describedby="inputGroupFileAddon03" aria-label="Upload"
-                                                onchange="Cfile13()" style="width: 98px;">
+                                                onchange="Cfile13()" style="width: 98px;" accept=".pdf,.docx,.png,.jpg">
                                         </div>
                                     </form>
+
+                                    <a href="<?php echo $row['COC'] ?>" target="_blank" class="btn btn-primary btn-sm ms-2"
+                                        title="View File" <?php if ($row['COC'] == null) echo "hidden"; ?>><img src="../Image/documents.svg"
+                                            alt="" width="20" height="20"></a>
                                 </li>
                             <?php } ?>
                         </ol>
                     </div>
                     <small class="text-muted">Notes to remember:</small> <br>
-                    &bull; <small class="text-muted">PDF, JPG, PNG and DOCX files are allowed and maximum file size
+                    &bull; <small class="text-muted">Their are <?php echo $count; ?> out of 12 documents submitted.</small> <br>
+                    &bull; <small class="text-muted">PDF, JPG, JPEG, and PNG files are allowed and maximum file size
                         is 3mb</small>
                     <br>
                     &bull; <small class="text-muted">You can hover over the file name to view the full form of the

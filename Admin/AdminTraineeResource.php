@@ -29,7 +29,7 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
     <title>Admin Resource</title>
 </head>
 
-<body>
+<body class="adminuser user-select-none">
     <?php
     @include_once '../Components/AdminSidebar.php';
     if (isset($ShowAlert)) {

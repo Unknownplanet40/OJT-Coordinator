@@ -130,7 +130,7 @@ body {
 }
 
 .registration-form .error {
-  margin-bottom: 16px;
+  padding: 20px 70px 10px 70px;
 }
 
 .registration-form .error p {
@@ -144,7 +144,7 @@ body {
 
 @media (max-width: 576px) {
   .registration-form form {
-      padding: 50px 20px;
+      padding: 40px 0;
   }
 }
 

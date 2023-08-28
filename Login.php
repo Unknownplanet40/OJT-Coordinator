@@ -54,11 +54,15 @@ if (isset($_SESSION['autoUsername']) && isset($_SESSION['autoPassword'])) {
     <script src="./Script/LoginValidation.js"></script>
     <script src="./Script/SweetAlert2.js"></script>
     <link rel="shortcut icon" href="./Image/login.svg" type="image/x-icon">
+    <script defer src="./Script/Bootstrap_Script/bootstrap.bundle.js"></script>
+    <script src="./Script/jquery-3.5.1.js"></script>
 </head>
 
 <body style="color: #fff;">
     <?php echo NewAlertBox();
-    $_SESSION['Show'] = false; ?>
+    $_SESSION['Show'] = false; 
+    @include_once("./Components/Modals/LoginModal.php");
+    ?>
     <div class="d-flex justify-content-center align-items-center">
         <div class="registration-form">
             <form method="POST" action="./Components/Authentication.php">
@@ -74,13 +78,15 @@ if (isset($_SESSION['autoUsername']) && isset($_SESSION['autoPassword'])) {
                     <input type="text" class="form-control item" name="username" id="username" placeholder="Username"
                         value="<?php if (isset($uname)) {
                             echo $uname;
-                        } ?>" title="Username must contain at least 5 characters, with no special characters, no whitespaces no numbers, no UPPER/lowercase and must be unique.">
+                        } ?>"
+                        title="Username must contain at least 5 characters, with no special characters, no whitespaces no numbers, no UPPER/lowercase and must be unique.">
                 </div>
                 <div class="form-group">
                     <input type="password" class="form-control item" name="password" id="password"
                         placeholder="Password" value="<?php if (isset($pword)) {
                             echo $pword;
-                        } ?>" title="Password must contain at least 8 characters, including UPPER/lowercase and numbers with special characters and no whitespaces.">
+                        } ?>"
+                        title="Password must contain at least 8 characters, including UPPER/lowercase and numbers with special characters and no whitespaces.">
                     <div style="margin: -20px 5px 0 5px; display: flex; justify-content: space-between;">
                         <div>
                             <input class="form-check-input" type="checkbox" id="flexCheckDefault">
@@ -89,7 +95,7 @@ if (isset($_SESSION['autoUsername']) && isset($_SESSION['autoPassword'])) {
                             </label>
                         </div>
                         <!-- I will add this later -->
-                        <!-- <p class="reg-link"><a href="ForgotPassword.php">Forgot Password</a></p> -->
+                        <p class="reg-link" style="cursor: pointer;"><a href="./Components/ForgotPWord/VerifyEmail.php">Forgot Password?</a></p>
                     </div>
                 </div>
                 <div class="form-group">

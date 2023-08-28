@@ -152,7 +152,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                     <li class="list-group-item text-bg-dark">
                         <span class="fw-bold">Description</span>
                         <br>
-                        <span style="text-align: justify;">
+                        <span class="text-break" style="text-align: justify;">
                             <?php if (isset($desc)) {
                                 echo $desc;
                             } ?>

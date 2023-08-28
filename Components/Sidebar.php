@@ -21,7 +21,7 @@
                     $role = "Trainee";
                 }
                 if (isset($_SESSION['Profile'])) {
-                    echo '<img class="rounded img-fluid shadow-lg" src="' . $_SESSION['Profile'] . '" alt="Profile Picture" title="Click your name to edit your profile">';
+                    echo '<img class="rounded img-thumbnail shadow-lg" src="' . $_SESSION['Profile'] . '" alt="Profile Picture" title="Click your name to edit your profile" style="width: 48px; height: 48px;">';
                 } else {
                     echo '<img class="rounded img-fluid shadow-lg" src="../Image/Profile.png" alt="Profile Picture" title="Click your name to edit your profile">';
                 }

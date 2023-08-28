@@ -52,7 +52,7 @@ function NewAlertBox()
                     allowEscapeKey: false,
                     allowEnterKey: false
                   });</script>';
-            }  else {
+            } else {
                 return '<script>
                 Swal.fire({
                     icon: "' . $_SESSION['icon'] . '",
@@ -66,6 +66,8 @@ function NewAlertBox()
                   });</script>';
             }
         }
+    } else {
+        return "";
     }
 }
 ?>

@@ -2,6 +2,7 @@
 session_start();
 @include_once("../Database/config.php");
 @include_once("../Components/PopupAlert.php");
+@include_once("../Components/ProgdataExporter.php");
 
 if (!isset($_SESSION['DatahasbeenFetched'])) {
     header("Location: ../Login.php");
@@ -39,6 +40,7 @@ if (mysqli_num_rows($result) > 0) {
     $useupdate = false;
     $hidden = "hidden";
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -52,6 +54,7 @@ if (mysqli_num_rows($result) > 0) {
     <link rel="stylesheet" href="../Style/ColorPalette.css">
     <script src="../Script/SweetAlert2.js"></script>
     <script src="../Script/Bootstrap_Script/bootstrap.bundle.js"></script>
+    <script src="../Script/jquery-3.5.1.js"></script>
     <title>Update Event</title>
     <style>
         * {
@@ -200,6 +203,37 @@ if (mysqli_num_rows($result) > 0) {
                 </div>
             </div>
         </div>
+        <form hidden>
+            <div class="input-group">
+                <select class="form-select" id="Choice" name="Choice">
+                    <option selected hidden>Choose...</option>
+                    <?php
+                    $sql = "SELECT * FROM tbl_programs";
+                    $result = mysqli_query($conn, $sql);
+
+                    if (mysqli_num_rows($result) > 0) {
+                        while ($row = mysqli_fetch_assoc($result)) {
+                            $ProgID = $row['ID'];
+                            $ProgTitle = $row['title'];
+                            $ProgLocation = $row['progloc'];
+                            $ProgDate = $row['start_date'];
+                            $ProgStart = $row['start_time'];
+                            $ProgEnd = $row['end_time'];
+                            $ProgDuration = $row['Duration'];
+                            $ProgCompletion = $row['end_date'];
+                            $ProgSupervisor = $row['Supervisor'];
+                            $ProgHours = $row['hours'];
+                            $ProgDescription = $row['description'];
+                            echo "<option value='$ProgID'>$ProgTitle</option>";
+                        }
+                    } else {
+                        echo "<option value=''>No Program Found</option>";
+                    }
+                    ?>
+                </select>
+                <button class="btn btn-outline-secondary" type="button">Button</button>
+            </div>
+        </form>
     </div>
     <div class="container-lg">
         <div id="EventForm">
@@ -223,8 +257,8 @@ if (mysqli_num_rows($result) > 0) {
                 </div>
                 <div class="col-md-4">
                     <div class="form-floating mb-3 text-light">
-                        <input type="date" class="form-control " id="ProgDate" name="ProgDate"
-                            placeholder="Date" required min="<?php echo date('Y-m-d'); ?>">
+                        <input type="date" class="form-control " id="ProgDate" name="ProgDate" placeholder="Date"
+                            required min="<?php echo date('Y-m-d'); ?>">
                         <label for="ProgDate" class="text-dark">Start Date</label>
                     </div>
                 </div>
@@ -237,15 +271,15 @@ if (mysqli_num_rows($result) > 0) {
                 </div>
                 <div class="col-md-2">
                     <div class="form-floating mb-3 text-light">
-                        <input type="time" class="form-control " id="ProgEnd" name="ProgEnd"
-                            placeholder="End Time" required>
+                        <input type="time" class="form-control " id="ProgEnd" name="ProgEnd" placeholder="End Time"
+                            required>
                         <label for="ProgEnd" class="text-dark">To</label>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-floating mb-3 text-light">
-                        <select class="form-select " name="Progduration" id="Progduration"
-                            aria-label="Events Type" required>
+                        <select class="form-select " name="Progduration" id="Progduration" aria-label="Events Type"
+                            required>
                             <option selected hidden>Choose...</option>
                             <option value="4">4 Week</option>
                             <option value="8">8 Week</option>
@@ -311,8 +345,8 @@ if (mysqli_num_rows($result) > 0) {
                 </div>
                 <div class="col-md-4">
                     <div class="form-floating mb-3 text-light">
-                        <input type="number" class="form-control " id="ProgHours" name="ProgHours"
-                            placeholder="Hours" required readonly>
+                        <input type="number" class="form-control " id="ProgHours" name="ProgHours" placeholder="Hours"
+                            required readonly>
                         <label for="ProgHours" class="text-dark">Hours</label>
                     </div>
                 </div>
@@ -403,7 +437,7 @@ if (mysqli_num_rows($result) > 0) {
                                     error.innerHTML = "Please select a Starting Date first";
                                     // set default value of EventType to Choose...
                                     EventHours.value = "Choose...";
-                                    
+
                                 }
                             });
                         });

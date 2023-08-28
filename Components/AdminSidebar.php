@@ -12,7 +12,7 @@
     }
 </style>
 
-<nav class="sidebar">
+<nav class="sidebar close">
     <header>
         <div class="image-text">
             <span class="image">

@@ -1,6 +1,6 @@
 <form action="EvaluteProccess.php" method="POST" enctype="multipart/form-data">
-    <div class="table-responsive-md rounded" style="min-width: 460px;">
-        <ul class="list-group" style="min-width: 460px;">
+    <div class="container-xl rounded">
+        <ul class="list-group">
             <li class="list-group-item text-bg-success" aria-current="true">Trainee Details</li>
             <li class="list-group-item bg-light">
                 <span class="text-muted">Trainee ID: </span>
@@ -260,7 +260,7 @@
                                 behavior's & personality of the trainee.</small>
                             <textarea class="form-control text-bg-light" name="Comments" id="Comments" cols="30"
                                 rows="8" maxlength="1000"
-                                placeholder="Maximum of 1,000 characters"><?php echo $Comment; ?></textarea>
+                                placeholder="Maximum of 1,000 characters"></textarea>
                             <br>
                         </td>
                     </tr>
@@ -367,18 +367,18 @@
                                 </tr>
                                 <tr>
                                 <th class="text-end text-muted" scope="row" colspan="2"></th>
-                                    <td class="text-end text-uppercase"><small class="text-muted">Remarks<small></td>
-                                    <td class="text-center text-uppercase" colspan="2">' . $grade . '</td>
+                                    <td class="text-end text-uppercase border-top"><small class="text-muted">Remarks<small></td>
+                                    <td class="text-center text-uppercase border-top" colspan="2">' . $grade . '</td>
                                 </tr>
                                 <tr>
                                     <th class="text-end text-muted" scope="row" colspan="2"></th>
                                     <td class="text-end text-uppercase"><small class="text-muted">Date Evaluated<small></td>
-                                    <td class="text-end" colspan="2">' . $date . '</td>
+                                    <td class="text-start" colspan="2">' . $date . '</td>
                                 </tr>
                                 <tr>
                                     <th class="text-end text-muted" scope="row" colspan="2"></th>
                                     <td class="text-end text-uppercase"><small class="text-muted">Evaluated By<small></td>
-                                    <td class="text-end text-uppercase" colspan="2">' . $evaluator . '</td>
+                                    <td class="text-start text-uppercase" colspan="2">' . $evaluator . '</td>
                                 </tr>
                                 <tr>
                                     <td class="text-start text-success" scope="row" colspan="6">Feedback</td>
@@ -394,10 +394,22 @@
                         </tr>';
                     }
                     ?>
-                    <script>
+                    <script>    
                         // adjust the height of the specific textarea based on its content
                         $(document).ready(function () {
                             let feedback = document.getElementById("Feedback");
+                            let comment = document.getElementById("Comments");
+
+                            if (comment) {
+                                // scroll height + 10px to prevent the scroll bar from showing
+                                comment.style.height = (comment.scrollHeight + 10) + "px";
+
+                                $(comment).on('input', function () {
+                                    this.style.height = 'auto';
+                                    this.style.height = (this.scrollHeight + 10) + 'px';
+                                });
+                                comment.value = "<?php echo $Comment; ?>";
+                            }
 
                             if (feedback) {
                                 // scroll height + 10px to prevent the scroll bar from showing
@@ -410,7 +422,6 @@
                                 
                             }
                         });
-
                     </script>
                 </tfoot>
             </table>

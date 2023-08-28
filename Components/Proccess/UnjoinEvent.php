@@ -26,25 +26,21 @@ if (mysqli_num_rows($result) > 0) {
     $interval = $date1->diff($date2);
     $nonZeroComponents = [];
 
-    // Check and add non-zero components to the array
-    if ($interval->format('%H') > 0) {
-        $nonZeroComponents[] = $interval->format('%H hours');
-    }
-    if ($interval->format('%I') > 0) {
-        $nonZeroComponents[] = $interval->format('%I minutes');
-    }
-    if ($interval->format('%S') > 0) {
-        $nonZeroComponents[] = $interval->format('%S seconds');
-    }
-
-    $remaining_time = implode(', ', $nonZeroComponents);
-    $_SESSION['remaining_time'] = $remaining_time;
-
-
-
-    echo "<script>console.log('Debug Objects: " . $remaining_time . "' );</script>";
-
     if ($current_date == $completion_date) {
+
+        // Check and add non-zero components to the array
+        if ($interval->format('%H') > 0) {
+            $nonZeroComponents[] = $interval->format('%h hours');
+        }
+        if ($interval->format('%I') > 0) {
+            $nonZeroComponents[] = $interval->format('%i minutes');
+        }
+        if ($interval->format('%S') > 0) {
+            $nonZeroComponents[] = $interval->format('%s seconds');
+        }
+
+        $remaining_time = implode(', ', $nonZeroComponents);
+        $_SESSION['remaining_time'] = $remaining_time;
         header("Location: ../../User/UserDashboard.php");
     } else {
         $sql = "UPDATE tbl_events SET eventSlots = eventSlots + 1 WHERE EventID = '$EventID'";

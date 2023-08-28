@@ -30,7 +30,7 @@ function Document_upload($DocumentType, $FromInput, $Column, $Column_Date, $Col_
     $tempfolderpath = $parentfolderpath .'/'. $DocumentType .'/'. 'temp';
     $tempname = $_SESSION['GlobalUsername'] . '_' . $DocumentType;
     $filename = randomString(5) . '_' . $tempname;
-    $extensions = ['png', 'jpg', 'jpeg', 'docx', 'pdf'];
+    $extensions = ['png', 'jpg', 'jpeg', 'pdf'];
 
     if (!file_exists($parentfolderpath)) {
         mkdir($parentfolderpath, 0777, true);
@@ -79,8 +79,8 @@ function Document_upload($DocumentType, $FromInput, $Column, $Column_Date, $Col_
             $result = mysqli_query($conn, $sql);
 
             if ($result) {
-                $_SESSION['message'] = 'The file ' . htmlspecialchars(basename($_FILES[$FromInput]['name'])) . ' has been uploaded.';
-                $_SESSION['icon'] = 'success';
+                // $_SESSION['message'] = 'The file ' . htmlspecialchars(basename($_FILES[$FromInput]['name'])) . ' has been uploaded.';
+                // $_SESSION['icon'] = 'success';
                 $_SESSION['Show'] = true;
             } else {
                 $_SESSION['message'] = 'Sorry, there was an error uploading your file.';

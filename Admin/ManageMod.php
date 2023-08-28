@@ -42,7 +42,7 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
         <div>
             <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light shadow-sm">
                 <div class="container-fluid">
-                    <a class="navbar-brand text-success" href="#">Accounts</a>
+                    <a class="navbar-brand text-success" style="cursor: pointer;">Accounts</a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                         data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
                         aria-label="Toggle navigation">
@@ -50,10 +50,12 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
                     </button>
                     <div class="collapse navbar-collapse" id="navbarNavDropdown">
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            <?php if ($_SESSION['GlobalRole'] == 'administrator') { ?>
                             <li class="nav-item" id="Tabs">
                                 <a class="nav-link" id="AdminTab" style="cursor: pointer;"
                                     href="../Admin/ManageAdmin.php">Administrator</a>
                             </li>
+                            <?php } ?>
                             <li class="nav-item">
                                 <a class="nav-link active" id="ModTab" style="cursor: pointer;">Moderator</a>
                             </li>
@@ -64,7 +66,8 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
         </div>
         <div class="container-fluid" style="width: 98%;" id="AdminTable">
             <div class="container-lg table-responsive">
-                <div class="container mt-5 rounded text-bg-light border border-1 border-success" style="min-width: fit-content;">
+                <div class="container mt-5 rounded text-bg-light border border-1 border-success"
+                    style="min-width: fit-content;">
                     <table class="table table-hover table-light align-middle caption-top" id="AccountTable">
                         <caption>
                             <div class="container-fluid">
@@ -72,16 +75,15 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
                                     <div class="col-4">
                                         <div class="input-group input-group-sm">
                                             <!-- In the future, I will add a Category Search -->
-                                            <span class="input-group-text"
-                                                title="You can search only by name">
+                                            <span class="input-group-text" title="You can search only by name">
                                                 <svg xmlns="http://www.w3.org/2000/svg" height="20"
                                                     viewBox="0 -960 960 960" width="20" fill="var(--bs-success)">
                                                     <path
                                                         d="M382.122-330.5q-102.187 0-173.861-71.674Q136.587-473.848 136.587-576q0-102.152 71.674-173.826Q279.935-821.5 382.087-821.5q102.152 0 173.826 71.674 71.674 71.674 71.674 173.861 0 40.859-12.022 76.292-12.021 35.434-33.065 64.956l212.087 212.326q12.674 12.913 12.674 28.945 0 16.033-12.913 28.707-12.674 12.674-29.326 12.674t-29.326-12.674L523.848-375.587q-29.761 21.044-65.434 33.065-35.672 12.022-76.292 12.022Zm-.035-83q67.848 0 115.174-47.326Q544.587-508.152 544.587-576q0-67.848-47.326-115.174Q449.935-738.5 382.087-738.5q-67.848 0-115.174 47.326Q219.587-643.848 219.587-576q0 67.848 47.326 115.174Q314.239-413.5 382.087-413.5Z" />
                                                 </svg>
                                             </span>
-                                            <input type="search" class="form-control"
-                                                placeholder="Search by Name" id="SearchBar">
+                                            <input type="search" class="form-control" placeholder="Search by Name"
+                                                id="SearchBar">
                                         </div>
                                     </div>
                                     <div class="col-4">
@@ -265,6 +267,7 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
                                                               timer: 1500,
                                                           });
                                                       }
+                                                    });
                                             }
                                           });
                                         ViewAccount[' . ($i - 1) . '].addEventListener("click", () => {
@@ -328,14 +331,56 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
                                                     text: "You won\'t be able to revert this!",
                                                     icon: "warning",
                                                     showCancelButton: true,
-                                                    confirmButtonColor: "#3085d6",
-                                                    cancelButtonColor: "#d33",
+                                                    confirmButtonColor: "#d33",
+                                                    cancelButtonColor: "#3085d6",
                                                     confirmButtonText: "Yes, delete it!",
                                                     background: "#fff",
                                                     color: "#000",
                                                 }).then((result) => {
                                                     if (result.isConfirmed) {
-                                                        window.location.href = "../Components/Proccess/Delete.php?ID=' . $row['UID'] . '&username=' . $row['admin_uname'] . '";
+                                                        Swal.fire({
+                                                            text: "Confirm your password first before you can proceed.",
+                                                            input: "password",
+                                                            inputAttributes: {
+                                                              autocapitalize: "off",
+                                                              placeholder: "Enter your password",
+                                                            },
+                                                            showCancelButton: false,
+                                                            confirmButtonText: "Confirm",
+                                                            showLoaderOnConfirm: true,
+                                                            preConfirm: async () => {
+                                                              try {
+                                                                const password = Swal.getInput().value; // Get the password from the input field
+                                                                const response = await fetch("../Components/Proccess/PasswordConfirmation.php?password=" + password);
+                                                        
+                                                                if (!response.ok) {
+                                                                  throw new Error(response.statusText);
+                                                                }
+                                                        
+                                                                return response.json();
+                                                              } catch (error) {
+                                                                Swal.showValidationMessage(`Request failed: ${error}`);
+                                                              }
+                                                            },
+                                                            allowOutsideClick: () => !Swal.isLoading(),
+                                                            background: "#fff",
+                                                            color: "#000",
+                                                          }).then((result) => {
+                                                            if (result.isConfirmed && result.value.valid) {
+                                                                window.location.href = "../Components/Proccess/Delete.php?ID=' . $row['UID'] . '&username=' . $row['admin_uname'] . '";
+                                                              } else if (result.isConfirmed && !result.value.valid) {
+                                                                  Swal.fire({
+                                                                      icon: "error",
+                                                                      title: "Oops...",
+                                                                      text: "You entered an incorrect password!",
+                                                                      background: "#fff",
+                                                                      color: "#000",
+                                                                      showConfirmButton: false,
+                                                                      timer: 1500,
+                                                                  });
+                                                              } else if (result.isDismissed) {
+                                                              }
+                                                            });
                                                     }
                                                 });
                                             });
@@ -360,7 +405,7 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
             </div>
         </div>
     </section>
-
+    
 </body>
 
 </html>

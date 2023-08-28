@@ -65,7 +65,7 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
     if (isset($ShowAlert)) {
         echo NewAlertBox();
         $_SESSION['Show'] = false;
-    } 
+    }
     if (isset($_SESSION['remaining_time']) && $_SESSION['remaining_time'] != null) {
         echo "<script>swal.fire({
             icon: 'info',
@@ -78,72 +78,89 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
         unset($_SESSION['remaining_time']);
     }
     ?>
-
     <section class="home">
         <div class="text">Dashboard</div>
-        <div class="content" style="margin: 10px; width: 98%;">
-            <?php
-            @include_once '../Components/Announcement.php';
-            @include_once '../Components/Modals/AdminEventModal.php';
-            ?>
-            <div class="row">
-                <div class="col-sm-8">
-                    <div class="card h-100">
-                        <div class="card-header">
-                            Program Joined
+        <div class="container-xl">
+            <div class="content">
+                <?php
+                @include_once '../Components/Announcement.php';
+                @include_once '../Components/Modals/AdminEventModal.php';
+                ?>
+                <div class="row row-cols-1 g-4">
+                    <div class="col-md-4" hidden>
+                        <!-- calendar -->
+                        <div class="card h-100 border border-success shadow-lg user-select-none">
+                            <div class="card-header">
+                                Calendar
+                            </div>
+                            <div class="card-body">
+                                <div id="calendar"></div>
+                            </div>
                         </div>
-                        <?php
-                        $id = $_SESSION['GlobalID'];
-                        $sql = "SELECT program, prog_duration, fulfilled_time FROM tbl_trainee WHERE UID = '$id'";
-                        $result = mysqli_query($conn, $sql);
-                        $row = mysqli_fetch_assoc($result);
-                        $program = $row['program'];
-                        $duration = $row['prog_duration'];
-                        $fulfilled = $row['fulfilled_time'];
-
-                        if (isset($program)) {
-                            $sql = "SELECT * FROM tbl_programs WHERE progID = '$id'";
+                    </div>
+                    <div class="col-md-4" hidden>
+                        sdasdasd
+                    </div>
+                    <div class="col-md-4" hidden>
+                        sdasdasd
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card h-100 border border-success shadow-lg user-select-none">
+                            <div class="card-header">
+                                Program Joined
+                            </div>
+                            <?php
+                            $id = $_SESSION['GlobalID'];
+                            $sql = "SELECT program, prog_duration, fulfilled_time FROM tbl_trainee WHERE UID = '$id'";
                             $result = mysqli_query($conn, $sql);
                             $row = mysqli_fetch_assoc($result);
+                            $program = $row['program'];
+                            $duration = $row['prog_duration'];
+                            $fulfilled = $row['fulfilled_time'];
 
-                            $current_date = date("Y-m-d");
-                            $start_date = $row['start_date'];
-                            $end_date = $row['end_date'];
-
-                            $start_datetime = new DateTime($start_date);
-                            $end_datetime = new DateTime($end_date);
-                            $current_datetime = new DateTime($current_date);
-
-                            $total_duration = $start_datetime->diff($end_datetime)->format('%a');
-                            $elapsed_duration = $start_datetime->diff($current_datetime)->format('%a');
-                            $percentage = ($elapsed_duration / $total_duration) * 100;
-                            $percentage = round($percentage, 0);
-
-                            if ($percentage >= 100) {
-                                $_SESSION['GlobalPercentage'] = 100;
-                            } else {
-                                $_SESSION['GlobalPercentage'] = $percentage;
-                            }
-
-                            if ($current_date >= $row['end_date']) {
-                                $sql = "UPDATE tbl_trainee SET completed = 'true' WHERE UID = '$id'";
+                            if (isset($program)) {
+                                $sql = "SELECT * FROM tbl_programs WHERE progID = '$id'";
                                 $result = mysqli_query($conn, $sql);
-                                $_SESSION['GlobalCompleted'] = 'true';
-                            }
+                                $row = mysqli_fetch_assoc($result);
 
-                            $startdate = date("F j, Y", strtotime($row['start_date']));
-                            $enddate = date("F j, Y", strtotime($row['end_date']));
-                            $start = date("g:i A", strtotime($row['start_time']));
-                            $end = date("g:i A", strtotime($row['end_time']));
+                                $current_date = date("Y-m-d");
+                                $start_date = $row['start_date'];
+                                $end_date = $row['end_date'];
 
-                            if (isset($_SESSION['GlobalCompleted']) && $_SESSION['GlobalCompleted'] == 'true') {
-                                $Progoutput =
-                                    '<div class="card-body">
+                                $start_datetime = new DateTime($start_date);
+                                $end_datetime = new DateTime($end_date);
+                                $current_datetime = new DateTime($current_date);
+
+                                $total_duration = $start_datetime->diff($end_datetime)->format('%a');
+                                $elapsed_duration = $start_datetime->diff($current_datetime)->format('%a');
+                                $percentage = ($elapsed_duration / $total_duration) * 100;
+                                $percentage = round($percentage, 0);
+
+                                if ($percentage >= 100) {
+                                    $_SESSION['GlobalPercentage'] = 100;
+                                } else {
+                                    $_SESSION['GlobalPercentage'] = $percentage;
+                                }
+
+                                if ($current_date >= $row['end_date']) {
+                                    $sql = "UPDATE tbl_trainee SET completed = 'true' WHERE UID = '$id'";
+                                    $result = mysqli_query($conn, $sql);
+                                    $_SESSION['GlobalCompleted'] = 'true';
+                                }
+
+                                $startdate = date("F j, Y", strtotime($row['start_date']));
+                                $enddate = date("F j, Y", strtotime($row['end_date']));
+                                $start = date("g:i A", strtotime($row['start_time']));
+                                $end = date("g:i A", strtotime($row['end_time']));
+
+                                if (isset($_SESSION['GlobalCompleted']) && $_SESSION['GlobalCompleted'] == 'true') {
+                                    $Progoutput =
+                                        '<div class="card-body">
                                         Program has been completed.
                                     </div>';
-                            } else {
-                                $Progoutput =
-                                    '<div class="card-body">
+                                } else {
+                                    $Progoutput =
+                                        '<div class="card-body">
                             <h5 class="card-title">' . $row['title'] . '</h5>
                             <p class="card-text">Duration: ' . $row['Duration'] . ' Weeks</p>
                             <p class="card-text">Start and End Date: ' . $startdate . ' - ' . $enddate . '</p>
@@ -160,65 +177,65 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
                                     aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">' . $percentage . '%</div>
                             </div>
                             </div>';
-                            }
-                        } else {
-                            $Progoutput =
-                                '<div class="card-body">
+                                }
+                            } else {
+                                $Progoutput =
+                                    '<div class="card-body">
                             No program joined yet.
                             </div>';
-                        }
+                            }
 
-                        echo $Progoutput;
-                        ?>
-                    </div>
-                </div>
-                <div class="col-sm-4">
-                    <div class="card h-100 card border-success mb-3">
-                        <div class="card-header">
-                            Events Joined
+                            echo $Progoutput;
+                            ?>
                         </div>
-                        <?php
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card h-100 card border-success mb-3">
+                            <div class="card-header">
+                                Events Joined
+                            </div>
+                            <?php
 
-                        $id = $_SESSION['GlobalID'];
-                        $sql = "SELECT EventID, Join_an_Event FROM tbl_trainee WHERE UID = '$id'";
-                        $result = mysqli_query($conn, $sql);
-                        $row = mysqli_fetch_assoc($result);
-                        $eventID = $row['EventID'];
-                        $join = $row['Join_an_Event'];
-
-                        if ($join == 1) {
-                            $sql = "SELECT * FROM tbl_events WHERE eventID = '$eventID'";
+                            $id = $_SESSION['GlobalID'];
+                            $sql = "SELECT EventID, Join_an_Event FROM tbl_trainee WHERE UID = '$id'";
                             $result = mysqli_query($conn, $sql);
                             $row = mysqli_fetch_assoc($result);
-                            $currentdate = date("Y-m-d");
+                            $eventID = $row['EventID'];
+                            $join = $row['Join_an_Event'];
 
-                            if ($row['eventEnded'] == 'true') {
-                                $sql = "UPDATE tbl_trainee SET Join_an_Event = 0 WHERE UID = '$id'";
-                                mysqli_query($conn, $sql);
-                                $_SESSION['GlobalJoin_an_Event'] = 0;
+                            if ($join == 1) {
+                                $sql = "SELECT * FROM tbl_events WHERE eventID = '$eventID'";
+                                $result = mysqli_query($conn, $sql);
+                                $row = mysqli_fetch_assoc($result);
+                                $currentdate = date("Y-m-d");
 
-                                echo
-                                    '<div class="card-body">
+                                if ($row['eventEnded'] == 'true') {
+                                    $sql = "UPDATE tbl_trainee SET Join_an_Event = 0 WHERE UID = '$id'";
+                                    mysqli_query($conn, $sql);
+                                    $_SESSION['GlobalJoin_an_Event'] = 0;
+
+                                    echo
+                                        '<div class="card-body">
                                         <h5 class="card-title"></h5>
                                         <p class="card-text">No event joined yet.</p>
                                         <p class="card-text"></p>
                                         <p class="card-text" style="font-size: 14px;"></p>
                                         <small class="text-muted"></small>
                                     </div>';
-                            } else {
-                                $start = date("g:i A", strtotime($row['eventStartTime']));
-                                $end = date("g:i A", strtotime($row['eventEndTime']));
-                                $date = date("F j, Y", strtotime($row['eventDate']));
-                                $comp = date("F j, Y", strtotime($row['eventCompletion']));
-
-                                if ($date == $comp) {
-                                    $datecomp = '';
                                 } else {
-                                    $datecomp = ' - ' . $comp;
-                                }
+                                    $start = date("g:i A", strtotime($row['eventStartTime']));
+                                    $end = date("g:i A", strtotime($row['eventEndTime']));
+                                    $date = date("F j, Y", strtotime($row['eventDate']));
+                                    $comp = date("F j, Y", strtotime($row['eventCompletion']));
 
-                                echo
-                                    '<div class="card-body">
+                                    if ($date == $comp) {
+                                        $datecomp = '';
+                                    } else {
+                                        $datecomp = ' - ' . $comp;
+                                    }
+
+                                    echo
+                                        '<div class="card-body">
                                         <h5 class="card-title">' . $row['eventTitle'] . '</h5>
                                         <p class="card-text">' . $date . ' <small class="text-muted">' . $datecomp . '</small></p>
                                         <p class="card-text">' . $row['eventLocation'] . '</p>
@@ -231,69 +248,69 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
                                     </div>
                                     
                                     ';
-                            }
-                        } else {
-                            echo
-                                '<div class="card-body">
+                                }
+                            } else {
+                                echo
+                                    '<div class="card-body">
                                         <h5 class="card-title"></h5>
                                         <p class="card-text">No event joined yet.</p>
                                         <p class="card-text"></p>
                                         <p class="card-text" style="font-size: 14px;"></p>
                                         <small class="text-muted"></small>
                                     </div>';
-                        }
-                        ?>
+                            }
+                            ?>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="text">Events</div>
-            <div class="container-lg">
-                <div class="row row-cols-1 row-cols-md-3 g-4">
-                    <?php
-                    $sql = "SELECT * FROM tbl_events WHERE eventEnded = 'false' ORDER BY eventDate ASC";
-                    $result = mysqli_query($conn, $sql);
+                <div class="text">Events</div>
+                <div class="container-lg">
+                    <div class="row row-cols-1 row-cols-md-3 g-4">
+                        <?php
+                        $sql = "SELECT * FROM tbl_events WHERE eventEnded = 'false' ORDER BY eventDate ASC";
+                        $result = mysqli_query($conn, $sql);
 
-                    if (mysqli_num_rows($result) > 0) {
-                        $i = 1;
-                        while ($row = mysqli_fetch_assoc($result)) {
+                        if (mysqli_num_rows($result) > 0) {
+                            $i = 1;
+                            while ($row = mysqli_fetch_assoc($result)) {
 
-                            $start = date("g:i A", strtotime($row['eventStartTime']));
-                            $end = date("g:i A", strtotime($row['eventEndTime']));
-                            $date = date("F j, Y", strtotime($row['eventDate']));
-                            $comdate = date("F j, Y", strtotime($row['eventCompletion']));
+                                $start = date("g:i A", strtotime($row['eventStartTime']));
+                                $end = date("g:i A", strtotime($row['eventEndTime']));
+                                $date = date("F j, Y", strtotime($row['eventDate']));
+                                $comdate = date("F j, Y", strtotime($row['eventCompletion']));
 
-                            // if date and completion date is the same, then it is a one day event
-                            if ($date == $comdate) {
-                                $comdate = '';
-                            } else {
-                                $comdate = ' - ' . $comdate;
-                            }
+                                // if date and completion date is the same, then it is a one day event
+                                if ($date == $comdate) {
+                                    $comdate = '';
+                                } else {
+                                    $comdate = ' - ' . $comdate;
+                                }
 
-                            $desc = $row['eventDescription'];
-                            $desc = substr($desc, 0, 100);
-                            $desc = $desc . '...';
+                                $desc = $row['eventDescription'];
+                                $desc = substr($desc, 0, 100);
+                                $desc = $desc . '...';
 
-                            if ($row['eventEnded'] == 'true') {
-                                $status = 'Ended';
-                            } else {
-                                $status = 'Ongoing';
-                            }
+                                if ($row['eventEnded'] == 'true') {
+                                    $status = 'Ended';
+                                } else {
+                                    $status = 'Ongoing';
+                                }
 
-                            // get how many days from the current date to the event date
-                            $currentDate = date("Y-m-d");
-                            $eventDate = $row['eventCreated'];
-                            $diff = abs(strtotime($eventDate) - strtotime($currentDate));
-                            $days = floor($diff / (60 * 60 * 24));
+                                // get how many days from the current date to the event date
+                                $currentDate = date("Y-m-d");
+                                $eventDate = $row['eventCreated'];
+                                $diff = abs(strtotime($eventDate) - strtotime($currentDate));
+                                $days = floor($diff / (60 * 60 * 24));
 
-                            // if the event is less than 3 days, add a new badge
-                            if ($days <= 3) {
-                                $badge = '<span class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle" title="Newly Added Event!"><span class="visually-hidden">New Event</span></span>';
-                            } else {
-                                $badge = '';
-                            }
+                                // if the event is less than 3 days, add a new badge
+                                if ($days <= 3) {
+                                    $badge = '<span class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle" title="Newly Added Event!"><span class="visually-hidden">New Event</span></span>';
+                                } else {
+                                    $badge = '';
+                                }
 
-                            $output =
-                                '<div class="col">
+                                $output =
+                                    '<div class="col">
                                     <div class="position-relative">
                                         <div class="card h-100 border border-success shadow-lg user-select-none">
                                         <img src="' . $row['eventImage'] . '" class="card-img-top" style="object-fit: cover; aspect-ratio: 16/9;" alt="...">
@@ -308,16 +325,16 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
                                                 <div class="card-footer text-center">
                                     <!-- if the user is already registered, the button should be disabled -->
                                     ';
-                            echo $output;
-                            if ($_SESSION['GlobalJoin_an_Event'] == 1 || $row['eventSlots'] == 0 || $row['eventEnded'] == 'true') {
-                                echo '<a class="btn btn-success" hidden>Register</a>
+                                echo $output;
+                                if ($_SESSION['GlobalJoin_an_Event'] == 1 || $row['eventSlots'] == 0 || $row['eventEnded'] == 'true') {
+                                    echo '<a class="btn btn-success" hidden>Register</a>
                                                 </div>
                                             </div>
                                     ' . $badge . '
                                     </div>
                                 </div>';
-                            } else {
-                                echo '<a href="../Components/eventprocess.php?ID=' . $row['eventID'] . '" class="btn btn-success">Register</a>
+                                } else {
+                                    echo '<a href="../Components/eventprocess.php?ID=' . $row['eventID'] . '" class="btn btn-success">Register</a>
                                     <a id="viewEvent' . $i . '" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#UserEvent">View</a>
                                 </div>
                             </div>
@@ -351,23 +368,23 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
                     });
                     </script>
                     ';
-                                $i++;
+                                    $i++;
+                                }
                             }
-                        }
 
-                    } else {
-                        echo '
+                        } else {
+                            echo '
                     <div class="content d-flex justify-content-center" style="margin: 10px; width: 98%;">
                         No Events Available
                     </div>';
-                    }
-                    ;
-                    ?>
+                        }
+                        ;
+                        ?>
                     </div>
                 </div>
                 <br>
             </div>
-
+        </div>
     </section>
     <script src="../Script/SidebarScript.js"></script>
     <script src="../Script/Bootstrap_Script/bootstrap.bundle.js"></script>

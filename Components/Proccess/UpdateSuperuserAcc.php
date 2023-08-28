@@ -40,9 +40,9 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
         //format last login date and time
         $lastlogin = date("F j, Y, g:i a", strtotime($lastlogin));
         if ($status == 1) {
-            $status = "<span class='text-success'>Online</span>";
+            $status = "<span class='text-light'>Online</span>";
         } else {
-            $status = "<span class='text-danger'>Offline</span>";
+            $status = "<span class='text-light'>Offline</span>";
         }
 
     } else {
@@ -142,58 +142,58 @@ if (isset($_POST['update'])) {
                             class="img-fluid m-1 rounded"
                             style="min-height: 256px; min-width: 256px; max-height: 256px; max-width: 256px;">
                     </li>
-                    <li
-                        class="list-group-item d-flex justify-content-between align-items-center text-muted" style="background: linear-gradient(to right, #2a9134 1%,#3fa34d 53%,#2a9134 100%)">
+                    <li class="list-group-item d-flex justify-content-between align-items-center text-muted"
+                        style="background: linear-gradient(to right, #2a9134 1%,#3fa34d 53%,#2a9134 100%)">
                         <span class="text-light user-select-none">Name:</span>
                         <span class="text-end text-light user-select-none">
                             <?php echo isset($name) ? $name : "Not Available"; ?>
                         </span>
                     </li>
-                    <li
-                        class="list-group-item d-flex justify-content-between align-items-center text-muted" style="background: linear-gradient(to left, #2a9134 1%,#3fa34d 53%,#2a9134 100%)">
+                    <li class="list-group-item d-flex justify-content-between align-items-center text-muted"
+                        style="background: linear-gradient(to left, #2a9134 1%,#3fa34d 53%,#2a9134 100%)">
                         <span class="text-light user-select-none">Email Address:</span>
                         <span class="text-end text-light user-select-none">
                             <?php echo isset($email) ? $email : "Not Available"; ?>
                         </span>
                     </li>
-                    <li
-                        class="list-group-item d-flex justify-content-between align-items-center text-muted" style="background: linear-gradient(to right, #2a9134 1%,#3fa34d 53%,#2a9134 100%)">
+                    <li class="list-group-item d-flex justify-content-between align-items-center text-muted"
+                        style="background: linear-gradient(to right, #2a9134 1%,#3fa34d 53%,#2a9134 100%)">
                         <span class="text-light user-select-none">Username:</span>
                         <span class="text-end text-light user-select-none">
                             <?php echo isset($username) ? $username : "Not Available"; ?>
                         </span>
                     </li>
-                    <li
-                        class="list-group-item d-flex justify-content-between align-items-center text-muted" style="background: linear-gradient(to left, #2a9134 1%,#3fa34d 53%,#2a9134 100%)">
+                    <li class="list-group-item d-flex justify-content-between align-items-center text-muted"
+                        style="background: linear-gradient(to left, #2a9134 1%,#3fa34d 53%,#2a9134 100%)">
                         <span class="text-light user-select-none">Department:</span>
                         <span class="text-end text-light user-select-none">
                             <?php echo isset($department) ? $department : "Not Available"; ?>
                         </span>
                     </li>
-                    <li
-                        class="list-group-item d-flex justify-content-between align-items-center text-muted " style="background: linear-gradient(to right, #2a9134 1%,#3fa34d 53%,#2a9134 100%)">
+                    <li class="list-group-item d-flex justify-content-between align-items-center text-muted "
+                        style="background: linear-gradient(to right, #2a9134 1%,#3fa34d 53%,#2a9134 100%)">
                         <span class="text-light user-select-none">Date Created:</span>
                         <span class="text-end text-light user-select-none">
                             <?php echo isset($datecreated) ? $datecreated : "Not Available"; ?>
                         </span>
                     </li>
-                    <li
-                        class="list-group-item d-flex justify-content-between align-items-center text-muted" style="background: linear-gradient(to left, #2a9134 1%,#3fa34d 53%,#2a9134 100%)">
+                    <li class="list-group-item d-flex justify-content-between align-items-center text-muted"
+                        style="background: linear-gradient(to left, #2a9134 1%,#3fa34d 53%,#2a9134 100%)">
                         <span class="text-light user-select-none">Last Login:</span>
                         <span class="text-end text-light user-select-none">
                             <?php echo isset($lastlogin) ? $lastlogin : "Not Available"; ?>
                         </span>
                     </li>
-                    <li
-                        class="list-group-item d-flex justify-content-between align-items-center text-muted" style="background: linear-gradient(to right, #2a9134 1%,#3fa34d 53%,#2a9134 100%)">
+                    <li class="list-group-item d-flex justify-content-between align-items-center text-muted"
+                        style="background: linear-gradient(to right, #2a9134 1%,#3fa34d 53%,#2a9134 100%)">
                         <span class="text-light user-select-none">Account Type:</span>
                         <span class="text-end text-light user-select-none">
                             <?php echo isset($position) ? $position : "Not Available"; ?>
                         </span>
                     </li>
-                    <li
-                        class="list-group-item d-flex justify-content-between align-items-center text-muted text-bg-dark">
-                        Current Status
+                    <li class="list-group-item d-flex justify-content-between align-items-center text-muted"
+                        style="background: linear-gradient(to right, #2a9134 1%,#3fa34d 53%,#2a9134 100%)">
+                        <span class="text-light user-select-none">Current Status:</span>
                         <span class="text-end text-light user-select-none text">
                             <?php echo isset($status) ? $status : "Not Available"; ?>
                         </span>
@@ -360,27 +360,39 @@ if (isset($_POST['update'])) {
                 <form action="../Proccess/update.php" method="POST" enctype="multipart/form-data">
                     <input type="hidden" name="id" value="<?php echo $UserID; ?>">
                     <div class="input-group mb-3">
-                        <span class="input-group-text w-25 text-bg-success">Name:</span>
+                        <span style="max-width: 140px; min-width: 140px;" class="input-group-text w-25 text-bg-success">Name:</span>
                         <input type="text" class="form-control" name="upname" id="upname"
                             value="<?php echo isset($name) ? $name : "Not Available"; ?>" required>
                     </div>
                     <div class="input-group mb-3">
-                        <span class="input-group-text text-bg-success w-25">Email:</span>
+                        <span style="max-width: 140px; min-width: 140px;" class="input-group-text text-bg-success w-25">Email:</span>
                         <input type="text" class="form-control" name="upemail" id="upemail"
                             value="<?php echo isset($email) ? $email : "Not Available"; ?>" required>
                     </div>
                     <div class="input-group mb-3">
-                        <span class="input-group-text text-bg-success w-25">Username:</span>
+                        <span style="max-width: 140px; min-width: 140px;" class="input-group-text text-bg-success w-25">Username:</span>
                         <input type="text" class="form-control" name="upusername" id="upusername"
                             value="<?php echo isset($username) ? $username : "Not Available"; ?>" required>
                     </div>
                     <div class="input-group mb-3">
-                        <span class="input-group-text text-bg-success w-25">Password:</span>
-                        <input type="text" class="form-control" name="uppassword" id="uppassword"
+                        <span style="max-width: 140px; min-width: 140px;" class="input-group-text text-bg-success w-25">Password: <input class="form-check-input mt-0 mx-2" type="checkbox" id="showpass"></span>
+                        <input type="password" class="form-control" name="uppassword" id="uppassword"
                             value="<?php echo isset($password) ? $password : "Not Available"; ?>" required>
+                        <script>
+                            let showpass = document.getElementById("showpass");
+                            showpass.checked = false;
+
+                            showpass.addEventListener("click", function () {
+                                if (showpass.checked) {
+                                    uppassword.type = "text";
+                                } else {
+                                    uppassword.type = "password";
+                                }
+                            });
+                        </script>
                     </div>
                     <div class="input-group mb-3">
-                        <span class="input-group-text text-bg-success w-25">Department:</span>
+                        <span style="max-width: 140px; min-width: 140px;" class="input-group-text text-bg-success w-25">Department:</span>
                         <select name="updepartment" class="form-select" id="updepartment" required>
                             <option value="BSIT" <?php if ($department === "BSIT")
                                 echo "selected"; ?>>
@@ -390,7 +402,7 @@ if (isset($_POST['update'])) {
                         </select>
                     </div>
                     <div class="input-group mb-3">
-                        <span class="input-group-text text-bg-success w-25">Position:</span>
+                        <span style="max-width: 140px; min-width: 140px;" class="input-group-text text-bg-success w-25">Position:</span>
                         <select name="upposition" class="form-select" id="upposition" required>
                             <option value="administrator" <?php if ($position === "administrator")
                                 echo "selected"; ?>>
@@ -401,7 +413,7 @@ if (isset($_POST['update'])) {
                         </select>
                     </div>
                     <div class="input-group mb-3">
-                        <span class="input-group-text text-bg-success w-25">Image:</span>
+                        <span style="max-width: 140px; min-width: 140px;" class="input-group-text text-bg-success w-25">Image:</span>
                         <input type="file" class="form-control" name="upimage" id="upimage"
                             accept="jpg, jpeg, png, gif">
                     </div>

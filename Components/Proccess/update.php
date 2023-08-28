@@ -33,6 +33,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $uppassword = $_POST['uppassword'];
     $updepartment = $_POST['updepartment'];
     $upposition = $_POST['upposition'];
+    $tempPass = $_SESSION['GlobalPassword'];
 
 
     $sql = "SELECT * FROM tbl_admin WHERE UID='$UserID'";
@@ -113,11 +114,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if (move_uploaded_file($_FILES['upimage']['tmp_name'], $target_file)) {
                 $Document = $target_file;
                 $Document = substr($Document, 3);
-                $_SESSION['Profile'] = $Document;
                 $sql = "UPDATE tbl_admin SET name='$upname', admin_email='$upemail', admin_uname='$upusername', admin_pword='$uppassword', department='$updepartment', role='$upposition', imagePath='$Document' WHERE UID='$UserID'";
                 $result = mysqli_query($conn, $sql);
 
                 if ($result) {
+                    if ($tempPass != $uppassword) {
+                        $sql = "UPDATE tbl_accounts SET password='$uppassword' WHERE UID='$UserID'";
+                        mysqli_query($conn, $sql);
+                    }
                     $_SESSION['message'] = "Successfully Updated.";
                     $_SESSION['icon'] = "success";
                     $_SESSION['Show'] = true;
@@ -131,7 +135,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 }
             }
         }
-    } 
+    }
 }
 
 
