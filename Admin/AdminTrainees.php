@@ -9,7 +9,7 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
 } else {
     $ShowAlert = true;
 }
-
+$_SESSION['Statalert'] = false;
 ?>
 
 
@@ -212,6 +212,7 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
                                                     icon: "warning",
                                                     title: "Reminder",
                                                     text: "Please be reminded that you can only modify some of the information of this account.",
+                                                    allowOutsideClick: false,
                                                     background: "#fff",
                                                     color: "#000",
                                                 }).then((result) => {
@@ -259,7 +260,7 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
                                         });
 
                                         AsignAccount[' . ($i - 1) . '].addEventListener("click", () => {
-                                            window.location.href = "../Components/Program.php?id=' . $row['UID'] . '";
+                                            window.location.href = "../Components/Program.php?id=' . $row['UID'] . '&title=' . $row['program'] . '";
                                         });
 
                                     

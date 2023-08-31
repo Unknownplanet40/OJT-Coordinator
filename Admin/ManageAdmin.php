@@ -219,6 +219,7 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
                                                     text: "You cannot update an account that is currently signed in!",
                                                     background: "#fff",
                                                     color: "#000",
+                                                    allowOutsideClick: false,
                                                 });
                                             } else {
                                                 Swal.fire({
@@ -226,6 +227,7 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
                                                     title: "Confirm your password",
                                                     text: "Your are about to update an account. Verify your password first before you can proceed.",
                                                     input: "password",
+                                                    allowOutsideClick: false,
                                                     inputAttributes: {
                                                       autocapitalize: "off",
                                                       placeholder: "Enter your password",
@@ -253,6 +255,7 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
                                                   }).then((result) => {
                                                     if (result.isConfirmed && result.value.valid) {
                                                       window.location.href = "../Components/Proccess/UpdateSuperuserAcc.php?id=' . $row['UID'] . '";
+                                                    } else if (result.isDismissed) {
                                                     } else if (result.isConfirmed && !result.value.valid) {
                                                         Swal.fire({
                                                             icon: "error",
@@ -309,6 +312,7 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
                                                     text: "You cannot delete your own account!",
                                                     background: "#fff",
                                                     color: "#000",
+                                                    allowOutsideClick: false,
                                                 });
                                             });
                                         } else if (' . $row['status'] . ' == 1) {
@@ -319,6 +323,7 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
                                                     text: "You cannot delete an account that is currently signed in!",
                                                     background: "#fff",
                                                     color: "#000",
+                                                    allowOutsideClick: false,
                                                 });
                                             });
                                         } else {
@@ -332,6 +337,7 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
                                                     cancelButtonColor: "#d33",
                                                     confirmButtonText: "Yes, delete it!",
                                                     background: "#fff",
+                                                    allowOutsideClick: false,
                                                     color: "#000",
                                                 }).then((result) => {
                                                     if (result.isConfirmed) {
@@ -343,6 +349,7 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
                                                               placeholder: "Enter your password",
                                                             },
                                                             showCancelButton: true,
+                                                            allowOutsideClick: false,
                                                             confirmButtonText: "Confirm",
                                                             showLoaderOnConfirm: true,
                                                             preConfirm: async () => {
@@ -365,6 +372,7 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
                                                           }).then((result) => {
                                                             if (result.isConfirmed && result.value.valid) {
                                                                 window.location.href = "../Components/Proccess/Delete.php?ID=' . $row['UID'] . '&username=' . $row['admin_uname'] . '";
+                                                            } else if (result.isDismissed) {
                                                             } else {
                                                                 Swal.fire({
                                                                     icon: "error",
@@ -374,6 +382,7 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
                                                                     color: "#000",
                                                                     showConfirmButton: false,
                                                                     timer: 1500,
+                                                                    allowOutsideClick: false,
                                                                 });
                                                             }
                                                         });

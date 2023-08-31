@@ -24,6 +24,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION['Show'] = true;
     }
 }
+// unset all session variables that are used for resetting password
 unset($_SESSION['FPUID']);
 unset($_SESSION['FPQ1']);
 unset($_SESSION['FPQ2']);

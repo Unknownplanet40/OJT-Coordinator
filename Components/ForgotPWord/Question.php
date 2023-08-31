@@ -44,7 +44,6 @@ if (isset($_SESSION['Phase1']) && $_SESSION['Phase1'] == true) {
     <div class="d-flex justify-content-center align-items-center">
         <div class="registration-form">
             <form>
-                <!-- this function is used to send the data to the same page -->
                 <div class="form-icon">
                     <span>
                         <span>
@@ -81,11 +80,6 @@ if (isset($_SESSION['Phase1']) && $_SESSION['Phase1'] == true) {
                 </div>
 
                 <script>
-                    console.log("<?php echo $Q1; ?>");
-                    console.log("<?php echo $Q2; ?>");
-                    console.log("<?php echo $Q3; ?>");
-
-
                     const error = document.querySelector(".error");
                     const Que1 = document.querySelector("#Q1");
                     const Que2 = document.querySelector("#Q2");
@@ -98,7 +92,7 @@ if (isset($_SESSION['Phase1']) && $_SESSION['Phase1'] == true) {
                         e.preventDefault();
                         if (Que1.value == "" || Que2.value == "" || Que3.value == "") {
                             error.textContent = "Please fill all the fields";
-                        } else if (Que1.value != A1 || Que2.value != A2 || Que3.value != A3) {
+                        } else if (Que1.value != A1 && Que2.value != A2 && Que3.value != A3) {
                             error.textContent = "Please enter correct answers";
                         } else {
                             form.action = "ResetPassword.php";

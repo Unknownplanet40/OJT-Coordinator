@@ -127,9 +127,6 @@ $_SESSION['Phase1'] = false;
                 </script>
             </form>
         </div>
-        <script>
-
-        </script>
     </div>
 </body>
 

@@ -73,19 +73,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 function Greetings()
 {
-    $Greetings = array("Good day", "Good morning", "Good afternoon", "Good evening", "Good night");
-    $hour = date('h');
-    if ($hour >= 5 && $hour <= 11) {
-        return $Greetings[1];
-    } else if ($hour >= 12 && $hour <= 17) {
-        return $Greetings[2];
-    } else if ($hour >= 18 && $hour <= 20) {
-        return $Greetings[3];
-    } else if ($hour >= 21 && $hour <= 23) {
-        return $Greetings[4];
+    $Greetings = array(
+        "Good day",
+        "Good morning",
+        "Good afternoon",
+        "Good evening",
+        "Good night"
+    );
+    
+    $hour = date("H");
+
+    if ($hour >= 5 && $hour < 12) {
+        return $Greetings[1]; // Good morning (5:00 AM - 11:59 AM)
+    } elseif ($hour >= 12 && $hour < 17) {
+        return $Greetings[2]; // Good afternoon (12:00 PM - 4:59 PM)
+    } elseif ($hour >= 17 && $hour < 20) {
+        return $Greetings[3]; // Good evening (5:00 PM - 7:59 PM)
     } else {
-        return $Greetings[0];
+        return $Greetings[4]; // Good night (8:00 PM - 4:59 AM)
     }
+
 }
 
 function fetchAdminData($ID)

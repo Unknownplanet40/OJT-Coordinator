@@ -2,7 +2,6 @@
 session_start();
 @include_once("../Database/config.php");
 @include_once("../Components/PopupAlert.php");
-@include_once("../Components/ProgdataExporter.php");
 
 if (!isset($_SESSION['DatahasbeenFetched'])) {
     header("Location: ../Login.php");
@@ -12,16 +11,14 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
 
 if ($_SERVER["REQUEST_METHOD"] == "GET") {
     $ProgID = $_GET['id'];
+    $title = $_GET['title'];
 }
 
-$sql = "SELECT * FROM tbl_programs WHERE progID = $ProgID";
+$sql = "SELECT * FROM tbl_programs WHERE title = '$title'";
 $result = mysqli_query($conn, $sql);
 $row = mysqli_fetch_assoc($result);
 
 if (mysqli_num_rows($result) > 0) {
-    $_SESSION['message'] = "User Already Been Assigned a Program";
-    $_SESSION['icon'] = "info";
-    $_SESSION['Show'] = true;
     $useupdate = true;
     $hidden = "";
 
@@ -35,10 +32,14 @@ if (mysqli_num_rows($result) > 0) {
     $Super = $row['Supervisor'];
     $Hours = $row['hours'];
     $Desc = $row['description'];
+    $Template = "disabled";
+    $collapse = "show";
 
 } else {
     $useupdate = false;
     $hidden = "hidden";
+    $Template = "";
+    $collapse = "";
 }
 
 ?>
@@ -119,7 +120,55 @@ if (mysqli_num_rows($result) > 0) {
         echo NewAlertBox();
         $_SESSION['Show'] = false;
     }
+
+    $sql = "SELECT DISTINCT title, description, start_date, end_date, start_time, end_time, Duration, hours, progloc, Supervisor, ID FROM tbl_programs";
+    $result = mysqli_query($conn, $sql);
+
+    if (mysqli_num_rows($result) > 0) {
+        $filePath = '../Components/TemporaryData/Program.xml';
+
+        // Create a new XML document
+        $xml = new SimpleXMLElement('<programs></programs>');
+
+        $addedTitles = array(); // Keep track of added titles
+    
+        while ($row = mysqli_fetch_assoc($result)) {
+            $title = $row['title'];
+
+            // Check if the title has already been added
+            if (!in_array($title, $addedTitles)) {
+                $program = $xml->addChild('program');
+                $program->addChild('ID', $row['ID']);
+                $program->addChild('title', $title);
+                $program->addChild('progloc', $row['progloc']);
+                $program->addChild('start_date', $row['start_date']);
+                $program->addChild('start_time', $row['start_time']);
+                $program->addChild('end_time', $row['end_time']);
+                $program->addChild('Duration', $row['Duration']);
+                $program->addChild('end_date', $row['end_date']);
+                $program->addChild('Supervisor', $row['Supervisor']);
+                $program->addChild('hours', $row['hours']);
+                $program->addChild('description', $row['description']);
+
+                // Add the title to the list of added titles
+                $addedTitles[] = $title;
+            }
+        }
+
+        // Save the XML to the file
+        $xml->asXML($filePath);
+    }
+
     ?>
+    <script>
+        // scroll to detalye
+        $(document).ready(function () {
+            $('html, body').animate({
+                scrollTop: $('#AlreadybeenAsigned').offset().top
+            }, 'slow');
+        });
+    </script>
+
     <div class="container-lg mt-5">
         <p <?php echo $hidden; ?>>
             <button class="btn btn-primary" type="button" data-bs-toggle="collapse"
@@ -127,7 +176,7 @@ if (mysqli_num_rows($result) > 0) {
                 Show Program Details
             </button>
         </p>
-        <div class="collapse" id="AlreadybeenAsigned">
+        <div class="collapse <?php echo $collapse; ?>" id="AlreadybeenAsigned">
             <div class="card card-body bg-transparent border-0">
                 <div class="row">
                     <div class="col-md-2"></div>
@@ -203,47 +252,24 @@ if (mysqli_num_rows($result) > 0) {
                 </div>
             </div>
         </div>
-        <form hidden>
-            <div class="input-group">
-                <select class="form-select" id="Choice" name="Choice">
-                    <option selected hidden>Choose...</option>
-                    <?php
-                    $sql = "SELECT * FROM tbl_programs";
-                    $result = mysqli_query($conn, $sql);
-
-                    if (mysqli_num_rows($result) > 0) {
-                        while ($row = mysqli_fetch_assoc($result)) {
-                            $ProgID = $row['ID'];
-                            $ProgTitle = $row['title'];
-                            $ProgLocation = $row['progloc'];
-                            $ProgDate = $row['start_date'];
-                            $ProgStart = $row['start_time'];
-                            $ProgEnd = $row['end_time'];
-                            $ProgDuration = $row['Duration'];
-                            $ProgCompletion = $row['end_date'];
-                            $ProgSupervisor = $row['Supervisor'];
-                            $ProgHours = $row['hours'];
-                            $ProgDescription = $row['description'];
-                            echo "<option value='$ProgID'>$ProgTitle</option>";
-                        }
-                    } else {
-                        echo "<option value=''>No Program Found</option>";
-                    }
-                    ?>
-                </select>
-                <button class="btn btn-outline-secondary" type="button">Button</button>
-            </div>
-        </form>
     </div>
     <div class="container-lg">
         <div id="EventForm">
             <form class="row g-3 rounded mt-1" method="POST" action="../Components/Proccess/ProgInsert.php"
                 enctype="multipart/form-data">
+                <div class="col-md-4">
+                    <label for="Choice" class="form-label">Use Existing Program</label>
+                    <select class="form-select" id="Choice" name="Choice" <?php print($Template); ?>>
+                        <option value="" selected hidden>Choose...</option>
+                    </select>
+                </div>
+                <div class="col-md-8">
+                </div>
                 <div class="col-md-6">
                     <input type="hidden" name="ProgID" id="ProgID" value="<?php echo $ProgID; ?>">
                     <input type="hidden" name="useupdate" id="useupdate" value="<?php echo $useupdate; ?>">
                     <div class="form-floating mb-3 text-light">
-                        <input type="text" class="form-control" id="ProgtTitle" name="ProgTitle"
+                        <input type="text" class="form-control" id="ProgTitle" name="ProgTitle"
                             placeholder="Program Name" required>
                         <label for="ProgTitle" class="text-dark">Program Name</label>
                     </div>
@@ -258,7 +284,7 @@ if (mysqli_num_rows($result) > 0) {
                 <div class="col-md-4">
                     <div class="form-floating mb-3 text-light">
                         <input type="date" class="form-control " id="ProgDate" name="ProgDate" placeholder="Date"
-                            required min="<?php echo date('Y-m-d'); ?>">
+                            required min="<?php echo date("Y-m-d"); ?>">
                         <label for="ProgDate" class="text-dark">Start Date</label>
                     </div>
                 </div>
@@ -355,7 +381,7 @@ if (mysqli_num_rows($result) > 0) {
                     <div class="vstack gap-2">
                         <input type="submit" class="btn btn-primary mb-1 bg-gradient" name="addEvent" id="addEvent"
                             value="Submit">
-                        <input type="reset" class="btn btn-danger bg-gradient" name="resetEvent" id="resetEvent"
+                        <input type="reset" disabled class="btn btn-danger bg-gradient" name="resetEvent" id="resetEvent"
                             value="Reset">
                         <a href="../Admin/AdminTrainees.php" class="btn btn-secondary mt-1">Back</a>
                     </div>
@@ -382,6 +408,7 @@ if (mysqli_num_rows($result) > 0) {
                             let EventSlot = document.getElementById("ProgSlot");
                             let EventHours = document.getElementById("ProgHours");
                             let EventDescription = document.getElementById("ProgDescription");
+                            let reset = document.getElementById("resetEvent");
                             let error = document.querySelector(".error");
 
                             error.innerHTML = "";
@@ -438,6 +465,124 @@ if (mysqli_num_rows($result) > 0) {
                                     // set default value of EventType to Choose...
                                     EventHours.value = "Choose...";
 
+                                }
+                            });
+
+                            let choice = document.getElementById("Choice");
+                            let PID = document.getElementById("ProgID");
+                            let useupdate = document.getElementById("useupdate");
+
+                            // Fetch the XML file and add the options to the select tag
+                            fetch("../Components/TemporaryData/Program.xml")
+                                .then(response => response.text())
+                                .then(data => {
+                                    let parser = new DOMParser();
+                                    let xml = parser.parseFromString(data, "application/xml");
+                                    let programs = xml.getElementsByTagName("program");
+                                    let options = "";
+                                    for (let i = 0; i < programs.length; i++) {
+                                        let title = programs[i].getElementsByTagName("title")[0].childNodes[0].nodeValue;
+                                        let id = programs[i].getElementsByTagName("ID")[0].childNodes[0].nodeValue;
+                                        let endDate = programs[i].getElementsByTagName("end_date")[0].childNodes[0].nodeValue;
+                                        let now = new Date();
+                                        // check if the end date is near like 3 week or less, then disable it
+                                        let end = new Date(endDate);
+                                        let diff = end - now;
+                                        // calculate the difference between end date and today's date
+                                        let days = diff / (1000 * 60 * 60 * 24);
+                                        days = Math.round(days);
+                                        console.log("Debug object: " + id + " " + title + " " + days + " days left");
+                                        if (days <= 21 && days > 1) {
+                                            options += `<option value="${id}" disabled class="text-warning">${title} - Less than 3 weeks left</option>`;
+                                        } else if (days <= 0) {
+                                            options += `<option value="${id}" disabled class="text-danger">${title} - Program Ended</option>`;
+                                        } else if (days == 1) {
+                                            options += `<option value="${id}" disabled class="text-warning">${title} - 1 day left</option>`;
+                                        } else {
+                                            options += `<option value="${id}">${title}</option>`;
+                                        }
+                                    }
+                                    // add the options to the select tag
+                                    choice.innerHTML += options;
+                                });
+
+                            // if option is selected then show the details of the program in the form
+                            choice.addEventListener("change", function () {
+                                // Get the selected option value
+                                let selectedValue = choice.value;
+
+                                let today = new Date();
+
+                                // Fetch the XML file again and find the selected program's details
+                                fetch("../Components/TemporaryData/Program.xml")
+                                    .then(response => response.text())
+                                    .then(data => {
+                                        let parser = new DOMParser();
+                                        let xml = parser.parseFromString(data, "application/xml");
+                                        let programs = xml.getElementsByTagName("program");
+                                        for (let i = 0; i < programs.length; i++) {
+                                            // Get the program details and update your form fields
+                                            let id = programs[i].getElementsByTagName("ID")[0].childNodes[0].nodeValue;
+                                            let title = programs[i].getElementsByTagName("title")[0].childNodes[0].nodeValue;
+                                            let progloc = programs[i].getElementsByTagName("progloc")[0].childNodes[0].nodeValue;
+                                            let start_date = programs[i].getElementsByTagName("start_date")[0].childNodes[0].nodeValue;
+                                            let start_time = programs[i].getElementsByTagName("start_time")[0].childNodes[0].nodeValue;
+                                            let end_time = programs[i].getElementsByTagName("end_time")[0].childNodes[0].nodeValue;
+                                            let Duration = programs[i].getElementsByTagName("Duration")[0].childNodes[0].nodeValue;
+                                            let end_date = programs[i].getElementsByTagName("end_date")[0].childNodes[0].nodeValue;
+                                            let Supervisor = programs[i].getElementsByTagName("Supervisor")[0].childNodes[0].nodeValue;
+                                            let hours = programs[i].getElementsByTagName("hours")[0].childNodes[0].nodeValue;
+                                            let description = programs[i].getElementsByTagName("description")[0].childNodes[0].nodeValue;
+
+                                            // if option is selected then show the details of the program in the form
+                                            if (id === selectedValue) {
+                                                // Update your form fields with the program details
+                                                EventTitle.value = title;
+                                                EventLocation.value = progloc;
+                                                EventDate.value = start_date;
+                                                EventStart.value = start_time;
+                                                EventEnd.value = end_time;
+                                                EventType.value = Duration;
+                                                EventCompletion.value = end_date;
+                                                EventOrganizer.value = Supervisor;
+                                                EventHours.value = hours;
+                                                EventDescription.value = description;
+                                                reset.disabled = false;
+
+                                                // set min date of EventDate to start_date
+                                                EventDate.setAttribute("min", start_date); // this will prevent user to select past date & validation compatibility
+
+                                                console.log(id);
+                                                console.log(title);
+                                                console.log(progloc);
+                                                console.log(start_date);
+                                                console.log(start_time);
+                                                console.log(end_time);
+                                                console.log(Duration);
+                                                console.log(end_date);
+                                                console.log(Supervisor);
+                                                console.log(hours);
+                                                console.log(description);
+                                            }
+                                        }
+                                    }).catch(error => {
+                                        console.error("Error fetching or parsing XML data:", error);
+                                    });
+
+                                // Clear the form fields if no option is selected
+                                if (!selectedValue) {
+                                    EventTitle.value = "";
+                                    EventLocation.value = "";
+                                    EventDate.value = "";
+                                    EventStart.value = "";
+                                    EventEnd.value = "";
+                                    EventType.value = "Choose...";
+                                    EventCompletion.value = "";
+                                    EventOrganizer.value = "";
+                                    EventHours.value = "";
+                                    EventDescription.value = "";
+                                    EventDate.setAttribute("min", today);
+                                    reset.disabled = true;
                                 }
                             });
                         });

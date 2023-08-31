@@ -17,7 +17,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $Desc = $_POST['ProgDescription'];
     $ID = $_POST['ProgID'];
     $type = $_POST['useupdate'];
-
+    $autofill = $_POST['Choice'];
+    
     if ($type == true) {
         $sql = "UPDATE tbl_programs SET title = '$Title', description = '$Desc', start_date = '$Date', end_date = '$Comp', progloc = '$Location', hours = '$Hours', start_time = '$From', end_time = '$To', Duration = '$Duration', Supervisor = '$Super' WHERE progID = $ID";
     } else {
@@ -34,16 +35,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION['Show'] = true;
             header("Location: ../../Admin/AdminTrainees.php");
         } else {
-            $_SESSION['message'] = "Error: " . $sql . "<br>" . mysqli_error($conn);
+            $_SESSION['message'] = "Error: Could not able to execute $sql. " . mysqli_error($conn);
             $_SESSION['icon'] = "error";
             $_SESSION['Show'] = true;
-            header("Location: ../../Components/Program.php?id=$ID");
+            header("Location: ../Program.php?id=$ID");
         }
     } else {
         $_SESSION['message'] = "Error: " . $sql . "<br>" . mysqli_error($conn);
         $_SESSION['icon'] = "error";
         $_SESSION['Show'] = true;
-        header("Location: ../../../Components/Program.php?id=$ID");
+        header("Location: ../Program.php?id=$ID");
     }
 
 }

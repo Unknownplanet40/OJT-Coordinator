@@ -463,7 +463,7 @@ function MonthlyChart($month)
                         </thead>
                         <tbody>
                             <?php
-                            $sql = "SELECT * FROM tbl_programs ORDER BY title ASC";
+                            $sql = "SELECT DISTINCT title, description, start_date, end_date, start_time, end_time, Duration, hours, progimage, progloc FROM tbl_programs ORDER BY title ASC";
                             $result = mysqli_query($conn, $sql);
 
                             if (mysqli_num_rows($result) > 0) {
@@ -474,6 +474,12 @@ function MonthlyChart($month)
                                     $start = date("h:i A", strtotime($row['start_time']));
                                     $end = date("h:i A", strtotime($row['end_time']));
                                     $enddate = date("M d, Y", strtotime($row['end_date']));
+
+                                    if (studentassign($row['title']) <= 1) {
+                                        $assigned = 'There is <span class="fw-bold text-primary fs-6">' . studentassign($row['title']) . '</span> trainee assigned to this program.';
+                                    } else {
+                                        $assigned = 'There are <span class="fw-bold text-primary fs-6">' . studentassign($row['title']) . '</span> trainees assigned to this program.';
+                                    }
 
                                     echo '<tr>
                                     <th scope="row">' . $i . '</th>
@@ -495,9 +501,10 @@ function MonthlyChart($month)
                                             html: `<div class="container-fluid text-start">
                                             <div class="card">
                                             <div class="card-body">
+                                                <img src="../' . $row['progimage'] . '" class="card-img-top">
                                                 <p class="card-text fs-6 text-center">' . $row['description'] . '</p>
                                                 <p class="card-text text-start">' . $row['progloc'] . '</p>
-                                                <small class="card-muted text-start text-success">There are ' . studentassign($row['title']) . ' trainee\'s assigned to this program.</small>
+                                                <small class="card-muted text-start text-success">' . $assigned . '</small>
                                                 <p class="">' . $date . ' - ' . $enddate . ' <br> ' . $start . ' - ' . $end . '</p>
                                                 <p class="text-start"><small class="text-muted">' . $row['Duration'] . ' weeks - ' . $row['hours'] . ' hours</small></p>
                                             </div>

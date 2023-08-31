@@ -25,7 +25,6 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
         $medical = $row['MedCert'];
         $GMcert = $row['GMCert'];
         $regform = $row['RegForm'];
-        $consent = $row['consent'];
         $eval = $row['Evaform'];
         $narrative = $row['NarraForm'];
         $timecard = $row['TimeCard'];
@@ -39,7 +38,6 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
         $Doc6 = $row['Doc6_date'];
         $Doc7 = $row['Doc7_date'];
         $Doc8 = $row['Doc8_date'];
-        $Doc9 = $row['Doc9_date'];
         $Doc10 = $row['Doc10_date'];
         $Doc11 = $row['Doc11_date'];
         $Doc12 = $row['Doc12_date'];
@@ -53,7 +51,6 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
         $Doc6_status = $row['Doc6_stat'];
         $Doc7_status = $row['Doc7_stat'];
         $Doc8_status = $row['Doc8_stat'];
-        $Doc9_status = $row['Doc9_stat'];
         $Doc10_status = $row['Doc10_stat'];
         $Doc11_status = $row['Doc11_stat'];
         $Doc12_status = $row['Doc12_stat'];
@@ -62,7 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
 
 }
 
-if ($Doc1_status == 1 || $Doc2_status == 1 || $Doc3_status == 1 || $Doc4_status == 1 || $Doc5_status == 1 || $Doc6_status == 1 || $Doc7_status == 1 || $Doc8_status == 1 || $Doc9_status == 1 || $Doc10_status == 1 || $Doc11_status == 1 || $Doc12_status == 1 || $Doc13_status == 1) {
+if ($Doc1_status == 1 && $Doc2_status == 1 && $Doc3_status == 1 && $Doc4_status == 1 && $Doc5_status == 1 && $Doc6_status == 1 && $Doc7_status == 1 && $Doc8_status == 1  && $Doc10_status == 1 && $Doc11_status == 1 && $Doc12_status == 1 && $Doc13_status == 1) {
     $sql = "UPDATE tbl_trainee SET Resource_Completed = 1 WHERE UID = '$userID'";
     mysqli_query($conn, $sql);
 } else {

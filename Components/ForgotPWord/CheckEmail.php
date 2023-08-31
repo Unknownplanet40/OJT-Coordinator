@@ -18,9 +18,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if (mysqli_num_rows($result) > 0) {
                 while ($row = mysqli_fetch_assoc($result)) {
 
+                    // Splitting the questions and answers
                     $question = explode(";", $row['question']);
                     $answer = explode(";", $row['answer']);
 
+                    // Array of security questions
                     $securityQuestions = [
                         "What is your mother's maiden name?",
                         "What was the name of your first pet?",
@@ -44,7 +46,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         "What is the name of the town where you had your first job?"
                     ];
 
-                    // sessions variables
+                    // Asssigning the questions and answers to session variables
                     $_SESSION['FPUID'] = $row['UID'];
                     $_SESSION['FPQ1'] = $securityQuestions[$question[0] - 1];
                     $_SESSION['FPQ2'] = $securityQuestions[$question[1] - 1];
