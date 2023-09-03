@@ -92,7 +92,7 @@ if (isset($_SESSION['Phase1']) && $_SESSION['Phase1'] == true) {
                         e.preventDefault();
                         if (Que1.value == "" || Que2.value == "" || Que3.value == "") {
                             error.textContent = "Please fill all the fields";
-                        } else if (Que1.value != A1 && Que2.value != A2 && Que3.value != A3) {
+                        } else if (Que1.value != A1 || Que2.value != A2 || Que3.value != A3) {
                             error.textContent = "Please enter correct answers";
                         } else {
                             form.action = "ResetPassword.php";

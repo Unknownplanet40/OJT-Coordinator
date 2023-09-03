@@ -141,7 +141,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                             echo $image;
                         } ?>" class="img-fluid img-thumbnail m-1" style="height: 256px;" alt="...">
                     </li>
-                    <li class="list-group-item d-flex justify-content-between align-items-center text-bg-dark">
+                    <li class="list-group-item d-flex justify-content-between align-items-center text-dark">
                         <span class="fw-bold">Title</span>
                         <span>
                             <?php if (isset($title)) {
@@ -149,7 +149,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                             } ?>
                         </span>
                     </li>
-                    <li class="list-group-item text-bg-dark">
+                    <li class="list-group-item text-dark">
                         <span class="fw-bold">Description</span>
                         <br>
                         <span class="text-break" style="text-align: justify;">
@@ -158,7 +158,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                             } ?>
                         </span>
                     </li>
-                    <li class="list-group-item d-flex justify-content-between align-items-center text-bg-dark">
+                    <li class="list-group-item d-flex justify-content-between align-items-center text-dark">
                         <span class="fw-bold">Date</span>
                         <span>
                             <?php if (isset($formatdate)) {
@@ -166,7 +166,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                             } ?>
                         </span>
                     </li>
-                    <li class="list-group-item d-flex justify-content-between align-items-center text-bg-dark">
+                    <li class="list-group-item d-flex justify-content-between align-items-center text-dark">
                         <span class="fw-bold">Time</span>
                         <span>
                             <?php if (isset($formatstart)) {
@@ -177,7 +177,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                             } ?>
                         </span>
                     </li>
-                    <li class="list-group-item d-flex justify-content-between align-items-center text-bg-dark">
+                    <li class="list-group-item d-flex justify-content-between align-items-center text-dark">
                         <span class="fw-bold">Completion</span>
                         <span>
                             <?php if (isset($formatcomp)) {
@@ -185,7 +185,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                             } ?>
                         </span>
                     </li>
-                    <li class="list-group-item d-flex justify-content-between align-items-center text-bg-dark">
+                    <li class="list-group-item d-flex justify-content-between align-items-center text-dark">
                         <span class="fw-bold">Location</span>
                         <span>
                             <?php if (isset($loc)) {
@@ -193,7 +193,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                             } ?>
                         </span>
                     </li>
-                    <li class="list-group-item d-flex justify-content-between align-items-center text-bg-dark">
+                    <li class="list-group-item d-flex justify-content-between align-items-center text-dark">
                         <span class="fw-bold">Type</span>
                         <span>
                             <?php if (isset($type)) {
@@ -201,7 +201,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                             } ?>
                         </span>
                     </li>
-                    <li class="list-group-item d-flex justify-content-between align-items-center text-bg-dark">
+                    <li class="list-group-item d-flex justify-content-between align-items-center text-dark">
                         <span class="fw-bold">Organizer</span>
                         <br>
                         <span>
@@ -210,7 +210,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                             } ?>
                         </span>
                     </li>
-                    <li class="list-group-item d-flex justify-content-between align-items-center text-bg-dark">
+                    <li class="list-group-item d-flex justify-content-between align-items-center text-dark">
                         <span class="fw-bold">Slots</span>
                         <span>
                             <?php if (isset($slot)) {
@@ -218,7 +218,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                             } ?> Participants
                         </span>
                     </li>
-                    <li class="list-group-item d-flex justify-content-between align-items-center text-bg-dark">
+                    <li class="list-group-item d-flex justify-content-between align-items-center text-dark">
                         <span class="fw-bold">Status</span>
                         <span>
                             <?php if (isset($status)) {
@@ -226,7 +226,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                             } ?>
                         </span>
                     </li>
-                    <li class="list-group-item text-center text-bg-dark">
+                    <li class="list-group-item text-center text-dark">
                         <div class="hstack gap-3">
                             <a href="../../Admin/AdminEvents.php" class="btn btn-primary w-100">Back</a>
                             <!-- refresh btn -->
@@ -257,7 +257,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
                             </script>
                         </div>
                     </li>
-                    <li class="list-group-item text-center text-bg-dark text-danger" id="warning">
+                    <li class="list-group-item text-center text-danger" id="warning">
                         <span>This is for Error Message</span>
                     </li>
                 </ul>

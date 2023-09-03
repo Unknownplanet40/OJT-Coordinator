@@ -63,7 +63,8 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
         </div>
         <div class="container-fluid" style="width: 98%;" id="AdminTable">
             <div class="container-lg table-responsive">
-                <div class="container mt-5 text-bg-light rounded border border-1 border-success" style="min-width: fit-content;">
+                <div class="container mt-5 text-bg-light rounded border border-1 border-success"
+                    style="min-width: fit-content;">
                     <table class="table table-hover table-light align-middle caption-top" id="AccountTable">
                         <caption>
                             <div class="container-fluid">
@@ -71,8 +72,7 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
                                     <div class="col-4">
                                         <div class="input-group input-group-sm">
                                             <!-- In the future, I will add a Category Search -->
-                                            <span class="input-group-text"
-                                                title="You can search only by name">
+                                            <span class="input-group-text" title="You can search only by name">
                                                 <svg xmlns="http://www.w3.org/2000/svg" height="20"
                                                     viewBox="0 -960 960 960" width="20" fill="var(--bs-success)">
                                                     <path
@@ -220,6 +220,9 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
                                                     background: "#fff",
                                                     color: "#000",
                                                     allowOutsideClick: false,
+                                                    showConfirmButton: false,
+                                                    timer: 1500,
+                                                    timerProgressBar: true,
                                                 });
                                             } else {
                                                 Swal.fire({
@@ -227,6 +230,8 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
                                                     title: "Confirm your password",
                                                     text: "Your are about to update an account. Verify your password first before you can proceed.",
                                                     input: "password",
+                                                    confirmButtonColor: "#d33",
+                                                    cancelButtonColor: "#3085d6",
                                                     allowOutsideClick: false,
                                                     inputAttributes: {
                                                       autocapitalize: "off",
@@ -265,6 +270,9 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
                                                             color: "#000",
                                                             showConfirmButton: false,
                                                             timer: 1500,
+                                                            allowOutsideClick: false,
+                                                            showLoaderOnConfirm: true,
+                                                            timerProgressBar: true,
                                                         });
                                                     }
                                                   });
@@ -333,8 +341,8 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
                                                     text: "You won\'t be able to revert this!",
                                                     icon: "warning",
                                                     showCancelButton: true,
-                                                    confirmButtonColor: "#3085d6",
-                                                    cancelButtonColor: "#d33",
+                                                    confirmButtonColor: "#d33",
+                                                    cancelButtonColor: "#3085d6",
                                                     confirmButtonText: "Yes, delete it!",
                                                     background: "#fff",
                                                     allowOutsideClick: false,
@@ -351,6 +359,8 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
                                                             showCancelButton: true,
                                                             allowOutsideClick: false,
                                                             confirmButtonText: "Confirm",
+                                                            confirmButtonColor: "#d33",
+                                                            cancelButtonColor: "#3085d6",
                                                             showLoaderOnConfirm: true,
                                                             preConfirm: async () => {
                                                               try {

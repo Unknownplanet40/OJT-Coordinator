@@ -3,10 +3,16 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: April 21, 2021 at 12:15 AM
+-- Generation Time: Sep 03, 2023 at 3:47 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
+--
+-- RJC
+-- Unknownplanet40
+-- https://github.com/Unknownplanet40
+-- Project: OJT_CS_Database
+--
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
@@ -20,7 +26,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `ojtcs_database`
 --
-
 CREATE DATABASE IF NOT EXISTS `ojtcs_database` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 USE `ojtcs_database`;
 
@@ -28,6 +33,9 @@ USE `ojtcs_database`;
 
 --
 -- Table structure for table `tbl_accounts`
+--
+-- Creation: Aug 17, 2023 at 03:30 AM
+-- Last update: Sep 03, 2023 at 10:44 AM
 --
 
 CREATE TABLE `tbl_accounts` (
@@ -45,7 +53,7 @@ CREATE TABLE `tbl_accounts` (
 --
 
 INSERT INTO `tbl_accounts` (`ID`, `UID`, `name`, `username`, `password`, `role`, `status`) VALUES
-(1, 1, 'Ryan James Capadocia', 'ryanjames', '@Capadocia123', 'administrator', 1),
+(1, 1, 'Ryan James Capadocia', 'ryanjames', '@Capadocia123', 'administrator', 0),
 (2, 2, 'James Veloria', 'jamesveloria', '@Veloria123', 'moderator', 0),
 (3, 1000000000, 'Lorenzo Asis', 'lorenzoasis', 'Lorenzo.asis2023', 'User', 0),
 (4, 2000000000, 'Brandon Logon', 'brandon23', 'Brandon.logon4sale', 'User', 0),
@@ -53,7 +61,7 @@ INSERT INTO `tbl_accounts` (`ID`, `UID`, `name`, `username`, `password`, `role`,
 (13, 1234567825, 'Joseph Contador', 'josephpogi23', 'Joseph@pogi23', 'User', 0),
 (14, 10, 'Administers According', 'adminaccs', '@Admin2023', 'administrator', 0),
 (15, 1278654638, 'Testing One', 'testing55', 'Passwordko@123', 'User', 0),
-(16, 2023123456, 'John Smith', 'johnny23', 'SecurePassword.123', 'User', 0);
+(16, 2023123456, 'John Smith', 'johnny23', 'SecurePassword.2020', 'User', 0);
 
 --
 -- Triggers `tbl_accounts`
@@ -76,6 +84,9 @@ DELIMITER ;
 --
 -- Table structure for table `tbl_admin`
 --
+-- Creation: Aug 17, 2023 at 03:30 AM
+-- Last update: Sep 03, 2023 at 10:44 AM
+--
 
 CREATE TABLE `tbl_admin` (
   `UID` bigint(10) NOT NULL,
@@ -96,8 +107,8 @@ CREATE TABLE `tbl_admin` (
 --
 
 INSERT INTO `tbl_admin` (`UID`, `name`, `admin_uname`, `admin_pword`, `admin_email`, `department`, `imagePath`, `date_created`, `last_login`, `role`, `status`) VALUES
-(1, 'Ryan James Capadocia', 'ryanjames', '@Capadocia123', 'rj.caps@cvsu.edu.ph', 'BSIT', '../uploads/ryanjames_Credentials/Profile/dSKde_ryanjames_Profile.gif', '2023-06-30', '2023-09-01 01:09:40', 'administrator', 1),
-(2, 'James Veloria', 'jamesveloria', '@Veloria123', 'james@gmail.com', 'BSIT', '../uploads/jamesveloria_Credentials/Profile/mldxY_jamesveloria_Profile.gif', '2023-06-30', '2023-08-30 21:16:35', 'moderator', 0),
+(1, 'Ryan James Capadocia', 'ryanjames', '@Capadocia123', 'rj.caps@cvsu.edu.ph', 'BSIT', '../uploads/ryanjames_Credentials/Profile/dSKde_ryanjames_Profile.gif', '2023-06-30', '2023-09-03 18:43:19', 'administrator', 0),
+(2, 'James Veloria', 'jamesveloria', '@Veloria123', 'james@gmail.com', 'BSIT', '../uploads/jamesveloria_Credentials/Profile/mldxY_jamesveloria_Profile.gif', '2023-06-30', '2023-09-03 09:06:56', 'moderator', 0),
 (10, 'Administers According', 'adminaccs', '@Admin2023', 'Admin+Accordingly@gmail.com', 'BSIT', '../uploads/adminaccs_Credentials/Profile/7sXsF_adminaccs_Profile.gif', '2023-07-08', '2023-08-14 22:15:07', 'administrator', 0);
 
 --
@@ -115,6 +126,8 @@ DELIMITER ;
 
 --
 -- Table structure for table `tbl_announcement`
+--
+-- Creation: Aug 17, 2023 at 03:30 AM
 --
 
 CREATE TABLE `tbl_announcement` (
@@ -138,6 +151,9 @@ INSERT INTO `tbl_announcement` (`ID`, `Title`, `Description`, `PostedBy`, `DateA
 
 --
 -- Table structure for table `tbl_evaluation`
+--
+-- Creation: Aug 17, 2023 at 03:30 AM
+-- Last update: Aug 20, 2023 at 01:39 AM
 --
 
 CREATE TABLE `tbl_evaluation` (
@@ -183,6 +199,9 @@ INSERT INTO `tbl_evaluation` (`ID`, `UID`, `Q1`, `Q2`, `Q3`, `Q4`, `Q5`, `Q6`, `
 --
 -- Table structure for table `tbl_events`
 --
+-- Creation: Aug 17, 2023 at 03:30 AM
+-- Last update: Sep 03, 2023 at 01:23 AM
+--
 
 CREATE TABLE `tbl_events` (
   `ID` int(10) NOT NULL,
@@ -211,12 +230,15 @@ INSERT INTO `tbl_events` (`ID`, `eventID`, `eventTitle`, `eventCreated`, `eventD
 (4, 124, 'Science Fair', '2023-08-02', 'he Science Fair is an annual event where students showcase their scientific knowledge and present their innovative projects to the school community. It promotes scientific inquiry and encourages creativity in the field of science. No outsider allowed inside school.', '../uploads/Science Fair_Event/Eventimg/jngiu_Eventimg(Science Fair).jpg', '2023-07-12', '09:00:00', '12:00:00', 'other', '2023-07-30', 'true', 'School Gymnasium', 49, 'Science Department'),
 (5, 125, 'Cultural Diversity Day', '2023-08-03', 'Cultural Diversity Day celebrates the rich and diverse cultures within our school community. It includes various activities, performances, and displays representing different countries and traditions. Students and staff come together to foster inclusivity and appreciation for cultural differences.', '../uploads/Cultural Diversity Day_Event/Eventimg/dmpuk_Eventimg(Cultural Diversity Day).jpg', '2023-07-13', '10:00:00', '14:00:00', 'other', '2023-08-07', 'true', 'School Courtyard', 45, 'School Courtyard'),
 (6, 126, 'Annual School Carnival', '2023-08-12', 'Join us for a day of fun and excitement at our Annual School Carnival! This event features games, food stalls, live performances, and a variety of activities for students, parents, and the community.', '../uploads/Annual School Carnival_Event/Eventimg/smcqe_Eventimg(Annual School Carnival).jpg', '2023-10-15', '11:00:00', '16:00:00', 'other', '2023-10-30', 'false', 'School Playground', 200, 'School Parent-Teacher Associat'),
-(7, 127, 'Student Leadership Workshop', '2023-08-13', 'Join us for an engaging Student Leadership Workshop where you\'ll have the opportunity to enhance your leadership skills, learn effective communication strategies, and collaborate with fellow students. ', '../uploads/Student Leadership Workshop_Event/Eventimg/ztdke_Eventimg(Student Leadership Workshop).png', '2023-08-25', '08:00:00', '18:40:00', 'workshop', '2023-08-25', 'true', 'School Auditorium', 1, 'School Student Council');
+(7, 127, 'Student Leadership Workshop', '2023-08-13', 'Join us for an engaging Student Leadership Workshop where you\'ll have the opportunity to enhance your leadership skills, learn effective communication strategies, and collaborate with fellow students. ', '../uploads/Student Leadership Workshop_Event/Eventimg/ztdke_Eventimg(Student Leadership Workshop).png', '2023-09-03', '06:00:00', '09:20:00', 'workshop', '2023-09-03', 'true', 'School Auditorium', 4, 'School Student Council');
 
 -- --------------------------------------------------------
 
 --
 -- Table structure for table `tbl_programs`
+--
+-- Creation: Aug 30, 2023 at 12:39 PM
+-- Last update: Sep 03, 2023 at 01:12 AM
 --
 
 CREATE TABLE `tbl_programs` (
@@ -244,12 +266,15 @@ INSERT INTO `tbl_programs` (`ID`, `progID`, `title`, `progimage`, `description`,
 (2, 2000000000, 'Name', 'Image/Programoffer.jpg', 'This is a long paragraph written to show how the line-height of an element is affected by our utilities. Classes are applied to the element itself or sometimes the parent element. These classes can be customized as needed with our utility API. This is a long paragraph written to show how the line-height of an element is affected by our', '2023-07-11', '2023-10-31', 'Sa Cabite  Malapit sa Molino', NULL, 640, '09:00:00', '17:00:00', '16', 'CapsLock'),
 (3, 3000000000, 'Web Development Internship', 'Image/Programoffer.jpg', 'This OJT program provides students with hands-on experience in web development, equipping them with practical skills and knowledge in HTML, CSS, and JavaScript. Participants will work on real-world projects and collaborate with experienced developers to create responsive and dynamic websites.', '2023-07-01', '2023-08-26', 'School of Computer Science, XYZ University', NULL, 320, '09:00:00', '13:00:00', '8', 'John Smith (Senior Web Developer)'),
 (4, 1000000000, 'Marketing Internship', 'Image/Programoffer.jpg', 'The Marketing Internship provides students with practical experience in various aspects of marketing, including market research, social media management, and campaign development. Participants will work closely with the marketing team and gain valuable insights into the field while contributing to real-world projects.', '2023-06-01', '2023-06-29', 'School of Business, XYZ University', NULL, 160, '09:00:00', '12:00:00', '4', 'Jane Johnson'),
-(9, 2023123456, 'Web Development Internship', 'Image/Programoffer.jpg', 'This OJT program provides students with hands-on experience in web development, equipping them with practical skills and knowledge in HTML, CSS, and JavaScript. Participants will work on real-world projects and collaborate with experienced developers to create responsive and dynamic websites.', '2023-07-01', '2023-08-26', 'School of Computer Science, XYZ University', NULL, 320, '09:00:00', '13:00:00', '8', 'John Smith (Senior Web Developer)');
+(11, 2023123456, 'Name', 'Image/Programoffer.jpg', 'This is a long paragraph written to show how the line-height of an element is affected by our utilities. Classes are applied to the element itself or sometimes the parent element. These classes can be customized as needed with our utility API. This is a long paragraph written to show how the line-height of an element is affected by our', '2023-09-03', '2023-11-26', 'Sa Cabite  Malapit sa Molino', NULL, 480, '09:00:00', '17:00:00', '12', 'CapsLock');
 
 -- --------------------------------------------------------
 
 --
 -- Table structure for table `tbl_resource`
+--
+-- Creation: Aug 17, 2023 at 03:30 AM
+-- Last update: Sep 03, 2023 at 10:36 AM
 --
 
 CREATE TABLE `tbl_resource` (
@@ -303,16 +328,19 @@ CREATE TABLE `tbl_resource` (
 INSERT INTO `tbl_resource` (`ID`, `UID`, `resume`, `placement`, `Birth`, `MoA`, `Waiver`, `MedCert`, `GMCert`, `RegForm`, `consent`, `Evaform`, `NarraForm`, `TimeCard`, `COC`, `Doc1_date`, `Doc2_date`, `Doc3_date`, `Doc4_date`, `Doc5_date`, `Doc6_date`, `Doc7_date`, `Doc8_date`, `Doc9_date`, `Doc10_date`, `Doc11_date`, `Doc12_date`, `Doc13_date`, `Doc1_stat`, `Doc2_stat`, `Doc3_stat`, `Doc4_stat`, `Doc5_stat`, `Doc6_stat`, `Doc7_stat`, `Doc8_stat`, `Doc9_stat`, `Doc10_stat`, `Doc11_stat`, `Doc12_stat`, `Doc13_stat`) VALUES
 (1, 2000000000, '../uploads/brandon23_Credentials/Resume/zCcJj_brandon23_Resume.jpg', '../uploads/brandon23_Credentials/PlacementForm/kL3Zs_brandon23_PlacementForm.jpg', '../uploads/brandon23_Credentials/BirthCertificate/EGd6x_brandon23_BirthCertificate.jpg', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2023-07-11', '2023-07-11', '2023-07-11', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
 (2, 1000000000, '../uploads/lorenzoasis_Credentials/Resume/MiI57_lorenzoasis_Resume.png', '../uploads/lorenzoasis_Credentials/PlacementForm/SseRI_lorenzoasis_PlacementForm.pdf', '../uploads/lorenzoasis_Credentials/BirthCertificate/IEEJ2_lorenzoasis_BirthCertificate.pdf', '../uploads/lorenzoasis_Credentials/MemorandumOfAgreement/pBlx1_lorenzoasis_MemorandumOfAgreement.pdf', '../uploads/lorenzoasis_Credentials/Waiver/0YWty_lorenzoasis_Waiver.png', '../uploads/lorenzoasis_Credentials/MedicalCertificate/3XJ6I_lorenzoasis_MedicalCertificate.jpg', '../uploads/lorenzoasis_Credentials/GoodMoralCertificate/Dc6Me_lorenzoasis_GoodMoralCertificate.png', '../uploads/lorenzoasis_Credentials/RegistrationForm/CXKwt_lorenzoasis_RegistrationForm.jpg', NULL, '../uploads/lorenzoasis_Credentials/EvaluationForm/V0Qjc_lorenzoasis_EvaluationForm.pdf', '../uploads/lorenzoasis_Credentials/NarrativeReport/46I7x_lorenzoasis_NarrativeReport.pdf', '../uploads/lorenzoasis_Credentials/DailyTimeRecord/x26dI_lorenzoasis_DailyTimeRecord.pdf', '../uploads/lorenzoasis_Credentials/CertificateOfCompletion/cXuj5_lorenzoasis_CertificateOfCompletion.pdf', '2023-07-12', '2023-08-13', '2023-08-26', '2023-08-26', '2023-07-12', '2023-07-12', '2023-08-13', '2023-07-12', NULL, '2023-07-12', '2023-07-12', '2023-07-12', '2023-07-12', 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1),
-(3, 3000000000, '../uploads/jeric20_Credentials/Resume/ffF4x_jeric20_Resume.pdf', '../uploads/jeric20_Credentials/PlacementForm/VOEzX_jeric20_PlacementForm.pdf', '../uploads/jeric20_Credentials/BirthCertificate/MWdWn_jeric20_BirthCertificate.pdf', '../uploads/jeric20_Credentials/MemorandumOfAgreement/b6WvQ_jeric20_MemorandumOfAgreement.pdf', '../uploads/jeric20_Credentials/Waiver/HGXVV_jeric20_Waiver.pdf', '../uploads/jeric20_Credentials/MedicalCertificate/40Pya_jeric20_MedicalCertificate.png', '../uploads/jeric20_Credentials/GoodMoralCertificate/TZZBp_jeric20_GoodMoralCertificate.pdf', '../uploads/jeric20_Credentials/RegistrationForm/F5poE_jeric20_RegistrationForm.jpg', NULL, NULL, NULL, NULL, NULL, '2023-08-25', '2023-08-25', '2023-08-25', '2023-08-25', '2023-08-25', '2023-08-25', '2023-08-25', '2023-08-25', NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(3, 3000000000, '../uploads/jeric20_Credentials/Resume/ffF4x_jeric20_Resume.pdf', '../uploads/jeric20_Credentials/PlacementForm/VOEzX_jeric20_PlacementForm.pdf', '../uploads/jeric20_Credentials/BirthCertificate/MWdWn_jeric20_BirthCertificate.pdf', '../uploads/jeric20_Credentials/MemorandumOfAgreement/b6WvQ_jeric20_MemorandumOfAgreement.pdf', '../uploads/jeric20_Credentials/Waiver/HGXVV_jeric20_Waiver.pdf', '../uploads/jeric20_Credentials/MedicalCertificate/40Pya_jeric20_MedicalCertificate.png', '../uploads/jeric20_Credentials/GoodMoralCertificate/TZZBp_jeric20_GoodMoralCertificate.pdf', '../uploads/jeric20_Credentials/RegistrationForm/F5poE_jeric20_RegistrationForm.jpg', NULL, NULL, NULL, NULL, NULL, '2023-08-25', '2023-08-25', '2023-08-25', '2023-08-25', '2023-08-25', '2023-08-25', '2023-08-25', '2023-08-25', NULL, NULL, NULL, NULL, NULL, 0, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
 (4, 1234567825, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
 (5, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
 (6, 1278654638, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(7, 2023123456, '../uploads/johnny23_Credentials/Resume/RVD9H_johnny23_Resume.pdf', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2023-08-11', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+(7, 2023123456, '../uploads/johnny23_Credentials/Resume/RVD9H_johnny23_Resume.pdf', NULL, NULL, '../uploads/johnny23_Credentials/MemorandumOfAgreement/L3Hp0_johnny23_MemorandumOfAgreement.pdf', '../uploads/johnny23_Credentials/Waiver/ySYkm_johnny23_Waiver.pdf', NULL, '../uploads/johnny23_Credentials/GoodMoralCertificate/6uf9k_johnny23_GoodMoralCertificate.pdf', NULL, NULL, NULL, NULL, NULL, NULL, '2023-08-11', NULL, NULL, '2023-09-03', '2023-09-03', NULL, '2023-09-03', NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 
 --
 -- Table structure for table `tbl_secquestion`
+--
+-- Creation: Aug 27, 2023 at 05:00 AM
+-- Last update: Sep 03, 2023 at 10:42 AM
 --
 
 CREATE TABLE `tbl_secquestion` (
@@ -329,17 +357,20 @@ CREATE TABLE `tbl_secquestion` (
 --
 
 INSERT INTO `tbl_secquestion` (`ID`, `UID`, `question`, `answer`, `date_submitted`, `date_updated`) VALUES
-(1, 3000000000, '1;2;3', 'arcojada;butchay;bacoor', '2023-08-27 13:03:10', '2023-08-27 13:41:00'),
+(1, 3000000000, '1;2;3', 'idono;catdog;mars', '2023-08-27 13:03:10', '2023-09-03 18:42:13'),
 (2, 1000000000, '18;16;7', 'vajulet;golden;bookworm', '2023-08-27 14:23:57', NULL),
 (3, 1278654638, NULL, NULL, NULL, NULL),
 (4, 2000000000, NULL, NULL, NULL, NULL),
 (5, 1234567825, NULL, NULL, NULL, NULL),
-(6, 2023123456, NULL, NULL, NULL, NULL);
+(6, 2023123456, '18;16;3', 'red;golden;bacoor', '2023-09-03 09:17:02', '2023-09-03 09:17:30');
 
 -- --------------------------------------------------------
 
 --
 -- Table structure for table `tbl_trainee`
+--
+-- Creation: Aug 27, 2023 at 06:33 AM
+-- Last update: Sep 03, 2023 at 10:43 AM
 --
 
 CREATE TABLE `tbl_trainee` (
@@ -385,7 +416,7 @@ INSERT INTO `tbl_trainee` (`UID`, `name`, `trainee_uname`, `trainee_pword`, `ema
 (1234567825, 'Joseph Contador', 'josephpogi23', 'Joseph@pogi23', 'joseph.contador@cvsu.edu.ph', '2004-02-09', 23, 'BSIT', 0, 'User', '2023-07-03', 'true', 1, 0, '../uploads/josephpogi23_Credentials/josephpogi23_Profile_Tq3UZ.jpg', 'male', 'BSIT-2B', '09687363887', NULL, NULL, NULL, NULL, 'false', 'DASMA PALIRARAN BACOOR CAVITE', 'DASMA', 404, 'Dasma', 0, 126, 0, 0),
 (1278654638, 'Testing One', 'testing55', 'Passwordko@123', 'test@gmail.com', '2002-08-06', 21, 'BSIT', 0, 'User', '2023-08-11', 'true', 0, 0, '../Image/Profile.png', 'female', 'BSIT-2B', '09675645233', NULL, NULL, NULL, NULL, 'false', 'taga imus to', 'imus', 4102, 'Cavite', 1, 123, 0, 0),
 (2000000000, 'Brandon Logon', 'brandon23', 'Brandon.logon4sale', 'Brandon@gmail.com', '2023-07-06', 21, 'BSCS', 0, 'User', '2023-06-30', 'true', 0, 0, '../uploads/brandon23_Credentials/brandon23_Profile_75fzg.jpeg', 'male', 'BSCS-2B', '09897867564', 'Name', '16', '640', NULL, 'false', 'Ohio', 'Columbus', 4300, 'Ohio', 0, 123, 0, 0),
-(2023123456, 'John Smith', 'johnny23', 'SecurePassword.123', 'johnsmith@cvsu.edu.ph', '2000-07-19', 23, 'BSCS', 0, 'User', '2023-08-11', 'true', 0, 0, '../uploads/johnny23_Credentials/johnny23_Profile_hcWNg.gif', 'male', 'BSCS-2C', '09786752324', 'Web Development Internship', '8', '320', 'true', 'false', 'iwan ko kung tagasaan to', 'baccor', 4102, 'Cavite', 0, 127, 0, 0),
+(2023123456, 'John Smith', 'johnny23', 'SecurePassword.2020', 'johnsmith@cvsu.edu.ph', '2000-07-19', 23, 'BSCS', 0, 'User', '2023-08-11', 'true', 0, 1, '../uploads/johnny23_Credentials/johnny23_Profile_hcWNg.gif', 'male', 'BSCS-2C', '09786752324', 'Name', '12', '480', NULL, 'false', 'iwan ko kung tagasaan to', 'baccor', 4102, 'Cavite', 0, 123, 0, 0),
 (3000000000, 'Jeric Dayandante', 'jeric20', 'Jeric@4sale', 'jeric@outlook.com', '2023-06-30', 20, 'BSIT', 0, 'User', '2023-06-30', 'true', 1, 1, '../Image/Profile.png', 'male', 'BSIT-2B', '09675453124', 'Web Development Internship', '8', '320', 'true', 'false', 'Taga Prima banda sa imus', 'City of Imus', 4103, 'Cavite', 0, 123, 0, 0);
 
 --
@@ -403,6 +434,8 @@ DELIMITER ;
 
 --
 -- Table structure for table `tbl_vaccine`
+--
+-- Creation: Aug 17, 2023 at 03:30 AM
 --
 
 CREATE TABLE `tbl_vaccine` (
@@ -523,7 +556,7 @@ ALTER TABLE `tbl_events`
 -- AUTO_INCREMENT for table `tbl_programs`
 --
 ALTER TABLE `tbl_programs`
-  MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `tbl_resource`

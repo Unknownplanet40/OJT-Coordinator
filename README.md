@@ -51,22 +51,22 @@ you can fix it by following this steps:
 ## Screenshots
 see the [Screenshots](./ScreenShots) folder for more screenshots.
 ### Admin / Moderator(Coordinator)
-![Admin](./ScreenShots/Moderator%20Dashboard.png)
+![Admin](./ScreenShots/New%20Version/Admin%20Dashboard.png)
 ### Trainee
-![Trainee](./ScreenShots/Trainee%20Dashboard.png)
+![Trainee](./ScreenShots/New%20Version/Trainee%20Dashboard.png)
 
 ## Information
 This project was created by the following students of the Cavite State University - Imus Campus (CvSU) in compliance to DCIT 60A - Integrated Programming and Technologies 1
 
-|       |        |
-| :---  |  :---: |
-| Date started:  | **May 21, 2023 at 12:15 AM** |
-| Date Finished: | **July 11, 2023 at 6:36 PM** |
-| Duration <sup>2nd Semester</sup> | **1 Month and 20 Days** |
-| Duration <sup>Mid Year - Summer Sem</sup> | **1 Month and 21 Days** |
+| **DATE** |        |        |
+| :---  |  :---: |  :---: |
+| <small>2nd Semester</small> | May 21 to Jul 12, 2023 |1 Month and 3 Weeks|
+| <small>Mid Year - Summer Sem</small> | Aug 6 to Sep 3, 2023 |4 Weeks|
 
 ### Developers and Contributors
 <div align="center">
+
+<p>2nd Semester</p>
 
 | Name | Role | Year | Course |
 | :--- | :--- | :---: | :---: |
@@ -75,6 +75,15 @@ This project was created by the following students of the Cavite State Universit
 | [**Jeric C. Dayandante**](https://github.com/kuya-G) | Full-Stack Developer | 2nd Year | BSIT 
 | [**Brandon Logon**](#developers-and-contributors) | Back-End Developer | 2nd Year | BSIT |
 | [**Lorenzo Asis**](#developers-and-contributors) | Quality Assurance | 2nd Year | BSIT |
+
+<p>Mid Year - Summer Sem</p>
+
+| Name | Role | Year | Course |
+| :--- | :--- | :---: | :---: |
+| [**Ryan James V. Capadocia**](https://github.com/Unknownplanet40) | Head Developer | 2nd Year | BSIT |
+| [**James Matthew R. Veloria**](https://github.com/JamesVeloria16) | Full-Stack Developer | 2nd Year | BSIT |
+| [**Lorenzo Asis**](#developers-and-contributors) | Quality Assurance | 2nd Year | BSIT |
+| [**Pia Nicole Agustin**<sup> Group 6</sup>](#developers-and-contributors) | Quality Assurance | 2nd Year | BSIT |
 
 </div>
 
@@ -131,10 +140,8 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 - [BGjar](https://bgjar.com/)
 
 
-
-> **Note:** This project is still under development. Some features may not work properly.
->> This project is for educational purposes only.
-
+> **Note:** <br> 
+> This project is currently in development and fully offline, so some features may not function as expected. Please keep in mind that it is intended solely for educational purposes.
 
 
 

@@ -219,9 +219,12 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
                                                 Swal.fire({
                                                     icon: "error",
                                                     title: "Oops...",
-                                                    text: "You cannot update an account that is currently signed in!",
+                                                    text: "Can\'t update an account that is currently signed in!",
                                                     background: "#fff",
                                                     color: "#000",
+                                                    timer: 1500,
+                                                    showConfirmButton: false,
+                                                    timerProgressBar: true,
                                                 });
                                             } else {
                                                 Swal.fire({
@@ -265,6 +268,8 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
                                                               color: "#000",
                                                               showConfirmButton: false,
                                                               timer: 1500,
+                                                              timerProgressBar: true,
+                                                              allowOutsideClick: false,
                                                           });
                                                       }
                                                     });
@@ -379,7 +384,17 @@ if (!isset($_SESSION['DatahasbeenFetched'])) {
                                                                       timer: 1500,
                                                                   });
                                                               } else if (result.isDismissed) {
-                                                              }
+                                                              } else {
+                                                                    Swal.fire({
+                                                                        icon: "error",
+                                                                        title: "Oops...",
+                                                                        text: "Something went wrong!",
+                                                                        background: "#fff",
+                                                                        color: "#000",
+                                                                        showConfirmButton: false,
+                                                                        timer: 1500,
+                                                                    });
+                                                                }
                                                             });
                                                     }
                                                 });
