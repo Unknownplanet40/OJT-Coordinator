@@ -91,14 +91,14 @@ This project was created by the following students of the Cavite State Universit
 
 | Name | Subject |
 | :---: | :--- |
-|[**BAUTISTA, BENEDICT**](#instructor) | **DCIT 60A** - INTEGRATED PROGRAMMING AND TECHNOLOGIES 1 |
-|[**ALLAUIGAN, WYETH**](#instructor) | **DCIT 55A** - ADVANCE DATABASE MANAGEMENT SYSTEM |
-| [**MODESTO, SHAINA MARIE**](#instructor) | **ITEC 65A** - OPEN SOURCE TECHNOLOGY |
+|[**[...]**](#instructor) | **DCIT 60A** - INTEGRATED PROGRAMMING AND TECHNOLOGIES 1 |
+|[**[...]**](#instructor) | **DCIT 55A** - ADVANCE DATABASE MANAGEMENT SYSTEM |
+| [**[...]**](#instructor) | **ITEC 65A** - OPEN SOURCE TECHNOLOGY |
 
 ### Instructor <sup>(Mid Year - Summer Sem)</sup>
 | Name | Subject |
 | :---: | :--- |
-|[**BAUTISTA, BENEDICT**](#instructor) | **ITEC 75A** - SYSTEM INTEGRATION AND ARCHITECTURE 1 |
+|[**[...]**](#instructor) | **ITEC 75A** - SYSTEM INTEGRATION AND ARCHITECTURE 1 |
 
 ## License
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
